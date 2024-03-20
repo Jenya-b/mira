@@ -113,6 +113,7 @@
 					["@/hooks", "./src/hooks"],
 					["@/pages", "./src/pages"],
 					["@/styles", "./src/styles"],
+					["@/router", "./src/router"],
 					["@/utils", "./src/utils"]
 				],
 				"extensions": [".ts", ".js", ".jsx", ".tsx"]

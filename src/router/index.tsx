@@ -1,7 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom';
 
 import { Layout } from '@/components/Layout/Layout';
-import { HomePage } from '@/pages';
+import { AuthPage, HomePage } from '@/pages';
 
 import { path } from './path';
 
@@ -15,5 +15,9 @@ export const router = createBrowserRouter([
 				element: <HomePage />,
 			},
 		],
+	},
+	{
+		path: path.auth,
+		element: <AuthPage />,
 	},
 ]);

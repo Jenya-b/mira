@@ -5,6 +5,13 @@ export const Form = styled.form`
 	flex-direction: column;
 	justify-content: center;
 	row-gap: 1.71rem;
+
+	@media (max-width: 768px) {
+		padding: 13.36rem 1.43rem 1.29rem 1.43rem;
+		background: #f9f9f9;
+		border-bottom-left-radius: 2.85714rem;
+		border-bottom-right-radius: 2.85714rem;
+	}
 `;
 
 export const InfoBlock = styled.div`

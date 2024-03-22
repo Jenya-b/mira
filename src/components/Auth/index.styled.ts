@@ -1,3 +1,4 @@
+import InputMask from 'react-input-mask';
 import styled from 'styled-components';
 
 export const Form = styled.form`
@@ -74,6 +75,22 @@ export const Label = styled.label`
 `;
 
 export const Input = styled.input`
+	padding-top: 1.65rem;
+	padding-left: 1.5rem;
+	width: 100%;
+	height: 100%;
+	border-radius: 20px;
+	background: #fff;
+
+	color: #1e1e1e;
+	font-size: 1rem;
+	font-style: normal;
+	font-weight: 500;
+	line-height: normal;
+	letter-spacing: -0.04rem;
+`;
+
+export const StyledInputMask = styled(InputMask)`
 	padding-top: 1.65rem;
 	padding-left: 1.5rem;
 	width: 100%;

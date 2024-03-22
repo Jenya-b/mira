@@ -7,8 +7,8 @@ import {
 	Controls,
 	Form,
 	InfoBlock,
-	Input,
 	Label,
+	StyledInputMask,
 	Subtitle,
 	Title,
 } from './index.styled';
@@ -28,7 +28,13 @@ export const PhoneBlock: FC<PhoneBlockProps> = ({ phoneNumber, setPhoneNumber, s
 		<Controls>
 			<Label>
 				<span>Номер телефона</span>
-				<Input value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} />
+				<StyledInputMask
+					mask="+7 999 999-99-99"
+					maskPlaceholder={null}
+					placeholder="+7 000 000-00-00"
+					value={phoneNumber}
+					onChange={(e) => setPhoneNumber(e.target.value)}
+				/>
 			</Label>
 			<ButtonPrimary onClick={() => setAuthParam(AuthEnum.COD)}>Получить код</ButtonPrimary>
 		</Controls>

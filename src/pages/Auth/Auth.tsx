@@ -25,7 +25,7 @@ export enum AuthEnum {
 
 const AuthPage: FC = () => {
 	const [authParam, setAuthParam] = useState<AuthEnum>(AuthEnum.PHONE);
-	const [phoneNumber, setPhoneNumber] = useState('+7');
+	const [phoneNumber, setPhoneNumber] = useState('');
 	const [codeNumber, setCodeNumber] = useState('');
 
 	const renderAuthBlock = (): JSX.Element => {

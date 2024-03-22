@@ -1,5 +1,5 @@
 import InputMask from 'react-input-mask';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const Form = styled.form`
 	display: flex;
@@ -16,7 +16,7 @@ export const Form = styled.form`
 `;
 
 export const InfoBlock = styled.div`
-	max-width: 24.07rem;
+	max-width: 25.64rem;
 	width: 100%;
 `;
 
@@ -28,7 +28,7 @@ export const Title = styled.h2`
 `;
 
 export const Subtitle = styled.h3`
-	margin-top: 1.21rem;
+	margin-top: 0.77rem;
 	font-weight: 500;
 	font-size: 1.14rem;
 	line-height: 112%;
@@ -74,39 +74,32 @@ export const Label = styled.label`
 	}
 `;
 
-export const Input = styled.input`
-	padding-top: 1.65rem;
-	padding-left: 1.5rem;
+const inputCss = css`
+	padding-top: 0.5rem;
+	padding-left: 2rem;
 	width: 100%;
 	height: 100%;
 	border-radius: 20px;
 	background: #fff;
 
 	color: #1e1e1e;
-	font-size: 1rem;
+	font-size: 1.14286rem;
 	font-style: normal;
 	font-weight: 500;
 	line-height: normal;
-	letter-spacing: -0.04rem;
+	letter-spacing: -0.04571rem;
+`;
+
+export const Input = styled.input`
+	${inputCss}
 `;
 
 export const StyledInputMask = styled(InputMask)`
-	padding-top: 1.65rem;
-	padding-left: 1.5rem;
-	width: 100%;
-	height: 100%;
-	border-radius: 20px;
-	background: #fff;
-
-	color: #1e1e1e;
-	font-size: 1rem;
-	font-style: normal;
-	font-weight: 500;
-	line-height: normal;
-	letter-spacing: -0.04rem;
+	${inputCss}
 `;
 
 export const NumberInfo = styled.div`
+	margin-top: 0.5rem;
 	display: flex;
 	column-gap: 1rem;
 	font-style: normal;
@@ -124,6 +117,14 @@ export const NumberInfo = styled.div`
 		font-size: 1rem;
 		letter-spacing: -0.04rem;
 		text-decoration-line: underline;
+	}
+
+	@media (max-width: 768px) {
+		margin-top: 0rem;
+		flex-direction: column;
+		align-items: start;
+		column-gap: 0rem;
+		row-gap: 0.36rem;
 	}
 `;
 

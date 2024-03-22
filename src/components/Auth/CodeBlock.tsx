@@ -11,6 +11,7 @@ import {
 	Label,
 	NumberInfo,
 	Subtitle,
+	Timer,
 	Title,
 } from './index.styled';
 
@@ -41,6 +42,9 @@ export const CodeBlock: FC<CodeBlockProps> = ({
 				<span>Код</span>
 				<Input value={codeNumber} onChange={(e) => setCodeNumber(e.target.value)} />
 			</Label>
+			<Timer style={{ marginTop: '-0.5rem' }}>
+				Отправить повторное СМС через <span>0:53</span>
+			</Timer>
 			<ButtonPrimary onClick={() => setAuthParam(AuthEnum.EMAIL)}>Подтвердить</ButtonPrimary>
 		</Controls>
 	</Form>

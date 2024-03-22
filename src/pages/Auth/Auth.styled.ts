@@ -41,14 +41,14 @@ export const Content = styled.div`
 	grid-column: 2/3;
 	background: #f9f9f9;
 	border-radius: 2.85rem;
-	padding: 0 4.64rem;
+	padding: 5.2rem 4.29rem 2rem 4.29rem;
 	height: 100%;
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
 	row-gap: 0.86rem;
 
 	@media (max-width: 768px) {
+		overflow-x: hidden;
 		position: relative;
 		background: none;
 		padding: 0;
@@ -64,7 +64,7 @@ export const LogoMob = styled.div`
 		width: 12.28571rem;
 		height: 11.28571rem;
 		top: 0;
-		right: 0;
+		right: -1.5rem;
 
 		background-image: url(${logoMob});
 		background-repeat: no-repeat;

@@ -8,7 +8,6 @@ import {
 	Input,
 	Label,
 	Subtitle,
-	Timer,
 	Title,
 } from './index.styled';
 
@@ -32,9 +31,7 @@ export const EmailBlock: FC = () => {
 						placeholder="myemail@email.com"
 					/>
 				</Label>
-				<Timer style={{ marginTop: '-0.5rem' }}>
-					Отправить повторное СМС через <span>0:53</span>
-				</Timer>
+
 				<ButtonPrimary>Продолжить</ButtonPrimary>
 			</Controls>
 		</Form>

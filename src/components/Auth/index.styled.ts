@@ -1,7 +1,7 @@
 import InputMask from 'react-input-mask';
 import styled, { css } from 'styled-components';
 
-export const Form = styled.form`
+export const Wrapper = styled.div`
 	display: flex;
 	flex-direction: column;
 	justify-content: center;

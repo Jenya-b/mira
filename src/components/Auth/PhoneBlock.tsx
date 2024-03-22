@@ -1,11 +1,12 @@
-import { Dispatch, FC, SetStateAction } from 'react';
+import { FC } from 'react';
 
-import { AuthEnum } from '@/pages/Auth/Auth';
+import { useAppDispatch, useAppSelector } from '@/store';
+import { AuthEnum, setAuthParam, setPhoneNumber } from '@/store/auth';
 
 import {
 	ButtonPrimary,
 	Controls,
-	Form,
+	Wrapper,
 	InfoBlock,
 	Label,
 	StyledInputMask,
@@ -13,30 +14,31 @@ import {
 	Title,
 } from './index.styled';
 
-interface PhoneBlockProps {
-	phoneNumber: string;
-	setPhoneNumber: Dispatch<SetStateAction<string>>;
-	setAuthParam: Dispatch<SetStateAction<AuthEnum>>;
-}
+export const PhoneBlock: FC = () => {
+	const dispatch = useAppDispatch();
+	const { phoneNumber } = useAppSelector((state) => state.auth);
 
-export const PhoneBlock: FC<PhoneBlockProps> = ({ phoneNumber, setPhoneNumber, setAuthParam }) => (
-	<Form>
-		<InfoBlock>
-			<Title>Войти в аккаунт</Title>
-			<Subtitle>Введите ваш номер телефона, мы пришлем код подтверждения.</Subtitle>
-		</InfoBlock>
-		<Controls>
-			<Label>
-				<span>Номер телефона</span>
-				<StyledInputMask
-					mask="+7 999 999-99-99"
-					maskPlaceholder={null}
-					placeholder="+7 000 000-00-00"
-					value={phoneNumber}
-					onChange={(e) => setPhoneNumber(e.target.value)}
-				/>
-			</Label>
-			<ButtonPrimary onClick={() => setAuthParam(AuthEnum.COD)}>Получить код</ButtonPrimary>
-		</Controls>
-	</Form>
-);
+	return (
+		<Wrapper>
+			<InfoBlock>
+				<Title>Войти в аккаунт</Title>
+				<Subtitle>Введите ваш номер телефона, мы пришлем код подтверждения.</Subtitle>
+			</InfoBlock>
+			<Controls>
+				<Label>
+					<span>Номер телефона</span>
+					<StyledInputMask
+						mask="+7 999 999-99-99"
+						maskPlaceholder={null}
+						placeholder="+7 000 000-00-00"
+						value={phoneNumber}
+						onChange={(e) => dispatch(setPhoneNumber(e.target.value))}
+					/>
+				</Label>
+				<ButtonPrimary onClick={() => dispatch(setAuthParam(AuthEnum.COD))}>
+					Получить код
+				</ButtonPrimary>
+			</Controls>
+		</Wrapper>
+	);
+};

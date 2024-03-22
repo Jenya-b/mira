@@ -1,9 +1,12 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
+
+import { useAppDispatch, useAppSelector } from '@/store';
+import { setEmail } from '@/store/auth';
 
 import {
 	ButtonPrimary,
 	Controls,
-	Form,
+	Wrapper,
 	InfoBlock,
 	Input,
 	Label,
@@ -12,10 +15,11 @@ import {
 } from './index.styled';
 
 export const EmailBlock: FC = () => {
-	const [email, setEmail] = useState('');
+	const dispatch = useAppDispatch();
+	const { email } = useAppSelector((state) => state.auth);
 
 	return (
-		<Form>
+		<Wrapper>
 			<InfoBlock>
 				<Title>Будьте в курсе</Title>
 				<Subtitle>
@@ -27,13 +31,13 @@ export const EmailBlock: FC = () => {
 					<span>Ваш адрес электронной почты</span>
 					<Input
 						value={email}
-						onChange={(e) => setEmail(e.target.value)}
+						onChange={(e) => dispatch(setEmail(e.target.value))}
 						placeholder="myemail@email.com"
 					/>
 				</Label>
 
 				<ButtonPrimary>Продолжить</ButtonPrimary>
 			</Controls>
-		</Form>
+		</Wrapper>
 	);
 };

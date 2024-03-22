@@ -9,6 +9,7 @@ export enum AuthEnum {
 const initialState = {
 	phoneNumber: '',
 	codeNumber: '',
+	email: '',
 	authParam: AuthEnum.PHONE,
 };
 
@@ -25,12 +26,16 @@ export const authSlice = createSlice({
 		setAuthParam(state, action: PayloadAction<AuthEnum>): void {
 			state.authParam = action.payload;
 		},
+		setEmail(state, action: PayloadAction<string>): void {
+			state.email = action.payload;
+		},
 		resetState() {
 			return initialState;
 		},
 	},
 });
 
-export const { setAuthParam, setCodeNumber, setPhoneNumber, resetState } = authSlice.actions;
+export const { setAuthParam, setCodeNumber, setPhoneNumber, setEmail, resetState } =
+	authSlice.actions;
 
 export const authReducer = authSlice.reducer;

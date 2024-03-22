@@ -1,11 +1,12 @@
-import { Dispatch, FC, SetStateAction } from 'react';
+import { FC } from 'react';
 
-import { AuthEnum } from '@/pages/Auth/Auth';
+import { useAppDispatch, useAppSelector } from '@/store';
+import { AuthEnum, setAuthParam, setCodeNumber } from '@/store/auth';
 
 import {
 	ButtonPrimary,
 	Controls,
-	Form,
+	Wrapper,
 	InfoBlock,
 	Input,
 	Label,
@@ -15,37 +16,32 @@ import {
 	Title,
 } from './index.styled';
 
-interface CodeBlockProps {
-	phoneNumber: string;
-	codeNumber: string;
-	setCodeNumber: Dispatch<SetStateAction<string>>;
-	setAuthParam: Dispatch<SetStateAction<AuthEnum>>;
-}
+export const CodeBlock: FC = () => {
+	const dispatch = useAppDispatch();
+	const { phoneNumber, codeNumber } = useAppSelector((state) => state.auth);
 
-export const CodeBlock: FC<CodeBlockProps> = ({
-	phoneNumber,
-	codeNumber,
-	setCodeNumber,
-	setAuthParam,
-}) => (
-	<Form>
-		<InfoBlock>
-			<Title>Введите код</Title>
-			<Subtitle>Мы выслали вам код по номеру</Subtitle>
-			<NumberInfo>
-				<p>{phoneNumber}</p>{' '}
-				<button onClick={() => setAuthParam(AuthEnum.PHONE)}>Изменить номер</button>
-			</NumberInfo>
-		</InfoBlock>
-		<Controls>
-			<Label>
-				<span>Код</span>
-				<Input value={codeNumber} onChange={(e) => setCodeNumber(e.target.value)} />
-			</Label>
-			<Timer style={{ marginTop: '-0.5rem' }}>
-				Отправить повторное СМС через <span>0:53</span>
-			</Timer>
-			<ButtonPrimary onClick={() => setAuthParam(AuthEnum.EMAIL)}>Подтвердить</ButtonPrimary>
-		</Controls>
-	</Form>
-);
+	return (
+		<Wrapper>
+			<InfoBlock>
+				<Title>Введите код</Title>
+				<Subtitle>Мы выслали вам код по номеру</Subtitle>
+				<NumberInfo>
+					<p>{phoneNumber}</p>{' '}
+					<button onClick={() => dispatch(setAuthParam(AuthEnum.PHONE))}>Изменить номер</button>
+				</NumberInfo>
+			</InfoBlock>
+			<Controls>
+				<Label>
+					<span>Код</span>
+					<Input value={codeNumber} onChange={(e) => dispatch(setCodeNumber(e.target.value))} />
+				</Label>
+				<Timer style={{ marginTop: '-0.5rem' }}>
+					Отправить повторное СМС через <span>0:53</span>
+				</Timer>
+				<ButtonPrimary onClick={() => dispatch(setAuthParam(AuthEnum.EMAIL))}>
+					Подтвердить
+				</ButtonPrimary>
+			</Controls>
+		</Wrapper>
+	);
+};

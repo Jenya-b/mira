@@ -1,10 +1,12 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 
 import authImg from '@/assets/images/authImg.png';
 import yandexIcon from '@/assets/images/icons/yandex.svg';
 import { CodeBlock } from '@/components/Auth/CodeBlock';
 import { EmailBlock } from '@/components/Auth/EmailBlock';
 import { PhoneBlock } from '@/components/Auth/PhoneBlock';
+import { useAppSelector } from '@/store';
+import { AuthEnum } from '@/store/auth';
 
 import {
 	Content,
@@ -17,37 +19,16 @@ import {
 	LogoMob,
 } from './Auth.styled';
 
-export enum AuthEnum {
-	PHONE,
-	COD,
-	EMAIL,
-}
-
 const AuthPage: FC = () => {
-	const [authParam, setAuthParam] = useState<AuthEnum>(AuthEnum.PHONE);
-	const [phoneNumber, setPhoneNumber] = useState('');
-	const [codeNumber, setCodeNumber] = useState('');
+	const { authParam } = useAppSelector((state) => state.auth);
 
 	const renderAuthBlock = (): JSX.Element => {
 		switch (authParam) {
 			case AuthEnum.PHONE:
-				return (
-					<PhoneBlock
-						phoneNumber={phoneNumber}
-						setPhoneNumber={setPhoneNumber}
-						setAuthParam={setAuthParam}
-					/>
-				);
+				return <PhoneBlock />;
 
 			case AuthEnum.COD:
-				return (
-					<CodeBlock
-						codeNumber={codeNumber}
-						setCodeNumber={setCodeNumber}
-						phoneNumber={phoneNumber}
-						setAuthParam={setAuthParam}
-					/>
-				);
+				return <CodeBlock />;
 
 			case AuthEnum.EMAIL:
 				return <EmailBlock />;

@@ -114,6 +114,7 @@
 					["@/pages", "./src/pages"],
 					["@/styles", "./src/styles"],
 					["@/router", "./src/router"],
+					["@/store", "./src/store"],
 					["@/utils", "./src/utils"]
 				],
 				"extensions": [".ts", ".js", ".jsx", ".tsx"]

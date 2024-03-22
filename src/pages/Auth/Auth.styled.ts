@@ -68,6 +68,7 @@ export const LogoMob = styled.div`
 
 		background-image: url(${logoMob});
 		background-repeat: no-repeat;
+		background-size: cover;
 	}
 `;
 

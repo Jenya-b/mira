@@ -53,7 +53,6 @@ export const Sidebar: FC = () => (
 		<ProfileBlock>
 			<Avatar alt="avatar" src={avatarIcon} />
 			<UserName>Глеб</UserName>
-			{/* <LogoutBtn /> */}
 			<LogoutBtn>
 				<p>Выйти</p>
 				<img src={logoutIcon} alt="" />

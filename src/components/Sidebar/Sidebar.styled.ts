@@ -131,6 +131,11 @@ export const ButtonSecondary = styled.button`
 		padding-left: 0.29rem;
 	}
 
+	img {
+		width: 1rem;
+		height: 1rem;
+	}
+
 	@media (max-width: 1000px) {
 		width: 7.85714rem;
 		height: 2.5rem;

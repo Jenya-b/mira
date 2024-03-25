@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 import bgSidebar from '@/assets/images/bg-sidebar.png';
-import logoutIcon from '@/assets/images/icons/logout.svg';
 import logoImg from '@/assets/images/logo-full.png';
 
 export const Wrapper = styled.div`
@@ -12,6 +11,15 @@ export const Wrapper = styled.div`
 	padding: 2.57rem 2.14rem;
 	display: flex;
 	flex-direction: column;
+
+	@media (max-height: 800px) and (min-width: 1001px) {
+		justify-content: space-between;
+	}
+
+	@media (max-width: 1000px) {
+		background-image: none;
+		padding: 0rem 1.43rem 1.57rem 1.43rem;
+	}
 `;
 
 export const Logo = styled.div`
@@ -22,6 +30,10 @@ export const Logo = styled.div`
 	max-width: 10.42rem;
 	width: 100%;
 	height: 3.28rem;
+
+	@media (max-width: 1000px) {
+		display: none;
+	}
 `;
 
 export const SessionBlock = styled.div`
@@ -29,6 +41,14 @@ export const SessionBlock = styled.div`
 	display: flex;
 	flex-direction: column;
 	row-gap: 0.93rem;
+
+	@media (max-height: 800px) and (min-width: 1001px) {
+		margin-top: 0rem;
+	}
+
+	@media (max-width: 1000px) {
+		margin-top: 0.5rem;
+	}
 `;
 
 export const CardBlock = styled.div`
@@ -36,6 +56,14 @@ export const CardBlock = styled.div`
 	display: flex;
 	flex-direction: column;
 	row-gap: 0.71rem;
+
+	@media (max-height: 800px) and (min-width: 1001px) {
+		margin-top: 0rem;
+	}
+
+	@media (max-width: 1000px) {
+		display: none;
+	}
 `;
 
 export const MenuBlock = styled.ul`
@@ -43,6 +71,15 @@ export const MenuBlock = styled.ul`
 	display: flex;
 	flex-direction: column;
 	row-gap: 2.86rem;
+
+	@media (max-height: 800px) and (min-width: 1001px) {
+		margin-top: 0rem;
+	}
+
+	@media (max-width: 1000px) {
+		margin-top: 3.93rem;
+		row-gap: 3.57rem;
+	}
 
 	li {
 		color: #fff;
@@ -93,12 +130,26 @@ export const ButtonSecondary = styled.button`
 	p {
 		padding-left: 0.29rem;
 	}
+
+	@media (max-width: 1000px) {
+		width: 7.85714rem;
+		height: 2.5rem;
+		font-size: 0.85714rem;
+	}
 `;
 
 export const ProfileBlock = styled.div`
 	margin-top: auto;
 	display: flex;
 	align-items: center;
+
+	@media (max-height: 800px) and (min-width: 1001px) {
+		margin-top: 0rem;
+	}
+
+	@media (max-width: 1000px) {
+		margin-top: 3.43rem;
+	}
 `;
 
 export const UserName = styled.p`
@@ -113,8 +164,25 @@ export const UserName = styled.p`
 
 export const LogoutBtn = styled.button`
 	margin-left: auto;
-	background: url(${logoutIcon}) no-repeat;
-	background-position: center;
-	width: 1.14286rem;
-	height: 1.14286rem;
+	background: none;
+
+	p {
+		display: none;
+		color: #fff;
+		font-size: 1.14286rem;
+		font-style: normal;
+		font-weight: 500;
+		line-height: normal;
+		letter-spacing: -0.02286rem;
+	}
+
+	@media (max-width: 1000px) {
+		display: flex;
+		align-items: center;
+		column-gap: 0.57rem;
+
+		p {
+			display: block;
+		}
+	}
 `;

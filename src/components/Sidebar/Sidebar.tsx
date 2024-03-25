@@ -4,6 +4,7 @@ import { FC } from 'react';
 import addIcon from '@/assets/images/icons/add.svg';
 import avatarIcon from '@/assets/images/icons/avatar.svg';
 import listIcon from '@/assets/images/icons/list.svg';
+import logoutIcon from '@/assets/images/icons/logout.svg';
 import okIcon from '@/assets/images/icons/okey.svg';
 import settingsIcon from '@/assets/images/icons/settings.svg';
 import { sidebarMenu } from '@/constants/menu';
@@ -52,7 +53,11 @@ export const Sidebar: FC = () => (
 		<ProfileBlock>
 			<Avatar alt="avatar" src={avatarIcon} />
 			<UserName>Глеб</UserName>
-			<LogoutBtn />
+			{/* <LogoutBtn /> */}
+			<LogoutBtn>
+				<p>Выйти</p>
+				<img src={logoutIcon} alt="" />
+			</LogoutBtn>
 		</ProfileBlock>
 	</Wrapper>
 );

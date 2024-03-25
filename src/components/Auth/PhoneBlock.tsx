@@ -1,5 +1,6 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 
+import { useCreateCodeMutation } from '@/services/api/auth';
 import { useAppDispatch, useAppSelector } from '@/store';
 import { AuthEnum, setAuthParam, setPhoneNumber } from '@/store/auth';
 
@@ -18,6 +19,19 @@ export const PhoneBlock: FC = () => {
 	const dispatch = useAppDispatch();
 	const { phoneNumber } = useAppSelector((state) => state.auth);
 
+	const [createCodeMutation, { isSuccess }] = useCreateCodeMutation();
+
+	useEffect(() => {
+		if (isSuccess) {
+			dispatch(setAuthParam(AuthEnum.COD));
+		}
+	}, [isSuccess]);
+
+	const handleSubmit = (): void => {
+		const phone = Number(phoneNumber.replace(/[^0-9]/g, ''));
+		createCodeMutation({ phone });
+	};
+
 	return (
 		<Wrapper>
 			<InfoBlock>
@@ -29,15 +43,12 @@ export const PhoneBlock: FC = () => {
 					<span>Номер телефона</span>
 					<StyledInputMask
 						mask="+7 999 999-99-99"
-						maskPlaceholder={null}
 						placeholder="+7 000 000-00-00"
 						value={phoneNumber}
 						onChange={(e) => dispatch(setPhoneNumber(e.target.value))}
 					/>
 				</Label>
-				<ButtonPrimary onClick={() => dispatch(setAuthParam(AuthEnum.COD))}>
-					Получить код
-				</ButtonPrimary>
+				<ButtonPrimary onClick={handleSubmit}>Получить код</ButtonPrimary>
 			</Controls>
 		</Wrapper>
 	);

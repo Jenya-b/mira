@@ -1,5 +1,6 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 
+import { useSigninMutation } from '@/services/api/auth';
 import { useAppDispatch, useAppSelector } from '@/store';
 import { AuthEnum, setAuthParam, setCodeNumber } from '@/store/auth';
 
@@ -20,6 +21,19 @@ export const CodeBlock: FC = () => {
 	const dispatch = useAppDispatch();
 	const { phoneNumber, codeNumber } = useAppSelector((state) => state.auth);
 
+	const [signinMutation, { isSuccess }] = useSigninMutation();
+
+	useEffect(() => {
+		if (isSuccess) {
+			dispatch(setAuthParam(AuthEnum.EMAIL));
+		}
+	}, [isSuccess]);
+
+	const handleSubmit = (): void => {
+		const phone = Number(phoneNumber.replace(/[^0-9]/g, ''));
+		signinMutation({ phone, code: Number(codeNumber) });
+	};
+
 	return (
 		<Wrapper>
 			<InfoBlock>
@@ -33,14 +47,16 @@ export const CodeBlock: FC = () => {
 			<Controls>
 				<Label>
 					<span>Код</span>
-					<Input value={codeNumber} onChange={(e) => dispatch(setCodeNumber(e.target.value))} />
+					<Input
+						type="number"
+						value={codeNumber}
+						onChange={(e) => dispatch(setCodeNumber(e.target.value))}
+					/>
 				</Label>
 				<Timer style={{ marginTop: '-0.5rem' }}>
 					Отправить повторное СМС через <span>0:53</span>
 				</Timer>
-				<ButtonPrimary onClick={() => dispatch(setAuthParam(AuthEnum.EMAIL))}>
-					Подтвердить
-				</ButtonPrimary>
+				<ButtonPrimary onClick={handleSubmit}>Подтвердить</ButtonPrimary>
 			</Controls>
 		</Wrapper>
 	);

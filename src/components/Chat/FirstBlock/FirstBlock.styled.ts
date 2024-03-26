@@ -3,11 +3,21 @@ import styled from 'styled-components';
 import logo from '@/assets/images/icons/logo.svg';
 
 export const Wrapper = styled.div`
-	padding: 8.64rem 5rem 12rem 5rem;
+	display: grid;
+	grid-template-columns: 1fr minmax(auto, 65rem) 1fr;
+`;
+
+export const Container = styled.div`
+	grid-column: 2/3;
+	padding: 8.64rem 2rem 12rem 2rem;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+
+	@media (max-width: 1000px) {
+		padding: 10rem 1.43rem 8rem 1.43rem;
+	}
 `;
 
 export const Logo = styled.div`
@@ -27,6 +37,11 @@ export const Title = styled.h2`
 	font-weight: 500;
 	line-height: 110%;
 	letter-spacing: -0.06571rem;
+
+	@media (max-width: 1000px) {
+		margin-top: 1.79rem;
+		font-size: 2.14286rem;
+	}
 `;
 
 export const List = styled.ul`
@@ -38,7 +53,7 @@ export const List = styled.ul`
 
 	li {
 		button {
-			padding: 2.25rem 2.52rem;
+			padding: 1.5rem 1.57rem;
 			border-radius: 0.88229rem;
 			border: 0.882px solid rgba(255, 255, 255, 0.5);
 			color: #fff;
@@ -47,6 +62,14 @@ export const List = styled.ul`
 			font-style: normal;
 			font-weight: 400;
 			line-height: 120%;
+		}
+	}
+
+	@media (max-width: 1000px) {
+		margin-top: 3.14rem;
+
+		li {
+			font-size: 1.14286rem;
 		}
 	}
 `;

@@ -25,12 +25,13 @@ export const MobMenu = styled.div`
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
-	position: absolute;
+	position: fixed;
 	top: 0rem;
 	left: 0;
 	width: 100%;
 	border-bottom-left-radius: 2.86rem;
 	border-bottom-right-radius: 2.86rem;
+	z-index: ${({ theme }) => theme.order.firstIndex};
 `;
 
 export const MobMenuWrap = styled.div`

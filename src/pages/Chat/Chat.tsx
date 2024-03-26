@@ -21,7 +21,7 @@ const ChatPage: FC = () => {
 					onChange={(e) => dispatch(setInputValue(e.target.value))}
 					placeholder="Сообщение..."
 				/>
-				<ButtonPrimary />
+				<ButtonPrimary className={!inputValue ? 'microfon' : ''} />
 				<ButtonSecondary />
 			</Label>
 		</Wrapper>

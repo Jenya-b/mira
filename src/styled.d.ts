@@ -10,3 +10,9 @@ declare module '@mui/material/styles' {
 declare module 'styled-components' {
 	export interface DefaultTheme extends Theme {}
 }
+
+declare module 'react' {
+	interface Attributes {
+		css?: CSSProp;
+	}
+}

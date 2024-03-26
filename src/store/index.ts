@@ -5,10 +5,13 @@ import type { TypedUseSelectorHook } from 'react-redux';
 import { authApi } from '@/services/api/auth';
 
 import { authReducer } from './auth';
+import { chatReducer } from './chat';
 
 export const store = configureStore({
 	reducer: {
 		auth: authReducer,
+		chat: chatReducer,
+
 		[authApi.reducerPath]: authApi.reducer,
 	},
 

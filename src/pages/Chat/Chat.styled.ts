@@ -1,8 +1,5 @@
 import styled from 'styled-components';
 
-import arrow from '@/assets/images/icons/arrow-top.svg';
-import microphone from '@/assets/images/icons/microphone.svg';
-
 export const Wrapper = styled.div`
 	position: relative;
 `;
@@ -51,74 +48,37 @@ export const Input = styled.input`
 
 	@media (max-width: 1000px) {
 		background: #3a4497;
-		padding: 0 0 0 2.5rem;
+		padding: 0 0 0 1.43rem;
 		font-size: 1rem;
 	}
 `;
 
-export const ButtonPrimary = styled.button`
+export const Controls = styled.div`
 	position: absolute;
 	top: 50%;
 	right: 1.79rem;
 	transform: translateY(-50%);
-	border-radius: 7.58243rem;
-	background: #4eb97f;
-	width: 3.28571rem;
+	width: 7.39rem;
 	height: 3.28571rem;
-
-	&::before {
-		position: absolute;
-		content: '';
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
-		width: 1.28571rem;
-		height: 1.5rem;
-		background: url(${arrow}) no-repeat;
-	}
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 
 	@media (max-width: 1000px) {
-		position: relative;
-		right: 0rem;
-		width: 2.78571rem;
-		height: 2.78571rem;
-
-		&::before {
-			width: 2;
-			height: 2;
-		}
-
-		&.microfon::before {
-			width: 1.4rem;
-			height: 1.76993rem;
-			background: url(${microphone}) no-repeat;
-		}
+		justify-content: end;
 	}
 `;
 
-export const ButtonSecondary = styled.button`
-	position: absolute;
-	top: 50%;
-	right: 5.86rem;
-	transform: translateY(-50%);
-	border-radius: 7.58243rem;
-	background: none;
+export const Button = styled.button`
 	width: 3.28571rem;
 	height: 3.28571rem;
-
-	&::before {
-		position: absolute;
-		content: '';
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
-		width: 1.4rem;
-		height: 1.76993rem;
-		background: url(${microphone}) no-repeat;
-	}
+	border-radius: 50%;
+	background: none;
 
 	@media (max-width: 1000px) {
-		display: none;
+		background: #4eb97f;
+		width: 2.78571rem;
+		height: 2.78571rem;
 	}
 `;
 

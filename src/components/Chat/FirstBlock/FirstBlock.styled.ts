@@ -1,7 +1,7 @@
 import { animated } from '@react-spring/web';
 import styled from 'styled-components';
 
-import logo from '@/assets/images/icons/logo.svg';
+import logo from '@/assets/images/logo.png';
 
 export const Wrapper = styled(animated.div)`
 	display: grid;

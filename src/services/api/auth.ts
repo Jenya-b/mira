@@ -9,8 +9,8 @@ interface CreateCodeRequest {
 }
 
 interface SigninResponse {
-	code: number;
-	phone: number;
+	access_token: string;
+	exists_user: boolean;
 }
 
 interface SigninRequest {
@@ -30,7 +30,6 @@ export const authApi = createApi({
 				headers: {
 					accept: 'application/json',
 					'Content-Type': 'application/json',
-					'X-CSRFTOKEN': 'c2Od50emVMmsS4e6Wp9quYQfh6tTGuSiID5jChuHHh9ZKaCm340cZIMSWdkR9QN1',
 				},
 			}),
 		}),
@@ -42,7 +41,6 @@ export const authApi = createApi({
 				headers: {
 					accept: 'application/json',
 					'Content-Type': 'application/json',
-					'X-CSRFTOKEN': 'c2Od50emVMmsS4e6Wp9quYQfh6tTGuSiID5jChuHHh9ZKaCm340cZIMSWdkR9QN1',
 				},
 			}),
 		}),

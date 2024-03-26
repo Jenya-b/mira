@@ -34,14 +34,13 @@ export const MobMenu = styled.div`
 `;
 
 export const MobMenuWrap = styled.div`
-	/* height: 6.22rem; */
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	padding: 1.43rem;
 `;
 
-export const BurgerBtn = styled.button<{ active: boolean }>`
+export const BurgerBtn = styled.button`
 	background: rgba(78, 185, 127, 1);
 	width: 2.85714rem;
 	height: 2.85714rem;
@@ -68,13 +67,24 @@ export const BurgerBtn = styled.button<{ active: boolean }>`
 		}
 
 		&::after {
-			transform: rotate(${({ active }) => (active ? 45 : 0)}deg);
-			bottom: ${({ active }) => (active ? 0.2 : 0)}rem;
+			transform: rotate(0deg);
+			bottom: 0rem;
+		}
+		&::before {
+			transform: rotate(0deg);
+			top: 0rem;
 		}
 
-		&::before {
-			transform: rotate(${({ active }) => (active ? -45 : 0)}deg);
-			top: ${({ active }) => (active ? 0.2 : 0)}rem;
+		&.active {
+			&::after {
+				transform: rotate(45deg);
+				bottom: 0.2rem;
+			}
+
+			&::before {
+				transform: rotate(-45deg);
+				top: 0.2rem;
+			}
 		}
 	}
 `;

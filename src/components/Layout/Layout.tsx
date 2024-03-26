@@ -29,8 +29,8 @@ export const Layout: FC = () => {
 			) : (
 				<MobMenu>
 					<MobMenuWrap>
-						<BurgerBtn active={isOpenMenu} onClick={() => setIsOpenMenu(!isOpenMenu)}>
-							<span />
+						<BurgerBtn onClick={() => setIsOpenMenu(!isOpenMenu)}>
+							<span className={isOpenMenu ? 'active' : ''} />
 						</BurgerBtn>
 						<ButtonGroup>
 							<ButtonSecondary>

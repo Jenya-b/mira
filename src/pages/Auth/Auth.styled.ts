@@ -52,6 +52,7 @@ export const Content = styled.div`
 		position: relative;
 		background: none;
 		padding: 0;
+		border-radius: 0rem;
 	}
 `;
 

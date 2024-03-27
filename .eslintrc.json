@@ -110,6 +110,7 @@
 					["@/assets", "./src/assets"],
 					["@/components", "./src/components"],
 					["@/constants", "./src/constants"],
+					["@/hocs", "./src/hocs"],
 					["@/hooks", "./src/hooks"],
 					["@/pages", "./src/pages"],
 					["@/styles", "./src/styles"],

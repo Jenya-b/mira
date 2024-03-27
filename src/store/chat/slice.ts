@@ -1,7 +1,14 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+export enum SessionBlocks {
+	FIRST,
+	CHAT,
+	FEEDBACK,
+}
+
 const initialState = {
 	inputValue: '',
+	sessionBlock: SessionBlocks.FIRST,
 };
 
 export const chatSlice = createSlice({
@@ -11,12 +18,15 @@ export const chatSlice = createSlice({
 		setInputValue(state, action: PayloadAction<string>): void {
 			state.inputValue = action.payload;
 		},
+		setSessionBlock(state, action: PayloadAction<SessionBlocks>): void {
+			state.sessionBlock = action.payload;
+		},
 		resetState() {
 			return initialState;
 		},
 	},
 });
 
-export const { setInputValue, resetState } = chatSlice.actions;
+export const { setInputValue, setSessionBlock, resetState } = chatSlice.actions;
 
 export const chatReducer = chatSlice.reducer;

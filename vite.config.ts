@@ -12,8 +12,8 @@ export default defineConfig({
 			includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'mask-icon.svg'],
 			manifest: {
 				theme_color: '#3B3F8C',
-				name: 'Mira',
-				short_name: 'Mira',
+				name: 'Мира',
+				short_name: 'Мира',
 				icons: [
 					{
 						src: 'pwa-64x64.png',

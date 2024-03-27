@@ -4,6 +4,7 @@ export enum SessionBlocks {
 	FIRST,
 	CHAT,
 	FEEDBACK,
+	COMPLAINT,
 }
 
 const initialState = {

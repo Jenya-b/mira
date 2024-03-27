@@ -3,6 +3,7 @@ import { FC } from 'react';
 import arrow from '@/assets/images/icons/arrow-top.svg';
 import microphone from '@/assets/images/icons/microphone.svg';
 import { ComplaintBlock } from '@/components/Chat/ComplaintBlock/ComplaintBlock';
+import { EndSessionBlock } from '@/components/Chat/EndSessionBlock/EndSessionBlock';
 import { Feedback } from '@/components/Chat/Feedback/Feedback';
 import { FirstBlock } from '@/components/Chat/FirstBlock/FirstBlock';
 import { useResize } from '@/hooks/useResize';
@@ -22,9 +23,10 @@ const ChatPage: FC = () => {
 				return <FirstBlock />;
 			case SessionBlocks.FEEDBACK:
 				return <Feedback />;
-
 			case SessionBlocks.COMPLAINT:
 				return <ComplaintBlock />;
+			case SessionBlocks.END_SESSION:
+				return <EndSessionBlock />;
 			default:
 				return <></>;
 		}

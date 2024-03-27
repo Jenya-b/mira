@@ -5,11 +5,12 @@ export enum SessionBlocks {
 	CHAT,
 	FEEDBACK,
 	COMPLAINT,
+	END_SESSION,
 }
 
 const initialState = {
 	inputValue: '',
-	sessionBlock: SessionBlocks.FIRST,
+	sessionBlock: SessionBlocks.END_SESSION,
 };
 
 export const chatSlice = createSlice({

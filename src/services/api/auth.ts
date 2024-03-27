@@ -25,7 +25,7 @@ export const authApi = createApi({
 		createCode: build.mutation<CreateCodeResponse, CreateCodeRequest>({
 			query: (body) => ({
 				method: 'POST',
-				url: '/token/login',
+				url: '/token/login/',
 				body,
 				headers: {
 					accept: 'application/json',
@@ -36,7 +36,7 @@ export const authApi = createApi({
 		signin: build.mutation<SigninResponse, SigninRequest>({
 			query: (body) => ({
 				method: 'POST',
-				url: '/token/create',
+				url: '/token/create/',
 				body,
 				headers: {
 					accept: 'application/json',

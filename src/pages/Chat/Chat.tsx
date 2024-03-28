@@ -49,7 +49,7 @@ const ChatPage: FC = () => {
 	};
 
 	return (
-		<Wrapper>
+		<Wrapper className={!hiddenInput ? 'grid' : ''}>
 			<ChatWrap>{renderSessionBlock()}</ChatWrap>
 			<Label className={hiddenInput ? 'hidden' : ''}>
 				<Input

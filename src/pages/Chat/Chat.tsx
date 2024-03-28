@@ -6,6 +6,7 @@ import { ComplaintBlock } from '@/components/Chat/ComplaintBlock/ComplaintBlock'
 import { EndSessionBlock } from '@/components/Chat/EndSessionBlock/EndSessionBlock';
 import { Feedback } from '@/components/Chat/Feedback/Feedback';
 import { FirstBlock } from '@/components/Chat/FirstBlock/FirstBlock';
+import { FurtherActionsBlock } from '@/components/Chat/FurtherActionsBlock/FurtherActionsBlock';
 import { useResize } from '@/hooks/useResize';
 import { useAppDispatch, useAppSelector } from '@/store';
 import { SessionBlocks, setHideInput, setInputValue } from '@/store/chat';
@@ -21,6 +22,7 @@ const ChatPage: FC = () => {
 		switch (sessionBlock) {
 			case SessionBlocks.FEEDBACK:
 			case SessionBlocks.END_SESSION:
+			case SessionBlocks.FUTURE_ACTIONS:
 				dispatch(setHideInput(true));
 				break;
 
@@ -37,6 +39,8 @@ const ChatPage: FC = () => {
 				return <Feedback />;
 			case SessionBlocks.COMPLAINT:
 				return <ComplaintBlock />;
+			case SessionBlocks.FUTURE_ACTIONS:
+				return <FurtherActionsBlock />;
 			case SessionBlocks.END_SESSION:
 				return <EndSessionBlock />;
 			default:

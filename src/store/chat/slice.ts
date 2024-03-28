@@ -5,6 +5,7 @@ export enum SessionBlocks {
 	CHAT,
 	FEEDBACK,
 	COMPLAINT,
+	FUTURE_ACTIONS,
 	END_SESSION,
 }
 
@@ -17,7 +18,7 @@ interface InitialState {
 const initialState: InitialState = {
 	inputValue: '',
 	hiddenInput: false,
-	sessionBlock: SessionBlocks.COMPLAINT,
+	sessionBlock: SessionBlocks.FUTURE_ACTIONS,
 };
 
 export const chatSlice = createSlice({

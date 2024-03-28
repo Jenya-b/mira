@@ -57,11 +57,16 @@ export const List = styled.ul`
 			width: 7.42857rem;
 
 			button {
+				width: 100%;
 				img {
 					width: 5.14286rem;
 					height: 5.14286rem;
 				}
 			}
+		}
+
+		@media (max-width: 390px) {
+			width: 6rem;
 		}
 	}
 `;

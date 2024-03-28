@@ -4,20 +4,23 @@ import styled from 'styled-components';
 import logo from '@/assets/images/logo.png';
 
 export const Wrapper = styled(animated.div)`
+	height: 100%;
 	display: grid;
 	grid-template-columns: 1fr minmax(auto, 65rem) 1fr;
 `;
 
 export const Container = styled.div`
 	grid-column: 2/3;
-	padding: 8.64rem 2rem 2rem 2rem;
+	/* padding: 8.64rem 2rem 2rem 2rem; */
+	padding: 2rem;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 
 	@media (max-width: 1000px) {
-		padding: 10rem 1.43rem 8rem 1.43rem;
+		/* padding: 10rem 1.43rem 1.43rem 1.43rem; */
+		padding: 7rem 1.43rem 1.43rem 1.43rem;
 	}
 `;
 

@@ -6,6 +6,10 @@ export const List = styled.ul`
 	column-gap: 1.43rem;
 	justify-content: center;
 
+	@media (max-width: 1000px) {
+		column-gap: 1.36rem;
+	}
+
 	li {
 		width: 10.35714rem;
 		height: 10.35714rem;
@@ -47,6 +51,17 @@ export const List = styled.ul`
 			background: none;
 			width: 100%;
 			height: 100%;
+		}
+
+		@media (max-width: 1000px) {
+			width: 7.42857rem;
+
+			button {
+				img {
+					width: 5.14286rem;
+					height: 5.14286rem;
+				}
+			}
 		}
 	}
 `;

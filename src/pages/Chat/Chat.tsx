@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 
 import arrow from '@/assets/images/icons/arrow-top.svg';
 import microphone from '@/assets/images/icons/microphone.svg';
@@ -8,14 +8,26 @@ import { Feedback } from '@/components/Chat/Feedback/Feedback';
 import { FirstBlock } from '@/components/Chat/FirstBlock/FirstBlock';
 import { useResize } from '@/hooks/useResize';
 import { useAppDispatch, useAppSelector } from '@/store';
-import { SessionBlocks, setInputValue } from '@/store/chat';
+import { SessionBlocks, setHideInput, setInputValue } from '@/store/chat';
 
 import { Input, Label, Wrapper, ChatWrap, Controls, Button } from './Chat.styled';
 
 const ChatPage: FC = () => {
 	const dispatch = useAppDispatch();
-	const { inputValue, sessionBlock } = useAppSelector((state) => state.chat);
+	const { inputValue, hiddenInput, sessionBlock } = useAppSelector((state) => state.chat);
 	const [innerWidth] = useResize();
+
+	useEffect(() => {
+		switch (sessionBlock) {
+			case SessionBlocks.FEEDBACK:
+			case SessionBlocks.END_SESSION:
+				dispatch(setHideInput(true));
+				break;
+
+			default:
+				break;
+		}
+	}, [hiddenInput]);
 
 	const renderSessionBlock = (): JSX.Element => {
 		switch (sessionBlock) {
@@ -35,7 +47,7 @@ const ChatPage: FC = () => {
 	return (
 		<Wrapper>
 			<ChatWrap>{renderSessionBlock()}</ChatWrap>
-			<Label>
+			<Label className={hiddenInput ? 'hidden' : ''}>
 				<Input
 					value={inputValue}
 					onChange={(e) => dispatch(setInputValue(e.target.value))}

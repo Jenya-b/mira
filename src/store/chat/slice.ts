@@ -8,9 +8,16 @@ export enum SessionBlocks {
 	END_SESSION,
 }
 
-const initialState = {
+interface InitialState {
+	inputValue: string;
+	hiddenInput: boolean;
+	sessionBlock: SessionBlocks;
+}
+
+const initialState: InitialState = {
 	inputValue: '',
-	sessionBlock: SessionBlocks.FIRST,
+	hiddenInput: false,
+	sessionBlock: SessionBlocks.COMPLAINT,
 };
 
 export const chatSlice = createSlice({
@@ -23,12 +30,15 @@ export const chatSlice = createSlice({
 		setSessionBlock(state, action: PayloadAction<SessionBlocks>): void {
 			state.sessionBlock = action.payload;
 		},
+		setHideInput(state, action: PayloadAction<boolean>): void {
+			state.hiddenInput = action.payload;
+		},
 		resetState() {
 			return initialState;
 		},
 	},
 });
 
-export const { setInputValue, setSessionBlock, resetState } = chatSlice.actions;
+export const { setInputValue, setSessionBlock, resetState, setHideInput } = chatSlice.actions;
 
 export const chatReducer = chatSlice.reducer;

@@ -1,13 +1,24 @@
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 
 import { complaintList } from '@/constants/chat';
 import { WithChat } from '@/hocs/WithChat/WithChat';
+import { useAppDispatch } from '@/store';
+import { setHideInput } from '@/store/chat';
 
-import { Info, List, Subtitle } from './ComplaintBlock.styled';
+import { List } from './ComplaintBlock.styled';
 
 export const ComplaintBlock: FC = () => {
+	const dispatch = useAppDispatch();
 	const [isOtherDescription, setOtherDescription] = useState(false);
 	const [complaints, setComplaints] = useState<string[]>([]);
+
+	useEffect(() => {
+		if (isOtherDescription) {
+			dispatch(setHideInput(false));
+		} else {
+			dispatch(setHideInput(true));
+		}
+	}, [isOtherDescription, complaints]);
 
 	const handleChangeComplaints = (item: string): void => {
 		if (complaints.includes(item)) {
@@ -16,6 +27,7 @@ export const ComplaintBlock: FC = () => {
 		} else {
 			setComplaints([...complaints, item]);
 		}
+		setOtherDescription(false);
 	};
 
 	const handleActiveDescription = (): void => {
@@ -27,32 +39,23 @@ export const ComplaintBlock: FC = () => {
 
 	return (
 		<WithChat title="Что вам не понравилось?">
-			<>
-				{!isOtherDescription && <Subtitle>Выберите 1 или более вариантов</Subtitle>}
-				<List>
-					{complaintList.map((item) => (
-						<li key={item}>
-							<button
-								onClick={() => handleChangeComplaints(item)}
-								className={complaints.includes(item) ? 'active' : ''}
-							>
-								{item}
-							</button>
-						</li>
-					))}
-					<li>
+			<List className={isOtherDescription ? 'subtitle-hide' : 'desc-act'}>
+				{complaintList.map((item) => (
+					<li key={item}>
 						<button
-							onClick={handleActiveDescription}
-							className={isOtherDescription ? 'active' : ''}
+							onClick={() => handleChangeComplaints(item)}
+							className={complaints.includes(item) ? 'active' : ''}
 						>
-							Другое
+							{item}
 						</button>
 					</li>
-				</List>
-				{isOtherDescription && (
-					<Info>Опишите, пожалуйста, проблему в сообщении и отправьте нам</Info>
-				)}
-			</>
+				))}
+				<li>
+					<button onClick={handleActiveDescription} className={isOtherDescription ? 'active' : ''}>
+						Другое
+					</button>
+				</li>
+			</List>
 		</WithChat>
 	);
 };

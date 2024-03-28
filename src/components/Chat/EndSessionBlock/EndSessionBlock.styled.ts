@@ -10,6 +10,11 @@ export const Desc = styled.div`
 	padding: 2.17857rem 1rem 2.67857rem 2.92857rem;
 	border-radius: 1.42857rem;
 	background: #2d327e;
+
+	@media (max-width: 768px) {
+		margin-top: 2.5rem;
+		padding: 2.36rem 2.43rem 2rem 2.07rem;
+	}
 `;
 
 const textCss = css`
@@ -17,6 +22,10 @@ const textCss = css`
 	font-style: normal;
 	font-weight: 500;
 	line-height: 120%;
+
+	@media (max-width: 768px) {
+		font-size: 1.14286rem;
+	}
 `;
 
 export const Title = styled.p`
@@ -29,6 +38,10 @@ export const List = styled.ul`
 	display: flex;
 	flex-direction: column;
 	row-gap: 0.5rem;
+
+	@media (max-width: 768px) {
+		row-gap: 0.35rem;
+	}
 
 	li {
 		${textCss}

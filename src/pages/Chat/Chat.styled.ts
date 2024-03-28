@@ -2,13 +2,13 @@ import styled from 'styled-components';
 
 export const Wrapper = styled.div`
 	position: relative;
+	display: grid;
+	grid-template: 1fr 9.29rem / 1fr;
 `;
 
 export const Label = styled.label`
-	position: absolute;
-	left: 50%;
-	bottom: 3.29rem;
-	transform: translateX(-50%);
+	position: relative;
+	justify-self: center;
 	width: 49.64286rem;
 	height: 6rem;
 	z-index: ${({ theme }) => theme.order.mediumIndex};

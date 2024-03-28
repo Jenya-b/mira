@@ -10,7 +10,7 @@ export enum SessionBlocks {
 
 const initialState = {
 	inputValue: '',
-	sessionBlock: SessionBlocks.END_SESSION,
+	sessionBlock: SessionBlocks.FIRST,
 };
 
 export const chatSlice = createSlice({

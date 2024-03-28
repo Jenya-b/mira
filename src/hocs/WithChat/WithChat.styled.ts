@@ -10,7 +10,7 @@ export const Wrapper = styled(animated.div)`
 
 export const Container = styled.div`
 	grid-column: 2/3;
-	padding: 8.64rem 2rem 12rem 2rem;
+	padding: 8.64rem 2rem 2rem 2rem;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;

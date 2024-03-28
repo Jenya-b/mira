@@ -77,6 +77,7 @@ export const List = styled.ul`
 
 	@media (max-width: 1000px) {
 		margin-top: 3.14rem;
+		margin-bottom: 3rem;
 
 		li {
 			font-size: 1.14286rem;

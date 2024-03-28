@@ -18,7 +18,7 @@ interface InitialState {
 const initialState: InitialState = {
 	inputValue: '',
 	hiddenInput: false,
-	sessionBlock: SessionBlocks.FUTURE_ACTIONS,
+	sessionBlock: SessionBlocks.FIRST,
 };
 
 export const chatSlice = createSlice({

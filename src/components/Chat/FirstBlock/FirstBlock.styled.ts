@@ -8,8 +8,11 @@ export const List = styled.ul`
 	flex-wrap: wrap;
 
 	li {
+		height: 5.35679rem;
+
 		button {
-			padding: 1.5rem 1.57rem;
+			padding: 0 1.57rem;
+			height: 100%;
 			border-radius: 0.88229rem;
 			border: 0.882px solid rgba(255, 255, 255, 0.5);
 			color: #fff;
@@ -18,14 +21,29 @@ export const List = styled.ul`
 			font-style: normal;
 			font-weight: 400;
 			line-height: 120%;
+			opacity: 0.8;
+
+			@media (max-width: 768px) {
+				font-size: 1.14286rem;
+			}
+		}
+
+		&:last-child {
+			button {
+				border: 0.882px solid #fff;
+				opacity: 1;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				column-gap: 0.82rem;
+			}
 		}
 	}
 
-	@media (max-width: 1000px) {
+	@media (max-width: 768px) {
 		margin-top: 3.14rem;
-
 		li {
-			font-size: 1.14286rem;
+			height: 4rem;
 		}
 	}
 `;

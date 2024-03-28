@@ -1,5 +1,6 @@
 import { FC } from 'react';
 
+import messageIcon from '@/assets/images/icons/bubble-message.svg';
 import { randomHints } from '@/constants/chat';
 import { WithChat } from '@/hocs/WithChat/WithChat';
 import { useAppDispatch } from '@/store';
@@ -18,6 +19,12 @@ export const FirstBlock: FC = () => {
 						<button onClick={() => dispatch(setInputValue(item))}>{item}</button>
 					</li>
 				))}
+				<li>
+					<button>
+						<img src={messageIcon} alt="" />
+						<span>Любая ситуация из вашей жизни</span>
+					</button>
+				</li>
 			</List>
 		</WithChat>
 	);

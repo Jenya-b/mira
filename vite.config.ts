@@ -14,7 +14,7 @@ export default defineConfig({
 			registerType: 'autoUpdate',
 			includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'mask-icon.svg'],
 			manifest: {
-				theme_color: '#3B3F8C',
+				theme_color: 'rgba(40, 43, 113, 1)',
 				name: 'Мира',
 				short_name: 'Мира',
 				icons: [

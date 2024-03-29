@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 import bgDesktop from '@/assets/images/bg-desktop-primary.png';
+import bgDesktopMob from '@/assets/images/bg-mob-primary.png';
 import bgSidebar from '@/assets/images/bg-sidebar.png';
 import countIcon from '@/assets/images/icons/count.svg';
 
@@ -16,12 +17,15 @@ export const Wrapper = styled.div`
 	@media (max-width: 1000px) {
 		grid-template: 1fr / 1fr;
 	}
+
+	@media (max-width: 420px) {
+		background-image: url(${bgDesktopMob});
+	}
 `;
 
 export const MobMenu = styled.div`
 	display: flex;
 	flex-direction: column;
-	/* background-image: url(${bgSidebar}); */
 	background: rgba(40, 43, 113, 1);
 	background-position: center;
 	background-repeat: no-repeat;

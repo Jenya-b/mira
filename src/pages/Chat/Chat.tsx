@@ -33,7 +33,7 @@ const ChatPage: FC = () => {
 			default:
 				break;
 		}
-	}, [hiddenInput]);
+	}, [hiddenInput, sessionBlock]);
 
 	const renderSessionBlock = (): JSX.Element => {
 		switch (sessionBlock) {

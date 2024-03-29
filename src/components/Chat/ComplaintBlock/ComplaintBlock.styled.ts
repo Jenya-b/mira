@@ -79,9 +79,12 @@ export const List = styled.ul`
 		}
 	}
 
-	@media (max-width: 1000px) {
+	@media (max-width: 768px) {
 		margin-top: 3.14rem;
-		margin-bottom: 3rem;
+
+		&.subtitle-hide {
+			margin-bottom: 3rem;
+		}
 
 		li {
 			font-size: 1.14286rem;
@@ -89,4 +92,22 @@ export const List = styled.ul`
 	}
 `;
 
-export const Button = styled.button``;
+export const Button = styled.button`
+	margin-top: 3.57rem;
+	max-width: 24.28571rem;
+	width: 100%;
+	height: 5.78571rem;
+	border-radius: 1.42857rem;
+	background: #4eb97f;
+
+	color: #fff;
+	font-size: 1.57143rem;
+	font-style: normal;
+	font-weight: 500;
+	line-height: normal;
+	letter-spacing: -0.03143rem;
+
+	@media (max-width: 768px) {
+		margin-top: 1.71rem;
+	}
+`;

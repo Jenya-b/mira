@@ -5,7 +5,7 @@ import { WithChat } from '@/hocs/WithChat/WithChat';
 import { useAppDispatch } from '@/store';
 import { setHideInput } from '@/store/chat';
 
-import { List } from './ComplaintBlock.styled';
+import { Button, List } from './ComplaintBlock.styled';
 
 export const ComplaintBlock: FC = () => {
 	const dispatch = useAppDispatch();
@@ -39,23 +39,29 @@ export const ComplaintBlock: FC = () => {
 
 	return (
 		<WithChat title="Что вам не понравилось?">
-			<List className={isOtherDescription ? 'subtitle-hide' : 'desc-act'}>
-				{complaintList.map((item) => (
-					<li key={item}>
+			<>
+				<List className={isOtherDescription ? 'subtitle-hide' : 'desc-act'}>
+					{complaintList.map((item) => (
+						<li key={item}>
+							<button
+								onClick={() => handleChangeComplaints(item)}
+								className={complaints.includes(item) ? 'active' : ''}
+							>
+								{item}
+							</button>
+						</li>
+					))}
+					<li>
 						<button
-							onClick={() => handleChangeComplaints(item)}
-							className={complaints.includes(item) ? 'active' : ''}
+							onClick={handleActiveDescription}
+							className={isOtherDescription ? 'active' : ''}
 						>
-							{item}
+							Другое
 						</button>
 					</li>
-				))}
-				<li>
-					<button onClick={handleActiveDescription} className={isOtherDescription ? 'active' : ''}>
-						Другое
-					</button>
-				</li>
-			</List>
+				</List>
+				{!!complaints.length && <Button>Отправить</Button>}
+			</>
 		</WithChat>
 	);
 };

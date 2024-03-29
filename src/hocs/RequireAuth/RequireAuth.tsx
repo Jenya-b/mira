@@ -25,7 +25,7 @@ export const RequireAuth = ({ children }: RequireAuthProps): JSX.Element => {
 		return <Loader />;
 	}
 
-	if (isError) {
+	if (isError || accessToken === null) {
 		return <Navigate to={path.auth} />;
 	}
 

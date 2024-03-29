@@ -3,6 +3,12 @@ import { BaseQueryApi, createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/
 import { RootState } from '@/store';
 import { User, resetState, setUser } from '@/store/user';
 
+interface UpdateUserRequest {
+	email?: string;
+	first_name?: string;
+	notify_email?: boolean;
+}
+
 export const userApi = createApi({
 	reducerPath: 'userApi',
 	baseQuery: fetchBaseQuery({
@@ -41,7 +47,25 @@ export const userApi = createApi({
 				}
 			},
 		}),
+		updateUser: build.mutation<User, UpdateUserRequest>({
+			query: (body) => ({
+				method: 'PATCH',
+				url: '/users/me/',
+				body,
+				headers: {
+					accept: 'application/json',
+				},
+			}),
+			onQueryStarted: async (_, { dispatch, queryFulfilled }) => {
+				try {
+					const { data } = await queryFulfilled;
+					dispatch(setUser(data));
+				} catch {
+					throw new Error();
+				}
+			},
+		}),
 	}),
 });
 
-export const { useGetUserQuery, useLazyGetUserQuery } = userApi;
+export const { useGetUserQuery, useLazyGetUserQuery, useUpdateUserMutation } = userApi;

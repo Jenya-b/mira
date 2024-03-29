@@ -1,5 +1,8 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
+import { path } from '@/router/path';
+import { useUpdateUserMutation } from '@/services/api/user';
 import { useAppDispatch, useAppSelector } from '@/store';
 import { setEmail } from '@/store/auth';
 
@@ -15,8 +18,22 @@ import {
 } from './index.styled';
 
 export const EmailBlock: FC = () => {
+	const navigate = useNavigate();
 	const dispatch = useAppDispatch();
 	const { email } = useAppSelector((state) => state.auth);
+	const [fetchUpdateUser, { isSuccess }] = useUpdateUserMutation();
+
+	useEffect(() => {
+		if (isSuccess) {
+			navigate(path.home);
+		}
+	}, [isSuccess]);
+
+	const handleSubmit = (): void => {
+		if (email) {
+			fetchUpdateUser({ email });
+		}
+	};
 
 	return (
 		<Wrapper>
@@ -35,8 +52,7 @@ export const EmailBlock: FC = () => {
 						placeholder="myemail@email.com"
 					/>
 				</Label>
-
-				<ButtonPrimary>Продолжить</ButtonPrimary>
+				<ButtonPrimary onClick={handleSubmit}>Продолжить</ButtonPrimary>
 			</Controls>
 		</Wrapper>
 	);

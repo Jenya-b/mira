@@ -1,10 +1,10 @@
 import { FC, useEffect, useState } from 'react';
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { path } from '@/router/path';
 import { useSigninMutation } from '@/services/api/auth';
 import { useAppDispatch, useAppSelector } from '@/store';
-import { AuthEnum, setAuthParam, setCodeNumber } from '@/store/auth';
+import { AuthEnum, resetState, setAuthParam, setCodeNumber } from '@/store/auth';
 
 import {
 	ButtonPrimary,
@@ -21,20 +21,34 @@ import {
 
 export const CodeBlock: FC = () => {
 	const dispatch = useAppDispatch();
+	const navigate = useNavigate();
 	const { phoneNumber, codeNumber } = useAppSelector((state) => state.auth);
 	const [timerNum, setTimerNum] = useState<number>(59);
+	const [error, setError] = useState(false);
 
-	const [signinMutation, { isSuccess, data }] = useSigninMutation();
+	const [signinMutation, { data, isError, isSuccess }] = useSigninMutation();
 
 	useEffect(() => {
 		if (isSuccess && data) {
+			dispatch(resetState());
+
 			if (data.exists_user) {
-				<Navigate to={path.home} />;
+				navigate(path.home);
 			} else {
 				dispatch(setAuthParam(AuthEnum.EMAIL));
 			}
 		}
 	}, [isSuccess]);
+
+	useEffect(() => {
+		setError(false);
+	}, [codeNumber]);
+
+	useEffect(() => {
+		if (isError) {
+			setError(true);
+		}
+	}, [isError]);
 
 	const setTimer = (): void => {
 		if (timerNum > 0) {
@@ -64,8 +78,9 @@ export const CodeBlock: FC = () => {
 				</NumberInfo>
 			</InfoBlock>
 			<Controls>
-				<Label>
+				<Label className={error ? 'error' : ''}>
 					<span>Код</span>
+					{error && <span>Неверный код</span>}
 					<Input
 						type="number"
 						value={codeNumber}

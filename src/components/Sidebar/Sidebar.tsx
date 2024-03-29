@@ -1,5 +1,6 @@
 import { Avatar } from '@mui/material';
 import { FC } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import addIcon from '@/assets/images/icons/add.svg';
 import avatarIcon from '@/assets/images/icons/avatar.svg';
@@ -8,7 +9,11 @@ import logoutIcon from '@/assets/images/icons/logout.svg';
 import okIcon from '@/assets/images/icons/okey.svg';
 import settingsIcon from '@/assets/images/icons/settings.svg';
 import { sidebarMenu } from '@/constants/menu';
-import { useAppSelector } from '@/store';
+import { path } from '@/router/path';
+import { useAppDispatch, useAppSelector } from '@/store';
+import { resetState as resetStateAuth } from '@/store/auth';
+import { resetState as resetStateChat } from '@/store/chat';
+import { resetState as resetStateUser } from '@/store/user';
 
 import {
 	ButtonPrimory,
@@ -24,7 +29,17 @@ import {
 } from './Sidebar.styled';
 
 export const Sidebar: FC = () => {
+	const dispatch = useAppDispatch();
+	const navigate = useNavigate();
 	const { user } = useAppSelector((state) => state.user);
+
+	const logout = (): void => {
+		localStorage.removeItem('accessToken');
+		dispatch(resetStateAuth());
+		dispatch(resetStateChat());
+		dispatch(resetStateUser());
+		navigate(path.auth);
+	};
 
 	return (
 		<Wrapper>
@@ -56,8 +71,8 @@ export const Sidebar: FC = () => {
 			</MenuBlock>
 			<ProfileBlock>
 				<Avatar alt="avatar" src={avatarIcon} />
-				<UserName>{user?.first_name ? user?.first_name : `+${user?.phone}`}</UserName>
-				<LogoutBtn>
+				<UserName>{user?.first_name}</UserName>
+				<LogoutBtn onClick={logout}>
 					<p>Выйти</p>
 					<img src={logoutIcon} alt="" />
 				</LogoutBtn>

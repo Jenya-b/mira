@@ -13,6 +13,10 @@ export const List = styled.ul`
 		row-gap: 1.14rem;
 	}
 
+	@media (max-width: 420px) {
+		margin-top: 2rem;
+	}
+
 	li {
 		width: 100%;
 		height: 5.28571rem;

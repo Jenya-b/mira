@@ -9,7 +9,7 @@ import { FirstBlock } from '@/components/Chat/FirstBlock/FirstBlock';
 import { FurtherActionsBlock } from '@/components/Chat/FurtherActionsBlock/FurtherActionsBlock';
 import { useResize } from '@/hooks/useResize';
 import { useAppDispatch, useAppSelector } from '@/store';
-import { SessionBlocks, setHideInput, setInputValue } from '@/store/chat';
+import { SessionBlocks, setHideInput, setInputValue, setSessionBlock } from '@/store/chat';
 
 import { Input, Label, Wrapper, ChatWrap, Controls, Button } from './Chat.styled';
 
@@ -24,6 +24,10 @@ const ChatPage: FC = () => {
 			case SessionBlocks.END_SESSION:
 			case SessionBlocks.FUTURE_ACTIONS:
 				dispatch(setHideInput(true));
+				break;
+
+			case SessionBlocks.FIRST:
+				dispatch(setHideInput(false));
 				break;
 
 			default:
@@ -48,8 +52,20 @@ const ChatPage: FC = () => {
 		}
 	};
 
+	// TODO временно для перелистывания экранов
+	const handleClick = (): void => {
+		const newSession = sessionBlock === 5 ? 0 : sessionBlock + 1;
+		dispatch(setSessionBlock(newSession));
+	};
+
 	return (
 		<Wrapper className={!hiddenInput ? 'grid' : ''}>
+			<button
+				onClick={handleClick}
+				style={{ background: 'none', position: 'absolute', top: '7rem', right: '2rem' }}
+			>
+				CL
+			</button>
 			<ChatWrap>{renderSessionBlock()}</ChatWrap>
 			<Label className={hiddenInput ? 'hidden' : ''}>
 				<Input

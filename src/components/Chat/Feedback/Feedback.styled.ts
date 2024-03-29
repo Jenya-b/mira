@@ -67,6 +67,14 @@ export const List = styled.ul`
 
 		@media (max-width: 390px) {
 			width: 6rem;
+			height: 9rem;
+
+			button {
+				img {
+					width: 4rem;
+					height: 4rem;
+				}
+			}
 		}
 	}
 `;

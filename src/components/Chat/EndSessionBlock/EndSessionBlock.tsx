@@ -6,7 +6,7 @@ import { WithChat } from '@/hocs/WithChat/WithChat';
 import { Button, Container, Desc, List, Title } from './EndSessionBlock.styled';
 
 export const EndSessionBlock: FC = () => (
-	<WithChat title="Извините, у вас закончились сессии">
+	<WithChat title="Извините, у вас закончились сессии c Мирой">
 		<Container>
 			<Desc>
 				<Title>Ограничен функционал:</Title>

@@ -22,9 +22,13 @@ export const List = styled.ul`
 		height: 2rem;
 
 		@media (max-width: 1000px) {
-			top: -2.5rem;
+			top: -2.8rem;
 			font-size: 1rem;
 		}
+	}
+
+	&.subtitle-hide {
+		margin-top: 1.5rem;
 	}
 
 	&.subtitle-hide::before {
@@ -84,3 +88,5 @@ export const List = styled.ul`
 		}
 	}
 `;
+
+export const Button = styled.button``;

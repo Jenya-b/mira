@@ -46,4 +46,8 @@ export const List = styled.ul`
 			height: 4rem;
 		}
 	}
+
+	@media (max-width: 420px) {
+		margin-top: 2rem;
+	}
 `;

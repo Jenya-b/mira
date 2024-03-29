@@ -11,7 +11,6 @@ export const Wrapper = styled(animated.div)`
 
 export const Container = styled.div`
 	grid-column: 2/3;
-	/* padding: 8.64rem 2rem 2rem 2rem; */
 	padding: 2rem;
 	display: flex;
 	flex-direction: column;
@@ -19,7 +18,6 @@ export const Container = styled.div`
 	align-items: center;
 
 	@media (max-width: 1000px) {
-		/* padding: 10rem 1.43rem 1.43rem 1.43rem; */
 		padding: 7rem 1.43rem 1.43rem 1.43rem;
 	}
 `;
@@ -31,6 +29,11 @@ export const Logo = styled.div`
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: contain;
+
+	@media (max-width: 420px) {
+		width: 4rem;
+		height: 4rem;
+	}
 `;
 
 export const Title = styled.h2`
@@ -48,5 +51,10 @@ export const Title = styled.h2`
 	@media (max-width: 1000px) {
 		margin-top: 1.79rem;
 		font-size: 2.14286rem;
+	}
+
+	@media (max-width: 420px) {
+		margin-top: 1rem;
+		font-size: 1.8rem;
 	}
 `;

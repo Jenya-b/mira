@@ -27,7 +27,7 @@ export const Layout: FC = () => {
 			{innerWidth > 1000 ? (
 				<Sidebar />
 			) : (
-				<MobMenu>
+				<MobMenu className={isOpenMenu ? 'active' : ''}>
 					<MobMenuWrap>
 						<BurgerBtn onClick={() => setIsOpenMenu(!isOpenMenu)}>
 							<span className={isOpenMenu ? 'active' : ''} />

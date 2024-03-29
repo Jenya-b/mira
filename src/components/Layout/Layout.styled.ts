@@ -21,7 +21,8 @@ export const Wrapper = styled.div`
 export const MobMenu = styled.div`
 	display: flex;
 	flex-direction: column;
-	background-image: url(${bgSidebar});
+	/* background-image: url(${bgSidebar}); */
+	background: rgba(40, 43, 113, 1);
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -32,6 +33,13 @@ export const MobMenu = styled.div`
 	border-bottom-left-radius: 2.86rem;
 	border-bottom-right-radius: 2.86rem;
 	z-index: ${({ theme }) => theme.order.firstIndex};
+
+	&.active {
+		background-image: url(${bgSidebar});
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: cover;
+	}
 `;
 
 export const MobMenuWrap = styled.div`

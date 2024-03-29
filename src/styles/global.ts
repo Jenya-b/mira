@@ -78,6 +78,9 @@ export default createGlobalStyle`
 		-webkit-text-size-adjust: 100%;
 		color: ${({ theme }) => theme.colors.textPrimary};
 	}
+	body::-webkit-scrollbar {
+  	display: none;
+	}
 	#root{
 		min-height: 100vh;
 	}

@@ -1,5 +1,7 @@
 import { FC, useEffect } from 'react';
+import { Navigate } from 'react-router-dom';
 
+import { path } from '@/router/path';
 import { useSigninMutation } from '@/services/api/auth';
 import { useAppDispatch, useAppSelector } from '@/store';
 import { AuthEnum, setAuthParam, setCodeNumber } from '@/store/auth';
@@ -21,11 +23,15 @@ export const CodeBlock: FC = () => {
 	const dispatch = useAppDispatch();
 	const { phoneNumber, codeNumber } = useAppSelector((state) => state.auth);
 
-	const [signinMutation, { isSuccess }] = useSigninMutation();
+	const [signinMutation, { isSuccess, data }] = useSigninMutation();
 
 	useEffect(() => {
-		if (isSuccess) {
-			dispatch(setAuthParam(AuthEnum.EMAIL));
+		if (isSuccess && data) {
+			if (data.exists_user) {
+				<Navigate to={path.home} />;
+			} else {
+				dispatch(setAuthParam(AuthEnum.EMAIL));
+			}
 		}
 	}, [isSuccess]);
 

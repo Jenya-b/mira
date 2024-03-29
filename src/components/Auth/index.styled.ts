@@ -63,7 +63,7 @@ export const Label = styled.label`
 
 	span {
 		position: absolute;
-		left: 1.63rem;
+		left: 2rem;
 		top: 0.88rem;
 		color: #c2c2c2;
 		font-size: 0.71rem;
@@ -75,7 +75,7 @@ export const Label = styled.label`
 `;
 
 const inputCss = css`
-	padding-top: 0.5rem;
+	padding-top: 0.9rem;
 	padding-left: 2rem;
 	width: 100%;
 	height: 100%;

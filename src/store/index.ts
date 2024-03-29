@@ -3,19 +3,23 @@ import { useDispatch, useSelector } from 'react-redux';
 import type { TypedUseSelectorHook } from 'react-redux';
 
 import { authApi } from '@/services/api/auth';
+import { userApi } from '@/services/api/user';
 
 import { authReducer } from './auth';
 import { chatReducer } from './chat';
+import { userReducer } from './user';
 
 export const store = configureStore({
 	reducer: {
 		auth: authReducer,
 		chat: chatReducer,
-
+		user: userReducer,
 		[authApi.reducerPath]: authApi.reducer,
+		[userApi.reducerPath]: userApi.reducer,
 	},
 
-	middleware: (getDefaultMiddleware) => getDefaultMiddleware({}).concat(authApi.middleware),
+	middleware: (getDefaultMiddleware) =>
+		getDefaultMiddleware({}).concat(authApi.middleware, userApi.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

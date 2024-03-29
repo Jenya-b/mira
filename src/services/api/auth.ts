@@ -1,5 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
+import { setAccessToken } from '@/store/user';
+
 interface CreateCodeResponse {
 	phone: number;
 }
@@ -43,6 +45,15 @@ export const authApi = createApi({
 					'Content-Type': 'application/json',
 				},
 			}),
+			onQueryStarted: async (_, { dispatch, queryFulfilled }) => {
+				try {
+					const { data } = await queryFulfilled;
+					localStorage.setItem('accessToken', data.access_token);
+					dispatch(setAccessToken(data.access_token));
+				} catch {
+					throw new Error();
+				}
+			},
 		}),
 	}),
 });

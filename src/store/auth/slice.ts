@@ -10,6 +10,7 @@ const initialState = {
 	phoneNumber: '',
 	codeNumber: '',
 	email: '',
+	activeControls: true,
 	authParam: AuthEnum.PHONE,
 };
 
@@ -29,13 +30,22 @@ export const authSlice = createSlice({
 		setEmail(state, action: PayloadAction<string>): void {
 			state.email = action.payload;
 		},
+		setActiveControls(state, action: PayloadAction<boolean>): void {
+			state.activeControls = action.payload;
+		},
 		resetState() {
 			return initialState;
 		},
 	},
 });
 
-export const { setAuthParam, setCodeNumber, setPhoneNumber, setEmail, resetState } =
-	authSlice.actions;
+export const {
+	setAuthParam,
+	setCodeNumber,
+	setPhoneNumber,
+	setEmail,
+	setActiveControls,
+	resetState,
+} = authSlice.actions;
 
 export const authReducer = authSlice.reducer;

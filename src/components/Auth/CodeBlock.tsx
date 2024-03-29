@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 
 import { path } from '@/router/path';
@@ -22,6 +22,7 @@ import {
 export const CodeBlock: FC = () => {
 	const dispatch = useAppDispatch();
 	const { phoneNumber, codeNumber } = useAppSelector((state) => state.auth);
+	const [timerNum, setTimerNum] = useState<number>(59);
 
 	const [signinMutation, { isSuccess, data }] = useSigninMutation();
 
@@ -34,6 +35,18 @@ export const CodeBlock: FC = () => {
 			}
 		}
 	}, [isSuccess]);
+
+	const setTimer = (): void => {
+		if (timerNum > 0) {
+			setTimerNum(timerNum - 1);
+		}
+	};
+
+	useEffect(() => {
+		const timer = setTimeout(setTimer, 1000);
+
+		return () => clearTimeout(timer);
+	}, [timerNum]);
 
 	const handleSubmit = (): void => {
 		const phone = Number(phoneNumber.replace(/[^0-9]/g, ''));
@@ -60,9 +73,16 @@ export const CodeBlock: FC = () => {
 					/>
 				</Label>
 				<Timer style={{ marginTop: '-0.5rem' }}>
-					Отправить повторное СМС через <span>0:53</span>
+					{timerNum > 0 && (
+						<>
+							Отправить повторное СМС через{' '}
+							<span>0:{timerNum >= 10 ? timerNum : `0${timerNum}`}</span>
+						</>
+					)}
 				</Timer>
-				<ButtonPrimary onClick={handleSubmit}>Подтвердить</ButtonPrimary>
+				<ButtonPrimary disabled={timerNum <= 0} onClick={handleSubmit}>
+					Подтвердить
+				</ButtonPrimary>
 			</Controls>
 		</Wrapper>
 	);

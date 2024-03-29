@@ -38,6 +38,11 @@ export default createGlobalStyle`
 	}
 	button {
 		cursor: pointer;
+
+		@media (max-width: 1000px) {
+			-webkit-appearance: none;
+			-moz-appearance: none;
+		}
 	}
 	button::-moz-focus-inner {
 		padding: 0;

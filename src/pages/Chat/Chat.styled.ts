@@ -12,7 +12,3 @@ export const Wrapper = styled.div`
 		}
 	}
 `;
-
-export const ChatWrap = styled.div`
-	height: 100%;
-`;

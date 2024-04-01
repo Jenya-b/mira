@@ -9,7 +9,7 @@ import { Input } from '@/components/Chat/Input/Input';
 import { useAppDispatch, useAppSelector } from '@/store';
 import { SessionBlocks, setHideInput, setSessionBlock } from '@/store/chat';
 
-import { Wrapper, ChatWrap } from './Chat.styled';
+import { Wrapper } from './Chat.styled';
 
 const ChatPage: FC = () => {
 	const dispatch = useAppDispatch();
@@ -63,7 +63,7 @@ const ChatPage: FC = () => {
 			>
 				CL
 			</button>
-			<ChatWrap>{renderSessionBlock()}</ChatWrap>
+			{renderSessionBlock()}
 			<Input />
 		</Wrapper>
 	);

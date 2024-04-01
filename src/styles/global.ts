@@ -73,7 +73,6 @@ export default createGlobalStyle`
 	html,
 	body {
 		font-family: "Onest", sans-serif;
-		height: 100%;
 		width: 100%;
 		font-size: 100%;
 		line-height: 1;
@@ -83,10 +82,18 @@ export default createGlobalStyle`
 		-webkit-text-size-adjust: 100%;
 		color: ${({ theme }) => theme.colors.textPrimary};
 	}
+	html {
+		height: -webkit-fill-available;
+	}
+	body {
+		min-height: 100vh;
+  	min-height: -webkit-fill-available;
+	}
 	body::-webkit-scrollbar {
   	display: none;
 	}
 	#root{
 		min-height: 100vh;
+		min-height: -webkit-fill-available;
 	}
 `;

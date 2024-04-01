@@ -91,3 +91,18 @@ export const furtherActionsHelp: FurtherActions[] = [
 		redirection: FurtherActionsEnum.MAIN,
 	},
 ];
+
+export const messagesList = [
+	{
+		isMira: false,
+		text: 'Подскажи конкретные шаги, как я себе могу чем-то помочь',
+	},
+	{
+		isMira: true,
+		text: 'Конечно, я готов помочь. Пожалуйста, расскажи мне, в чем именно твоя проблема или что тебя беспокоит, и мы вместе попытаемся найти решение.',
+	},
+	{
+		isMira: false,
+		text: 'Спасибо, а еще?',
+	},
+];

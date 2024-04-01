@@ -114,6 +114,7 @@
 					["@/hooks", "./src/hooks"],
 					["@/pages", "./src/pages"],
 					["@/styles", "./src/styles"],
+					["@/utils", "./src/utils"],
 					["@/router", "./src/router"],
 					["@/services", "./src/services"],
 					["@/store", "./src/store"],

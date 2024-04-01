@@ -6,6 +6,7 @@ import { Feedback } from '@/components/Chat/Feedback/Feedback';
 import { FirstBlock } from '@/components/Chat/FirstBlock/FirstBlock';
 import { FurtherActionsBlock } from '@/components/Chat/FurtherActionsBlock/FurtherActionsBlock';
 import { Input } from '@/components/Chat/Input/Input';
+import { MessageBlock } from '@/components/Chat/MessagesBlock/MessagesBlock';
 import { useAppDispatch, useAppSelector } from '@/store';
 import { SessionBlocks, setHideInput, setSessionBlock } from '@/store/chat';
 
@@ -36,6 +37,8 @@ const ChatPage: FC = () => {
 		switch (sessionBlock) {
 			case SessionBlocks.FIRST:
 				return <FirstBlock />;
+			case SessionBlocks.CHAT:
+				return <MessageBlock />;
 			case SessionBlocks.FEEDBACK:
 				return <Feedback />;
 			case SessionBlocks.COMPLAINT:

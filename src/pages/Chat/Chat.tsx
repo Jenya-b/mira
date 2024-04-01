@@ -1,22 +1,19 @@
 import { FC, useEffect } from 'react';
 
-import arrow from '@/assets/images/icons/arrow-top.svg';
-import microphone from '@/assets/images/icons/microphone.svg';
 import { ComplaintBlock } from '@/components/Chat/ComplaintBlock/ComplaintBlock';
 import { EndSessionBlock } from '@/components/Chat/EndSessionBlock/EndSessionBlock';
 import { Feedback } from '@/components/Chat/Feedback/Feedback';
 import { FirstBlock } from '@/components/Chat/FirstBlock/FirstBlock';
 import { FurtherActionsBlock } from '@/components/Chat/FurtherActionsBlock/FurtherActionsBlock';
-import { useResize } from '@/hooks/useResize';
+import { Input } from '@/components/Chat/Input/Input';
 import { useAppDispatch, useAppSelector } from '@/store';
-import { SessionBlocks, setHideInput, setInputValue, setSessionBlock } from '@/store/chat';
+import { SessionBlocks, setHideInput, setSessionBlock } from '@/store/chat';
 
-import { Input, Label, Wrapper, ChatWrap, Controls, Button } from './Chat.styled';
+import { Wrapper, ChatWrap } from './Chat.styled';
 
 const ChatPage: FC = () => {
 	const dispatch = useAppDispatch();
-	const { inputValue, hiddenInput, sessionBlock } = useAppSelector((state) => state.chat);
-	const [innerWidth] = useResize();
+	const { hiddenInput, sessionBlock } = useAppSelector((state) => state.chat);
 
 	useEffect(() => {
 		switch (sessionBlock) {
@@ -67,31 +64,7 @@ const ChatPage: FC = () => {
 				CL
 			</button>
 			<ChatWrap>{renderSessionBlock()}</ChatWrap>
-			<Label className={hiddenInput ? 'hidden' : ''}>
-				<Input
-					value={inputValue}
-					onChange={(e) => dispatch(setInputValue(e.target.value))}
-					placeholder="Сообщение..."
-				/>
-				<Controls>
-					{innerWidth > 1000 ? (
-						<>
-							<Button>
-								<img src={microphone} alt="btn" />
-							</Button>
-							<Button style={{ background: '#4eb97f' }}>
-								<img src={arrow} alt="btn" />
-							</Button>
-						</>
-					) : (
-						<>
-							<Button>
-								<img src={!inputValue ? microphone : arrow} alt="btn" />
-							</Button>
-						</>
-					)}
-				</Controls>
-			</Label>
+			<Input />
 		</Wrapper>
 	);
 };

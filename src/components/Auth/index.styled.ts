@@ -54,6 +54,11 @@ export const ButtonPrimary = styled.button`
 	font-weight: 500;
 	line-height: normal;
 	letter-spacing: -0.44px;
+
+	&:disabled {
+		background: #c5c5c5;
+		color: #e5e5e5;
+	}
 `;
 
 export const Label = styled.label`
@@ -84,7 +89,6 @@ export const Label = styled.label`
 		font-weight: 500;
 		line-height: 1.28571rem;
 		letter-spacing: -0.04rem;
-		text-decoration-line: underline;
 	}
 
 	&.error {

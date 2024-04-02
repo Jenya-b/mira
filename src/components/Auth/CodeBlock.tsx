@@ -95,7 +95,7 @@ export const CodeBlock: FC = () => {
 						</>
 					)}
 				</Timer>
-				<ButtonPrimary disabled={timerNum <= 0} onClick={handleSubmit}>
+				<ButtonPrimary disabled={error} onClick={handleSubmit}>
 					Подтвердить
 				</ButtonPrimary>
 			</Controls>

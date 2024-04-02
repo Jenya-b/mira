@@ -37,6 +37,15 @@ export const TextMessageWrap = styled.div`
 	}
 `;
 
+export const ThoughtsWrap = styled.div`
+	margin-top: 3.64rem;
+	grid-column: 2/3;
+	grid-row: 2/3;
+	display: flex;
+	flex-direction: column;
+	row-gap: 3.64rem;
+`;
+
 export const MessageLogo = styled.div`
 	@media (max-width: 768px) {
 		&.user img {

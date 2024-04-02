@@ -18,9 +18,33 @@ export const Logo = styled.div`
 
 export const Panel = styled.div`
 	@media (max-width: 768px) {
-		background: rgba(72, 140, 225, 0.4);
+		background: #5970ae;
 		border-radius: 1rem;
 		height: 3.25157rem;
 		max-width: 85%;
+		overflow: hidden;
+	}
+`;
+
+export const Block = styled.div`
+	@media (max-width: 768px) {
+		height: 100%;
+		width: 100%;
+
+		background: linear-gradient(143deg, #5970ae 20%, #7084bf, #5970ae 70%);
+		animation-direction: normal;
+		animation-duration: 3.5s;
+		animation-name: move;
+		animation-iteration-count: infinite;
+		animation-timing-function: linear;
+
+		@keyframes move {
+			from {
+				margin-left: -100vw;
+			}
+			to {
+				margin-left: 100vw;
+			}
+		}
 	}
 `;

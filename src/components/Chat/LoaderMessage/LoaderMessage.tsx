@@ -3,7 +3,7 @@ import { FC, useEffect, useRef } from 'react';
 import img from '@/assets/images/sprite-desc.png';
 import { Sprite } from '@/utils/sprite';
 
-import { Logo, Panel, Wrapper } from './LoaderMessage.styled';
+import { Logo, Panel, Wrapper, Block } from './LoaderMessage.styled';
 
 export const LoaderMessage: FC = () => {
 	const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -31,7 +31,9 @@ export const LoaderMessage: FC = () => {
 			<Logo>
 				<canvas id="canvas" ref={canvasRef} width={36} height={36} />
 			</Logo>
-			<Panel />
+			<Panel>
+				<Block />
+			</Panel>
 		</Wrapper>
 	);
 };

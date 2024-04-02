@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 
 import authImg from '@/assets/images/authImg.png';
 import yandexIcon from '@/assets/images/icons/yandex.svg';
@@ -23,19 +23,27 @@ const AuthPage: FC = () => {
 	const dispatch = useAppDispatch();
 	const { authParam, activeControls } = useAppSelector((state) => state.auth);
 
-	const renderAuthBlock = (): JSX.Element => {
+	useEffect(() => {
 		switch (authParam) {
 			case AuthEnum.PHONE:
 				dispatch(setActiveControls(true));
-
-				return <PhoneBlock />;
+				break;
 			case AuthEnum.COD:
-				dispatch(setActiveControls(false));
-
-				return <CodeBlock />;
 			case AuthEnum.EMAIL:
 				dispatch(setActiveControls(false));
+				break;
+			default:
+				break;
+		}
+	}, [authParam]);
 
+	const renderAuthBlock = (): JSX.Element => {
+		switch (authParam) {
+			case AuthEnum.PHONE:
+				return <PhoneBlock />;
+			case AuthEnum.COD:
+				return <CodeBlock />;
+			case AuthEnum.EMAIL:
 				return <EmailBlock />;
 			default:
 				return <></>;

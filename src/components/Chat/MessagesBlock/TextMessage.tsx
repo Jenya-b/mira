@@ -22,10 +22,12 @@ export const TextMessage: FC<TextMessageProps> = ({ isMira, text, searchBlock })
 			<img src={isMira ? miraIcon : userIcon} alt="logo" />
 		</MessageLogo>
 		<MessageText className={isMira ? 'mira' : 'user'}>{text}</MessageText>
-		<ThoughtsWrap>
-			{searchBlock.map(({ list, title }, i) => (
-				<Thoughts key={i} list={list} title={title} />
-			))}
-		</ThoughtsWrap>
+		{!!searchBlock.length && (
+			<ThoughtsWrap>
+				{searchBlock.map(({ list, title }, i) => (
+					<Thoughts key={i} list={list} title={title} />
+				))}
+			</ThoughtsWrap>
+		)}
 	</TextMessageWrap>
 );

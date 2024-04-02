@@ -3,6 +3,8 @@ import { FC, useEffect, useRef } from 'react';
 import img from '@/assets/images/sprite-desc.png';
 import { Sprite } from '@/utils/sprite';
 
+import { Logo, Panel, Wrapper } from './LoaderMessage.styled';
+
 export const LoaderMessage: FC = () => {
 	const canvasRef = useRef<HTMLCanvasElement>(null);
 	const coinImage = new Image();
@@ -25,8 +27,11 @@ export const LoaderMessage: FC = () => {
 	}, []);
 
 	return (
-		<div style={{ width: '36px', height: '36px', borderRadius: '50%', overflow: 'hidden' }}>
-			<canvas id="canvas" ref={canvasRef} width={36} height={36} />
-		</div>
+		<Wrapper>
+			<Logo>
+				<canvas id="canvas" ref={canvasRef} width={36} height={36} />
+			</Logo>
+			<Panel />
+		</Wrapper>
 	);
 };

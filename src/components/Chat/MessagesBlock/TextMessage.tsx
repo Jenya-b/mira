@@ -12,9 +12,9 @@ interface TextMessageProps {
 
 export const TextMessage: FC<TextMessageProps> = ({ isMira, text }) => (
 	<TextMessageWrap>
-		<MessageLogo>
+		<MessageLogo className={isMira ? 'mira' : 'user'}>
 			<img src={isMira ? miraIcon : userIcon} alt="logo" />
 		</MessageLogo>
-		<MessageText>{text}</MessageText>
+		<MessageText className={isMira ? 'mira' : 'user'}>{text}</MessageText>
 	</TextMessageWrap>
 );

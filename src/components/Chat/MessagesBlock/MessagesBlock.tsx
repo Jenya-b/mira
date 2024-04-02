@@ -1,9 +1,10 @@
 import { FC } from 'react';
 
+import { LoaderMessage } from '../LoaderMessage/LoaderMessage';
+
 import { messagesList } from '@/constants/chat';
 
 import { Container, Wrapper } from './index.styled';
-import { LoaderMessage } from './LoaderMessage';
 import { TextMessage } from './TextMessage';
 
 export const MessageBlock: FC = () => (

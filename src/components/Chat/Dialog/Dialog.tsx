@@ -7,14 +7,26 @@ import { FC, forwardRef } from 'react';
 
 import { Button, Content, Title } from './Dialog.styled';
 
-export const StyledDialog = styled(Dialog)(() => ({
+export const StyledDialog = styled(Dialog)(({ theme }) => ({
+	'& .MuiDialog-container': {
+		[theme.breakpoints.down('sm')]: {
+			alignItems: 'end',
+		},
+	},
 	'& .MuiDialog-paper': {
 		margin: 0,
 		borderRadius: '2.14286rem',
 		background: '#488CE1',
-		maxWidth: '29.78571rem',
+		maxWidth: '30rem',
 		width: '100%',
 		padding: '3.79rem 2.29rem 2.71rem 2.29rem',
+
+		[theme.breakpoints.down('sm')]: {
+			maxWidth: '100%',
+			borderBottomLeftRadius: 0,
+			borderBottomRightRadius: 0,
+			padding: '3.43rem 1.43rem 0.64rem 1.43rem',
+		},
 	},
 	'.MuiBackdrop-root': {
 		background: 'rgba(0, 0, 0, 0.35)',
@@ -50,6 +62,6 @@ export const DialogSlide: FC<DialogSlideProps> = ({ handleClickClose, open }) =>
 			Накладывание строгих, часто нереальных стандартов на себя или других, обычно с использованием
 			слов "должен" или "необходимо".
 		</Content>
-		<Button>Понятно, назад</Button>
+		<Button onClick={handleClickClose}>Понятно, назад</Button>
 	</StyledDialog>
 );

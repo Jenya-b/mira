@@ -35,21 +35,30 @@ export const TextMessageWrap = styled.div`
 
 	@media (max-width: 768px) {
 		align-self: flex-end;
-		column-gap: 1rem;
+		column-gap: 0.79rem;
 	}
 `;
 
 export const ThoughtsWrap = styled.div`
 	margin-top: 3.64rem;
-	grid-column: 2/3;
+	grid-column: 1/3;
 	grid-row: 2/3;
 	display: flex;
 	flex-direction: column;
 	row-gap: 3.64rem;
+
+	@media (max-width: 768px) {
+		margin-top: 2.43rem;
+		row-gap: 1.43rem;
+	}
 `;
 
 export const MessageLogo = styled.div`
 	@media (max-width: 768px) {
+		img {
+			width: 2.14286rem;
+			height: 2.14286rem;
+		}
 		&.user img {
 			display: none;
 		}

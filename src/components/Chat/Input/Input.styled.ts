@@ -77,5 +77,9 @@ export const Button = styled.button`
 		background: #4eb97f;
 		width: 2.78571rem;
 		height: 2.78571rem;
+
+		img {
+			height: 1.38079rem;
+		}
 	}
 `;

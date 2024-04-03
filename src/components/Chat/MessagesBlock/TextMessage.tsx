@@ -3,7 +3,8 @@ import { FC } from 'react';
 import { Thoughts } from '../Thoughts/Thoughts';
 
 import userIcon from '@/assets/images/avatar-msg.png';
-import miraIcon from '@/assets/images/logo-msg.png';
+// import miraIcon from '@/assets/images/logo-msg.png';
+import miraIcon from '@/assets/images/icons/logo-chat.svg';
 
 import { MessageLogo, MessageText, TextMessageWrap, ThoughtsWrap } from './index.styled';
 

@@ -33,7 +33,7 @@ export const Block = styled.div`
 
 		background: linear-gradient(143deg, #5970ae 20%, #7084bf, #5970ae 70%);
 		animation-direction: normal;
-		animation-duration: 3.2s;
+		animation-duration: 2.34s;
 		animation-name: move;
 		animation-iteration-count: infinite;
 		animation-timing-function: linear;
@@ -43,7 +43,7 @@ export const Block = styled.div`
 				margin-left: -100vw;
 			}
 			to {
-				margin-left: 100vw;
+				margin-left: 150vw;
 			}
 		}
 	}

@@ -42,7 +42,7 @@ export class Sprite {
 	}
 
 	update(): void {
-		this.tickCount += 1.5;
+		this.tickCount += 2.5;
 
 		if (this.tickCount > this.ticksPerFrame) {
 			this.tickCount = 0;

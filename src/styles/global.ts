@@ -81,6 +81,10 @@ export default createGlobalStyle`
 		-moz-text-size-adjust: 100%;
 		-webkit-text-size-adjust: 100%;
 		color: ${({ theme }) => theme.colors.textPrimary};
+		
+		::-webkit-scrollbar {
+  		display: none;
+		}
 	}
 	html {
 		height: -webkit-fill-available;

@@ -70,7 +70,7 @@ export const MessageText = styled.p`
 	font-size: 1.14286rem;
 	font-style: normal;
 	font-weight: 500;
-	line-height: 120%;
+	line-height: 130%;
 
 	@media (max-width: 768px) {
 		padding: 1.08rem 1.3rem;

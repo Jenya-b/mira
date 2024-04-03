@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import bgDesktop from '@/assets/images/bg-desktop-primary.png';
 import bgDesktopMob from '@/assets/images/bg-mob-primary.png';
 import bgSidebar from '@/assets/images/bg-sidebar.png';
-import countIcon from '@/assets/images/icons/count.svg';
 
 export const Wrapper = styled.div`
 	min-height: 100vh;
@@ -111,10 +110,6 @@ export const ButtonGroup = styled.div`
 export const CountSession = styled.div`
 	width: 2.57143rem;
 	height: 2.57143rem;
-	background-image: url(${countIcon});
-	background-position: center;
-	background-repeat: no-repeat;
-	background-size: contain;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -124,4 +119,13 @@ export const CountSession = styled.div`
 	font-weight: 500;
 	line-height: normal;
 	letter-spacing: -0.02286rem;
+	position: relative;
+
+	svg {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+	}
 `;

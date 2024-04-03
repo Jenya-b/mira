@@ -36,6 +36,7 @@ export const TextMessageWrap = styled.div`
 	@media (max-width: 768px) {
 		align-self: flex-end;
 		column-gap: 0.79rem;
+		grid-template-columns: 2.14286rem 1fr;
 	}
 `;
 

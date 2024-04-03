@@ -83,6 +83,7 @@ export const CodeBlock: FC = () => {
 					{error && <span>Неверный код</span>}
 					<Input
 						type="number"
+						inputMode="numeric"
 						value={codeNumber}
 						onChange={(e) => dispatch(setCodeNumber(e.target.value))}
 					/>

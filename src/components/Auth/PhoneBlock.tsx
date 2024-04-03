@@ -42,6 +42,8 @@ export const PhoneBlock: FC = () => {
 				<Label>
 					<span>Номер телефона</span>
 					<StyledInputMask
+						type="tel"
+						inputMode="tel"
 						mask="+7 999 999-99-99"
 						placeholder="+7 000 000-00-00"
 						value={phoneNumber}

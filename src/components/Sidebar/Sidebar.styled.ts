@@ -92,7 +92,7 @@ export const MenuBlock = styled.ul`
 `;
 
 export const ButtonPrimory = styled.button`
-	padding-bottom: 1.36rem;
+	padding-bottom: 0.93rem;
 	width: 100%;
 	border-bottom: 1px solid rgba(255, 255, 255, 0.26);
 	background: none;

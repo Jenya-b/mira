@@ -51,7 +51,7 @@ export const Sidebar: FC = () => {
 				</ButtonPrimory>
 				<ButtonPrimory>
 					<img src={addIcon} alt="add" />
-					<p>7 доступных сессий</p>
+					<p>Начать новую сессию</p>
 				</ButtonPrimory>
 			</SessionBlock>
 			<CardBlock>

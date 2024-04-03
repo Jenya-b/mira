@@ -1,5 +1,6 @@
 import { FC } from 'react';
 
+import { CheckWithUser } from '../CheckWithUser/CheckWithUser';
 import { LoaderMessage } from '../LoaderMessage/LoaderMessage';
 
 import { messagesList } from '@/constants/chat';
@@ -13,6 +14,7 @@ export const MessageBlock: FC = () => (
 			{messagesList.map(({ isMira, text, searchBlock }, i) => (
 				<TextMessage key={i} isMira={isMira} text={text} searchBlock={searchBlock} />
 			))}
+			<CheckWithUser />
 			<LoaderMessage />
 		</Container>
 	</Wrapper>

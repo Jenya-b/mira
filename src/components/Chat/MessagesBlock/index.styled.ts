@@ -41,7 +41,7 @@ export const TextMessageWrap = styled.div`
 
 export const ThoughtsWrap = styled.div`
 	margin-top: 3.64rem;
-	grid-column: 1/3;
+	grid-column: 2/3;
 	grid-row: 2/3;
 	display: flex;
 	flex-direction: column;
@@ -50,6 +50,7 @@ export const ThoughtsWrap = styled.div`
 	@media (max-width: 768px) {
 		margin-top: 2.43rem;
 		row-gap: 1.43rem;
+		grid-column: 1/3;
 	}
 `;
 

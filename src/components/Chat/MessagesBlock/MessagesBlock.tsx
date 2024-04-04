@@ -1,18 +1,24 @@
 import { FC } from 'react';
 
-import { CheckWithUser } from '../CheckWithUser/CheckWithUser';
-import { LoaderMessage } from '../LoaderMessage/LoaderMessage';
+import { CheckWithUser } from '../../ChatElements/CheckWithUser/CheckWithUser';
+import { LoaderMessage } from '../../ChatElements/LoaderMessage/LoaderMessage';
 
+import { TextMessage } from '@/components/ChatElements/TextMessage/TextMessage';
 import { messagesList } from '@/constants/chat';
+import { PersonMessage } from '@/hocs/WithMessage/WithMessage';
 
-import { Container, Wrapper } from './index.styled';
-import { TextMessage } from './TextMessage';
+import { Container, Wrapper } from './MessageBlock.styled';
 
 export const MessageBlock: FC = () => (
 	<Wrapper>
 		<Container>
-			{messagesList.map(({ isMira, text, searchBlock }, i) => (
-				<TextMessage key={i} isMira={isMira} text={text} searchBlock={searchBlock} />
+			{messagesList.map(({ text, searchBlock, logoParam }, i) => (
+				<TextMessage
+					key={i}
+					logoParam={logoParam as PersonMessage}
+					text={text}
+					searchBlock={searchBlock}
+				/>
 			))}
 			<CheckWithUser />
 			<LoaderMessage />

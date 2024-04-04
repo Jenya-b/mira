@@ -1,8 +1,8 @@
 import { FC, useState } from 'react';
 
-import miraIcon from '@/assets/images/icons/logo-chat2.svg';
+import { PersonMessage, WithMessage } from '@/hocs/WithMessage/WithMessage';
 
-import { List, Logo, Text, Wrapper } from './CheckWithUser.styled';
+import { List } from './CheckWithUser.styled';
 
 const list = ['Теперь сильно сомневаюсь', 'Стал немного сомневаться', 'Мысль также верна'];
 
@@ -10,11 +10,7 @@ export const CheckWithUser: FC = () => {
 	const [active, setActive] = useState<string>('');
 
 	return (
-		<Wrapper>
-			<Logo>
-				<img src={miraIcon} alt="logo" />
-			</Logo>
-			<Text>Насколько вы согласны с моей мыслью?</Text>
+		<WithMessage logoParam={PersonMessage.MIRA_CHECK} text="Насколько вы согласны с моей мыслью?">
 			<List>
 				{list.map((item) => (
 					<li key={item}>
@@ -24,6 +20,6 @@ export const CheckWithUser: FC = () => {
 					</li>
 				))}
 			</List>
-		</Wrapper>
+		</WithMessage>
 	);
 };

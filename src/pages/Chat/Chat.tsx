@@ -1,5 +1,6 @@
 import { FC, useEffect } from 'react';
 
+import { CardsBlock } from '@/components/Chat/CardsBlock/CardsBlock';
 import { ComplaintBlock } from '@/components/Chat/ComplaintBlock/ComplaintBlock';
 import { EndSessionBlock } from '@/components/Chat/EndSessionBlock/EndSessionBlock';
 import { Feedback } from '@/components/Chat/Feedback/Feedback';
@@ -21,6 +22,7 @@ const ChatPage: FC = () => {
 			case SessionBlocks.FEEDBACK:
 			case SessionBlocks.END_SESSION:
 			case SessionBlocks.FUTURE_ACTIONS:
+			case SessionBlocks.CARDS:
 				dispatch(setHideInput(true));
 				break;
 
@@ -39,6 +41,8 @@ const ChatPage: FC = () => {
 				return <FirstBlock />;
 			case SessionBlocks.CHAT:
 				return <MessageBlock />;
+			case SessionBlocks.CARDS:
+				return <CardsBlock />;
 			case SessionBlocks.FEEDBACK:
 				return <Feedback />;
 			case SessionBlocks.COMPLAINT:

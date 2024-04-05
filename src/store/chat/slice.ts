@@ -3,6 +3,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 export enum SessionBlocks {
 	FIRST,
 	CHAT,
+	CARDS,
 	FEEDBACK,
 	COMPLAINT,
 	FUTURE_ACTIONS,

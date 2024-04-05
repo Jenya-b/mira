@@ -2,7 +2,11 @@ import styled from 'styled-components';
 
 export const Wrapper = styled.div`
 	position: relative;
-	height: 100vh;
+	overflow-y: hidden;
+
+	@media (min-width: 1000px) {
+		height: 100vh;
+	}
 
 	&.grid {
 		display: grid;

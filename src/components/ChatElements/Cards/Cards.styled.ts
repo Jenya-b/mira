@@ -5,6 +5,7 @@ import 'swiper/css/pagination';
 
 export const Wrapper = styled.div`
 	grid-column: 1/3;
+	overflow: hidden;
 `;
 
 export const Controls = styled.div`

@@ -5,6 +5,23 @@ export const StyledSwiper = styled(Swiper)`
 	margin-top: 1.86rem;
 	width: 100%;
 	height: 23.14286rem;
+
+	.swiper-wrapper {
+		@media (max-width: 480px) {
+			@keyframes go-left-right {
+				from {
+					left: 0px;
+				}
+				to {
+					left: -100px;
+				}
+			}
+
+			animation: go-left-right 0.5s alternate;
+			animation-delay: 1s;
+			animation-iteration-count: 2;
+		}
+	}
 `;
 
 export const StyledSwiperSlide = styled(SwiperSlide)`
@@ -47,7 +64,7 @@ export const Order = styled.p`
 	font-size: 1rem;
 	font-style: normal;
 	font-weight: 400;
-	line-height: 2.57143rem; /* 257.143% */
+	line-height: 2.57143rem;
 	letter-spacing: -0.02rem;
 	border-radius: 0.42857rem;
 	background: rgba(255, 255, 255, 0.26);

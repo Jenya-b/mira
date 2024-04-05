@@ -1,8 +1,7 @@
 import { Collapse } from '@mui/material';
-import { FC, Suspense, useState } from 'react';
+import { FC, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 
-import { Loader } from '../Loader/Loader';
 import { Sidebar } from '../Sidebar/Sidebar';
 import { ButtonSecondary } from '../Sidebar/Sidebar.styled';
 
@@ -59,9 +58,7 @@ export const Layout: FC = () => {
 					</Collapse>
 				</MobMenu>
 			)}
-			<Suspense fallback={<Loader />}>
-				<Outlet />
-			</Suspense>
+			<Outlet />
 		</Wrapper>
 	);
 };

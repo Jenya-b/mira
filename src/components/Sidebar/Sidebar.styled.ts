@@ -82,9 +82,12 @@ export const MenuBlock = styled.ul`
 	}
 
 	li {
-		font-size: 1.14286rem;
-		font-weight: 500;
-		letter-spacing: -0.02286rem;
+		a {
+			font-size: 1.14286rem;
+			font-weight: 500;
+			letter-spacing: -0.02286rem;
+			color: ${({ theme }) => theme.colors.textPrimary};
+		}
 	}
 `;
 

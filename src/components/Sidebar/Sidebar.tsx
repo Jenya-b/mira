@@ -1,6 +1,6 @@
 import { Avatar } from '@mui/material';
 import { FC } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import addIcon from '@/assets/images/icons/add.svg';
 import avatarIcon from '@/assets/images/icons/avatar.svg';
@@ -65,8 +65,10 @@ export const Sidebar: FC = () => {
 				</ButtonSecondary>
 			</CardBlock>
 			<MenuBlock>
-				{sidebarMenu.map(({ title }) => (
-					<li key={title}>{title}</li>
+				{sidebarMenu.map((item) => (
+					<li key={item.title}>
+						<Link to={item.path}>{item.title}</Link>
+					</li>
 				))}
 			</MenuBlock>
 			<ProfileBlock>

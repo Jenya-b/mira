@@ -16,6 +16,7 @@ export const Wrapper = styled.div`
 	@media (max-width: 768px) {
 		display: block;
 		background-image: url(${bgMobile});
+		height: 100vh;
 	}
 `;
 

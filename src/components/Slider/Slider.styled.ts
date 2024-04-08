@@ -61,9 +61,7 @@ export const Order = styled.p`
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	color: #fff;
 	font-size: 1rem;
-	font-style: normal;
 	font-weight: 400;
 	line-height: 2.57143rem;
 	letter-spacing: -0.02rem;

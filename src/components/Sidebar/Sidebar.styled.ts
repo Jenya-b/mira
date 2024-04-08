@@ -82,11 +82,8 @@ export const MenuBlock = styled.ul`
 	}
 
 	li {
-		color: #fff;
 		font-size: 1.14286rem;
-		font-style: normal;
 		font-weight: 500;
-		line-height: normal;
 		letter-spacing: -0.02286rem;
 	}
 `;
@@ -98,11 +95,9 @@ export const ButtonPrimory = styled.button`
 	background: none;
 	display: flex;
 	align-items: center;
-	color: #fff;
+	color: ${({ theme }) => theme.colors.textPrimary};
 	font-size: 1.14286rem;
-	font-style: normal;
 	font-weight: 700;
-	line-height: normal;
 	letter-spacing: -0.02286rem;
 
 	p {
@@ -120,11 +115,9 @@ export const ButtonSecondary = styled.button`
 	justify-content: center;
 	align-items: center;
 
-	color: #fff;
+	color: ${({ theme }) => theme.colors.textPrimary};
 	font-size: 1rem;
-	font-style: normal;
 	font-weight: 500;
-	line-height: normal;
 	letter-spacing: -0.02rem;
 
 	p {
@@ -159,11 +152,8 @@ export const ProfileBlock = styled.div`
 
 export const UserName = styled.p`
 	margin-left: 1.07rem;
-	color: #fff;
 	font-size: 1rem;
-	font-style: normal;
 	font-weight: 500;
-	line-height: normal;
 	letter-spacing: -0.02rem;
 `;
 
@@ -173,11 +163,9 @@ export const LogoutBtn = styled.button`
 
 	p {
 		display: none;
-		color: #fff;
+		color: ${({ theme }) => theme.colors.textPrimary};
 		font-size: 1.14286rem;
-		font-style: normal;
 		font-weight: 500;
-		line-height: normal;
 		letter-spacing: -0.02286rem;
 	}
 

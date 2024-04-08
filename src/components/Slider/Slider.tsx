@@ -3,15 +3,17 @@ import { Order, StyledSwiper, StyledSwiperSlide } from './Slider.styled';
 interface SliderProps<T> {
 	data: T[];
 	renderData: (item: T) => JSX.Element;
+	visible?: boolean;
 }
 
-export const Slider = <T,>({ data, renderData }: SliderProps<T>): JSX.Element => (
+export const Slider = <T,>({ data, renderData, visible = false }: SliderProps<T>): JSX.Element => (
 	<StyledSwiper
 		slidesPerView="auto"
 		pagination={{
 			clickable: true,
 		}}
 		grabCursor
+		className={visible ? 'visible' : ''}
 	>
 		{data.map((item, i, array) => (
 			<StyledSwiperSlide key={i}>

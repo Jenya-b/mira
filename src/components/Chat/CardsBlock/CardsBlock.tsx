@@ -11,7 +11,7 @@ export const CardsBlock: FC = () => {
 	return (
 		<Wrapper>
 			<Container>
-				<Slider data={[...Array(8)]} renderData={renderSliderData} />
+				<Slider data={[...Array(8)]} renderData={renderSliderData} visible />
 				<Controls isFullBtn={false} />
 			</Container>
 		</Wrapper>

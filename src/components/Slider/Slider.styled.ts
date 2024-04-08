@@ -5,7 +5,10 @@ export const StyledSwiper = styled(Swiper)`
 	margin-top: 1.86rem;
 	width: 100%;
 	height: 23.14286rem;
-	overflow: visible;
+
+	&.visible {
+		overflow: visible;
+	}
 
 	.swiper-wrapper {
 		@media (max-width: 480px) {

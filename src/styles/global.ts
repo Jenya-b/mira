@@ -74,8 +74,8 @@ export default createGlobalStyle`
 	body {
 		font-family: "Onest", sans-serif;
 		width: 100%;
-		font-size: 100%;
-		line-height: 1;
+		font-style: normal;
+		line-height: normal;
 		font-size: 14px;
 		-ms-text-size-adjust: 100%;
 		-moz-text-size-adjust: 100%;

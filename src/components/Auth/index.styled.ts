@@ -42,25 +42,6 @@ export const Controls = styled.div`
 	row-gap: 0.85rem;
 `;
 
-export const ButtonPrimary = styled.button`
-	width: 100%;
-	height: 5.78571rem;
-	border-radius: 20px;
-	background: #4eb97f;
-
-	color: #fff;
-	font-size: 22px;
-	font-style: normal;
-	font-weight: 500;
-	line-height: normal;
-	letter-spacing: -0.44px;
-
-	&:disabled {
-		background: #c5c5c5;
-		color: #e5e5e5;
-	}
-`;
-
 export const Label = styled.label`
 	position: relative;
 	width: 100%;

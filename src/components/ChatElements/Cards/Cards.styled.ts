@@ -32,11 +32,6 @@ const buttonCss = css`
 	letter-spacing: -0.03143rem;
 `;
 
-export const ButtonPrimary = styled.button`
-	${buttonCss}
-	border-radius: 1.42857rem;
-	background: #4eb97f;
-`;
 export const ButtonSecondary = styled.button`
 	${buttonCss}
 	display: flex;

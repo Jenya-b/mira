@@ -4,7 +4,11 @@ import { Colors } from './colors';
 
 export const theme = createTheme({
 	colors: {
-		textPrimary: Colors.BLACK,
+		buttonBgPrimary: Colors.GREEN_100,
+		buttonBgDisabled: Colors.SILVER_100,
+		buttonTextDisabled: Colors.SILVER_200,
+
+		textPrimary: Colors.WHITE_100,
 	},
 
 	order: {

@@ -1,5 +1,7 @@
 import styled, { css } from 'styled-components';
 
+import { ButtonPrimary } from '@/styles/components';
+
 export const Container = styled.div`
 	max-width: 33rem;
 	width: 100%;
@@ -63,17 +65,6 @@ export const List = styled.ul`
 	}
 `;
 
-export const Button = styled.button`
+export const Button = styled(ButtonPrimary)`
 	margin-top: 0.64rem;
-	width: 100%;
-	height: 5.78571rem;
-	border-radius: 1.42857rem;
-	background: #4eb97f;
-
-	color: #fff;
-	font-size: 1.57143rem;
-	font-style: normal;
-	font-weight: 500;
-	line-height: normal;
-	letter-spacing: -0.03143rem;
 `;

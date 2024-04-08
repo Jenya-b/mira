@@ -1,8 +1,9 @@
 import { FC } from 'react';
 
 import iconBtn from '@/assets/images/icons/chat.svg';
+import { ButtonPrimary } from '@/styles/components';
 
-import { ButtonPrimary, ButtonSecondary, ControlsWrap } from './Cards.styled';
+import { ButtonSecondary, ControlsWrap } from './Cards.styled';
 
 interface ControlsProps {
 	isFullBtn?: boolean;

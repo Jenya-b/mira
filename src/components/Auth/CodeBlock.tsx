@@ -5,9 +5,9 @@ import { path } from '@/router/path';
 import { useSigninMutation } from '@/services/api/auth';
 import { useAppDispatch, useAppSelector } from '@/store';
 import { AuthEnum, resetState, setAuthParam, setCodeNumber } from '@/store/auth';
+import { ButtonPrimary } from '@/styles/components';
 
 import {
-	ButtonPrimary,
 	Controls,
 	Wrapper,
 	InfoBlock,

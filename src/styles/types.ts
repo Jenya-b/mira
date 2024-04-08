@@ -1,5 +1,8 @@
 export interface CustomTheme {
 	colors: {
+		buttonBgPrimary: string;
+		buttonBgDisabled: string;
+		buttonTextDisabled: string;
 		textPrimary: string;
 	};
 

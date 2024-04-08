@@ -3,9 +3,9 @@ import { FC, useEffect } from 'react';
 import { useCreateCodeMutation } from '@/services/api/auth';
 import { useAppDispatch, useAppSelector } from '@/store';
 import { AuthEnum, setAuthParam, setPhoneNumber } from '@/store/auth';
+import { ButtonPrimary } from '@/styles/components';
 
 import {
-	ButtonPrimary,
 	Controls,
 	Wrapper,
 	InfoBlock,

@@ -7,9 +7,10 @@ interface CardProps {
 	services: string[];
 	price: number;
 	discount: number;
+	handleSubmit: () => void;
 }
 
-export const Card: FC<CardProps> = ({ discount, price, services, title }) => (
+export const Card: FC<CardProps> = ({ discount, price, services, title, handleSubmit }) => (
 	<CardWrap>
 		{discount ? <Discount>скидка {discount}%</Discount> : <span />}
 		<CardTitle>{title}</CardTitle>
@@ -20,7 +21,7 @@ export const Card: FC<CardProps> = ({ discount, price, services, title }) => (
 				</li>
 			))}
 		</Services>
-		<Button>Купить {title}</Button>
+		<Button onClick={handleSubmit}>Купить {title}</Button>
 		<Price>
 			<span>{price} ₽</span>
 			<span>за {title}</span>

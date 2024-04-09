@@ -7,13 +7,18 @@ export const Wrapper = styled.div`
 `;
 
 export const Logo = styled.div`
-	width: 33px;
-	height: 33px;
+	width: 2.57143rem;
+	height: 2.57143rem;
 	border-radius: 50%;
 	overflow: hidden;
 	display: flex;
 	justify-content: center;
 	align-items: center;
+
+	@media (max-width: 768px) {
+		width: 2.14286rem;
+		height: 2.14286rem;
+	}
 `;
 
 export const Panel = styled.div`

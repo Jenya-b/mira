@@ -1,14 +1,14 @@
 import { FC, useEffect, useRef } from 'react';
 
-import img from '@/assets/images/sprite-desc.png';
+import imgDesc from '@/assets/images/sprite-desc.png';
 import { Sprite } from '@/utils/sprite';
 
-import { Logo, Panel, Wrapper, Block } from './LoaderMessage.styled';
+import { Panel, Wrapper, Block, Logo } from './LoaderMessage.styled';
 
 export const LoaderMessage: FC = () => {
 	const canvasRef = useRef<HTMLCanvasElement>(null);
 	const coinImage = new Image();
-	coinImage.src = img;
+	coinImage.src = imgDesc;
 
 	useEffect(() => {
 		if (canvasRef.current === null) {

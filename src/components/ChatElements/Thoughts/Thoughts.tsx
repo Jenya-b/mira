@@ -1,6 +1,8 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 
 import { DialogSlide } from '../Dialog/Dialog';
+
+import { useModal } from '@/hooks/useModal';
 
 import { List, Title, Wrapper } from './Thoughts.styled';
 
@@ -10,15 +12,7 @@ interface ThoughtsProps {
 }
 
 export const Thoughts: FC<ThoughtsProps> = ({ list, title }) => {
-	const [open, setOpen] = useState(false);
-
-	const handleClickOpen = (): void => {
-		setOpen(true);
-	};
-
-	const handleClose = (): void => {
-		setOpen(false);
-	};
+	const [open, openModal, closeModal] = useModal();
 
 	return (
 		<Wrapper>
@@ -29,7 +23,7 @@ export const Thoughts: FC<ThoughtsProps> = ({ list, title }) => {
 					height="26"
 					viewBox="0 0 26 26"
 					fill="none"
-					onClick={handleClickOpen}
+					onClick={openModal}
 					style={{ cursor: 'pointer' }}
 				>
 					<circle cx="13" cy="13" r="13" fill="white" />
@@ -46,7 +40,7 @@ export const Thoughts: FC<ThoughtsProps> = ({ list, title }) => {
 					</li>
 				))}
 			</List>
-			<DialogSlide handleClickClose={handleClose} open={open} />
+			<DialogSlide handleClickClose={closeModal} open={open} />
 		</Wrapper>
 	);
 };

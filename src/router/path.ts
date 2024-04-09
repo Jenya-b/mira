@@ -3,4 +3,5 @@ export const path = {
 	auth: '/auth',
 	questions: '/questions',
 	rates: '/rates',
+	request: '/request',
 };

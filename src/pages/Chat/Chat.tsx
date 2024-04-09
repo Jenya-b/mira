@@ -58,7 +58,7 @@ const ChatPage: FC = () => {
 
 	// TODO временно для перелистывания экранов
 	const handleClick = (): void => {
-		const newSession = sessionBlock === 5 ? 0 : sessionBlock + 1;
+		const newSession = sessionBlock === 6 ? 0 : sessionBlock + 1;
 		dispatch(setSessionBlock(newSession));
 	};
 

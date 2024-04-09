@@ -7,6 +7,7 @@ export const Wrapper = styled(animated.div)`
 	height: 100%;
 	display: grid;
 	grid-template-columns: 1fr minmax(auto, 65rem) 1fr;
+	overflow: auto;
 `;
 
 export const Container = styled.div`

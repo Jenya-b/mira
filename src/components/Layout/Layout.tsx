@@ -1,5 +1,5 @@
 import { Collapse } from '@mui/material';
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 
 import { Sidebar } from '../Sidebar/Sidebar';
@@ -20,7 +20,12 @@ import {
 
 export const Layout: FC = () => {
 	const [isOpenMenu, setIsOpenMenu] = useState(false);
-	const [innerWidth] = useResize();
+	const [innerWidth, innerHeight] = useResize();
+
+	useEffect(() => {
+		const vh = window.innerHeight * 0.01;
+		document.documentElement.style.setProperty('--vh', `${vh}px`);
+	}, [innerHeight]);
 
 	return (
 		<Wrapper>

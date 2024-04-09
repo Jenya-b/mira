@@ -6,6 +6,7 @@ import bgSidebar from '@/assets/images/bg-sidebar.png';
 
 export const Wrapper = styled.div`
 	height: 100vh;
+	height: calc(var(--vh, 1vh) * 100);
 	display: grid;
 	grid-template-columns: 19.8rem 1fr;
 	background-image: url(${bgDesktop});

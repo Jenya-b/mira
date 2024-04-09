@@ -86,18 +86,16 @@ export default createGlobalStyle`
   		display: none;
 		}
 	}
-	html {
-		height: -webkit-fill-available;
-	}
 	body {
-		min-height: 100vh;
-  	min-height: -webkit-fill-available;
+	  min-height: 100vh;
+	  min-height: -webkit-fill-available;
+	}
+	html {
+	  height: -webkit-fill-available;
 	}
 	body::-webkit-scrollbar {
   	display: none;
 	}
 	#root{
-		min-height: 100vh;
-		min-height: -webkit-fill-available;
 	}
 `;

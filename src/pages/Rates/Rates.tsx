@@ -1,12 +1,13 @@
 import { FC, useState } from 'react';
 import Confetti from 'react-confetti';
 
+import { Card } from '../../components/Rates/Card/Card';
+
 import { Modal } from '@/components/Rates/Modal/Modal';
 import { rateList } from '@/constants/rates';
 import { useModal } from '@/hooks/useModal';
 import { useResize } from '@/hooks/useResize';
 
-import { Card } from './Card';
 import { Container, RatesWrap, Title, Wrapper } from './Rates.styled';
 
 const Rates: FC = () => {

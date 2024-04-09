@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { Button, Discount, Services, CardTitle, CardWrap, Price } from './Rates.styled';
+import { Button, Discount, Services, CardTitle, CardWrap, Price } from './Card.styled';
 
 interface CardProps {
 	title: string;

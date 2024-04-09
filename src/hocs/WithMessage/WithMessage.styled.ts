@@ -35,9 +35,13 @@ export const Text = styled.p`
 		padding: 1.08rem 1.3rem;
 		border-radius: 1rem;
 
-		&.mira,
-		&.mira-check {
+		&.mira {
 			background: #488ce1;
+			max-width: 90%;
+		}
+
+		&.mira-check {
+			background: #4eb97f;
 			max-width: 90%;
 		}
 

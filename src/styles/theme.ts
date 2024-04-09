@@ -4,6 +4,10 @@ import { Colors } from './colors';
 
 export const theme = createTheme({
 	colors: {
+		bgPrimary: Colors.BLUE_100,
+		bgSecondary: Colors.BLUE_200,
+		bgTertiary: Colors.BLUE_LIGHT_100,
+
 		buttonBgPrimary: Colors.GREEN_100,
 		buttonBgDisabled: Colors.SILVER_100,
 		buttonTextDisabled: Colors.SILVER_200,

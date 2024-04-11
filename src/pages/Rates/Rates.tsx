@@ -3,7 +3,8 @@ import Confetti from 'react-confetti';
 
 import { Card } from '../../components/Rates/Card/Card';
 
-import { Modal } from '@/components/Rates/Modal/Modal';
+import smile from '@/assets/images/smile-confetti.png';
+import { BaseModal } from '@/components/Modal/Modal';
 import { rateList } from '@/constants/rates';
 import { useModal } from '@/hooks/useModal';
 import { useResize } from '@/hooks/useResize';
@@ -20,9 +21,21 @@ const Rates: FC = () => {
 		setParty(true);
 	};
 
+	const handleClickModal = (): void => {
+		closeModal();
+	};
+
 	return (
 		<Wrapper>
-			<Modal closeModal={closeModal} isOpen={isOpen} />
+			<BaseModal
+				buttonText="Отлично!"
+				title="Вы успешно приобрели пакет из 7 сессий!"
+				subtitle="Теперь вы можете продолжить общение с Мирой."
+				imgSrc={smile}
+				handleClickModal={handleClickModal}
+				isOpen={isOpen}
+				closeModal={closeModal}
+			/>
 			<Confetti
 				onConfettiComplete={(confetti) => {
 					setParty(false);

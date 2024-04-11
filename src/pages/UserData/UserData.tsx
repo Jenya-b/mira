@@ -1,7 +1,11 @@
 import { FC, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import smile from '@/assets/images/smile1.png';
+import { BaseModal } from '@/components/Modal/Modal';
+import { Dialog } from '@/components/UserData/Dialog/Dialog';
 import { WithProfile } from '@/hocs/WithProfile/WithProfile';
+import { useModal } from '@/hooks/useModal';
 import { path } from '@/router/path';
 import { useAppDispatch, useAppSelector } from '@/store';
 import { resetState as resetStateAuth } from '@/store/auth';
@@ -18,6 +22,8 @@ const UserData: FC = () => {
 	const [name, setName] = useState<string>('');
 	const [email, setEmail] = useState('');
 	const [phoneNumber, setPhoneNumber] = useState('');
+	const [isOpenDialog, openDialog, closeDialog] = useModal();
+	const [isOpenModal, openModal, closeModal] = useModal();
 
 	useEffect(() => {
 		if (user === null) {
@@ -35,6 +41,11 @@ const UserData: FC = () => {
 		dispatch(resetStateChat());
 		dispatch(resetStateUser());
 		navigate(path.auth);
+	};
+
+	const handleDialog = (): void => {
+		closeDialog();
+		openModal();
 	};
 
 	return (
@@ -81,7 +92,7 @@ const UserData: FC = () => {
 						</defs>
 					</svg>
 				</ButtonClose>
-				<ButtonDelete>
+				<ButtonDelete onClick={() => openDialog()}>
 					<svg width="19" height="19" viewBox="0 0 19 19" fill="none">
 						<path
 							d="M16.1797 2.22656H13.3965V1.66992C13.3965 0.749127 12.6474 0 11.7266 0H7.27344C6.35264 0 5.60352 0.749127 5.60352 1.66992V2.22656H2.82031C1.89952 2.22656 1.15039 2.97569 1.15039 3.89648C1.15039 4.636 1.63374 5.26437 2.30097 5.48332L3.29383 17.4687C3.36534 18.3274 4.09632 19 4.95796 19H14.042C14.9037 19 15.6347 18.3274 15.7062 17.4685L16.699 5.48328C17.3663 5.26437 17.8496 4.636 17.8496 3.89648C17.8496 2.97569 17.1005 2.22656 16.1797 2.22656ZM6.7168 1.66992C6.7168 1.36299 6.96651 1.11328 7.27344 1.11328H11.7266C12.0335 1.11328 12.2832 1.36299 12.2832 1.66992V2.22656H6.7168V1.66992ZM14.5968 17.3763C14.5729 17.6625 14.3293 17.8867 14.042 17.8867H4.95796C4.67077 17.8867 4.42711 17.6625 4.40332 17.3766L3.42497 5.56641H15.575L14.5968 17.3763ZM16.1797 4.45312H2.82031C2.51338 4.45312 2.26367 4.20342 2.26367 3.89648C2.26367 3.58955 2.51338 3.33984 2.82031 3.33984H16.1797C16.4866 3.33984 16.7363 3.58955 16.7363 3.89648C16.7363 4.20342 16.4866 4.45312 16.1797 4.45312Z"
@@ -102,6 +113,17 @@ const UserData: FC = () => {
 					</svg>
 					<span>Удалить аккаунт</span>
 				</ButtonDelete>
+				<Dialog isOpen={isOpenDialog} closeModal={closeDialog} handleClickModal={handleDialog} />
+				<BaseModal
+					buttonText="Назад"
+					title="Ваш аккаунт
+				успешно удален"
+					subtitle="Вы всегда можете зарегистрироваться снова, мы всегда рады помогать."
+					imgSrc={smile}
+					handleClickModal={() => {}}
+					isOpen={isOpenModal}
+					closeModal={closeModal}
+				/>
 			</>
 		</WithProfile>
 	);

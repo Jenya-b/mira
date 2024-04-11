@@ -1,5 +1,8 @@
-import { FC, useState } from 'react';
+import { FC, FormEvent, useState } from 'react';
 
+import messageImg from '@/assets/images/message.png';
+import { BaseModal } from '@/components/Modal/Modal';
+import { useModal } from '@/hooks/useModal';
 import { useAppSelector } from '@/store';
 import {
 	ButtonPrimary,
@@ -18,13 +21,24 @@ const InfoRequest: FC = () => {
 	const [email, setEmail] = useState('');
 	const [text, setText] = useState('');
 	const [select, setSelect] = useState('');
+	const [open, openModal, closeModal] = useModal();
+
+	const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
+		e.preventDefault();
+
+		openModal();
+	};
+
+	const handleClickModal = (): void => {
+		closeModal();
+	};
 
 	return (
 		<Wrapper>
 			<Container>
 				<Title>Привет, {user?.first_name}!</Title>
 				<Subtitle>Если у вас есть вопросы, напишите нам и мы постараемся помочь.</Subtitle>
-				<Form>
+				<Form onSubmit={handleSubmit}>
 					<LabelSelect>
 						<span>Тема</span>
 						<SelectPrimary value={select} onChange={(e) => setSelect(e.target.value)}>
@@ -50,6 +64,16 @@ const InfoRequest: FC = () => {
 					<Info>Ответ будет отправлен на указанную почту.</Info>
 				</Form>
 			</Container>
+			<BaseModal
+				buttonText="Назад"
+				title="Обращение успешно отправлено!"
+				subtitle="Ответ будет направлен
+на указанную почту."
+				imgSrc={messageImg}
+				handleClickModal={handleClickModal}
+				isOpen={open}
+				closeModal={closeModal}
+			/>
 		</Wrapper>
 	);
 };

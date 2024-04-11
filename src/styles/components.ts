@@ -74,6 +74,10 @@ export const LabelPrimary = styled.label`
 export const LabelSecondary = styled.label`
 	${labelCss}
 	height: 11rem;
+
+	@media (max-width: 768px) {
+		height: 8.35714rem;
+	}
 `;
 
 const inputCss = css`

@@ -11,10 +11,10 @@ export const sidebarMenu = [
 	},
 	{
 		title: 'Служба поддержки',
-		path: '',
+		path: path.request,
 	},
 	{
 		title: 'Мои данные',
-		path: '',
+		path: path.userData,
 	},
 ];

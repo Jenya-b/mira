@@ -59,7 +59,7 @@ export const Layout: FC = () => {
 						</CountSession>
 					</MobMenuWrap>
 					<Collapse in={isOpenMenu}>
-						<Sidebar />
+						<Sidebar closeMenu={() => setIsOpenMenu(false)} />
 					</Collapse>
 				</MobMenu>
 			)}

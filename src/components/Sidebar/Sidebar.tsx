@@ -1,6 +1,6 @@
 import { Avatar } from '@mui/material';
 import { FC } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import addIcon from '@/assets/images/icons/add.svg';
 import avatarIcon from '@/assets/images/icons/avatar.svg';
@@ -28,7 +28,11 @@ import {
 	Wrapper,
 } from './Sidebar.styled';
 
-export const Sidebar: FC = () => {
+interface SidebarProps {
+	closeMenu?: () => void;
+}
+
+export const Sidebar: FC<SidebarProps> = ({ closeMenu }) => {
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
 	const { user } = useAppSelector((state) => state.user);
@@ -39,6 +43,14 @@ export const Sidebar: FC = () => {
 		dispatch(resetStateChat());
 		dispatch(resetStateUser());
 		navigate(path.auth);
+	};
+
+	const handleNavigate = (href: string): void => {
+		if (closeMenu) {
+			closeMenu();
+		}
+
+		setTimeout(() => navigate(href));
 	};
 
 	return (
@@ -67,7 +79,7 @@ export const Sidebar: FC = () => {
 			<MenuBlock>
 				{sidebarMenu.map((item) => (
 					<li key={item.title}>
-						<Link to={item.path}>{item.title}</Link>
+						<button onClick={() => handleNavigate(item.path)}>{item.title}</button>
 					</li>
 				))}
 			</MenuBlock>

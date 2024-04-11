@@ -5,9 +5,9 @@ import { path } from '@/router/path';
 import { useUpdateUserMutation } from '@/services/api/user';
 import { useAppDispatch, useAppSelector } from '@/store';
 import { setEmail } from '@/store/auth';
-import { ButtonPrimary } from '@/styles/components';
+import { ButtonPrimary, InputPrimary } from '@/styles/components';
 
-import { Controls, Wrapper, InfoBlock, Input, Label, Subtitle, Title } from './index.styled';
+import { Controls, Wrapper, InfoBlock, Label, Subtitle, Title } from './index.styled';
 
 export const EmailBlock: FC = () => {
 	const navigate = useNavigate();
@@ -38,7 +38,7 @@ export const EmailBlock: FC = () => {
 			<Controls>
 				<Label>
 					<span>Ваш адрес электронной почты</span>
-					<Input
+					<InputPrimary
 						value={email}
 						onChange={(e) => dispatch(setEmail(e.target.value))}
 						placeholder="myemail@email.com"

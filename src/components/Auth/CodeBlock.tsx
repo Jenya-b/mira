@@ -5,13 +5,12 @@ import { path } from '@/router/path';
 import { useSigninMutation } from '@/services/api/auth';
 import { useAppDispatch, useAppSelector } from '@/store';
 import { AuthEnum, resetState, setAuthParam, setCodeNumber } from '@/store/auth';
-import { ButtonPrimary } from '@/styles/components';
+import { ButtonPrimary, InputPrimary } from '@/styles/components';
 
 import {
 	Controls,
 	Wrapper,
 	InfoBlock,
-	Input,
 	Label,
 	NumberInfo,
 	Subtitle,
@@ -81,7 +80,7 @@ export const CodeBlock: FC = () => {
 				<Label className={error ? 'error' : ''}>
 					<span>Код</span>
 					{error && <span>Неверный код</span>}
-					<Input
+					<InputPrimary
 						type="number"
 						inputMode="numeric"
 						value={codeNumber}

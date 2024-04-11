@@ -1,5 +1,7 @@
 import InputMask from 'react-input-mask';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
+
+import { inputCss } from '@/styles/components';
 
 export const Wrapper = styled.div`
 	display: flex;
@@ -82,26 +84,6 @@ export const Label = styled.label`
 			color: rgba(255, 15, 0, 0.25);
 		}
 	}
-`;
-
-const inputCss = css`
-	padding-top: 0.9rem;
-	padding-left: 2rem;
-	width: 100%;
-	height: 100%;
-	border-radius: 20px;
-	background: #fff;
-
-	color: #1e1e1e;
-	font-size: 1.14286rem;
-	font-style: normal;
-	font-weight: 500;
-	line-height: normal;
-	letter-spacing: -0.04571rem;
-`;
-
-export const Input = styled.input`
-	${inputCss}
 `;
 
 export const StyledInputMask = styled(InputMask)`

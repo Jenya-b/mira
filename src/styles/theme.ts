@@ -8,11 +8,14 @@ export const theme = createTheme({
 		bgSecondary: Colors.BLUE_200,
 		bgTertiary: Colors.BLUE_LIGHT_100,
 
+		inputBgPrimary: Colors.WHITE_100,
+
 		buttonBgPrimary: Colors.GREEN_100,
 		buttonBgDisabled: Colors.SILVER_100,
 		buttonTextDisabled: Colors.SILVER_200,
 
 		textPrimary: Colors.WHITE_100,
+		textSecondary: Colors.BLACK,
 	},
 
 	order: {

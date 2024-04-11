@@ -3,10 +3,12 @@ export interface CustomTheme {
 		bgPrimary: string;
 		bgSecondary: string;
 		bgTertiary: string;
+		inputBgPrimary: string;
 		buttonBgPrimary: string;
 		buttonBgDisabled: string;
 		buttonTextDisabled: string;
 		textPrimary: string;
+		textSecondary: string;
 	};
 
 	order: {

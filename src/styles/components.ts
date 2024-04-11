@@ -1,5 +1,7 @@
 import styled, { css } from 'styled-components';
 
+import { theme as th } from './theme';
+
 export const ButtonPrimary = styled.button`
 	background: ${({ theme }) => theme.colors.buttonBgPrimary};
 	color: ${({ theme }) => theme.colors.textPrimary};
@@ -73,15 +75,15 @@ export const LabelSecondary = styled.label`
 	height: 11rem;
 `;
 
-const inputCss = css`
+export const inputCss = css`
 	padding-top: 0.9rem;
 	padding-left: 2rem;
 	width: 100%;
 	height: 100%;
 	border-radius: 20px;
-	background: #fff;
+	background: ${th.colors.inputBgPrimary};
 
-	color: #1e1e1e;
+	color: ${th.colors.textSecondary};
 	font-size: 1.14286rem;
 	font-style: normal;
 	font-weight: 500;
@@ -95,6 +97,7 @@ export const InputPrimary = styled.input`
 
 export const Textarea = styled.textarea`
 	${inputCss}
+	padding-top: 1.9rem;
 	resize: none;
 `;
 

@@ -5,18 +5,9 @@ import { path } from '@/router/path';
 import { useSigninMutation } from '@/services/api/auth';
 import { useAppDispatch, useAppSelector } from '@/store';
 import { AuthEnum, resetState, setAuthParam, setCodeNumber } from '@/store/auth';
-import { ButtonPrimary, InputPrimary } from '@/styles/components';
+import { ButtonPrimary, InputPrimary, LabelPrimary } from '@/styles/components';
 
-import {
-	Controls,
-	Wrapper,
-	InfoBlock,
-	Label,
-	NumberInfo,
-	Subtitle,
-	Timer,
-	Title,
-} from './index.styled';
+import { Controls, Wrapper, InfoBlock, NumberInfo, Subtitle, Timer, Title } from './index.styled';
 
 export const CodeBlock: FC = () => {
 	const dispatch = useAppDispatch();
@@ -77,7 +68,7 @@ export const CodeBlock: FC = () => {
 				</NumberInfo>
 			</InfoBlock>
 			<Controls>
-				<Label className={error ? 'error' : ''}>
+				<LabelPrimary className={error ? 'error' : ''}>
 					<span>Код</span>
 					{error && <span>Неверный код</span>}
 					<InputPrimary
@@ -86,7 +77,7 @@ export const CodeBlock: FC = () => {
 						value={codeNumber}
 						onChange={(e) => dispatch(setCodeNumber(e.target.value))}
 					/>
-				</Label>
+				</LabelPrimary>
 				<Timer style={{ marginTop: '-0.5rem' }}>
 					{timerNum > 0 && (
 						<>

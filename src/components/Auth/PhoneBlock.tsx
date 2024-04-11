@@ -3,17 +3,9 @@ import { FC, useEffect } from 'react';
 import { useCreateCodeMutation } from '@/services/api/auth';
 import { useAppDispatch, useAppSelector } from '@/store';
 import { AuthEnum, setAuthParam, setPhoneNumber } from '@/store/auth';
-import { ButtonPrimary } from '@/styles/components';
+import { ButtonPrimary, LabelPrimary, StyledInputMask } from '@/styles/components';
 
-import {
-	Controls,
-	Wrapper,
-	InfoBlock,
-	Label,
-	StyledInputMask,
-	Subtitle,
-	Title,
-} from './index.styled';
+import { Controls, Wrapper, InfoBlock, Subtitle, Title } from './index.styled';
 
 export const PhoneBlock: FC = () => {
 	const dispatch = useAppDispatch();
@@ -39,7 +31,7 @@ export const PhoneBlock: FC = () => {
 				<Subtitle>Введите ваш номер телефона, мы пришлем код подтверждения.</Subtitle>
 			</InfoBlock>
 			<Controls>
-				<Label>
+				<LabelPrimary>
 					<span>Номер телефона</span>
 					<StyledInputMask
 						type="tel"
@@ -49,7 +41,7 @@ export const PhoneBlock: FC = () => {
 						value={phoneNumber}
 						onChange={(e) => dispatch(setPhoneNumber(e.target.value))}
 					/>
-				</Label>
+				</LabelPrimary>
 				<ButtonPrimary onClick={handleSubmit}>Получить код</ButtonPrimary>
 			</Controls>
 		</Wrapper>

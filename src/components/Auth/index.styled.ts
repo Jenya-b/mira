@@ -1,7 +1,4 @@
-import InputMask from 'react-input-mask';
 import styled from 'styled-components';
-
-import { inputCss } from '@/styles/components';
 
 export const Wrapper = styled.div`
 	display: flex;
@@ -42,52 +39,6 @@ export const Controls = styled.div`
 	display: flex;
 	flex-direction: column;
 	row-gap: 0.85rem;
-`;
-
-export const Label = styled.label`
-	position: relative;
-	width: 100%;
-	height: 4.28rem;
-
-	span:nth-child(1) {
-		position: absolute;
-		left: 2rem;
-		top: 0.88rem;
-		color: #c2c2c2;
-		font-size: 0.71rem;
-		font-style: normal;
-		font-weight: 500;
-		line-height: normal;
-		letter-spacing: -0.02rem;
-	}
-
-	span:nth-child(2) {
-		position: absolute;
-		right: 2rem;
-		top: 50%;
-		transform: translateY(-50%);
-		color: #ff0f00;
-		font-size: 1rem;
-		font-style: normal;
-		font-weight: 500;
-		line-height: 1.28571rem;
-		letter-spacing: -0.04rem;
-	}
-
-	&.error {
-		input {
-			background: #fce7e7;
-			color: rgba(255, 15, 0, 1);
-		}
-
-		span:nth-child(1) {
-			color: rgba(255, 15, 0, 0.25);
-		}
-	}
-`;
-
-export const StyledInputMask = styled(InputMask)`
-	${inputCss}
 `;
 
 export const NumberInfo = styled.div`

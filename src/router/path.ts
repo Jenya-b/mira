@@ -4,4 +4,5 @@ export const path = {
 	questions: '/questions',
 	rates: '/rates',
 	request: '/request',
+	userData: '/user-data',
 };

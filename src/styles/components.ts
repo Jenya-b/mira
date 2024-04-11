@@ -1,3 +1,4 @@
+import ReactInputMask from 'react-input-mask';
 import styled, { css } from 'styled-components';
 
 import { theme as th } from './theme';
@@ -75,7 +76,7 @@ export const LabelSecondary = styled.label`
 	height: 11rem;
 `;
 
-export const inputCss = css`
+const inputCss = css`
 	padding-top: 0.9rem;
 	padding-left: 2rem;
 	width: 100%;
@@ -92,6 +93,10 @@ export const inputCss = css`
 `;
 
 export const InputPrimary = styled.input`
+	${inputCss}
+`;
+
+export const StyledInputMask = styled(ReactInputMask)`
 	${inputCss}
 `;
 

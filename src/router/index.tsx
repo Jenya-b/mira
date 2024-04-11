@@ -2,7 +2,14 @@ import { createBrowserRouter } from 'react-router-dom';
 
 import { Layout } from '@/components/Layout/Layout';
 // import { RequireAuth } from '@/hocs/RequireAuth/RequireAuth';
-import { AuthPage, HomePage, InfoRequestPage, QuestionsPage, RatesPage } from '@/pages';
+import {
+	AuthPage,
+	HomePage,
+	InfoRequestPage,
+	QuestionsPage,
+	RatesPage,
+	UserDataPage,
+} from '@/pages';
 
 import { path } from './path';
 
@@ -30,6 +37,10 @@ export const router = createBrowserRouter([
 			{
 				path: path.request,
 				element: <InfoRequestPage />,
+			},
+			{
+				path: path.userData,
+				element: <UserDataPage />,
 			},
 		],
 	},

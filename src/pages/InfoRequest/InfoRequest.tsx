@@ -1,7 +1,8 @@
-import { FC, FormEvent, useState } from 'react';
+import { FC, FormEvent, useEffect, useState } from 'react';
 
 import messageImg from '@/assets/images/message.png';
 import { BaseModal } from '@/components/Modal/Modal';
+import { WithProfile } from '@/hocs/WithProfile/WithProfile';
 import { useModal } from '@/hooks/useModal';
 import { useAppSelector } from '@/store';
 import {
@@ -14,14 +15,24 @@ import {
 	Textarea,
 } from '@/styles/components';
 
-import { Container, Form, Info, Subtitle, Title, Wrapper } from './InfoRequest.styled';
+import { Form, Info } from './InfoRequest.styled';
 
 const InfoRequest: FC = () => {
 	const { user } = useAppSelector((state) => state.user);
+	const [name, setName] = useState('');
 	const [email, setEmail] = useState('');
 	const [text, setText] = useState('');
 	const [select, setSelect] = useState('');
 	const [open, openModal, closeModal] = useModal();
+
+	useEffect(() => {
+		if (user === null) {
+			return;
+		}
+
+		setName(user.first_name);
+		setEmail(user.email);
+	}, [user]);
 
 	const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
 		e.preventDefault();
@@ -34,10 +45,11 @@ const InfoRequest: FC = () => {
 	};
 
 	return (
-		<Wrapper>
-			<Container>
-				<Title>Привет, {user?.first_name}!</Title>
-				<Subtitle>Если у вас есть вопросы, напишите нам и мы постараемся помочь.</Subtitle>
+		<WithProfile
+			userName={name}
+			subtitle="Если у вас есть вопросы, напишите нам и мы постараемся помочь."
+		>
+			<>
 				<Form onSubmit={handleSubmit}>
 					<LabelSelect>
 						<span>Тема</span>
@@ -63,18 +75,18 @@ const InfoRequest: FC = () => {
 					<ButtonPrimary>Отправить запрос</ButtonPrimary>
 					<Info>Ответ будет отправлен на указанную почту.</Info>
 				</Form>
-			</Container>
-			<BaseModal
-				buttonText="Назад"
-				title="Обращение успешно отправлено!"
-				subtitle="Ответ будет направлен
+				<BaseModal
+					buttonText="Назад"
+					title="Обращение успешно отправлено!"
+					subtitle="Ответ будет направлен
 на указанную почту."
-				imgSrc={messageImg}
-				handleClickModal={handleClickModal}
-				isOpen={open}
-				closeModal={closeModal}
-			/>
-		</Wrapper>
+					imgSrc={messageImg}
+					handleClickModal={handleClickModal}
+					isOpen={open}
+					closeModal={closeModal}
+				/>
+			</>
+		</WithProfile>
 	);
 };
 

@@ -7,7 +7,7 @@ export const sidebarMenu = [
 	},
 	{
 		title: 'Уведомления',
-		path: '',
+		path: path.therapySettings,
 	},
 	{
 		title: 'Служба поддержки',

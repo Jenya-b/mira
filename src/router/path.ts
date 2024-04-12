@@ -5,4 +5,5 @@ export const path = {
 	rates: '/rates',
 	request: '/request',
 	userData: '/user-data',
+	therapySettings: '/therapy-settings',
 };

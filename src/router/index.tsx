@@ -8,6 +8,7 @@ import {
 	InfoRequestPage,
 	QuestionsPage,
 	RatesPage,
+	TherapySettingsPage,
 	UserDataPage,
 } from '@/pages';
 
@@ -41,6 +42,10 @@ export const router = createBrowserRouter([
 			{
 				path: path.userData,
 				element: <UserDataPage />,
+			},
+			{
+				path: path.therapySettings,
+				element: <TherapySettingsPage />,
 			},
 		],
 	},

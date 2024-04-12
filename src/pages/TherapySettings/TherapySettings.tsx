@@ -1,7 +1,9 @@
-import { FC, useState } from 'react';
+import { ChangeEvent, FC, useState } from 'react';
 
 import { Card } from '@/components/TherapySettings/Card/Card';
+import { Dialog } from '@/components/TherapySettings/Dialog/Dialog';
 import { TimeOfDay } from '@/constants/settings';
+import { useModal } from '@/hooks/useModal';
 
 import {
 	CardsWrap,
@@ -14,15 +16,36 @@ import {
 
 const TherapySettings: FC = () => {
 	const [activeSettings, setActiveSettings] = useState(true);
+	const [isOpenDialog, openDialog, closeDialog] = useModal();
+
+	const handleSwitchChange = (event: ChangeEvent<HTMLInputElement>): void => {
+		const { checked } = event.target;
+
+		if (checked) {
+			setActiveSettings(checked);
+		} else {
+			openDialog();
+		}
+	};
+
+	const handleDisabledSettings = (): void => {
+		setActiveSettings(false);
+		closeDialog();
+	};
 
 	return (
 		<Wrapper>
+			<Dialog
+				isOpen={isOpenDialog}
+				closeModal={closeDialog}
+				handleClickModal={handleDisabledSettings}
+			/>
 			<Container>
 				<TitleBlock>
 					<h2>Настройки терапии</h2>
 					<StyledSwitch
 						checked={activeSettings}
-						onChange={(e) => setActiveSettings(e.target.checked)}
+						onChange={handleSwitchChange}
 						name="transaction"
 						inputProps={{ 'aria-label': 'ant design' }}
 					/>

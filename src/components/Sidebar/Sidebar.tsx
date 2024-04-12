@@ -61,7 +61,7 @@ export const Sidebar: FC<SidebarProps> = ({ closeMenu }) => {
 					<img src={okIcon} alt="ok" />
 					<p>7 доступных сессий</p>
 				</ButtonPrimory>
-				<ButtonPrimory>
+				<ButtonPrimory onClick={() => handleNavigate(path.home)}>
 					<img src={addIcon} alt="add" />
 					<p>Начать новую сессию</p>
 				</ButtonPrimory>

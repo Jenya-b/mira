@@ -3,14 +3,16 @@ import styled from 'styled-components';
 import { ButtonPrimary } from '@/styles/components';
 
 export const Wrapper = styled.div`
-	padding: 8.64rem 1.21rem 2rem 1.21rem;
+	padding: 0rem 1.21rem 0rem 1.21rem;
 	display: grid;
 	grid-template-columns: 1fr minmax(auto, 71.21429rem) 1fr;
-	height: 100vh;
 	overflow: auto;
 `;
 
 export const Container = styled.div`
+	padding: 8.64rem 0rem 2rem 0rem;
+	height: 100%;
+	overflow: auto;
 	grid-column: 2/3;
 	height: 100%;
 	display: flex;

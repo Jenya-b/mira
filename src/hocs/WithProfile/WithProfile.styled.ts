@@ -15,6 +15,8 @@ export const Wrapper = styled.div`
 
 export const Container = styled.div`
 	padding: 5.29rem 4.21rem;
+	height: 100%;
+	overflow: auto;
 	grid-column: 2/3;
 	border-radius: 2.85714rem;
 	background: #f9f9f9;

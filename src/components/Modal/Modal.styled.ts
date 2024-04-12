@@ -8,7 +8,6 @@ export const ImageWrap = styled.div`
 
 	img {
 		width: 6.42857rem;
-		height: 6.42857rem;
 	}
 `;
 

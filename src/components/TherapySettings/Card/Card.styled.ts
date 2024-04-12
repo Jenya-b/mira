@@ -45,6 +45,7 @@ export const TimeDay = styled.div`
 `;
 
 export const Time = styled.input`
+	padding-top: 0.2rem;
 	font-size: 1.71429rem;
 	font-weight: 500;
 	line-height: 2.85714rem;

@@ -6,6 +6,7 @@ import {
 	AuthPage,
 	HomePage,
 	InfoRequestPage,
+	IntroPage,
 	QuestionsPage,
 	RatesPage,
 	TherapySettingsPage,
@@ -52,5 +53,9 @@ export const router = createBrowserRouter([
 	{
 		path: path.auth,
 		element: <AuthPage />,
+	},
+	{
+		path: path.intro,
+		element: <IntroPage />,
 	},
 ]);

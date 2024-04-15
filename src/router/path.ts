@@ -6,4 +6,5 @@ export const path = {
 	request: '/request',
 	userData: '/user-data',
 	therapySettings: '/therapy-settings',
+	intro: '/intro',
 };

@@ -5,6 +5,12 @@ export const Wrapper = styled.div`
 	grid-template-columns: repeat(2, 1fr);
 	column-gap: 1.43rem;
 	height: 29.5rem;
+
+	@media (max-width: 1000px) {
+		padding: 0rem;
+		height: 100%;
+		display: block;
+	}
 `;
 
 export const Block = styled.div`
@@ -15,6 +21,13 @@ export const Block = styled.div`
 	justify-content: center;
 	row-gap: 2.07rem;
 	background: #488ce1;
+
+	&:nth-child(1) {
+		@media (max-width: 1000px) {
+			background: none;
+			padding: 2rem 1.14rem 5.21rem 1.14rem;
+		}
+	}
 
 	&:nth-child(2) {
 		display: block;

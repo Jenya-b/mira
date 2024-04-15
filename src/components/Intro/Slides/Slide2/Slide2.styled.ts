@@ -5,6 +5,12 @@ export const Wrapper = styled.div`
 	grid-template-columns: repeat(2, 1fr);
 	column-gap: 1.43rem;
 	height: 29.5rem;
+
+	@media (max-width: 1000px) {
+		padding: 0rem;
+		height: 100%;
+		display: block;
+	}
 `;
 
 export const Block = styled.div`
@@ -17,9 +23,21 @@ export const Block = styled.div`
 
 	&:nth-child(1) {
 		background: #f9f9f9;
+
+		@media (max-width: 1000px) {
+			border-radius: 0;
+			border-bottom-left-radius: 2.85714rem;
+			border-bottom-right-radius: 2.85714rem;
+			padding: 2rem 1.14rem 5.21rem 1.14rem;
+		}
 	}
 
 	&:nth-child(2) {
 		background: #488ce1;
+
+		@media (max-width: 1000px) {
+			background: none;
+			padding: 4.71rem 1.14rem 1rem 1.14rem;
+		}
 	}
 `;

@@ -11,6 +11,13 @@ export const Button = styled.button`
 	font-weight: 500;
 	line-height: normal;
 	letter-spacing: -0.03143rem;
+
+	@media (max-width: 1000px) {
+		position: fixed;
+		bottom: 1.36rem;
+		left: 50%;
+		transform: translateX(-50%);
+	}
 `;
 
 export const Title = styled.h2`

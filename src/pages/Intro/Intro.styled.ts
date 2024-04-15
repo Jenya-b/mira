@@ -13,9 +13,21 @@ export const Wrapper = styled.div`
 	background-repeat: no-repeat;
 	background-size: cover;
 	overflow: visible;
+
+	@media (max-width: 1000px) {
+		grid-template-columns: 1fr;
+		align-items: start;
+	}
 `;
 
 export const SliderWrap = styled.div`
 	grid-column: 2/3;
 	overflow: visible;
+	min-width: 0;
+	width: 100%;
+
+	@media (max-width: 1000px) {
+		grid-column: 1/3;
+		height: 100%;
+	}
 `;

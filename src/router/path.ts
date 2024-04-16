@@ -7,4 +7,5 @@ export const path = {
 	userData: '/user-data',
 	therapySettings: '/therapy-settings',
 	intro: '/intro',
+	training: '/training',
 };

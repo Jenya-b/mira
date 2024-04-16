@@ -10,6 +10,7 @@ import {
 	QuestionsPage,
 	RatesPage,
 	TherapySettingsPage,
+	TrainingPage,
 	UserDataPage,
 } from '@/pages';
 
@@ -47,6 +48,10 @@ export const router = createBrowserRouter([
 			{
 				path: path.therapySettings,
 				element: <TherapySettingsPage />,
+			},
+			{
+				path: path.training,
+				element: <TrainingPage />,
 			},
 		],
 	},

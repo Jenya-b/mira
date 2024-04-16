@@ -123,3 +123,21 @@ export const messagesList = [
 		],
 	},
 ];
+
+export const messagesListTraining = [
+	{
+		logoParam: 'user',
+		text: 'Подскажи конкретные шаги, как я себе могу чем-то помочь',
+		searchBlock: [],
+	},
+	{
+		logoParam: 'mira',
+		text: 'Конечно, я готов помочь. Пожалуйста, расскажи мне, в чем именно твоя проблема или что тебя беспокоит, и мы вместе попытаемся найти решение.',
+		searchBlock: [],
+	},
+	{
+		logoParam: 'user',
+		text: 'Спасибо, а еще?',
+		searchBlock: [],
+	},
+];

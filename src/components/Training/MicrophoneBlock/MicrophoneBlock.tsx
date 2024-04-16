@@ -4,9 +4,9 @@ import { useResize } from '@/hooks/useResize';
 import { useAppDispatch } from '@/store';
 import { TrainingParam, setTrainingBlock } from '@/store/training';
 
-import { Content, TextBlock, Wrapper } from './InputBlock.styled';
+import { Content, TextBlock, Wrapper } from './MicrophoneBlock.styled';
 
-export const InputBlock: FC = () => {
+export const MicrophoneBlock: FC = () => {
 	const dispatch = useAppDispatch();
 	const [width] = useResize();
 
@@ -22,9 +22,7 @@ export const InputBlock: FC = () => {
 		<Wrapper>
 			<Content>
 				<TextBlock>
-					<p>Это поле для ввода сообщений.</p>
-					<p>Отсюда начинается общение с Мирой 👍🏼</p>
-					{width > 1000 && <p>Можно ввести текст или записать голосовое сообщение</p>}
+					<p>С помощью этой кнопки можно составить сообщение, используя голос</p>
 				</TextBlock>
 				<button onClick={handleClick}>Ок, дальше</button>
 			</Content>

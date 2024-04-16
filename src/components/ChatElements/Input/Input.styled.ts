@@ -21,6 +21,17 @@ export const Label = styled.label`
 		grid-template-columns: 1fr 2.78rem;
 		column-gap: 0.79rem;
 		align-items: center;
+
+		&.input {
+			background: none;
+		}
+		&.microphone {
+			background: none;
+
+			input {
+				display: none;
+			}
+		}
 	}
 
 	&.hidden {
@@ -64,6 +75,10 @@ export const Controls = styled.div`
 
 	@media (max-width: 1000px) {
 		justify-content: end;
+
+		&.input {
+			display: none;
+		}
 	}
 `;
 

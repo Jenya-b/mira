@@ -7,6 +7,7 @@ import { BaseModal } from '@/components/Modal/Modal';
 import { CardBlock } from '@/components/Training/Card/Card';
 import { InputBlock } from '@/components/Training/InputBlock/InputBlock';
 import { MenuBlock } from '@/components/Training/MenuBlock/MenuBlock';
+import { MicrophoneBlock } from '@/components/Training/MicrophoneBlock/MicrophoneBlock';
 import { SessionBlock } from '@/components/Training/SessionBlock/SessionBlock';
 import { messagesListTraining } from '@/constants/chat';
 import { PersonMessage } from '@/hocs/WithMessage/WithMessage';
@@ -36,6 +37,8 @@ const Training: FC = () => {
 				return <SessionBlock />;
 			case TrainingParam.CARD:
 				return <CardBlock />;
+			case TrainingParam.MICROPHONE:
+				return <MicrophoneBlock />;
 
 			default:
 				return <></>;

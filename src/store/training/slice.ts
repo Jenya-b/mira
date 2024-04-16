@@ -6,6 +6,7 @@ export enum TrainingParam {
 	SESSION = 'session',
 	CARD = 'card',
 	MODAL = 'modal',
+	MICROPHONE = 'microphone',
 }
 
 interface InitialState {

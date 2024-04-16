@@ -43,7 +43,8 @@ export const DisabledBg = styled.div`
 	height: 100%;
 	z-index: ${({ theme }) => theme.order.firstIndex};
 
-	&.input {
+	&.input,
+	&.microphone {
 		z-index: ${({ theme }) => theme.order.lastIndex};
 	}
 `;

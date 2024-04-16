@@ -40,6 +40,5 @@ export const StyledSwiper = styled(Swiper)`
 `;
 
 export const StyledSwiperSlide = styled(SwiperSlide)`
-	margin-right: 1.43rem;
 	overflow: visible;
 `;

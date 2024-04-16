@@ -4,7 +4,11 @@ import { Button, Subtitle, Title } from '../styles';
 
 import { Block, Wrapper } from './Slide4.styled';
 
-export const Slide4: FC = () => (
+interface SlideProps {
+	handleNextSlider: () => void;
+}
+
+export const Slide4: FC<SlideProps> = ({ handleNextSlider }) => (
 	<Wrapper>
 		<Block>
 			<Title className="black">Суть КПТ</Title>
@@ -15,7 +19,7 @@ export const Slide4: FC = () => (
 				КПТ научит вас осознавать и переосмысливать негативные мысли, преобразуя их в более
 				реалистичные и положительные убеждения.
 			</Subtitle>
-			<Button>Я готов(а)</Button>
+			<Button onClick={handleNextSlider}>Я готов(а)</Button>
 		</Block>
 	</Wrapper>
 );

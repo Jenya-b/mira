@@ -1,4 +1,4 @@
-import { FC, useRef } from 'react';
+import { FC, useRef, useState } from 'react';
 import { Keyboard, Mousewheel, Navigation, Pagination } from 'swiper/modules';
 import { SwiperRef } from 'swiper/react';
 
@@ -6,6 +6,9 @@ import { Slide1 } from '../Slides/Slide1/Slide1';
 import { Slide2 } from '../Slides/Slide2/Slide2';
 import { Slide3 } from '../Slides/Slide3/Slide3';
 import { Slide4 } from '../Slides/Slide4/Slide4';
+import { Slide5 } from '../Slides/Slide5/Slide5';
+import { Slide6 } from '../Slides/Slide6/Slide6';
+import { Slide7 } from '../Slides/Slide7/Slide7';
 
 import { StyledSwiper, StyledSwiperSlide } from './Slider.styled';
 
@@ -15,12 +18,19 @@ import 'swiper/css/pagination';
 
 export const Slider: FC = () => {
 	const sliderRef = useRef<SwiperRef>(null);
+	const sliderRef2 = useRef<SwiperRef>(null);
+	const [isNextSlider, setNextSlider] = useState(false);
 
 	const handleNext = (): void => {
-		if (!sliderRef.current) {
-			return;
+		if (!isNextSlider && sliderRef.current) {
+			sliderRef.current.swiper.slideNext();
+		} else if (isNextSlider && sliderRef2.current) {
+			sliderRef2.current.swiper.slideNext();
 		}
-		sliderRef.current.swiper.slideNext();
+	};
+
+	const handleNextSlider = (): void => {
+		setNextSlider(true);
 	};
 
 	const slides = [
@@ -34,15 +44,29 @@ export const Slider: FC = () => {
 			slide: <Slide3 handleNext={handleNext} />,
 		},
 		{
-			slide: <Slide4 />,
+			slide: <Slide4 handleNextSlider={handleNextSlider} />,
+		},
+	];
+
+	const slides2 = [
+		{
+			slide: <Slide5 handleNext={handleNext} />,
+		},
+		{
+			slide: <Slide6 handleNext={handleNext} />,
+		},
+		{
+			slide: <Slide7 handleNext={handleNext} />,
 		},
 	];
 
 	return (
 		<>
 			<StyledSwiper
+				style={{ display: isNextSlider ? 'none' : 'block' }}
 				ref={sliderRef}
-				cssMode
+				allowTouchMove={false}
+				noSwiping
 				pagination
 				mousewheel
 				keyboard
@@ -50,6 +74,20 @@ export const Slider: FC = () => {
 				className="my-slider"
 			>
 				{slides.map(({ slide }, i) => (
+					<StyledSwiperSlide key={i}>{slide}</StyledSwiperSlide>
+				))}
+			</StyledSwiper>
+			<StyledSwiper
+				style={{ display: !isNextSlider ? 'none' : 'block' }}
+				ref={sliderRef2}
+				allowTouchMove={false}
+				noSwiping
+				mousewheel
+				keyboard
+				modules={[Navigation, Pagination, Mousewheel, Keyboard]}
+				className="my-slider"
+			>
+				{slides2.map(({ slide }, i) => (
 					<StyledSwiperSlide key={i}>{slide}</StyledSwiperSlide>
 				))}
 			</StyledSwiper>

@@ -7,6 +7,11 @@ export const Label = styled.label`
 	height: 6rem;
 	z-index: ${({ theme }) => theme.order.mediumIndex};
 
+	&.input,
+	&.microphone {
+		z-index: ${({ theme }) => theme.order.mainIndex};
+	}
+
 	@media (max-width: 1000px) {
 		position: fixed;
 		left: 0;

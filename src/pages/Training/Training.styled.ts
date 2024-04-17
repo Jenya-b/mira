@@ -42,15 +42,6 @@ export const DisabledBg = styled.div`
 	width: 100%;
 	height: 100%;
 	z-index: ${({ theme }) => theme.order.firstIndex};
-
-	&.input,
-	&.microphone {
-		z-index: ${({ theme }) => theme.order.lastIndex};
-	}
-
-	&.menu {
-		z-index: ${({ theme }) => theme.order.firstIndex};
-	}
 `;
 
 export const FilterBg = styled.div`

@@ -24,6 +24,8 @@ export const Input: FC = () => {
 				setTrClassName(TrainingParam.INPUT);
 			} else if (trainingBlock === TrainingParam.MICROPHONE) {
 				setTrClassName(TrainingParam.MICROPHONE);
+			} else {
+				setTrClassName('');
 			}
 		}
 	}, [trainingBlock, pathname]);

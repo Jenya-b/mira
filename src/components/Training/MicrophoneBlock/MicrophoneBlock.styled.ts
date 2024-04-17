@@ -9,7 +9,7 @@ export const Wrapper = styled.div`
 	height: 78.85714rem;
 	border-radius: 78.85714rem;
 	background: #488ce1;
-	z-index: ${({ theme }) => theme.order.lastIndex};
+	z-index: ${({ theme }) => theme.order.firstIndex};
 	display: flex;
 	justify-content: center;
 

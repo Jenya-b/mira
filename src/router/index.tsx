@@ -61,6 +61,10 @@ export const router = createBrowserRouter([
 	},
 	{
 		path: path.intro,
-		element: <IntroPage />,
+		element: (
+			// <RequireAuth>
+			<IntroPage />
+			// </RequireAuth>
+		),
 	},
 ]);

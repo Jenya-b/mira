@@ -1,4 +1,5 @@
 import { FC, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Keyboard, Mousewheel, Navigation, Pagination } from 'swiper/modules';
 import { SwiperRef } from 'swiper/react';
 
@@ -10,6 +11,8 @@ import { Slide5 } from '../Slides/Slide5/Slide5';
 import { Slide6 } from '../Slides/Slide6/Slide6';
 import { Slide7 } from '../Slides/Slide7/Slide7';
 
+import { path } from '@/router/path';
+
 import { StyledSwiper, StyledSwiperSlide } from './Slider.styled';
 
 import 'swiper/css';
@@ -17,6 +20,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
 export const Slider: FC = () => {
+	const navigate = useNavigate();
 	const sliderRef = useRef<SwiperRef>(null);
 	const sliderRef2 = useRef<SwiperRef>(null);
 	const [isNextSlider, setNextSlider] = useState(false);
@@ -31,6 +35,10 @@ export const Slider: FC = () => {
 
 	const handleNextSlider = (): void => {
 		setNextSlider(true);
+	};
+
+	const handleNavigate = (): void => {
+		navigate(path.training);
 	};
 
 	const slides = [
@@ -56,7 +64,7 @@ export const Slider: FC = () => {
 			slide: <Slide6 handleNext={handleNext} />,
 		},
 		{
-			slide: <Slide7 handleNext={handleNext} />,
+			slide: <Slide7 handleNext={handleNavigate} />,
 		},
 	];
 

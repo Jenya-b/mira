@@ -1,4 +1,5 @@
 import { FC, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import smile from '@/assets/images/smile-confetti.png';
 import { Input } from '@/components/ChatElements/Input/Input';
@@ -12,12 +13,14 @@ import { SessionBlock } from '@/components/Training/SessionBlock/SessionBlock';
 import { messagesListTraining } from '@/constants/chat';
 import { PersonMessage } from '@/hocs/WithMessage/WithMessage';
 import { useModal } from '@/hooks/useModal';
+import { path } from '@/router/path';
 import { useAppSelector } from '@/store';
 import { TrainingParam } from '@/store/training';
 
 import { Container, DisabledBg, FilterBg, MessageWrap, Wrapper } from './Training.styled';
 
 const Training: FC = () => {
+	const navigate = useNavigate();
 	const { trainingBlock } = useAppSelector((state) => state.training);
 	const [isOpen, openModal, closeModal] = useModal();
 
@@ -45,7 +48,10 @@ const Training: FC = () => {
 		}
 	};
 
-	const handleClickModal = (): void => {};
+	const handleClickModal = (): void => {
+		closeModal();
+		navigate(path.home);
+	};
 
 	return (
 		<Wrapper>
@@ -71,7 +77,7 @@ const Training: FC = () => {
 					imgSrc={smile}
 					handleClickModal={handleClickModal}
 					isOpen={isOpen}
-					closeModal={closeModal}
+					closeModal={handleClickModal}
 				/>
 			</DisabledBg>
 			{renderItem()}

@@ -17,7 +17,7 @@ export const EmailBlock: FC = () => {
 
 	useEffect(() => {
 		if (isSuccess) {
-			navigate(path.home);
+			navigate(path.intro);
 		}
 	}, [isSuccess]);
 

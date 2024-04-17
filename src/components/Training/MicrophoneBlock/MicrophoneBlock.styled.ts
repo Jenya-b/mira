@@ -52,7 +52,6 @@ export const Content = styled.div`
 `;
 
 export const TextBlock = styled.div`
-	color: #fff;
 	order: 2;
 	margin-top: 3.21rem;
 	font-size: 1.14286rem;
@@ -60,12 +59,10 @@ export const TextBlock = styled.div`
 	line-height: 120%;
 	letter-spacing: -0.02571rem;
 
-	p {
-		max-width: 23rem;
-		width: 100%;
+	max-width: 24rem;
+	width: 100%;
 
-		@media (max-width: 480px) {
-			margin-left: -2rem;
-		}
+	@media (max-width: 480px) {
+		margin-left: -3rem;
 	}
 `;

@@ -1,5 +1,7 @@
 import { FC } from 'react';
 
+import btnGroup from '@/assets/images/training-btn-group.png';
+import { useResize } from '@/hooks/useResize';
 import { useAppDispatch } from '@/store';
 import { TrainingParam, setTrainingBlock } from '@/store/training';
 
@@ -7,10 +9,12 @@ import { Content, TextBlock, Wrapper } from './Card.styled';
 
 export const CardBlock: FC = () => {
 	const dispatch = useAppDispatch();
+	const [innerWidth] = useResize();
 
 	return (
 		<Wrapper>
 			<Content>
+				{innerWidth <= 1000 && <img src={btnGroup} alt="" />}
 				<TextBlock>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"

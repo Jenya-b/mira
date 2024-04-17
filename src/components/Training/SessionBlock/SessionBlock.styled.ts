@@ -11,12 +11,27 @@ export const Wrapper = styled.div`
 	z-index: ${({ theme }) => theme.order.firstIndex};
 	display: flex;
 	justify-content: end;
+
+	@media (max-width: 1000px) {
+		width: 32.57143rem;
+		height: 32.57143rem;
+		left: auto;
+		right: -2rem;
+		top: -11.93rem;
+	}
 `;
 
 export const Content = styled.div`
 	margin-top: 19.5rem;
 	margin-right: 9rem;
 	width: 19.78571rem;
+
+	@media (max-width: 1000px) {
+		max-width: 25rem;
+		width: 100%;
+		margin-top: 13.5rem;
+		margin-right: 3.5rem;
+	}
 
 	button {
 		margin-top: 1.43rem;
@@ -28,6 +43,12 @@ export const Content = styled.div`
 		font-size: 1.14286rem;
 		font-weight: 500;
 		line-height: 120%;
+
+		@media (max-width: 1000px) {
+			width: 10.71429rem;
+			height: 3.14286rem;
+			font-size: 1rem;
+		}
 	}
 `;
 
@@ -39,10 +60,22 @@ export const TextBlock = styled.div`
 	line-height: 120%;
 	letter-spacing: -0.02571rem;
 
-	svg {
-		position: absolute;
-		top: 50%;
-		left: -6rem;
-		transform: translateY(-50%);
+	@media (min-width: 1001px) {
+		svg {
+			position: absolute;
+			top: 50%;
+			left: -6rem;
+			transform: translateY(-50%);
+		}
+	}
+
+	@media (max-width: 1000px) {
+		display: grid;
+		grid-template-columns: 1fr 2.57143rem;
+		column-gap: 2.47rem;
+
+		p {
+			font-size: 1.14286rem;
+		}
 	}
 `;

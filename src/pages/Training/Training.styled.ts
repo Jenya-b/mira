@@ -47,6 +47,10 @@ export const DisabledBg = styled.div`
 	&.microphone {
 		z-index: ${({ theme }) => theme.order.lastIndex};
 	}
+
+	&.menu {
+		z-index: ${({ theme }) => theme.order.firstIndex};
+	}
 `;
 
 export const FilterBg = styled.div`
@@ -60,5 +64,9 @@ export const FilterBg = styled.div`
 	&.session,
 	&.card {
 		left: 19.8rem;
+
+		@media (max-width: 1000px) {
+			left: 0rem;
+		}
 	}
 `;

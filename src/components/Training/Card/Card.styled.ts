@@ -11,12 +11,31 @@ export const Wrapper = styled.div`
 	z-index: ${({ theme }) => theme.order.firstIndex};
 	display: flex;
 	justify-content: end;
+
+	@media (max-width: 1000px) {
+		width: 32.57143rem;
+		height: 32.57143rem;
+		left: 50%;
+		top: -11.93rem;
+		transform: translateX(-50%);
+	}
 `;
 
 export const Content = styled.div`
 	margin-top: 30rem;
 	margin-right: 6rem;
 	width: 22.85714rem;
+
+	@media (max-width: 1000px) {
+		width: 100%;
+		margin-top: 13.5rem;
+		margin-right: 0rem;
+		margin-left: 5rem;
+
+		img {
+			margin-left: 3.36rem;
+		}
+	}
 
 	button {
 		margin-top: 1.43rem;
@@ -28,6 +47,12 @@ export const Content = styled.div`
 		font-size: 1.14286rem;
 		font-weight: 500;
 		line-height: 120%;
+
+		@media (max-width: 1000px) {
+			width: 10.71429rem;
+			height: 3.14286rem;
+			font-size: 1rem;
+		}
 	}
 `;
 
@@ -38,6 +63,14 @@ export const TextBlock = styled.div`
 	font-weight: 400;
 	line-height: 120%;
 	letter-spacing: -0.02571rem;
+
+	@media (max-width: 1000px) {
+		svg {
+			display: none;
+		}
+		margin-top: 2.29rem;
+		font-size: 1.14286rem;
+	}
 
 	ul {
 		li {
@@ -54,6 +87,27 @@ export const TextBlock = styled.div`
 				left: 1rem;
 				transform: translateY(-50%);
 				border-radius: 50%;
+			}
+
+			@media (max-width: 1000px) {
+				&:nth-child(1) {
+					&::before {
+						content: '1.';
+						background: none;
+						top: 0;
+						left: 0.5rem;
+						transform: translateY(0);
+					}
+				}
+				&:nth-child(2) {
+					&::before {
+						content: '2.';
+						background: none;
+						top: 0;
+						left: 0.5rem;
+						transform: translateY(0);
+					}
+				}
 			}
 		}
 	}

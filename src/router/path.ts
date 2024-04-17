@@ -8,4 +8,5 @@ export const path = {
 	therapySettings: '/therapy-settings',
 	intro: '/intro',
 	training: '/training',
+	review: '/review',
 };

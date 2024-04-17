@@ -12,6 +12,7 @@ import {
 	TherapySettingsPage,
 	TrainingPage,
 	UserDataPage,
+	ReviewPage,
 } from '@/pages';
 
 import { path } from './path';
@@ -52,6 +53,10 @@ export const router = createBrowserRouter([
 			{
 				path: path.training,
 				element: <TrainingPage />,
+			},
+			{
+				path: path.review,
+				element: <ReviewPage />,
 			},
 		],
 	},

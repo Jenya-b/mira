@@ -7,6 +7,7 @@ import { userApi } from '@/services/api/user';
 
 import { authReducer } from './auth';
 import { chatReducer } from './chat';
+import { generalReducer } from './general';
 import { trainingReducer } from './training';
 import { userReducer } from './user';
 
@@ -16,6 +17,7 @@ export const store = configureStore({
 		chat: chatReducer,
 		user: userReducer,
 		training: trainingReducer,
+		general: generalReducer,
 		[authApi.reducerPath]: authApi.reducer,
 		[userApi.reducerPath]: userApi.reducer,
 	},

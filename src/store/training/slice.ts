@@ -18,7 +18,7 @@ const initialState: InitialState = {
 };
 
 export const trainingSlice = createSlice({
-	name: 'chat',
+	name: 'training',
 	initialState,
 	reducers: {
 		setTrainingBlock(state, action: PayloadAction<TrainingParam>): void {

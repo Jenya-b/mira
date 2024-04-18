@@ -4,6 +4,10 @@ export const Wrapper = styled.div`
 	display: grid;
 	grid-template-columns: 2.6rem 1fr;
 	column-gap: 1rem;
+
+	@media (max-width: 768px) {
+		column-gap: 0.3rem;
+	}
 `;
 
 export const Logo = styled.div`

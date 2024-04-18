@@ -39,7 +39,7 @@ export const BurgerMenu: FC = () => {
 				</BurgerBtn>
 				{location.pathname === path.practice && innerWidth <= 480 ? (
 					<>
-						<BackLink to={location.state ? location.state.backLink : path.home}>
+						<BackLink to={location.state ? location.state.backPath : path.home}>
 							<img src={arrowIcon} alt="" />
 							<span>Вернуться назад</span>
 						</BackLink>

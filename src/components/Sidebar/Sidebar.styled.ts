@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import bgSidebar from '@/assets/images/bg-sidebar.png';
@@ -109,7 +110,7 @@ export const ButtonPrimory = styled.button`
 	}
 `;
 
-export const ButtonSecondary = styled.button`
+export const ButtonSecondary = styled(Link)`
 	background: none;
 	width: 100%;
 	height: 3.57143rem;

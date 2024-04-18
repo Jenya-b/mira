@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import arrowIcon from '@/assets/images/icons/arrow-left.svg';
+import { BackLink } from '@/components/BackLink/BackLink';
 import { ParamsBlock } from '@/components/Review/ParamsBlock/ParamsBlock';
 import { path } from '@/router/path';
 
@@ -11,7 +11,6 @@ import {
 	ParamsWrap,
 	SessionCount,
 	SessionInfo,
-	StyledLink,
 	Subtitle,
 	Title,
 	Wrapper,
@@ -20,10 +19,7 @@ import {
 const Review: FC = () => (
 	<Wrapper>
 		<Container>
-			<StyledLink to={path.home}>
-				<img src={arrowIcon} alt="" />
-				<span>Вернуться на главную</span>
-			</StyledLink>
+			<BackLink path={path.home} textLink="Вернуться на главную" />
 			<Content>
 				<Card>
 					<Title>Обзор вашей недели</Title>

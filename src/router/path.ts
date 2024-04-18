@@ -9,4 +9,5 @@ export const path = {
 	intro: '/intro',
 	training: '/training',
 	review: '/review',
+	practice: '/practice',
 };

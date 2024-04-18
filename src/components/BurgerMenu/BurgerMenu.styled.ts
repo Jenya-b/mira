@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import bgSidebar from '@/assets/images/bg-sidebar.png';
@@ -107,5 +108,35 @@ export const CountSession = styled.div`
 		left: 0;
 		width: 100%;
 		height: 100%;
+	}
+`;
+
+export const BackLink = styled(Link)`
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	column-gap: 0.29rem;
+	width: 16.5rem;
+	height: 2.5rem;
+	border-radius: 6.42857rem;
+	border: 1px solid rgba(255, 255, 255, 0.17);
+	color: ${({ theme }) => theme.colors.textPrimary};
+	font-size: 0.85714rem;
+	font-weight: 500;
+	letter-spacing: -0.01714rem;
+`;
+
+export const Filter = styled.button`
+	border-radius: 6.42857rem;
+	border: 1px solid rgba(255, 255, 255, 0.17);
+	background: none;
+	width: 2.5rem;
+	height: 2.5rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	&.active {
+		border: 1px solid #4eb97f;
 	}
 `;

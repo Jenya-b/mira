@@ -1,7 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom';
 
 import { Layout } from '@/components/Layout/Layout';
-// import { RequireAuth } from '@/hocs/RequireAuth/RequireAuth';
+import { RequireAuth } from '@/hocs/RequireAuth/RequireAuth';
 import {
 	AuthPage,
 	HomePage,
@@ -13,6 +13,7 @@ import {
 	TrainingPage,
 	UserDataPage,
 	ReviewPage,
+	PracticePage,
 } from '@/pages';
 
 import { path } from './path';
@@ -21,9 +22,9 @@ export const router = createBrowserRouter([
 	{
 		path: path.home,
 		element: (
-			// <RequireAuth>
-			<Layout />
-			// </RequireAuth>
+			<RequireAuth>
+				<Layout />
+			</RequireAuth>
 		),
 		children: [
 			{
@@ -58,6 +59,10 @@ export const router = createBrowserRouter([
 				path: path.review,
 				element: <ReviewPage />,
 			},
+			{
+				path: path.practice,
+				element: <PracticePage />,
+			},
 		],
 	},
 	{
@@ -67,9 +72,9 @@ export const router = createBrowserRouter([
 	{
 		path: path.intro,
 		element: (
-			// <RequireAuth>
-			<IntroPage />
-			// </RequireAuth>
+			<RequireAuth>
+				<IntroPage />
+			</RequireAuth>
 		),
 	},
 ]);

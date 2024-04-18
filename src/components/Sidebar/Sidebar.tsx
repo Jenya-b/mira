@@ -1,6 +1,6 @@
 import { Avatar } from '@mui/material';
 import { FC } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import addIcon from '@/assets/images/icons/add.svg';
 import avatarIcon from '@/assets/images/icons/avatar.svg';
@@ -35,6 +35,7 @@ interface SidebarProps {
 export const Sidebar: FC<SidebarProps> = ({ closeMenu }) => {
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
+	const location = useLocation();
 	const { user } = useAppSelector((state) => state.user);
 
 	const logout = (): void => {
@@ -67,11 +68,11 @@ export const Sidebar: FC<SidebarProps> = ({ closeMenu }) => {
 				</ButtonPrimory>
 			</SessionBlock>
 			<CardBlock>
-				<ButtonSecondary>
+				<ButtonSecondary to={path.practice} state={{ backPath: location.pathname }}>
 					<img src={listIcon} alt="list" />
 					<p>Карточки</p>
 				</ButtonSecondary>
-				<ButtonSecondary>
+				<ButtonSecondary to="#">
 					<img src={settingsIcon} alt="setting" />
 					<p>Тренажер</p>
 				</ButtonSecondary>

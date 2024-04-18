@@ -10,3 +10,4 @@ export const TherapySettingsPage = lazy(() => import('./TherapySettings/TherapyS
 export const IntroPage = lazy(() => import('./Intro/Intro'));
 export const TrainingPage = lazy(() => import('./Training/Training'));
 export const ReviewPage = lazy(() => import('./Review/Review'));
+export const PracticePage = lazy(() => import('./Practice/Practice'));

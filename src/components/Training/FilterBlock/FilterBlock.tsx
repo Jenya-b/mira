@@ -1,37 +1,19 @@
 import { FC } from 'react';
-import { useLocation } from 'react-router-dom';
 
-import { BackLink } from '@/components/BackLink/BackLink';
-import { Card } from '@/components/Practice/Card/Card';
-import { FilterBlock } from '@/components/Training/FilterBlock/FilterBlock';
-import { path } from '@/router/path';
-import { useAppDispatch, useAppSelector } from '@/store';
-import { setActiveFilter } from '@/store/practice';
+import { useAppDispatch } from '@/store';
+import { setIsTraining } from '@/store/practice';
 
-import {
-	Container,
-	Content,
-	Controls,
-	Filter,
-	Wrapper,
-	DisabledBg,
-	FilterBg,
-} from './Practice.styled';
+import { Content, StyledFilter, TextBlock, Wrapper } from './FilterBlock.styled';
 
-const Practice: FC = () => {
-	const { state } = useLocation();
+export const FilterBlock: FC = () => {
 	const dispatch = useAppDispatch();
-	const { activeFilter, isTraining } = useAppSelector((state) => state.practice);
 
 	return (
 		<Wrapper>
-			<Container>
-				<Controls>
-					<BackLink path={state ? state.backPath : path.home} textLink="Вернуться назад" />
-					<Filter
-						onClick={() => dispatch(setActiveFilter(!activeFilter))}
-						className={isTraining ? 'training' : activeFilter ? 'active' : ''}
-					>
+			<Content>
+				<TextBlock>
+					<p>Эта кнопка — фильтр карточек, позволяющий отображать избранные вверху списка.</p>
+					<StyledFilter>
 						<svg width="15" height="15" viewBox="0 0 15 15" fill="none">
 							<g clipPath="url(#clip0_1169_35060)">
 								<path
@@ -47,39 +29,10 @@ const Practice: FC = () => {
 								</clipPath>
 							</defs>
 						</svg>
-						<span>Фильтр карточек</span>
-					</Filter>
-				</Controls>
-				<Content>
-					<Card
-						date="02.02.2024"
-						favorites
-						btnText1="Хочу реализовать потенциал"
-						btnText2="Должен много зарабатывать"
-						btnText3="Никто не покупает мой продукт"
-						btnText4="Новая мысль плохо работает"
-					/>
-					<Card
-						date="02.02.2024"
-						favorites={false}
-						btnText1="Хочу реализовать потенциал"
-						btnText2="Должен много зарабатывать"
-						btnText3="Никто не покупает мой продукт, несмотря на то, что я потратил много сил на свой бизнес и формирование продукта"
-						btnText4="Новая мысль плохо работает"
-					/>
-				</Content>
-			</Container>
-			{isTraining && (
-				<>
-					<DisabledBg>
-						<FilterBg />
-						{/* <FilterBlock /> */}
-					</DisabledBg>
-					<FilterBlock />
-				</>
-			)}
+					</StyledFilter>
+				</TextBlock>
+				<button onClick={() => dispatch(setIsTraining(false))}>Ок, спасибо</button>
+			</Content>
 		</Wrapper>
 	);
 };
-
-export default Practice;

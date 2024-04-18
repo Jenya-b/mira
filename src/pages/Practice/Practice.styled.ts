@@ -5,6 +5,7 @@ export const Wrapper = styled.div`
 	display: grid;
 	grid-template-columns: 1fr minmax(auto, 63rem) 1fr;
 	overflow: auto;
+	position: relative;
 `;
 
 export const Container = styled.div`
@@ -50,6 +51,11 @@ export const Filter = styled.button`
 	align-items: center;
 	column-gap: 0.29rem;
 
+	&.training {
+		position: relative;
+		z-index: ${({ theme }) => theme.order.mainIndex};
+	}
+
 	&.active {
 		border: 1px solid #4eb97f;
 	}
@@ -67,4 +73,22 @@ export const Content = styled.div`
 	@media (max-width: 480px) {
 		row-gap: 0.71rem;
 	}
+`;
+
+export const DisabledBg = styled.div`
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: ${({ theme }) => theme.order.firstIndex};
+	overflow: hidden;
+`;
+
+export const FilterBg = styled.div`
+	background: rgba(0, 0, 0, 0.35);
+	backdrop-filter: blur(5px);
+	position: absolute;
+	width: 100%;
+	height: 100%;
 `;

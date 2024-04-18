@@ -13,7 +13,6 @@ export const Container = styled.div`
 	height: 100%;
 	overflow: auto;
 	grid-column: 2/3;
-	height: 100%;
 	display: flex;
 	flex-direction: column;
 `;

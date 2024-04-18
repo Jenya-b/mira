@@ -12,8 +12,8 @@ export const Wrapper = styled.div`
 export const Container = styled.div`
 	padding: 2.64rem 0rem 2rem 0rem;
 	height: 100%;
+	overflow: auto;
 	grid-column: 2/3;
-	height: 100%;
 	display: flex;
 	flex-direction: column;
 	row-gap: 2.29rem;

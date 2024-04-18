@@ -1,5 +1,7 @@
 import { FC, useEffect, useRef, useState } from 'react';
 
+import { useResize } from '@/hooks/useResize';
+
 import {
 	Button1,
 	Button2,
@@ -31,6 +33,7 @@ export const Card: FC<CardProps> = ({
 }) => {
 	const btnRef = useRef<HTMLButtonElement>(null);
 	const [activeText, setActiveText] = useState(false);
+	const [innerWidth] = useResize();
 
 	useEffect(() => {
 		if (btnRef.current) {
@@ -41,7 +44,7 @@ export const Card: FC<CardProps> = ({
 			btnRef.current.appendChild(span);
 
 			if (span.getClientRects().length > 2 && !activeText) {
-				btnRef.current.textContent = `${text.slice(0, 60)}...`;
+				btnRef.current.textContent = `${text.slice(0, innerWidth < 400 ? 50 : 60)}...`;
 			} else {
 				btnRef.current.textContent = btnText3;
 			}

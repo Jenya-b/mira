@@ -19,7 +19,9 @@ import {
 const Review: FC = () => (
 	<Wrapper>
 		<Container>
-			<BackLink path={path.home} textLink="Вернуться на главную" />
+			<div>
+				<BackLink path={path.home} textLink="Вернуться на главную" />
+			</div>
 			<Content>
 				<Card>
 					<Title>Обзор вашей недели</Title>

@@ -33,6 +33,10 @@ export const Content = styled.div`
 		margin-right: 3.5rem;
 	}
 
+	@media (max-width: 380px) {
+		max-width: 22rem;
+	}
+
 	button {
 		margin-top: 1.43rem;
 		width: 13.07143rem;

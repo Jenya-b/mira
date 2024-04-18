@@ -65,4 +65,9 @@ export const TextBlock = styled.div`
 	@media (max-width: 480px) {
 		margin-left: -3rem;
 	}
+
+	@media (max-width: 380px) {
+		margin-top: 2.5rem;
+		max-width: 22rem;
+	}
 `;

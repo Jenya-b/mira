@@ -1,9 +1,13 @@
 import { ChangeEvent, FC, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { Card } from '@/components/TherapySettings/Card/Card';
 import { Dialog } from '@/components/TherapySettings/Dialog/Dialog';
 import { TimeOfDay } from '@/constants/settings';
 import { useModal } from '@/hooks/useModal';
+import { useResize } from '@/hooks/useResize';
+import { path } from '@/router/path';
+import { ButtonPrimary } from '@/styles/components';
 
 import {
 	CardsWrap,
@@ -15,8 +19,10 @@ import {
 } from './TherapySettings.styled';
 
 const TherapySettings: FC = () => {
+	const navigate = useNavigate();
 	const [activeSettings, setActiveSettings] = useState(true);
 	const [isOpenDialog, openDialog, closeDialog] = useModal();
+	const [innerWidth] = useResize();
 
 	const handleSwitchChange = (event: ChangeEvent<HTMLInputElement>): void => {
 		const { checked } = event.target;
@@ -68,6 +74,11 @@ const TherapySettings: FC = () => {
 						activeSettings={activeSettings}
 					/>
 				</CardsWrap>
+				{innerWidth <= 1000 && (
+					<div style={{ marginTop: '0.71rem' }}>
+						<ButtonPrimary onClick={() => navigate(path.home)}>На главную</ButtonPrimary>
+					</div>
+				)}
 			</Container>
 		</Wrapper>
 	);

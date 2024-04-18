@@ -33,7 +33,7 @@ export const BurgerMenu: FC = () => {
 
 	return (
 		<Wrapper className={isOpenBurgerMenu ? 'active' : ''}>
-			<Menu>
+			<Menu id="burger-menu">
 				<BurgerBtn onClick={() => dispatch(setOpenBurgerMenu(!isOpenBurgerMenu))}>
 					<span className={isOpenBurgerMenu ? 'active' : ''} />
 				</BurgerBtn>

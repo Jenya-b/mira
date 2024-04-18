@@ -55,7 +55,7 @@ export const Sidebar: FC<SidebarProps> = ({ closeMenu }) => {
 	};
 
 	return (
-		<Wrapper>
+		<Wrapper id="sidebar-menu">
 			<Logo />
 			<SessionBlock>
 				<ButtonPrimory>

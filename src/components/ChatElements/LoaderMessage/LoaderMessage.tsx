@@ -1,4 +1,4 @@
-import { FC, useEffect, useRef } from 'react';
+import { FC, useEffect, useRef, useState } from 'react';
 
 import imgDesc from '@/assets/images/sprite-desc.png';
 import { Sprite } from '@/utils/sprite';
@@ -8,6 +8,7 @@ import { Panel, Wrapper, Block, Logo } from './LoaderMessage.styled';
 export const LoaderMessage: FC = () => {
 	const canvasRef = useRef<HTMLCanvasElement>(null);
 	const coinImage = new Image();
+	const [isAnimation, setIsAnimation] = useState(false);
 	coinImage.src = imgDesc;
 
 	useEffect(() => {
@@ -16,7 +17,7 @@ export const LoaderMessage: FC = () => {
 		}
 
 		// eslint-disable-next-line no-new
-		new Sprite({
+		const sprite = new Sprite({
 			ctx: canvasRef.current.getContext('2d') as CanvasRenderingContext2D,
 			image: coinImage,
 			width: 2556,
@@ -24,6 +25,11 @@ export const LoaderMessage: FC = () => {
 			numberOfFrames: 71,
 			ticksPerFrame: 4,
 		});
+
+		const interval = setInterval(() => setIsAnimation(sprite.getStart()), 10);
+
+		// eslint-disable-next-line consistent-return
+		return () => clearInterval(interval);
 	}, []);
 
 	return (
@@ -31,9 +37,7 @@ export const LoaderMessage: FC = () => {
 			<Logo>
 				<canvas id="canvas" ref={canvasRef} width={36} height={36} />
 			</Logo>
-			<Panel>
-				<Block />
-			</Panel>
+			<Panel>{isAnimation && <Block />}</Panel>
 		</Wrapper>
 	);
 };

@@ -24,6 +24,8 @@ export class Sprite {
 
 	numberOfFrames: number;
 
+	isAnimation: boolean;
+
 	constructor(options: Options) {
 		this.ctx = options.ctx;
 
@@ -38,6 +40,8 @@ export class Sprite {
 
 		this.numberOfFrames = options.numberOfFrames || 1;
 
+		this.isAnimation = false;
+
 		this.start();
 	}
 
@@ -46,13 +50,19 @@ export class Sprite {
 
 		if (this.tickCount > this.ticksPerFrame) {
 			this.tickCount = 0;
+			this.isAnimation = true;
 
 			if (this.frameIndex < this.numberOfFrames - 1) {
 				this.frameIndex += 1;
 			} else {
 				this.frameIndex = 0;
+				this.isAnimation = false;
 			}
 		}
+	}
+
+	getStart(): boolean {
+		return this.isAnimation;
 	}
 
 	render(): void {
@@ -73,6 +83,7 @@ export class Sprite {
 	start(): void {
 		const loop = (): void => {
 			this.update();
+			this.getStart();
 			this.render();
 
 			window.requestAnimationFrame(loop);

@@ -1,6 +1,8 @@
 import { useSpring } from '@react-spring/web';
 import { FC } from 'react';
 
+import logo from '@/assets/images/icons/logo.svg';
+
 import { Container, Logo, Title, Wrapper } from './WithChat.styled';
 
 interface WithCharProps {
@@ -17,7 +19,9 @@ export const WithChat: FC<WithCharProps> = ({ title, children }) => {
 	return (
 		<Wrapper style={springs}>
 			<Container>
-				<Logo />
+				<Logo>
+					<img src={logo} alt="" />
+				</Logo>
 				<Title>{title}</Title>
 				{children}
 			</Container>

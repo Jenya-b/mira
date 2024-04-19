@@ -1,8 +1,6 @@
 import { animated } from '@react-spring/web';
 import styled from 'styled-components';
 
-import logo from '@/assets/images/logo.png';
-
 export const Wrapper = styled(animated.div)`
 	height: 100%;
 	display: grid;
@@ -26,10 +24,6 @@ export const Container = styled.div`
 export const Logo = styled.div`
 	width: 6.42857rem;
 	height: 6.42857rem;
-	background-image: url(${logo});
-	background-position: center;
-	background-repeat: no-repeat;
-	background-size: contain;
 
 	@media (max-width: 420px) {
 		width: 4rem;

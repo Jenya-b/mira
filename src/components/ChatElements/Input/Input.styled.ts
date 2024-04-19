@@ -39,6 +39,11 @@ export const Label = styled.label`
 		}
 	}
 
+	@media (max-width: 768px) {
+		height: 7rem;
+		padding: 1.21rem 1.5rem 3rem 1.5rem;
+	}
+
 	&.hidden {
 		display: none;
 	}
@@ -82,6 +87,11 @@ export const Controls = styled.div`
 		&.input {
 			display: none;
 		}
+	}
+
+	@media (max-width: 768px) {
+		top: 1rem;
+		transform: translateY(0);
 	}
 `;
 

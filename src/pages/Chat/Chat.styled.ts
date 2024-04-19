@@ -15,5 +15,9 @@ export const Wrapper = styled.div`
 		@media (max-width: 1000px) {
 			grid-template: 1fr 5.07143rem / 1fr;
 		}
+
+		@media (max-width: 768px) {
+			grid-template: 1fr 7rem / 1fr;
+		}
 	}
 `;

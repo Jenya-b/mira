@@ -1,11 +1,12 @@
 import { FC } from 'react';
 
-import btnGroup from '@/assets/images/training-btn-group.png';
+import listIcon from '@/assets/images/icons/list.svg';
+import settingsIcon from '@/assets/images/icons/settings.svg';
 import { useResize } from '@/hooks/useResize';
 import { useAppDispatch } from '@/store';
 import { TrainingParam, setTrainingBlock } from '@/store/training';
 
-import { Content, TextBlock, Wrapper } from './Card.styled';
+import { ButtonGroup, ButtonSecondary, Content, TextBlock, Wrapper } from './Card.styled';
 
 export const CardBlock: FC = () => {
 	const dispatch = useAppDispatch();
@@ -14,7 +15,19 @@ export const CardBlock: FC = () => {
 	return (
 		<Wrapper>
 			<Content>
-				{innerWidth <= 1000 && <img src={btnGroup} alt="" />}
+				{innerWidth <= 1000 && (
+					<ButtonGroup>
+						<ButtonSecondary>
+							<img src={listIcon} alt="list" />
+							<p>Карточки</p>
+						</ButtonSecondary>
+						<ButtonSecondary>
+							<img src={settingsIcon} alt="setting" />
+							<p>Тренажер</p>
+						</ButtonSecondary>
+					</ButtonGroup>
+				)}
+
 				<TextBlock>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"

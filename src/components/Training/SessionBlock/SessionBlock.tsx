@@ -36,7 +36,7 @@ export const SessionBlock: FC = () => {
 										fillOpacity="0.5"
 									/>
 								</svg>
-								<p>22</p>
+								<p>2</p>
 							</CountSession>
 						</TextBlock>
 					</>

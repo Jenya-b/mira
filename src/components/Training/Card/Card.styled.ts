@@ -119,3 +119,35 @@ export const TextBlock = styled.div`
 		transform: translateY(-50%);
 	}
 `;
+
+export const ButtonGroup = styled.div`
+	margin-left: 3rem;
+	display: flex;
+	align-items: center;
+	column-gap: 0.57rem;
+`;
+
+export const ButtonSecondary = styled.div`
+	background: none;
+	width: 7.85714rem;
+	height: 2.5rem;
+	border-radius: 6.42857rem;
+	border: 1px solid rgba(255, 255, 255, 0.17);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: ${({ theme }) => theme.colors.textPrimary};
+	font-size: 0.85714rem;
+	font-weight: 500;
+	letter-spacing: -0.02rem;
+
+	p {
+		padding-left: 0.29rem;
+	}
+
+	img {
+		margin-left: 0;
+		width: 1rem;
+		height: 1rem;
+	}
+`;

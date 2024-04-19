@@ -98,4 +98,11 @@ export default createGlobalStyle`
 	}
 	#root{
 	}
+	input, textarea, select {
+  	font-size: 16px;
+
+		@media (min-width: 768px) {
+  		font-size: 14px;
+		}
+	}
 `;

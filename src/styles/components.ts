@@ -89,7 +89,6 @@ const inputCss = css`
 	background: ${th.colors.inputBgPrimary};
 
 	color: ${th.colors.textSecondary};
-	font-size: 1.14286rem;
 	font-style: normal;
 	font-weight: 500;
 	line-height: normal;
@@ -133,7 +132,6 @@ export const SelectPrimary = styled.select`
 	background: #fff;
 
 	color: #1e1e1e;
-	font-size: 1.14286rem;
 	font-style: normal;
 	font-weight: 500;
 	line-height: normal;

@@ -50,7 +50,6 @@ export const StyledInput = styled.input`
 	border-radius: 6.42857rem;
 	background: rgba(40, 43, 113, 0.88);
 	color: #fff;
-	font-size: 1.28571rem;
 	font-style: normal;
 	font-weight: 500;
 	line-height: 1.42857rem;
@@ -63,7 +62,6 @@ export const StyledInput = styled.input`
 	@media (max-width: 1000px) {
 		background: #3a4497;
 		padding: 0 0 0 1.43rem;
-		font-size: 1rem;
 	}
 `;
 

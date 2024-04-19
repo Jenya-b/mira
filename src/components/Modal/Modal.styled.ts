@@ -12,7 +12,7 @@ export const ImageWrap = styled.div`
 `;
 
 export const Title = styled.h2`
-	margin-top: 2.64rem;
+	margin-top: 2.5rem;
 	font-size: 2.14286rem;
 	font-weight: 500;
 	line-height: 110%;
@@ -22,7 +22,7 @@ export const Title = styled.h2`
 `;
 
 export const Subtitle = styled.h3`
-	margin-top: 2.64rem;
+	margin-top: 2.5rem;
 	font-size: 1.42857rem;
 	font-weight: 400;
 	line-height: 120%;
@@ -38,5 +38,5 @@ export const Subtitle = styled.h3`
 `;
 
 export const Button = styled(ButtonPrimary)`
-	margin-top: 2.07rem;
+	margin-top: 2.5rem;
 `;

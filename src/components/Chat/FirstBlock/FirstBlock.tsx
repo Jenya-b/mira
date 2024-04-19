@@ -31,8 +31,7 @@ export const FirstBlock: FC = () => {
 				</List>
 				<BaseModal
 					buttonText="Продолжить"
-					title="Любая ситуация 
-				из вашей жизни"
+					title="Любая ситуация из вашей жизни"
 					subtitle="Опишите своими словами, что вас беспокоит, в поле для сообщений. Вместе мы найдем путь к решению."
 					imgSrc={messageIcon}
 					handleClickModal={closeModal}

@@ -23,7 +23,7 @@ export const StyledDialog = styled(Dialog)(({ theme }) => ({
 			maxWidth: '100%',
 			borderBottomLeftRadius: 0,
 			borderBottomRightRadius: 0,
-			padding: '3.43rem 1.43rem 0.64rem 1.43rem',
+			padding: '3.43rem 1.43rem 3rem 1.43rem',
 		},
 	},
 	'.MuiBackdrop-root': {

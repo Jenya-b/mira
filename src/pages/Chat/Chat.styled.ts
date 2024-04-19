@@ -17,7 +17,7 @@ export const Wrapper = styled.div`
 		}
 
 		@media (max-width: 768px) {
-			grid-template: 1fr 7rem / 1fr;
+			grid-template: 1fr 6.1rem / 1fr;
 		}
 	}
 `;

@@ -40,8 +40,8 @@ export const Label = styled.label`
 	}
 
 	@media (max-width: 768px) {
-		height: 7rem;
-		padding: 1.21rem 1.5rem 3rem 1.5rem;
+		height: 6.1rem;
+		padding: 1.21rem 1.5rem 2.1rem 1.5rem;
 	}
 
 	&.hidden {

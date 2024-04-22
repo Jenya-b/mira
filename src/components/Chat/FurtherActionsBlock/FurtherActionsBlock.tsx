@@ -5,10 +5,15 @@ import {
 	FurtherActions,
 	FurtherActionsEnum,
 	furtherActionsHelp,
+	furtherActionsHelpHome,
 	furtherActionsMain,
 	furtherActionsPractice,
+	furtherActionsPracticeHome,
+	homeActions,
 } from '@/constants/chat';
 import { WithChat } from '@/hocs/WithChat/WithChat';
+import { useAppDispatch } from '@/store';
+import { SessionBlocks, setSessionBlock } from '@/store/chat';
 
 import { List } from './FurtherActionsBlock.styled';
 
@@ -17,21 +22,42 @@ interface SlideProps {
 	handleChangeSlide: (item: FurtherActionsEnum) => void;
 }
 
-const Slide: FC<SlideProps> = memo(({ list, handleChangeSlide }) => (
-	<List>
-		{list.map((i) => (
-			<li key={i.title}>
-				<button onClick={() => handleChangeSlide(i.redirection)}>
-					{i.img && <img src={i.img} alt="" />}
-					<span>{i.title}</span>
-				</button>
-			</li>
-		))}
-	</List>
-));
+const Slide: FC<SlideProps> = memo(({ list, handleChangeSlide }) => {
+	const dispatch = useAppDispatch();
 
-export const FurtherActionsBlock: FC = () => {
-	const [activeSlide, setActiveSlide] = useState<FurtherActionsEnum>(FurtherActionsEnum.MAIN);
+	const handleClick = (
+		redirection: FurtherActionsEnum | undefined,
+		sessionBlocks: SessionBlocks | undefined
+	): void => {
+		if (redirection !== undefined) {
+			handleChangeSlide(redirection);
+		} else if (sessionBlocks !== undefined) {
+			dispatch(setSessionBlock(sessionBlocks));
+		}
+	};
+
+	return (
+		<List>
+			{list.map((i) => (
+				<li key={i.title}>
+					<button onClick={() => handleClick(i.redirection, i.sessionBlocks)}>
+						{i.img && <img src={i.img} alt="" />}
+						<span>{i.title}</span>
+					</button>
+				</li>
+			))}
+		</List>
+	);
+});
+
+interface FurtherActionsBlockProps {
+	isHome?: boolean;
+}
+
+export const FurtherActionsBlock: FC<FurtherActionsBlockProps> = ({ isHome = false }) => {
+	const [activeSlide, setActiveSlide] = useState<FurtherActionsEnum>(
+		isHome ? FurtherActionsEnum.HOME : FurtherActionsEnum.MAIN
+	);
 	const [animation, setAnimation] = useState(false);
 
 	const { x } = useSpring({
@@ -52,12 +78,24 @@ export const FurtherActionsBlock: FC = () => {
 
 	const renderElement = useCallback((): JSX.Element => {
 		switch (activeSlide) {
+			case FurtherActionsEnum.HOME:
+				return <Slide list={homeActions} handleChangeSlide={handleChangeSlide} />;
 			case FurtherActionsEnum.MAIN:
 				return <Slide list={furtherActionsMain} handleChangeSlide={handleChangeSlide} />;
 			case FurtherActionsEnum.PRACTICE:
-				return <Slide list={furtherActionsPractice} handleChangeSlide={handleChangeSlide} />;
+				return (
+					<Slide
+						list={isHome ? furtherActionsPracticeHome : furtherActionsPractice}
+						handleChangeSlide={handleChangeSlide}
+					/>
+				);
 			case FurtherActionsEnum.HELP:
-				return <Slide list={furtherActionsHelp} handleChangeSlide={handleChangeSlide} />;
+				return (
+					<Slide
+						list={isHome ? furtherActionsHelpHome : furtherActionsHelp}
+						handleChangeSlide={handleChangeSlide}
+					/>
+				);
 			default:
 				return <></>;
 		}

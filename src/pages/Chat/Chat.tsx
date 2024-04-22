@@ -37,6 +37,8 @@ const ChatPage: FC = () => {
 
 	const renderSessionBlock = (): JSX.Element => {
 		switch (sessionBlock) {
+			case SessionBlocks.HOME:
+				return <FurtherActionsBlock isHome />;
 			case SessionBlocks.FIRST:
 				return <FirstBlock />;
 			case SessionBlocks.CHAT:

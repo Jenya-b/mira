@@ -2,6 +2,7 @@ import arrowIcon from '@/assets/images/icons/arrow-left.svg';
 import bookIcon from '@/assets/images/icons/book.svg';
 import messageIcon from '@/assets/images/icons/bubble-message.svg';
 import chatIcon from '@/assets/images/icons/chat.svg';
+import { SessionBlocks } from '@/store/chat';
 
 export const randomHints = [
 	'Я потерял работу',
@@ -26,6 +27,7 @@ export const descEndSession = [
 ];
 
 export enum FurtherActionsEnum {
+	HOME,
 	MAIN,
 	HELP,
 	PRACTICE,
@@ -34,23 +36,24 @@ export enum FurtherActionsEnum {
 export interface FurtherActions {
 	img?: string;
 	title: string;
-	redirection: FurtherActionsEnum;
+	redirection?: FurtherActionsEnum;
+	sessionBlocks?: SessionBlocks;
+	naigate?: string;
 }
 
-export const furtherActionsMain: FurtherActions[] = [
+export const homeActions: FurtherActions[] = [
 	{
 		img: bookIcon,
-		title: 'Проверить другую мысль',
-		redirection: FurtherActionsEnum.MAIN,
+		title: 'Мысли прошлой сессии',
 	},
 	{
 		img: messageIcon,
-		title: 'Обсудить новую ситуацию',
-		redirection: FurtherActionsEnum.MAIN,
+		title: 'Начать новую сессию',
+		sessionBlocks: SessionBlocks.FIRST,
 	},
 	{
 		img: chatIcon,
-		title: 'Приступить к тренировке',
+		title: 'Приступить к практике',
 		redirection: FurtherActionsEnum.PRACTICE,
 	},
 	{
@@ -60,15 +63,38 @@ export const furtherActionsMain: FurtherActions[] = [
 	},
 ];
 
-export const furtherActionsPractice: FurtherActions[] = [
+export const furtherActionsMain: FurtherActions[] = [
+	{
+		img: bookIcon,
+		title: 'Проверить другую мысль',
+	},
+	{
+		img: messageIcon,
+		title: 'Обсудить новую ситуацию',
+	},
+	{
+		img: chatIcon,
+		title: 'Приступить к практике',
+		redirection: FurtherActionsEnum.PRACTICE,
+	},
+	{
+		img: chatIcon,
+		title: 'Нужна помощь',
+		redirection: FurtherActionsEnum.HELP,
+	},
+];
+
+const Practice: FurtherActions[] = [
 	{
 		title: 'Копинг-карточки',
-		redirection: FurtherActionsEnum.PRACTICE,
 	},
 	{
 		title: 'Виртуальный тренажер',
-		redirection: FurtherActionsEnum.PRACTICE,
 	},
+];
+
+export const furtherActionsPractice: FurtherActions[] = [
+	...Practice,
 	{
 		img: arrowIcon,
 		title: 'Вернуться назад',
@@ -76,19 +102,39 @@ export const furtherActionsPractice: FurtherActions[] = [
 	},
 ];
 
-export const furtherActionsHelp: FurtherActions[] = [
+export const furtherActionsPracticeHome: FurtherActions[] = [
+	...Practice,
+	{
+		img: arrowIcon,
+		title: 'Вернуться назад',
+		redirection: FurtherActionsEnum.HOME,
+	},
+];
+
+const Help: FurtherActions[] = [
 	{
 		title: 'Новая мысль плохо работает',
-		redirection: FurtherActionsEnum.HELP,
 	},
 	{
 		title: 'У меня вопрос',
-		redirection: FurtherActionsEnum.HELP,
 	},
+];
+
+export const furtherActionsHelp: FurtherActions[] = [
+	...Help,
 	{
 		img: arrowIcon,
 		title: 'Вернуться назад',
 		redirection: FurtherActionsEnum.MAIN,
+	},
+];
+
+export const furtherActionsHelpHome: FurtherActions[] = [
+	...Help,
+	{
+		img: arrowIcon,
+		title: 'Вернуться назад',
+		redirection: FurtherActionsEnum.HOME,
 	},
 ];
 

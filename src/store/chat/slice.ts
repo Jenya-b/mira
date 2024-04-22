@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export enum SessionBlocks {
+	HOME,
 	FIRST,
 	CHAT,
 	CARDS,
@@ -19,7 +20,7 @@ interface InitialState {
 const initialState: InitialState = {
 	inputValue: '',
 	hiddenInput: false,
-	sessionBlock: SessionBlocks.FIRST,
+	sessionBlock: SessionBlocks.HOME,
 };
 
 export const chatSlice = createSlice({

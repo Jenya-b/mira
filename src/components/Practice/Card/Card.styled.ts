@@ -36,13 +36,14 @@ export const Favorites = styled.button`
 	text-decoration-line: underline;
 	color: ${({ theme }) => theme.colors.textPrimary};
 	background: none;
+	opacity: 0.6;
 
 	span {
 		padding-top: 0.2rem;
 	}
 
 	&.favorites {
-		opacity: 0.6;
+		opacity: 1;
 	}
 `;
 

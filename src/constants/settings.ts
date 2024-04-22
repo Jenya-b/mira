@@ -1,26 +1,14 @@
-export enum TimeOfDay {
-	MORNING,
-	AFTERNOON,
-	EVENING,
-}
-
-export const timeOfDayData = {
-	[TimeOfDay.MORNING]: 'Утро',
-	[TimeOfDay.AFTERNOON]: 'День',
-	[TimeOfDay.EVENING]: 'Вечер',
-};
-
 export const periods = [
 	{
 		value: 3,
-		text: '3 раза',
+		text: '3 раза в неделю',
 	},
 	{
 		value: 5,
-		text: '5 раз',
+		text: '5 раз в неделю',
 	},
 	{
 		value: 7,
-		text: '7 раз',
+		text: '7 раз в неделю',
 	},
 ];

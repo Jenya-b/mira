@@ -37,13 +37,6 @@ export const Controls = styled.div`
 	background: #3b3f8c;
 `;
 
-export const TimeDay = styled.div`
-	margin-right: auto;
-	font-size: 1.14286rem;
-	font-weight: 500;
-	line-height: 110%;
-`;
-
 export const Time = styled.input`
 	padding-top: 0.2rem;
 	font-size: 1.71429rem;
@@ -52,7 +45,7 @@ export const Time = styled.input`
 	letter-spacing: -0.03429rem;
 	background: none;
 	color: ${({ theme }) => theme.colors.textPrimary};
-	width: 6.85rem;
+	width: 7.5rem;
 
 	@media (max-width: 768px) {
 		width: 6.3rem;
@@ -85,6 +78,7 @@ export const Periods = styled.select`
 	font-weight: 500;
 	line-height: 120%;
 	opacity: 0.8;
+	margin-left: auto;
 
 	option {
 		color: ${({ theme }) => theme.colors.textSecondary};

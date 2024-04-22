@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 
 import { Card } from '@/components/TherapySettings/Card/Card';
 import { Dialog } from '@/components/TherapySettings/Dialog/Dialog';
-import { TimeOfDay } from '@/constants/settings';
 import { useModal } from '@/hooks/useModal';
 import { useResize } from '@/hooks/useResize';
 import { path } from '@/router/path';
@@ -64,13 +63,11 @@ const TherapySettings: FC = () => {
 					<Card
 						title="Новые мысли"
 						subtitle="Регулярный просмотр новых мыслей поможет им укрепиться и стать основой вашего мышления."
-						timeOfDay={TimeOfDay.MORNING}
 						activeSettings={activeSettings}
 					/>
 					<Card
 						title="Вечерняя практика"
 						subtitle="Осмысление и анализ происходящих событий — это ключ к изменению вашего образа мышления."
-						timeOfDay={TimeOfDay.EVENING}
 						activeSettings={activeSettings}
 					/>
 				</CardsWrap>

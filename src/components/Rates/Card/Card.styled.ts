@@ -47,23 +47,13 @@ export const Services = styled.ul`
 	row-gap: 1.43rem;
 
 	li {
-		position: relative;
-		padding-left: 1.4rem;
 		font-size: 1.14286rem;
 		font-weight: 400;
 		line-height: 120%;
 
-		&::before {
-			position: absolute;
-			top: 50%;
-			left: 0;
-			transform: translateY(-50%);
-			content: '';
-			width: 0.64286rem;
-			height: 0.64286rem;
-			border-radius: 50%;
-			background: #fff;
-		}
+		display: flex;
+		align-items: center;
+		column-gap: 0.71rem;
 
 		span {
 			opacity: 0.8;

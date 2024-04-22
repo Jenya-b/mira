@@ -1,11 +1,28 @@
+import icon1 from '@/assets/images/icons/rates/icon1.svg';
+import icon2 from '@/assets/images/icons/rates/icon2.svg';
+import icon3 from '@/assets/images/icons/rates/icon3.svg';
+import icon4 from '@/assets/images/icons/rates/icon4.svg';
+
 export const rateList = [
 	{
 		title: '7 сессий',
 		services: [
-			'Цифровой психолог на базе ИИ',
-			'Доступно 24/7',
-			'Золотой стандарт терапии (КПТ)',
-			'Абсолютно анонимно',
+			{
+				text: 'Цифровой психолог на базе ИИ',
+				icon: icon1,
+			},
+			{
+				text: 'Доступно 24/7',
+				icon: icon2,
+			},
+			{
+				text: 'Золотой стандарт терапии (КПТ)',
+				icon: icon3,
+			},
+			{
+				text: 'Абсолютно анонимно',
+				icon: icon4,
+			},
 		],
 		price: 999,
 		discount: 0,
@@ -13,10 +30,22 @@ export const rateList = [
 	{
 		title: '14 сессий',
 		services: [
-			'Цифровой психолог на базе ИИ',
-			'Доступно 24/7',
-			'Золотой стандарт терапии (КПТ)',
-			'Абсолютно анонимно',
+			{
+				text: 'Цифровой психолог на базе ИИ',
+				icon: icon1,
+			},
+			{
+				text: 'Доступно 24/7',
+				icon: icon2,
+			},
+			{
+				text: 'Золотой стандарт терапии (КПТ)',
+				icon: icon3,
+			},
+			{
+				text: 'Абсолютно анонимно',
+				icon: icon4,
+			},
 		],
 		price: 1799,
 		discount: 40,
@@ -24,10 +53,22 @@ export const rateList = [
 	{
 		title: '30 сессий',
 		services: [
-			'Цифровой психолог на базе ИИ',
-			'Доступно 24/7',
-			'Золотой стандарт терапии (КПТ)',
-			'Абсолютно анонимно',
+			{
+				text: 'Цифровой психолог на базе ИИ',
+				icon: icon1,
+			},
+			{
+				text: 'Доступно 24/7',
+				icon: icon2,
+			},
+			{
+				text: 'Золотой стандарт терапии (КПТ)',
+				icon: icon3,
+			},
+			{
+				text: 'Абсолютно анонимно',
+				icon: icon4,
+			},
 		],
 		price: 2999,
 		discount: 40,

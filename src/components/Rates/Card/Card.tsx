@@ -4,7 +4,10 @@ import { Button, Discount, Services, CardTitle, CardWrap, Price } from './Card.s
 
 interface CardProps {
 	title: string;
-	services: string[];
+	services: {
+		text: string;
+		icon: string;
+	}[];
 	price: number;
 	discount: number;
 	handleSubmit: () => void;
@@ -15,9 +18,10 @@ export const Card: FC<CardProps> = ({ discount, price, services, title, handleSu
 		{discount ? <Discount>скидка {discount}%</Discount> : <span />}
 		<CardTitle>{title}</CardTitle>
 		<Services>
-			{services.map((item) => (
-				<li key={item}>
-					<span>{item}</span>
+			{services.map(({ icon, text }) => (
+				<li key={text}>
+					<img src={icon} alt="" />
+					<span>{text}</span>
 				</li>
 			))}
 		</Services>

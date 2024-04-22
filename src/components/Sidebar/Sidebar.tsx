@@ -2,8 +2,8 @@ import { Avatar } from '@mui/material';
 import { FC } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-import addIcon from '@/assets/images/icons/add.svg';
 import avatarIcon from '@/assets/images/icons/avatar.svg';
+import homeIcon from '@/assets/images/icons/home.svg';
 import listIcon from '@/assets/images/icons/list.svg';
 import logoutIcon from '@/assets/images/icons/logout.svg';
 import okIcon from '@/assets/images/icons/okey.svg';
@@ -63,8 +63,8 @@ export const Sidebar: FC<SidebarProps> = ({ closeMenu }) => {
 					<p>7 доступных сессий</p>
 				</ButtonPrimory>
 				<ButtonPrimory onClick={() => handleNavigate(path.home)}>
-					<img src={addIcon} alt="add" />
-					<p>Начать новую сессию</p>
+					<img src={homeIcon} alt="add" />
+					<p>На главный экран</p>
 				</ButtonPrimory>
 			</SessionBlock>
 			<CardBlock>

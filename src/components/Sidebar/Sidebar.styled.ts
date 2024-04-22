@@ -102,7 +102,7 @@ export const ButtonPrimory = styled.button`
 	align-items: center;
 	color: ${({ theme }) => theme.colors.textPrimary};
 	font-size: 1.14286rem;
-	font-weight: 700;
+	font-weight: 500;
 	letter-spacing: -0.02286rem;
 
 	p {

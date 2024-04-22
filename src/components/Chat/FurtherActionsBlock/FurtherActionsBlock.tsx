@@ -106,6 +106,7 @@ export const FurtherActionsBlock: FC<FurtherActionsBlockProps> = ({ isHome = fal
 			style={{
 				opacity: x.to({ range: [0, 1], output: [1, 0] }),
 				height: '100%',
+				overflow: 'auto',
 			}}
 		>
 			<WithChat title="Что делаем дальше?">{renderElement()}</WithChat>

@@ -12,7 +12,10 @@ export const FilterBlock: FC = () => {
 		<Wrapper>
 			<Content>
 				<TextBlock>
-					<p>Эта кнопка — фильтр карточек, позволяющий отображать избранные вверху списка.</p>
+					<p>
+						Эта кнопка — фильтр карточек. Она позволяет отсортировать список так, чтобы избранные
+						были сверху.
+					</p>
 					<StyledFilter>
 						<svg width="15" height="15" viewBox="0 0 15 15" fill="none">
 							<g clipPath="url(#clip0_1169_35060)">

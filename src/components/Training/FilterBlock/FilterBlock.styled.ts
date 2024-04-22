@@ -72,6 +72,7 @@ export const TextBlock = styled.div`
 		font-size: 1.14286rem;
 		display: grid;
 		grid-template-columns: 1fr 10px;
+		column-gap: 1rem;
 	}
 `;
 

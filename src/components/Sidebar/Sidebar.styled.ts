@@ -78,7 +78,7 @@ export const MenuBlock = styled.ul`
 	}
 
 	@media (max-width: 1000px) {
-		margin-top: 3.93rem;
+		margin-top: 3.43rem;
 		row-gap: 3.57rem;
 	}
 

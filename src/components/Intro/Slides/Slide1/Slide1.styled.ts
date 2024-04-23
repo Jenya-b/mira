@@ -52,7 +52,7 @@ export const ImagesWrap = styled.div`
 		width: 22rem;
 		height: 26rem;
 		left: 50%;
-		top: 11rem;
+		top: 10rem;
 		transform: translateX(-50%);
 	}
 

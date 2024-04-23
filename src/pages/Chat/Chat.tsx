@@ -19,6 +19,7 @@ const ChatPage: FC = () => {
 
 	useEffect(() => {
 		switch (sessionBlock) {
+			case SessionBlocks.HOME:
 			case SessionBlocks.FEEDBACK:
 			case SessionBlocks.END_SESSION:
 			case SessionBlocks.FUTURE_ACTIONS:

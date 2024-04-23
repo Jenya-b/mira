@@ -12,7 +12,7 @@ import { sidebarMenu } from '@/constants/menu';
 import { path } from '@/router/path';
 import { useAppDispatch, useAppSelector } from '@/store';
 import { resetState as resetStateAuth } from '@/store/auth';
-import { resetState as resetStateChat } from '@/store/chat';
+import { SessionBlocks, resetState as resetStateChat, setSessionBlock } from '@/store/chat';
 import { resetState as resetStateUser } from '@/store/user';
 
 import {
@@ -51,6 +51,7 @@ export const Sidebar: FC<SidebarProps> = ({ closeMenu }) => {
 			closeMenu();
 		}
 
+		dispatch(setSessionBlock(SessionBlocks.HOME));
 		setTimeout(() => navigate(href));
 	};
 

@@ -30,6 +30,11 @@ export const Block = styled.div`
 			border-bottom-right-radius: 2.85714rem;
 			padding: 2rem 1.14rem 5.21rem 1.14rem;
 		}
+
+		@media (max-width: 480px) {
+			padding: 5rem 1.14rem 4.21rem 1.14rem;
+			row-gap: 1.5rem;
+		}
 	}
 
 	&:nth-child(2) {
@@ -38,6 +43,10 @@ export const Block = styled.div`
 		@media (max-width: 1000px) {
 			background: none;
 			padding: 4.71rem 1.14rem 1rem 1.14rem;
+		}
+
+		@media (max-width: 480px) {
+			padding: 4rem 1.14rem 1rem 1.14rem;
 		}
 	}
 `;

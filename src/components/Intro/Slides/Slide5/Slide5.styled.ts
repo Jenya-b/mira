@@ -19,6 +19,10 @@ export const Wrapper = styled.div`
 		border-bottom-left-radius: 2.85714rem;
 		border-bottom-right-radius: 2.85714rem;
 	}
+
+	@media (max-width: 480px) {
+		padding: 5rem 1.21rem 1.21rem 1.21rem;
+	}
 `;
 
 export const Title = styled.h2`

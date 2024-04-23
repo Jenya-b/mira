@@ -7,9 +7,12 @@ export const Wrapper = styled.div`
 	height: 29.5rem;
 
 	@media (max-width: 1000px) {
-		padding: 0rem;
 		height: 100%;
-		display: block;
+		grid-template: max-content 1fr / 1fr;
+	}
+
+	@media (max-width: 480px) {
+		overflow: hidden;
 	}
 `;
 
@@ -27,6 +30,10 @@ export const Block = styled.div`
 			background: none;
 			padding: 2rem 1.14rem 5.21rem 1.14rem;
 		}
+
+		@media (max-width: 480px) {
+			padding: 5rem 1.14rem 5rem 1.14rem;
+		}
 	}
 
 	&:nth-child(2) {
@@ -38,6 +45,25 @@ export const Block = styled.div`
 			background-position: center;
 			background-repeat: no-repeat;
 			background-size: cover;
+
+			@media (max-width: 480px) {
+				height: 110%;
+			}
+		}
+
+		@media (max-width: 1000px) {
+			background: none;
+			margin-left: auto;
+			margin-right: auto;
+			max-width: 40rem;
+			width: 100%;
+
+			img {
+				text-align: center;
+				object-fit: cover;
+				border-top-right-radius: 2.86rem;
+				border-top-left-radius: 2.86rem;
+			}
 		}
 	}
 `;

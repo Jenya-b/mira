@@ -79,6 +79,7 @@ export const Periods = styled.select`
 	line-height: 120%;
 	opacity: 0.8;
 	margin-left: auto;
+	text-align: center;
 
 	option {
 		color: ${({ theme }) => theme.colors.textSecondary};

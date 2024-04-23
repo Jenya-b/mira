@@ -13,6 +13,7 @@ export const Wrapper = styled.div`
 	justify-content: end;
 
 	@media (max-width: 1000px) {
+		position: fixed;
 		width: 32.57143rem;
 		height: 32.57143rem;
 		left: -6.93rem;

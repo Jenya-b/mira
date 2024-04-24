@@ -38,7 +38,7 @@ export interface FurtherActions {
 	title: string;
 	redirection?: FurtherActionsEnum;
 	sessionBlocks?: SessionBlocks;
-	naigate?: string;
+	navigate?: string;
 }
 
 export const homeActions: FurtherActions[] = [

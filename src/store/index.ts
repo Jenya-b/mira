@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import type { TypedUseSelectorHook } from 'react-redux';
 
 import { authApi } from '@/services/api/auth';
+import { sessionApi } from '@/services/api/session';
 import { userApi } from '@/services/api/user';
 
 import { authReducer } from './auth';
@@ -22,10 +23,11 @@ export const store = configureStore({
 		practice: practiceReducer,
 		[authApi.reducerPath]: authApi.reducer,
 		[userApi.reducerPath]: userApi.reducer,
+		[sessionApi.reducerPath]: sessionApi.reducer,
 	},
 
 	middleware: (getDefaultMiddleware) =>
-		getDefaultMiddleware({}).concat(authApi.middleware, userApi.middleware),
+		getDefaultMiddleware({}).concat(authApi.middleware, userApi.middleware, sessionApi.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

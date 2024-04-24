@@ -8,6 +8,10 @@ export const Wrapper = styled.div`
 	display: flex;
 	flex-direction: column;
 	height: max-content;
+
+	&.training {
+		z-index: ${({ theme }) => theme.order.mainIndex};
+	}
 `;
 
 export const Info = styled.div`
@@ -67,6 +71,11 @@ export const Button1 = styled.button`
 	${buttonCss}
 	color: ${({ theme }) => theme.colors.textPrimary};
 	background: #488ce1;
+
+	&.training {
+		position: relative;
+		z-index: ${({ theme }) => theme.order.firstIndex};
+	}
 `;
 
 export const Button2 = styled.button`
@@ -74,6 +83,11 @@ export const Button2 = styled.button`
 	color: ${({ theme }) => theme.colors.textPrimary};
 	opacity: 0.9;
 	background: #3b3f8c;
+
+	&.training {
+		position: relative;
+		z-index: ${({ theme }) => theme.order.firstIndex};
+	}
 `;
 
 export const Button3 = styled.button`
@@ -82,6 +96,11 @@ export const Button3 = styled.button`
 	border: 1px solid rgba(255, 255, 255, 0.7);
 	opacity: 0.7;
 	background: none;
+
+	&.training {
+		position: relative;
+		z-index: ${({ theme }) => theme.order.firstIndex};
+	}
 `;
 
 export const Button4 = styled.button`
@@ -91,4 +110,27 @@ export const Button4 = styled.button`
 	background: none;
 	height: 2rem;
 	text-decoration-line: underline;
+
+	&.training {
+		position: relative;
+		z-index: ${({ theme }) => theme.order.firstIndex};
+	}
+`;
+
+export const DisabledBg = styled.div`
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: ${({ theme }) => theme.order.lastIndex};
+`;
+
+export const FilterBg = styled.div`
+	background: rgba(0, 0, 0, 0.05);
+	backdrop-filter: blur(5px);
+	border-radius: 1.71429rem;
+	position: absolute;
+	width: 100%;
+	height: 100%;
 `;

@@ -1,6 +1,7 @@
 import { FC, useEffect, useRef, useState } from 'react';
 
 import { useResize } from '@/hooks/useResize';
+import { useAppSelector } from '@/store';
 
 import {
 	Button1,
@@ -9,7 +10,9 @@ import {
 	Button4,
 	Controls,
 	Date,
+	DisabledBg,
 	Favorites,
+	FilterBg,
 	Info,
 	Wrapper,
 } from './Card.styled';
@@ -21,6 +24,7 @@ interface CardProps {
 	btnText4: string;
 	date: string;
 	favorites: boolean;
+	isTraining?: boolean;
 }
 
 export const Card: FC<CardProps> = ({
@@ -30,10 +34,12 @@ export const Card: FC<CardProps> = ({
 	btnText4,
 	date,
 	favorites,
+	isTraining = false,
 }) => {
 	const btnRef = useRef<HTMLButtonElement>(null);
 	const [activeText, setActiveText] = useState(false);
 	const [innerWidth] = useResize();
+	const { cardTrainingBlock } = useAppSelector((state) => state.practice);
 
 	useEffect(() => {
 		if (btnRef.current) {
@@ -52,7 +58,7 @@ export const Card: FC<CardProps> = ({
 	}, [activeText]);
 
 	return (
-		<Wrapper>
+		<Wrapper className={isTraining ? 'training' : ''}>
 			<Info>
 				<Date>{date}</Date>
 				<Favorites className={favorites ? 'favorites' : ''}>
@@ -73,13 +79,28 @@ export const Card: FC<CardProps> = ({
 				</Favorites>
 			</Info>
 			<Controls>
-				<Button1>{btnText1}</Button1>
-				<Button2>{btnText2}</Button2>
-				<Button3 onClick={() => setActiveText(!activeText)} ref={btnRef}>
+				<Button1 className={isTraining && cardTrainingBlock === 1 ? 'training' : ''}>
+					{btnText1}
+				</Button1>
+				<Button2 className={isTraining && cardTrainingBlock === 2 ? 'training' : ''}>
+					{btnText2}
+				</Button2>
+				<Button3
+					className={isTraining && cardTrainingBlock === 3 ? 'training' : ''}
+					onClick={() => setActiveText(!activeText)}
+					ref={btnRef}
+				>
 					{btnText3}
 				</Button3>
-				<Button4>{btnText4}</Button4>
+				<Button4 className={isTraining && cardTrainingBlock === 4 ? 'training' : ''}>
+					{btnText4}
+				</Button4>
 			</Controls>
+			{isTraining && cardTrainingBlock !== 0 && (
+				<DisabledBg>
+					<FilterBg />
+				</DisabledBg>
+			)}
 		</Wrapper>
 	);
 };

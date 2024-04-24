@@ -3,10 +3,11 @@ import { useLocation } from 'react-router-dom';
 
 import { BackLink } from '@/components/BackLink/BackLink';
 import { Card } from '@/components/Practice/Card/Card';
+import { CopingCardBlock } from '@/components/Training/CopingCard/CopingCard';
 import { FilterBlock } from '@/components/Training/FilterBlock/FilterBlock';
 import { path } from '@/router/path';
 import { useAppDispatch, useAppSelector } from '@/store';
-import { setActiveFilter } from '@/store/practice';
+import { TrainingBlock, setActiveFilter } from '@/store/practice';
 
 import {
 	Container,
@@ -21,7 +22,20 @@ import {
 const Practice: FC = () => {
 	const { state } = useLocation();
 	const dispatch = useAppDispatch();
-	const { activeFilter, isTraining } = useAppSelector((state) => state.practice);
+	const { activeFilter, isTraining, trainingBlock } = useAppSelector(({ practice }) => practice);
+
+	const renderTrainingBlock = (): JSX.Element => {
+		switch (trainingBlock) {
+			case TrainingBlock.FILTER:
+				return <FilterBlock />;
+
+			case TrainingBlock.COPING_CARD:
+				return <CopingCardBlock />;
+
+			default:
+				return <></>;
+		}
+	};
 
 	return (
 		<Wrapper>
@@ -30,7 +44,13 @@ const Practice: FC = () => {
 					<BackLink path={state ? state.backPath : path.home} textLink="Вернуться назад" />
 					<Filter
 						onClick={() => dispatch(setActiveFilter(!activeFilter))}
-						className={isTraining ? 'training' : activeFilter ? 'active' : ''}
+						className={
+							isTraining && trainingBlock === TrainingBlock.FILTER
+								? 'training'
+								: activeFilter
+									? 'active'
+									: ''
+						}
 					>
 						<svg width="15" height="15" viewBox="0 0 15 15" fill="none">
 							<g clipPath="url(#clip0_1169_35060)">
@@ -73,9 +93,8 @@ const Practice: FC = () => {
 				<>
 					<DisabledBg>
 						<FilterBg />
-						{/* <FilterBlock /> */}
 					</DisabledBg>
-					<FilterBlock />
+					{renderTrainingBlock()}
 				</>
 			)}
 		</Wrapper>

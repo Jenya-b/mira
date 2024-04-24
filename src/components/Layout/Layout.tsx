@@ -4,6 +4,7 @@ import { Outlet } from 'react-router-dom';
 import { BurgerMenu } from '../BurgerMenu/BurgerMenu';
 import { Sidebar } from '../Sidebar/Sidebar';
 
+import { useChat } from '@/hooks/useChat';
 import { useResize } from '@/hooks/useResize';
 import { useAppDispatch, useAppSelector } from '@/store';
 import { setOpenBurgerMenu } from '@/store/general';
@@ -14,6 +15,7 @@ export const Layout: FC = () => {
 	const [innerWidth, innerHeight] = useResize();
 	const dispatch = useAppDispatch();
 	const { isOpenBurgerMenu } = useAppSelector((state) => state.general);
+	useChat();
 
 	useEffect(() => {
 		const vh = window.innerHeight * 0.01;

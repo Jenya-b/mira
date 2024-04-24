@@ -14,6 +14,23 @@ export const Wrapper = styled.div`
 	}
 `;
 
+export const DisabledBg = styled.div`
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: ${({ theme }) => theme.order.lastIndex};
+`;
+
+export const FilterBg = styled.div`
+	backdrop-filter: blur(5px);
+	border-radius: 1.71429rem;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+`;
+
 export const Info = styled.div`
 	display: flex;
 	justify-content: space-between;
@@ -115,22 +132,4 @@ export const Button4 = styled.button`
 		position: relative;
 		z-index: ${({ theme }) => theme.order.firstIndex};
 	}
-`;
-
-export const DisabledBg = styled.div`
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	z-index: ${({ theme }) => theme.order.lastIndex};
-`;
-
-export const FilterBg = styled.div`
-	background: rgba(0, 0, 0, 0.05);
-	backdrop-filter: blur(5px);
-	border-radius: 1.71429rem;
-	position: absolute;
-	width: 100%;
-	height: 100%;
 `;

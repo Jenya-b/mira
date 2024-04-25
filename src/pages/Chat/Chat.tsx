@@ -1,4 +1,4 @@
-import { FC, useEffect, useRef, useState } from 'react';
+import { FC, useEffect, useRef } from 'react';
 
 import { CardsBlock } from '@/components/Chat/CardsBlock/CardsBlock';
 import { ComplaintBlock } from '@/components/Chat/ComplaintBlock/ComplaintBlock';
@@ -8,17 +8,41 @@ import { FirstBlock } from '@/components/Chat/FirstBlock/FirstBlock';
 import { FurtherActionsBlock } from '@/components/Chat/FurtherActionsBlock/FurtherActionsBlock';
 import { MessageBlock } from '@/components/Chat/MessagesBlock/MessagesBlock';
 import { Input } from '@/components/ChatElements/Input/Input';
+import { Loader } from '@/components/Loader/Loader';
+import { useGetLastSessionQuery } from '@/services/api/session';
 import { useAppDispatch, useAppSelector } from '@/store';
-import { SessionBlocks, setHideInput, setSessionBlock } from '@/store/chat';
+import {
+	Author,
+	Message,
+	SessionBlocks,
+	StageEnum,
+	addMessage,
+	setHideInput,
+	setInputValue,
+	setSessionBlock,
+} from '@/store/chat';
 
 import { Wrapper } from './Chat.styled';
 
 const ChatPage: FC = () => {
 	const dispatch = useAppDispatch();
-	const { hiddenInput, sessionBlock } = useAppSelector((state) => state.chat);
+	const { hiddenInput, sessionBlock, currentStage, inputValue } = useAppSelector(
+		(state) => state.chat
+	);
 	const { accessToken } = useAppSelector((state) => state.user);
-	const [inputValue, setInputValue] = useState('');
 	const ws = useRef<WebSocket | null>(null);
+
+	const { isLoading, isSuccess, data } = useGetLastSessionQuery(null);
+
+	useEffect(() => {
+		if (isSuccess && data !== undefined) {
+			if (data.messages.length) {
+				dispatch(setSessionBlock(SessionBlocks.CHAT));
+			} else {
+				dispatch(setSessionBlock(SessionBlocks.FIRST));
+			}
+		}
+	}, [isSuccess]);
 
 	useEffect(() => {
 		ws.current = new WebSocket(
@@ -31,7 +55,9 @@ const ChatPage: FC = () => {
 
 		ws.current.onmessage = function (event) {
 			try {
-				console.log(event);
+				const json: Message = JSON.parse(event.data);
+				dispatch(addMessage(json));
+				console.log();
 			} catch {
 				throw new Error();
 			}
@@ -55,6 +81,7 @@ const ChatPage: FC = () => {
 				break;
 
 			case SessionBlocks.FIRST:
+			case SessionBlocks.CHAT:
 				dispatch(setHideInput(false));
 				break;
 
@@ -90,7 +117,23 @@ const ChatPage: FC = () => {
 		const wsCurrent = ws.current;
 
 		if (wsCurrent?.readyState === WebSocket.OPEN && inputValue) {
-			wsCurrent.send(JSON.stringify({ content: inputValue, action: 'MESSAGE' }));
+			if (currentStage === StageEnum.SITUATION) {
+				wsCurrent.send(JSON.stringify({ content: inputValue, action: 'MESSAGE' }));
+				const message: Message = {
+					author: Author.USER,
+					buttons: null,
+					content: inputValue,
+					created_at: '',
+					gpt: true,
+					role: 'user',
+					stage: StageEnum.SITUATION,
+					status: 1,
+					type: 'msg',
+				};
+				dispatch(addMessage(message));
+			}
+			dispatch(setSessionBlock(SessionBlocks.CHAT));
+			dispatch(setInputValue(''));
 		}
 	};
 
@@ -102,6 +145,7 @@ const ChatPage: FC = () => {
 
 	return (
 		<Wrapper className={!hiddenInput ? 'grid' : ''}>
+			{isLoading && <Loader />}
 			<button
 				onClick={handleClick}
 				style={{ background: 'none', position: 'absolute', top: '7rem', right: '2rem' }}
@@ -109,7 +153,7 @@ const ChatPage: FC = () => {
 				CL
 			</button>
 			{renderSessionBlock()}
-			<Input inputValue={inputValue} setInputValue={setInputValue} sendMessage={sendMessage} />
+			<Input sendMessage={sendMessage} />
 		</Wrapper>
 	);
 };

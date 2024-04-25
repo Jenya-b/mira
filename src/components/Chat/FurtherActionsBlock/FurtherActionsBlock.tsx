@@ -11,7 +11,7 @@ import {
 	homeActions,
 } from '@/constants/chat';
 import { WithChat } from '@/hocs/WithChat/WithChat';
-import { useCreateSessionMutation } from '@/services/api/session';
+import { useCreateSessionMutation, useLazyGetLastSessionQuery } from '@/services/api/session';
 import { useAppDispatch } from '@/store';
 import { SessionBlocks, setSessionBlock } from '@/store/chat';
 
@@ -27,7 +27,8 @@ export const FurtherActionsBlock: FC<FurtherActionsBlockProps> = ({ isHome = fal
 		isHome ? FurtherActionsEnum.HOME : FurtherActionsEnum.MAIN
 	);
 	const [animation, setAnimation] = useState(false);
-	const [fetchCreateSession, { isSuccess }] = useCreateSessionMutation();
+	const [fetchCreateSession, { isSuccess: isSuccessCreate }] = useCreateSessionMutation();
+	const [fetchGetLastSession, { isSuccess: isSuccessGet }] = useLazyGetLastSessionQuery();
 
 	const { x } = useSpring({
 		from: { x: 0 },
@@ -50,10 +51,16 @@ export const FurtherActionsBlock: FC<FurtherActionsBlockProps> = ({ isHome = fal
 	};
 
 	useEffect(() => {
-		if (isSuccess) {
+		if (isSuccessCreate) {
+			fetchGetLastSession(null);
+		}
+	}, [isSuccessCreate]);
+
+	useEffect(() => {
+		if (isSuccessGet) {
 			dispatch(setSessionBlock(SessionBlocks.FIRST));
 		}
-	}, [isSuccess]);
+	}, [isSuccessGet]);
 
 	const renderElement = useCallback((): JSX.Element => {
 		switch (activeSlide) {

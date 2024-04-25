@@ -1,24 +1,24 @@
-import { Dispatch, FC, SetStateAction, useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import arrow from '@/assets/images/icons/arrow-top.svg';
 import microphone from '@/assets/images/icons/microphone.svg';
 import { useResize } from '@/hooks/useResize';
-import { useAppSelector } from '@/store';
+import { useAppDispatch, useAppSelector } from '@/store';
+import { setInputValue } from '@/store/chat';
 import { TrainingParam } from '@/store/training';
 
 import { Button, Controls, Label, StyledInput } from './Input.styled';
 
 interface InputProps {
-	inputValue: string;
-	setInputValue: Dispatch<SetStateAction<string>>;
 	sendMessage: () => void;
 }
 
-export const Input: FC<InputProps> = ({ inputValue, setInputValue, sendMessage }) => {
+export const Input: FC<InputProps> = ({ sendMessage }) => {
+	const dispatch = useAppDispatch();
 	const { pathname } = useLocation();
 	const { trainingBlock } = useAppSelector((state) => state.training);
-	const { hiddenInput } = useAppSelector((state) => state.chat);
+	const { hiddenInput, inputValue } = useAppSelector((state) => state.chat);
 	const [trClassName, setTrClassName] = useState('');
 	const [innerWidth] = useResize();
 
@@ -38,7 +38,7 @@ export const Input: FC<InputProps> = ({ inputValue, setInputValue, sendMessage }
 		<Label className={trClassName || (hiddenInput ? 'hidden' : '')}>
 			<StyledInput
 				value={inputValue}
-				onChange={(e) => setInputValue(e.target.value)}
+				onChange={(e) => dispatch(setInputValue(e.target.value))}
 				placeholder="Сообщение..."
 			/>
 			<Controls className={trClassName}>

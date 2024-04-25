@@ -1,15 +1,7 @@
 import { BaseQueryApi, createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 import { RootState } from '@/store';
-
-interface Session {
-	id: number;
-	active: boolean;
-	first_time: boolean;
-	result: number;
-	created_at: string;
-	last_stage: string;
-}
+import { Session, addCurrentSession } from '@/store/chat';
 
 export const sessionApi = createApi({
 	reducerPath: 'sessionApi',
@@ -55,6 +47,14 @@ export const sessionApi = createApi({
 					accept: 'application/json',
 				},
 			}),
+			onQueryStarted: async (_, { dispatch, queryFulfilled }) => {
+				try {
+					const { data } = await queryFulfilled;
+					dispatch(addCurrentSession(data));
+				} catch {
+					throw new Error();
+				}
+			},
 		}),
 		createSession: build.mutation<Session, null>({
 			query: () => ({
@@ -73,4 +73,5 @@ export const {
 	useGetSessionByIdQuery,
 	useGetLastSessionQuery,
 	useCreateSessionMutation,
+	useLazyGetLastSessionQuery,
 } = sessionApi;

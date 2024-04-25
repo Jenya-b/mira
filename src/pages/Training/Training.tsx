@@ -62,11 +62,11 @@ const Training: FC = () => {
 							key={i}
 							logoParam={logoParam as PersonMessage}
 							text={text}
-							searchBlock={searchBlock}
+							buttons={searchBlock}
 						/>
 					))}
 				</MessageWrap>
-				<Input />
+				<Input sendMessage={() => {}} />
 			</Container>
 			<DisabledBg className={trainingBlock}>
 				<FilterBg className={trainingBlock} />

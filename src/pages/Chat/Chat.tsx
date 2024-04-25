@@ -35,7 +35,7 @@ const ChatPage: FC = () => {
 	const { isLoading, isSuccess, data } = useGetLastSessionQuery(null);
 
 	useEffect(() => {
-		if (isSuccess && data !== undefined) {
+		if (isSuccess && data !== undefined && Object.keys(data).length !== 0) {
 			if (data.messages.length) {
 				dispatch(setSessionBlock(SessionBlocks.CHAT));
 			} else {

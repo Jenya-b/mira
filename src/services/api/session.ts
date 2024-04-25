@@ -50,7 +50,10 @@ export const sessionApi = createApi({
 			onQueryStarted: async (_, { dispatch, queryFulfilled }) => {
 				try {
 					const { data } = await queryFulfilled;
-					dispatch(addCurrentSession(data));
+
+					if (Object.keys(data).length !== 0) {
+						dispatch(addCurrentSession(data));
+					}
 				} catch {
 					throw new Error();
 				}

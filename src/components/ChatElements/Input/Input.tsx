@@ -1,20 +1,24 @@
-import { FC, useEffect, useState } from 'react';
+import { Dispatch, FC, SetStateAction, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import arrow from '@/assets/images/icons/arrow-top.svg';
 import microphone from '@/assets/images/icons/microphone.svg';
 import { useResize } from '@/hooks/useResize';
-import { useAppDispatch, useAppSelector } from '@/store';
-import { setInputValue } from '@/store/chat';
+import { useAppSelector } from '@/store';
 import { TrainingParam } from '@/store/training';
 
 import { Button, Controls, Label, StyledInput } from './Input.styled';
 
-export const Input: FC = () => {
+interface InputProps {
+	inputValue: string;
+	setInputValue: Dispatch<SetStateAction<string>>;
+	sendMessage: () => void;
+}
+
+export const Input: FC<InputProps> = ({ inputValue, setInputValue, sendMessage }) => {
 	const { pathname } = useLocation();
-	const dispatch = useAppDispatch();
 	const { trainingBlock } = useAppSelector((state) => state.training);
-	const { inputValue, hiddenInput } = useAppSelector((state) => state.chat);
+	const { hiddenInput } = useAppSelector((state) => state.chat);
 	const [trClassName, setTrClassName] = useState('');
 	const [innerWidth] = useResize();
 
@@ -34,7 +38,7 @@ export const Input: FC = () => {
 		<Label className={trClassName || (hiddenInput ? 'hidden' : '')}>
 			<StyledInput
 				value={inputValue}
-				onChange={(e) => dispatch(setInputValue(e.target.value))}
+				onChange={(e) => setInputValue(e.target.value)}
 				placeholder="Сообщение..."
 			/>
 			<Controls className={trClassName}>
@@ -43,13 +47,13 @@ export const Input: FC = () => {
 						<Button>
 							<img src={microphone} alt="btn" />
 						</Button>
-						<Button style={{ background: '#4eb97f' }}>
+						<Button style={{ background: '#4eb97f' }} onClick={sendMessage}>
 							<img src={arrow} alt="btn" />
 						</Button>
 					</>
 				) : (
 					<>
-						<Button>
+						<Button onClick={inputValue ? sendMessage : undefined}>
 							<img src={!inputValue ? microphone : arrow} alt="btn" />
 						</Button>
 					</>

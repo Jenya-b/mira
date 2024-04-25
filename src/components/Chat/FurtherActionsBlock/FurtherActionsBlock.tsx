@@ -1,8 +1,7 @@
 import { animated, useSpring } from '@react-spring/web';
-import { FC, memo, useCallback, useState } from 'react';
+import { FC, useCallback, useEffect, useState } from 'react';
 
 import {
-	FurtherActions,
 	FurtherActionsEnum,
 	furtherActionsHelp,
 	furtherActionsHelpHome,
@@ -12,53 +11,23 @@ import {
 	homeActions,
 } from '@/constants/chat';
 import { WithChat } from '@/hocs/WithChat/WithChat';
+import { useCreateSessionMutation } from '@/services/api/session';
 import { useAppDispatch } from '@/store';
 import { SessionBlocks, setSessionBlock } from '@/store/chat';
 
-import { List } from './FurtherActionsBlock.styled';
-
-interface SlideProps {
-	list: FurtherActions[];
-	handleChangeSlide: (item: FurtherActionsEnum) => void;
-}
-
-const Slide: FC<SlideProps> = memo(({ list, handleChangeSlide }) => {
-	const dispatch = useAppDispatch();
-
-	const handleClick = (
-		redirection: FurtherActionsEnum | undefined,
-		sessionBlocks: SessionBlocks | undefined
-	): void => {
-		if (redirection !== undefined) {
-			handleChangeSlide(redirection);
-		} else if (sessionBlocks !== undefined) {
-			dispatch(setSessionBlock(sessionBlocks));
-		}
-	};
-
-	return (
-		<List>
-			{list.map((i) => (
-				<li key={i.title}>
-					<button onClick={() => handleClick(i.redirection, i.sessionBlocks)}>
-						{i.img && <img src={i.img} alt="" />}
-						<span>{i.title}</span>
-					</button>
-				</li>
-			))}
-		</List>
-	);
-});
+import { Slide } from './Slide';
 
 interface FurtherActionsBlockProps {
 	isHome?: boolean;
 }
 
 export const FurtherActionsBlock: FC<FurtherActionsBlockProps> = ({ isHome = false }) => {
+	const dispatch = useAppDispatch();
 	const [activeSlide, setActiveSlide] = useState<FurtherActionsEnum>(
 		isHome ? FurtherActionsEnum.HOME : FurtherActionsEnum.MAIN
 	);
 	const [animation, setAnimation] = useState(false);
+	const [fetchCreateSession, { isSuccess }] = useCreateSessionMutation();
 
 	const { x } = useSpring({
 		from: { x: 0 },
@@ -76,10 +45,26 @@ export const FurtherActionsBlock: FC<FurtherActionsBlockProps> = ({ isHome = fal
 		return () => clearTimeout(timer);
 	}, []);
 
+	const createSession = (): void => {
+		fetchCreateSession(null);
+	};
+
+	useEffect(() => {
+		if (isSuccess) {
+			dispatch(setSessionBlock(SessionBlocks.FIRST));
+		}
+	}, [isSuccess]);
+
 	const renderElement = useCallback((): JSX.Element => {
 		switch (activeSlide) {
 			case FurtherActionsEnum.HOME:
-				return <Slide list={homeActions} handleChangeSlide={handleChangeSlide} />;
+				return (
+					<Slide
+						list={homeActions}
+						handleChangeSlide={handleChangeSlide}
+						createSession={createSession}
+					/>
+				);
 			case FurtherActionsEnum.MAIN:
 				return <Slide list={furtherActionsMain} handleChangeSlide={handleChangeSlide} />;
 			case FurtherActionsEnum.PRACTICE:

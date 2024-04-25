@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react';
+import { FC, useEffect, useRef, useState } from 'react';
 
 import { CardsBlock } from '@/components/Chat/CardsBlock/CardsBlock';
 import { ComplaintBlock } from '@/components/Chat/ComplaintBlock/ComplaintBlock';
@@ -16,6 +16,33 @@ import { Wrapper } from './Chat.styled';
 const ChatPage: FC = () => {
 	const dispatch = useAppDispatch();
 	const { hiddenInput, sessionBlock } = useAppSelector((state) => state.chat);
+	const { accessToken } = useAppSelector((state) => state.user);
+	const [inputValue, setInputValue] = useState('');
+	const ws = useRef<WebSocket | null>(null);
+
+	useEffect(() => {
+		ws.current = new WebSocket(
+			`${import.meta.env.VITE_API_WEB_SOCKET_URL}/chat/?token=${accessToken}`
+		);
+
+		ws.current.onopen = () => console.log('ws opened');
+
+		ws.current.onclose = () => console.log('ws closed');
+
+		ws.current.onmessage = function (event) {
+			try {
+				console.log(event);
+			} catch {
+				throw new Error();
+			}
+		};
+
+		const wsCurrent = ws.current;
+
+		return () => {
+			wsCurrent.close();
+		};
+	}, []);
 
 	useEffect(() => {
 		switch (sessionBlock) {
@@ -59,6 +86,14 @@ const ChatPage: FC = () => {
 		}
 	};
 
+	const sendMessage = (): void => {
+		const wsCurrent = ws.current;
+
+		if (wsCurrent?.readyState === WebSocket.OPEN && inputValue) {
+			wsCurrent.send(JSON.stringify({ content: inputValue, action: 'MESSAGE' }));
+		}
+	};
+
 	// TODO временно для перелистывания экранов
 	const handleClick = (): void => {
 		const newSession = sessionBlock === 7 ? 0 : sessionBlock + 1;
@@ -74,7 +109,7 @@ const ChatPage: FC = () => {
 				CL
 			</button>
 			{renderSessionBlock()}
-			<Input />
+			<Input inputValue={inputValue} setInputValue={setInputValue} sendMessage={sendMessage} />
 		</Wrapper>
 	);
 };

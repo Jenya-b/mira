@@ -12,7 +12,7 @@ interface UpdateUserRequest {
 export const userApi = createApi({
 	reducerPath: 'userApi',
 	baseQuery: fetchBaseQuery({
-		baseUrl: import.meta.env.VITE_API_URL,
+		baseUrl: `${import.meta.env.VITE_API_URL}/v1`,
 		prepareHeaders: (
 			headers: Headers,
 			{ getState }: Pick<BaseQueryApi, 'getState' | 'extra' | 'endpoint' | 'type' | 'forced'>

@@ -38,7 +38,7 @@ export interface FurtherActions {
 	title: string;
 	redirection?: FurtherActionsEnum;
 	sessionBlocks?: SessionBlocks;
-	navigate?: string;
+	addNewSession?: boolean;
 }
 
 export const homeActions: FurtherActions[] = [
@@ -49,6 +49,7 @@ export const homeActions: FurtherActions[] = [
 	{
 		img: messageIcon,
 		title: 'Начать новую сессию',
+		addNewSession: true,
 		sessionBlocks: SessionBlocks.FIRST,
 	},
 	{

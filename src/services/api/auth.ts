@@ -22,7 +22,7 @@ interface SigninRequest {
 
 export const authApi = createApi({
 	reducerPath: 'authApi',
-	baseQuery: fetchBaseQuery({ baseUrl: import.meta.env.VITE_API_URL }),
+	baseQuery: fetchBaseQuery({ baseUrl: `${import.meta.env.VITE_API_URL}/v1` }),
 	endpoints: (build) => ({
 		createCode: build.mutation<CreateCodeResponse, CreateCodeRequest>({
 			query: (body) => ({

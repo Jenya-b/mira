@@ -49,7 +49,7 @@ export const Label = styled.label`
 	}
 `;
 
-export const StyledInput = styled.input`
+export const StyledInput = styled.textarea`
 	width: 100%;
 	height: 100%;
 	border-radius: 6.42857rem;
@@ -58,7 +58,8 @@ export const StyledInput = styled.input`
 	font-style: normal;
 	font-weight: 500;
 	line-height: 1.42857rem;
-	padding: 0 10rem 0 2.5rem;
+	padding: 2.3rem 10rem 0rem 2.5rem;
+	resize: none;
 
 	&::placeholder {
 		color: rgba(255, 255, 255, 0.7);
@@ -66,7 +67,7 @@ export const StyledInput = styled.input`
 
 	@media (max-width: 1000px) {
 		background: #3a4497;
-		padding: 0 0 0 1.43rem;
+		padding: 0.6rem 0.4rem 0 1.43rem;
 	}
 `;
 

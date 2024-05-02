@@ -34,7 +34,7 @@ export const Input: FC<InputProps> = ({ sendMessage }) => {
 		}
 	}, [trainingBlock, pathname]);
 
-	const handleKeyPress = (event: KeyboardEvent<HTMLInputElement>): void => {
+	const handleKeyPress = (event: KeyboardEvent): void => {
 		if (event.key === 'Enter') {
 			sendMessage();
 		}

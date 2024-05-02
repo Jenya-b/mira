@@ -30,6 +30,7 @@ export const Text = styled.p`
 	font-style: normal;
 	font-weight: 500;
 	line-height: 130%;
+	padding-top: 0.3rem;
 
 	@media (max-width: 768px) {
 		padding: 1.08rem 1.3rem;

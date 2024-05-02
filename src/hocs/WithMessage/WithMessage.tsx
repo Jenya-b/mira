@@ -1,8 +1,8 @@
 import { FC } from 'react';
 
-import userIcon from '@/assets/images/avatar-msg.png';
 import miraIcon from '@/assets/images/icons/logo-chat.svg';
 import miraCheckIcon from '@/assets/images/icons/logo-chat2.svg';
+import userIcon from '@/assets/images/icons/logo-chat3.svg';
 
 import { Logo, Text, Wrapper } from './WithMessage.styled';
 

@@ -1,16 +1,17 @@
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
-	padding: 8.64rem 1.21rem 2rem 1.21rem;
+	padding: 0rem 1.21rem 0rem 1.21rem;
 	display: grid;
 	grid-template-columns: 1fr minmax(auto, 80rem) 1fr;
-	height: 100vh;
 	overflow: auto;
 `;
 
 export const Container = styled.div`
-	grid-column: 2/3;
+	padding: 8.64rem 0rem 2rem 0rem;
 	height: 100%;
+	overflow: auto;
+	grid-column: 2/3;
 	display: flex;
 	flex-direction: column;
 `;

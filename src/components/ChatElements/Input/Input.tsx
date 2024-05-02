@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, KeyboardEvent, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import arrow from '@/assets/images/icons/arrow-top.svg';
@@ -34,11 +34,18 @@ export const Input: FC<InputProps> = ({ sendMessage }) => {
 		}
 	}, [trainingBlock, pathname]);
 
+	const handleKeyPress = (event: KeyboardEvent<HTMLInputElement>): void => {
+		if (event.key === 'Enter') {
+			sendMessage();
+		}
+	};
+
 	return (
 		<Label className={trClassName || (hiddenInput ? 'hidden' : '')}>
 			<StyledInput
 				value={inputValue}
 				onChange={(e) => dispatch(setInputValue(e.target.value))}
+				onKeyPress={handleKeyPress}
 				placeholder="Сообщение..."
 			/>
 			<Controls className={trClassName}>

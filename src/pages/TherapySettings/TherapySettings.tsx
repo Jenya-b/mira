@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { Card } from '@/components/TherapySettings/Card/Card';
 import { Dialog } from '@/components/TherapySettings/Dialog/Dialog';
 import { useModal } from '@/hooks/useModal';
+import { usePushNotifications } from '@/hooks/usePushNotifications';
 import { useResize } from '@/hooks/useResize';
 import { path } from '@/router/path';
 import { ButtonPrimary } from '@/styles/components';
@@ -22,12 +23,14 @@ const TherapySettings: FC = () => {
 	const [activeSettings, setActiveSettings] = useState(true);
 	const [isOpenDialog, openDialog, closeDialog] = useModal();
 	const [innerWidth] = useResize();
+	const { onClickSusbribeToPushNotification } = usePushNotifications();
 
 	const handleSwitchChange = (event: ChangeEvent<HTMLInputElement>): void => {
 		const { checked } = event.target;
 
 		if (checked) {
 			setActiveSettings(checked);
+			onClickSusbribeToPushNotification();
 		} else {
 			openDialog();
 		}

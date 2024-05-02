@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, useState } from 'react';
+import { ChangeEvent, FC, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { Card } from '@/components/TherapySettings/Card/Card';
@@ -20,10 +20,16 @@ import {
 
 const TherapySettings: FC = () => {
 	const navigate = useNavigate();
-	const [activeSettings, setActiveSettings] = useState(true);
+	const [activeSettings, setActiveSettings] = useState(false);
 	const [isOpenDialog, openDialog, closeDialog] = useModal();
 	const [innerWidth] = useResize();
-	const { onClickSusbribeToPushNotification } = usePushNotifications();
+	const { onClickSusbribeToPushNotification, userSubscription } = usePushNotifications();
+
+	useEffect(() => {
+		if (userSubscription !== null) {
+			setActiveSettings(true);
+		}
+	}, [userSubscription]);
 
 	const handleSwitchChange = (event: ChangeEvent<HTMLInputElement>): void => {
 		const { checked } = event.target;
@@ -56,6 +62,7 @@ const TherapySettings: FC = () => {
 						onChange={handleSwitchChange}
 						name="transaction"
 						inputProps={{ 'aria-label': 'ant design' }}
+						disabled={userSubscription !== null}
 					/>
 				</TitleBlock>
 				<Controls style={{ opacity: activeSettings ? 1 : 0.3 }}>

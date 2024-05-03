@@ -20,21 +20,27 @@ export const Wrapper = styled.div`
 
 export const Content = styled.div`
 	margin-top: 42rem;
-	width: 45rem;
+	width: 47rem;
 	display: grid;
 	grid-template: auto auto / 1fr 13.2rem;
-	gap: 2.5rem;
+	column-gap: 2.5rem;
+	row-gap: 1.5rem;
 	position: absolute;
 	left: 50%;
 	transform: translateX(-50%);
 
 	@media (max-width: 768px) {
-		max-width: 24rem;
+		max-width: 26rem;
 		width: 100%;
 		margin-right: 35rem;
 		grid-template-columns: 1fr;
 		margin-top: 47rem;
 	}
+`;
+
+export const CardWrap = styled.div`
+	padding: 1rem;
+	position: relative;
 `;
 
 export const Button = styled.button`
@@ -69,6 +75,7 @@ export const TextBlock = styled.div`
 	font-weight: 400;
 	line-height: 120%;
 	letter-spacing: -0.02571rem;
+	padding: 0 1rem;
 
 	@media (max-width: 768px) {
 		font-size: 1.14286rem;

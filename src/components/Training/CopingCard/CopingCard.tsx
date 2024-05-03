@@ -2,10 +2,11 @@ import { FC, useEffect, useState } from 'react';
 
 import { Card } from '@/components/Practice/Card/Card';
 import { copingCardList } from '@/constants/training';
+import { DisabledBg, FilterBg } from '@/pages/Training/Training.styled';
 import { useAppDispatch, useAppSelector } from '@/store';
 import { TrainingBlock, setCardTrainingBlock, setTrainingBlock } from '@/store/practice';
 
-import { Button, Content, TextBlock, Wrapper } from './CopingCard.styled';
+import { Button, CardWrap, Content, TextBlock, Wrapper } from './CopingCard.styled';
 
 export const CopingCardBlock: FC = () => {
 	const dispatch = useAppDispatch();
@@ -44,15 +45,22 @@ export const CopingCardBlock: FC = () => {
 		<Wrapper>
 			<Content>
 				<TextBlock>{copingCardList[cardTrainingBlock]}</TextBlock>
-				<Card
-					date="02.02.2024"
-					favorites
-					btnText1="Хочу реализовать потенциал"
-					btnText2="Должен много зарабатывать"
-					btnText3="Не могу получить повышение"
-					btnText4="Новая мысль плохо работает"
-					isTraining
-				/>
+				<CardWrap>
+					<Card
+						date="02.02.2024"
+						favorites
+						btnText1="Хочу реализовать потенциал"
+						btnText2="Должен много зарабатывать"
+						btnText3="Не могу получить повышение"
+						btnText4="Новая мысль плохо работает"
+						isTraining
+					/>
+					{cardTrainingBlock !== 0 && (
+						<DisabledBg className="coping">
+							<FilterBg className="coping" />
+						</DisabledBg>
+					)}
+				</CardWrap>
 				<Button onClick={handleClick}>{textBtn}</Button>
 			</Content>
 		</Wrapper>

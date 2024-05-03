@@ -42,6 +42,10 @@ export const DisabledBg = styled.div`
 	width: 100%;
 	height: 100%;
 	z-index: ${({ theme }) => theme.order.firstIndex};
+
+	&.coping {
+		position: absolute;
+	}
 `;
 
 export const FilterBg = styled.div`
@@ -59,5 +63,10 @@ export const FilterBg = styled.div`
 		@media (max-width: 1000px) {
 			left: 0rem;
 		}
+	}
+
+	&.coping {
+		background: none;
+		backdrop-filter: blur(3px);
 	}
 `;

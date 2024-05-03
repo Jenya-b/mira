@@ -8,10 +8,6 @@ export const Wrapper = styled.div`
 	display: flex;
 	flex-direction: column;
 	height: max-content;
-
-	&.training {
-		z-index: ${({ theme }) => theme.order.mainIndex};
-	}
 `;
 
 export const DisabledBg = styled.div`
@@ -91,7 +87,7 @@ export const Button1 = styled.button`
 
 	&.training {
 		position: relative;
-		z-index: ${({ theme }) => theme.order.firstIndex};
+		z-index: ${({ theme }) => theme.order.mainIndex};
 	}
 `;
 
@@ -103,7 +99,7 @@ export const Button2 = styled.button`
 
 	&.training {
 		position: relative;
-		z-index: ${({ theme }) => theme.order.firstIndex};
+		z-index: ${({ theme }) => theme.order.mainIndex};
 	}
 `;
 
@@ -116,7 +112,7 @@ export const Button3 = styled.button`
 
 	&.training {
 		position: relative;
-		z-index: ${({ theme }) => theme.order.firstIndex};
+		z-index: ${({ theme }) => theme.order.mainIndex};
 	}
 `;
 
@@ -130,6 +126,6 @@ export const Button4 = styled.button`
 
 	&.training {
 		position: relative;
-		z-index: ${({ theme }) => theme.order.firstIndex};
+		z-index: ${({ theme }) => theme.order.mainIndex};
 	}
 `;

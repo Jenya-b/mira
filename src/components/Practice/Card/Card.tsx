@@ -10,9 +10,7 @@ import {
 	Button4,
 	Controls,
 	Date,
-	DisabledBg,
 	Favorites,
-	FilterBg,
 	Info,
 	Wrapper,
 } from './Card.styled';
@@ -58,7 +56,7 @@ export const Card: FC<CardProps> = ({
 	}, [activeText]);
 
 	return (
-		<Wrapper className={isTraining ? 'training' : ''}>
+		<Wrapper>
 			<Info>
 				<Date>{date}</Date>
 				<Favorites className={favorites ? 'favorites' : ''}>
@@ -96,11 +94,6 @@ export const Card: FC<CardProps> = ({
 					{btnText4}
 				</Button4>
 			</Controls>
-			{isTraining && cardTrainingBlock !== 0 && (
-				<DisabledBg>
-					<FilterBg />
-				</DisabledBg>
-			)}
 		</Wrapper>
 	);
 };

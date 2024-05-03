@@ -67,7 +67,7 @@ export const StyledInput = styled.textarea`
 
 	@media (max-width: 1000px) {
 		background: #3a4497;
-		padding: 0.6rem 0.4rem 0 1.43rem;
+		padding: 0.6rem 0.8rem 0 1.43rem;
 	}
 `;
 

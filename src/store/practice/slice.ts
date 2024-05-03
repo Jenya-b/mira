@@ -15,7 +15,7 @@ interface InitialState {
 const initialState: InitialState = {
 	activeFilter: false,
 	isTraining: true,
-	trainingBlock: TrainingBlock.FILTER,
+	trainingBlock: TrainingBlock.COPING_CARD,
 	cardTrainingBlock: 0,
 };
 

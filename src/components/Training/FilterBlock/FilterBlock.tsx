@@ -1,7 +1,7 @@
 import { FC } from 'react';
 
 import { useAppDispatch } from '@/store';
-import { TrainingBlock, setTrainingBlock } from '@/store/practice';
+import { setIsTraining } from '@/store/practice';
 
 import { Content, StyledFilter, TextBlock, Wrapper } from './FilterBlock.styled';
 
@@ -34,9 +34,7 @@ export const FilterBlock: FC = () => {
 						</svg>
 					</StyledFilter>
 				</TextBlock>
-				<button onClick={() => dispatch(setTrainingBlock(TrainingBlock.COPING_CARD))}>
-					Ок, спасибо
-				</button>
+				<button onClick={() => dispatch(setIsTraining(false))}>Ок, спасибо</button>
 			</Content>
 		</Wrapper>
 	);

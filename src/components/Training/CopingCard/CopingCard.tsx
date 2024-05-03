@@ -3,7 +3,7 @@ import { FC, useEffect, useState } from 'react';
 import { Card } from '@/components/Practice/Card/Card';
 import { copingCardList } from '@/constants/training';
 import { useAppDispatch, useAppSelector } from '@/store';
-import { setCardTrainingBlock, setIsTraining } from '@/store/practice';
+import { TrainingBlock, setCardTrainingBlock, setTrainingBlock } from '@/store/practice';
 
 import { Button, Content, TextBlock, Wrapper } from './CopingCard.styled';
 
@@ -34,7 +34,7 @@ export const CopingCardBlock: FC = () => {
 
 	const handleClick = (): void => {
 		if (cardTrainingBlock === 4) {
-			dispatch(setIsTraining(false));
+			dispatch(setTrainingBlock(TrainingBlock.FILTER));
 		} else {
 			dispatch(setCardTrainingBlock(cardTrainingBlock + 1));
 		}

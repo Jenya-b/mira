@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 
+import { useSubscriptionMutation } from '@/services/api/pushNotification';
 import {
 	askUserPermission,
 	createNotificationSubscription,
@@ -33,6 +34,7 @@ export const usePushNotifications = (): {
 	const [pushServerSubscriptionId, setPushServerSubscriptionId] = useState<string | null>(null);
 	const [error, setError] = useState<ErrorNotification | null>(null);
 	const [loading, setLoading] = useState(true);
+	const [fetchSub] = useSubscriptionMutation();
 
 	useEffect(() => {
 		if (pushNotificationSupported) {
@@ -79,6 +81,7 @@ export const usePushNotifications = (): {
 		createNotificationSubscription()
 			.then((subscrition) => {
 				setUserSubscription(subscrition);
+				fetchSub({ settings: subscrition });
 				setLoading(false);
 			})
 			.catch((err) => {
@@ -96,7 +99,7 @@ export const usePushNotifications = (): {
 				credentials: 'omit',
 				headers: { 'content-type': 'application/json;charset=UTF-8', 'sec-fetch-mode': 'cors' },
 				body: JSON.stringify(userSubscription),
-				method: 'POST',
+				method: 'PATCH',
 				mode: 'cors',
 			});
 			const data = await response.json();

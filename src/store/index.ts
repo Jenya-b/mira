@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import type { TypedUseSelectorHook } from 'react-redux';
 
 import { authApi } from '@/services/api/auth';
+import { pushNotificationApi } from '@/services/api/pushNotification';
 import { sessionApi } from '@/services/api/session';
 import { userApi } from '@/services/api/user';
 
@@ -22,12 +23,18 @@ export const store = configureStore({
 		general: generalReducer,
 		practice: practiceReducer,
 		[authApi.reducerPath]: authApi.reducer,
+		[pushNotificationApi.reducerPath]: pushNotificationApi.reducer,
 		[userApi.reducerPath]: userApi.reducer,
 		[sessionApi.reducerPath]: sessionApi.reducer,
 	},
 
 	middleware: (getDefaultMiddleware) =>
-		getDefaultMiddleware({}).concat(authApi.middleware, userApi.middleware, sessionApi.middleware),
+		getDefaultMiddleware({}).concat(
+			authApi.middleware,
+			pushNotificationApi.middleware,
+			userApi.middleware,
+			sessionApi.middleware
+		),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

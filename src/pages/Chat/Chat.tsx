@@ -55,9 +55,13 @@ const ChatPage: FC = () => {
 
 		ws.current.onmessage = function (event) {
 			try {
-				const json: Message = JSON.parse(event.data);
-				dispatch(addMessage(json));
-				console.log();
+				const json = JSON.parse(event.data);
+
+				if (json.errors) {
+					return;
+				}
+
+				dispatch(addMessage(json as Message));
 			} catch {
 				throw new Error();
 			}

@@ -10,6 +10,7 @@ import { userApi } from '@/services/api/user';
 import { authReducer } from './auth';
 import { chatReducer } from './chat';
 import { generalReducer } from './general';
+import { notificationReducer } from './notification';
 import { practiceReducer } from './practice';
 import { trainingReducer } from './training';
 import { userReducer } from './user';
@@ -22,6 +23,7 @@ export const store = configureStore({
 		training: trainingReducer,
 		general: generalReducer,
 		practice: practiceReducer,
+		notification: notificationReducer,
 		[authApi.reducerPath]: authApi.reducer,
 		[pushNotificationApi.reducerPath]: pushNotificationApi.reducer,
 		[userApi.reducerPath]: userApi.reducer,

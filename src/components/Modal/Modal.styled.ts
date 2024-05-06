@@ -40,3 +40,15 @@ export const Subtitle = styled.h3`
 export const Button = styled(ButtonPrimary)`
 	margin-top: 2.5rem;
 `;
+
+export const ButtonSecond = styled.button`
+	margin-top: 0.93rem;
+	border-radius: 1.42857rem;
+	border: 1px solid #fff;
+	height: 5.78571rem;
+	background: none;
+	color: ${({ theme }) => theme.colors.textPrimary};
+	font-size: 1.57143rem;
+	font-weight: 500;
+	letter-spacing: -0.03143rem;
+`;

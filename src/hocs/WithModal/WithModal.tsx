@@ -43,7 +43,7 @@ const Transition = forwardRef(
 
 interface DialogSlideProps {
 	open: boolean;
-	handleClickClose: () => void;
+	handleClickClose: (() => void) | undefined;
 	children: JSX.Element;
 }
 

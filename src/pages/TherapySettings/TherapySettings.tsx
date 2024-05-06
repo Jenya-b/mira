@@ -1,12 +1,14 @@
 import { ChangeEvent, FC, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import modalImg from '@/assets/images/phoneForModal.png';
+import { BaseModal } from '@/components/Modal/Modal';
 import { Card } from '@/components/TherapySettings/Card/Card';
-import { Dialog } from '@/components/TherapySettings/Dialog/Dialog';
 import { useModal } from '@/hooks/useModal';
 import { usePushNotifications } from '@/hooks/usePushNotifications';
 import { useResize } from '@/hooks/useResize';
 import { path } from '@/router/path';
+import { useAppSelector } from '@/store';
 import { ButtonPrimary } from '@/styles/components';
 
 import {
@@ -21,9 +23,32 @@ import {
 const TherapySettings: FC = () => {
 	const navigate = useNavigate();
 	const [activeSettings, setActiveSettings] = useState(false);
-	const [isOpenDialog, openDialog, closeDialog] = useModal();
+	const [isMobileDevice, setIsMobileDevice] = useState(false);
+	const [isOpenModal, openModal, closeModal] = useModal();
+	const [isOpenModal2, openModal2, closeModal2] = useModal();
 	const [innerWidth] = useResize();
 	const { onClickSusbribeToPushNotification, userSubscription } = usePushNotifications();
+	const { prompt, isActivePWA } = useAppSelector((state) => state.notification);
+
+	const getInstalledRelatedApps = async (): Promise<void> => {
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		const relatedApps = await (navigator as any).getInstalledRelatedApps();
+		const PWAisInstalled = relatedApps.length > 0;
+		console.log(PWAisInstalled);
+	};
+
+	useEffect(() => {
+		const regexp =
+			/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i;
+
+		if (regexp.test(navigator.userAgent)) {
+			setIsMobileDevice(true);
+		} else {
+			setIsMobileDevice(false);
+		}
+
+		getInstalledRelatedApps();
+	}, []);
 
 	useEffect(() => {
 		if (userSubscription !== null) {
@@ -31,28 +56,58 @@ const TherapySettings: FC = () => {
 		}
 	}, [userSubscription]);
 
+	useEffect(() => {
+		closeModal();
+		closeModal2();
+
+		if (isMobileDevice && !isActivePWA) {
+			openModal();
+		} else if (!isMobileDevice) {
+			openModal2();
+		}
+	}, [isMobileDevice, isActivePWA]);
+
 	const handleSwitchChange = (event: ChangeEvent<HTMLInputElement>): void => {
 		const { checked } = event.target;
+
+		if (!isMobileDevice) {
+			return;
+		}
 
 		if (checked) {
 			setActiveSettings(checked);
 			onClickSusbribeToPushNotification();
-		} else {
-			openDialog();
 		}
 	};
 
-	const handleDisabledSettings = (): void => {
-		setActiveSettings(false);
-		closeDialog();
+	const handleClickModal = (): void => {
+		if (prompt) {
+			prompt?.prompt();
+		}
+	};
+
+	const handleNavigate = (): void => {
+		navigate(path.home);
 	};
 
 	return (
 		<Wrapper>
-			<Dialog
-				isOpen={isOpenDialog}
-				closeModal={closeDialog}
-				handleClickModal={handleDisabledSettings}
+			<BaseModal
+				buttonText="Установить"
+				buttonTextSecond="Пропустить"
+				isOpen={isOpenModal}
+				title="Для настройки терапии установите приложение"
+				imgSrc={modalImg}
+				handleClickModal={handleClickModal}
+				handleClickModalSecond={handleNavigate}
+			/>
+			<BaseModal
+				buttonText="Перейти на главную"
+				isOpen={isOpenModal2}
+				title="Настройка терапии"
+				subtitle="Для настройки терапии перейдите в мобильное устройство и установите приложение."
+				imgSrc={modalImg}
+				handleClickModal={handleNavigate}
 			/>
 			<Container>
 				<TitleBlock>

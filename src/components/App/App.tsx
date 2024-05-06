@@ -1,24 +1,38 @@
-import { FC, Suspense } from 'react';
-import { Provider } from 'react-redux';
+import { FC, Suspense, useEffect } from 'react';
 import { RouterProvider } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 
 import { Loader } from '../Loader/Loader';
 
+import { useAddToHomescreenPrompt } from '@/hooks/useAddToHomescreenPrompt';
 import { router } from '@/router';
-import { store } from '@/store';
+import { useAppDispatch } from '@/store';
+import { setActivePWA, setPromptState } from '@/store/notification';
 import GlobalStyles from '@/styles/global';
 import { theme } from '@/styles/theme';
 
-const App: FC = () => (
-	<Provider store={store}>
+const App: FC = () => {
+	const dispatch = useAppDispatch();
+	const [prompt] = useAddToHomescreenPrompt();
+
+	useEffect(() => {
+		dispatch(setPromptState(prompt));
+
+		if (window.matchMedia('(display-mode: standalone)').matches) {
+			dispatch(setActivePWA(true));
+		} else {
+			dispatch(setActivePWA(false));
+		}
+	}, [prompt]);
+
+	return (
 		<ThemeProvider theme={theme}>
 			<Suspense fallback={<Loader />}>
 				<RouterProvider router={router} />
 			</Suspense>
 			<GlobalStyles />
 		</ThemeProvider>
-	</Provider>
-);
+	);
+};
 
 export default App;

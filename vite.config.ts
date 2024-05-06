@@ -18,6 +18,14 @@ export default defineConfig({
 				theme_color: 'rgba(40, 43, 113, 1)',
 				name: 'Мира',
 				short_name: 'Мира',
+				start_url: '/',
+				display: 'standalone',
+				related_applications: [
+					{
+						platform: 'webapp',
+						url: 'http://localhost:4173/manifest.webmanifest',
+					},
+				],
 				icons: [
 					{
 						src: 'pwa-64x64.png',

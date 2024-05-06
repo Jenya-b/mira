@@ -1,9 +1,6 @@
 export const isPushNotificationSupported = (): boolean =>
 	'serviceWorker' in navigator && 'PushManager' in window;
 
-export const askUserPermission = async (): Promise<NotificationPermission> =>
-	Notification.requestPermission();
-
 export const registerServiceWorker = (): Promise<ServiceWorkerRegistration> =>
 	navigator.serviceWorker.register('/sw.js');
 

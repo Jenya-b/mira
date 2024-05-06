@@ -82,7 +82,7 @@ const TherapySettings: FC = () => {
 
 	const handleClickModal = (): void => {
 		if (prompt) {
-			prompt?.prompt();
+			prompt.prompt();
 		}
 	};
 

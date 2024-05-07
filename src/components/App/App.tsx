@@ -7,13 +7,19 @@ import { Loader } from '../Loader/Loader';
 import { useAddToHomescreenPrompt } from '@/hooks/useAddToHomescreenPrompt';
 import { router } from '@/router';
 import { useAppDispatch } from '@/store';
-import { setActivePWA, setPromptState } from '@/store/notification';
+import { setActivePWA, setDeviceType, setPromptState } from '@/store/general';
 import GlobalStyles from '@/styles/global';
 import { theme } from '@/styles/theme';
 
 const App: FC = () => {
 	const dispatch = useAppDispatch();
 	const [prompt] = useAddToHomescreenPrompt();
+
+	useEffect(() => {
+		if (navigator) {
+			dispatch(setDeviceType(navigator.userAgent));
+		}
+	}, []);
 
 	useEffect(() => {
 		dispatch(setPromptState(prompt));

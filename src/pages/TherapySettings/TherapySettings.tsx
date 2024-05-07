@@ -23,12 +23,11 @@ import {
 const TherapySettings: FC = () => {
 	const navigate = useNavigate();
 	const [activeSettings, setActiveSettings] = useState(false);
-	const [isMobileDevice, setIsMobileDevice] = useState(false);
 	const [isOpenModal, openModal, closeModal] = useModal();
 	const [isOpenModal2, openModal2, closeModal2] = useModal();
 	const [innerWidth] = useResize();
 	const { onClickSusbribeToPushNotification, userSubscription } = usePushNotifications();
-	const { prompt, isActivePWA } = useAppSelector((state) => state.notification);
+	const { prompt, isActivePWA, isMobileDevice } = useAppSelector((state) => state.general);
 
 	const getInstalledRelatedApps = async (): Promise<void> => {
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -38,15 +37,6 @@ const TherapySettings: FC = () => {
 	};
 
 	useEffect(() => {
-		const regexp =
-			/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i;
-
-		if (regexp.test(navigator.userAgent)) {
-			setIsMobileDevice(true);
-		} else {
-			setIsMobileDevice(false);
-		}
-
 		getInstalledRelatedApps();
 	}, []);
 

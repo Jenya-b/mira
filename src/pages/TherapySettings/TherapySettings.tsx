@@ -4,11 +4,14 @@ import { useNavigate } from 'react-router-dom';
 import modalImg from '@/assets/images/phoneForModal.png';
 import { BaseModal } from '@/components/Modal/Modal';
 import { Card } from '@/components/TherapySettings/Card/Card';
+import { InstructionModal } from '@/components/TherapySettings/InstructionModal/InstructionModal';
+import { dataAndroid, dataIos } from '@/constants/installPWA';
 import { useModal } from '@/hooks/useModal';
 import { usePushNotifications } from '@/hooks/usePushNotifications';
 import { useResize } from '@/hooks/useResize';
 import { path } from '@/router/path';
 import { useAppSelector } from '@/store';
+import { DeviceTypeEnum } from '@/store/general';
 import { ButtonPrimary } from '@/styles/components';
 
 import {
@@ -23,11 +26,13 @@ import {
 const TherapySettings: FC = () => {
 	const navigate = useNavigate();
 	const [activeSettings, setActiveSettings] = useState(false);
-	const [isOpenModal, openModal, closeModal] = useModal();
-	const [isOpenModal2, openModal2, closeModal2] = useModal();
+	const [isOpenInstallModal, openInstallModal, closeInstallModal] = useModal();
+	const [isOpenInstructionModal, openInstructionModal] = useModal();
 	const [innerWidth] = useResize();
 	const { onClickSusbribeToPushNotification, userSubscription } = usePushNotifications();
-	const { prompt, isActivePWA, isMobileDevice } = useAppSelector((state) => state.general);
+	const { prompt, isActivePWA, isMobileDevice, deviceType } = useAppSelector(
+		(state) => state.general
+	);
 
 	const getInstalledRelatedApps = async (): Promise<void> => {
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -47,13 +52,8 @@ const TherapySettings: FC = () => {
 	}, [userSubscription]);
 
 	useEffect(() => {
-		closeModal();
-		closeModal2();
-
-		if (isMobileDevice && !isActivePWA) {
-			openModal();
-		} else if (!isMobileDevice) {
-			openModal2();
+		if (!isActivePWA) {
+			openInstallModal();
 		}
 	}, [isMobileDevice, isActivePWA]);
 
@@ -73,6 +73,9 @@ const TherapySettings: FC = () => {
 	const handleClickModal = (): void => {
 		if (prompt) {
 			prompt.prompt();
+		} else if (deviceType !== DeviceTypeEnum.DESKTOP) {
+			closeInstallModal();
+			openInstructionModal();
 		}
 	};
 
@@ -82,22 +85,29 @@ const TherapySettings: FC = () => {
 
 	return (
 		<Wrapper>
-			<BaseModal
-				buttonText="Установить"
-				buttonTextSecond="Пропустить"
-				isOpen={isOpenModal}
-				title="Для настройки терапии установите приложение"
-				imgSrc={modalImg}
-				handleClickModal={handleClickModal}
-				handleClickModalSecond={handleNavigate}
-			/>
-			<BaseModal
-				buttonText="Перейти на главную"
-				isOpen={isOpenModal2}
-				title="Настройка терапии"
-				subtitle="Для настройки терапии перейдите в мобильное устройство и установите приложение."
-				imgSrc={modalImg}
-				handleClickModal={handleNavigate}
+			{isMobileDevice ? (
+				<BaseModal
+					buttonText="Установить"
+					buttonTextSecond="Пропустить"
+					isOpen={isOpenInstallModal}
+					title="Для настройки терапии установите приложение"
+					imgSrc={modalImg}
+					handleClickModal={handleClickModal}
+					handleClickModalSecond={handleNavigate}
+				/>
+			) : (
+				<BaseModal
+					buttonText="Перейти на главную"
+					isOpen={isOpenInstallModal}
+					title="Настройка терапии"
+					subtitle="Для настройки терапии перейдите в мобильное устройство и установите приложение."
+					imgSrc={modalImg}
+					handleClickModal={handleNavigate}
+				/>
+			)}
+			<InstructionModal
+				isOpen={isOpenInstructionModal}
+				data={deviceType === DeviceTypeEnum.IOS ? dataIos : dataAndroid}
 			/>
 			<Container>
 				<TitleBlock>

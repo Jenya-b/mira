@@ -1,5 +1,6 @@
 import { FC, useEffect, useRef } from 'react';
 
+import modalIcon from '@/assets/images/bulb.png';
 import { CardsBlock } from '@/components/Chat/CardsBlock/CardsBlock';
 import { ComplaintBlock } from '@/components/Chat/ComplaintBlock/ComplaintBlock';
 import { EndSessionBlock } from '@/components/Chat/EndSessionBlock/EndSessionBlock';
@@ -9,6 +10,9 @@ import { FurtherActionsBlock } from '@/components/Chat/FurtherActionsBlock/Furth
 import { MessageBlock } from '@/components/Chat/MessagesBlock/MessagesBlock';
 import { Input } from '@/components/ChatElements/Input/Input';
 import { Loader } from '@/components/Loader/Loader';
+import { BaseModal } from '@/components/Modal/Modal';
+import { useModal } from '@/hooks/useModal';
+import { usePushNotifications } from '@/hooks/usePushNotifications';
 import { useGetLastSessionQuery } from '@/services/api/session';
 import { useAppDispatch, useAppSelector } from '@/store';
 import {
@@ -31,8 +35,32 @@ const ChatPage: FC = () => {
 	);
 	const { accessToken } = useAppSelector((state) => state.user);
 	const ws = useRef<WebSocket | null>(null);
+	const [isOpenModal, openModal, closeModal] = useModal();
+	const { onClickSusbribeToPushNotification, userSubscription } = usePushNotifications();
 
 	const { isLoading, isSuccess, data } = useGetLastSessionQuery(null);
+
+	useEffect(() => {
+		if (userSubscription !== null) {
+			closeModal();
+
+			return;
+		}
+
+		const localStorageDate = localStorage.getItem('therapyReminderData');
+
+		if (localStorageDate === null) {
+			openModal();
+		} else if (localStorageDate !== null) {
+			const localDate = Number(localStorageDate);
+			const currentDate = new Date().getTime();
+			const week = 1000 * 60 * 60 * 24 * 7;
+
+			if (currentDate >= localDate + week) {
+				openModal();
+			}
+		}
+	}, [userSubscription]);
 
 	useEffect(() => {
 		if (isSuccess && data !== undefined && Object.keys(data).length !== 0) {
@@ -141,6 +169,16 @@ const ChatPage: FC = () => {
 		}
 	};
 
+	const handleClickModal = (): void => {
+		onClickSusbribeToPushNotification();
+	};
+
+	const handleCloseModal = (): void => {
+		const currentDate = new Date().getTime();
+		localStorage.setItem('therapyReminderData', String(currentDate));
+		closeModal();
+	};
+
 	// TODO временно для перелистывания экранов
 	const handleClick = (): void => {
 		const newSession = sessionBlock === 7 ? 0 : sessionBlock + 1;
@@ -158,6 +196,17 @@ const ChatPage: FC = () => {
 			</button>
 			{renderSessionBlock()}
 			<Input sendMessage={sendMessage} />
+			<BaseModal
+				buttonText="Включить"
+				buttonTextSecond="Пропустить"
+				title="Как получать от Миры напоминания о терапии?"
+				subtitle="Включите пуш-уведомления, чтобы обеспечить эффективность и последовательность терапии"
+				imgSrc={modalIcon}
+				isOpen={isOpenModal}
+				handleClickModal={handleClickModal}
+				closeModal={handleCloseModal}
+				handleClickModalSecond={handleCloseModal}
+			/>
 		</Wrapper>
 	);
 };

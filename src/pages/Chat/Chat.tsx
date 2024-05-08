@@ -34,6 +34,7 @@ const ChatPage: FC = () => {
 		(state) => state.chat
 	);
 	const { accessToken } = useAppSelector((state) => state.user);
+	const { isActivePWA } = useAppSelector((state) => state.general);
 	const ws = useRef<WebSocket | null>(null);
 	const [isOpenModal, openModal, closeModal] = useModal();
 	const { onClickSusbribeToPushNotification, userSubscription } = usePushNotifications();
@@ -41,7 +42,7 @@ const ChatPage: FC = () => {
 	const { isLoading, isSuccess, data } = useGetLastSessionQuery(null);
 
 	useEffect(() => {
-		if (userSubscription !== null) {
+		if (!isActivePWA || userSubscription !== null) {
 			closeModal();
 
 			return;

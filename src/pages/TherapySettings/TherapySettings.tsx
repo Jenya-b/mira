@@ -6,7 +6,6 @@ import { BaseModal } from '@/components/Modal/Modal';
 import { Card } from '@/components/TherapySettings/Card/Card';
 import { InstructionModal } from '@/components/TherapySettings/InstructionModal/InstructionModal';
 import { dataAndroid, dataIos } from '@/constants/installPWA';
-import { defaultNotificationData } from '@/constants/pushNotification';
 import { newThroughPeriods, practicePeriods } from '@/constants/settings';
 import { useModal } from '@/hooks/useModal';
 import { usePushNotifications } from '@/hooks/usePushNotifications';
@@ -31,8 +30,7 @@ const TherapySettings: FC = () => {
 	const navigate = useNavigate();
 	const [activeSettings, setActiveSettings] = useState(false);
 	const [activeSubmitBtn, setActiveSubmitBtn] = useState(false);
-	const [newNotificationData, setNewNotificationData] =
-		useState<Subscription>(defaultNotificationData);
+	const [newNotificationData, setNewNotificationData] = useState<Subscription>({});
 	const [isOpenInstallModal, openInstallModal, closeInstallModal] = useModal();
 	const [isOpenInstructionModal, openInstructionModal] = useModal();
 	const { prompt, isActivePWA, isMobileDevice, deviceType } = useAppSelector(
@@ -118,7 +116,7 @@ const TherapySettings: FC = () => {
 	};
 
 	const handlePracticeDays = (e: ChangeEvent<HTMLSelectElement>): void => {
-		setNewNotificationData((state) => ({ ...state, new_thoughts_days: Number(e.target.value) }));
+		setNewNotificationData((state) => ({ ...state, practice_days: Number(e.target.value) }));
 	};
 
 	const handleSubmit = (): void => {

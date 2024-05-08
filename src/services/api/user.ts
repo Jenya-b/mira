@@ -1,12 +1,22 @@
 import { BaseQueryApi, createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 import { RootState } from '@/store';
-import { User, resetState, setUser } from '@/store/user';
+import { Subscription, User, resetState, setNotificationData, setUser } from '@/store/user';
 
 interface UpdateUserRequest {
 	email?: string;
 	first_name?: string;
 	notify_email?: boolean;
+}
+
+interface SubscriptionRequest {
+	deactivate?: boolean;
+	new_thoughts_days?: number;
+	new_through_time?: string | null;
+	notify_email?: boolean;
+	practice_days?: number;
+	practice_time?: string | null;
+	settings?: PushSubscription;
 }
 
 export const userApi = createApi({
@@ -65,7 +75,47 @@ export const userApi = createApi({
 				}
 			},
 		}),
+		updateNotification: build.mutation<Subscription, SubscriptionRequest>({
+			query: (body) => ({
+				method: 'PATCH',
+				url: '/users/me/notification-settings/',
+				body,
+				headers: {
+					accept: 'application/json',
+				},
+			}),
+			onQueryStarted: async (_, { dispatch, queryFulfilled }) => {
+				try {
+					const { data } = await queryFulfilled;
+					dispatch(setNotificationData(data));
+				} catch {
+					throw new Error();
+				}
+			},
+		}),
+		getNotification: build.query<Subscription, null>({
+			query: () => ({
+				url: '/users/me/notification-settings/',
+				headers: {
+					accept: 'application/json',
+				},
+			}),
+			onQueryStarted: async (_, { dispatch, queryFulfilled }) => {
+				try {
+					const { data } = await queryFulfilled;
+					dispatch(setNotificationData(data));
+				} catch {
+					throw new Error();
+				}
+			},
+		}),
 	}),
 });
 
-export const { useGetUserQuery, useLazyGetUserQuery, useUpdateUserMutation } = userApi;
+export const {
+	useGetUserQuery,
+	useLazyGetUserQuery,
+	useUpdateUserMutation,
+	useUpdateNotificationMutation,
+	useGetNotificationQuery,
+} = userApi;

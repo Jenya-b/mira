@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { useSubscriptionMutation } from '@/services/api/pushNotification';
+import { useUpdateNotificationMutation } from '@/services/api/user';
 import {
 	createNotificationSubscription,
 	getUserSubscription,
@@ -25,7 +25,7 @@ export const usePushNotifications = (): {
 	const [userSubscription, setUserSubscription] = useState<PushSubscription | null>(null);
 	const [error, setError] = useState<ErrorNotification | null>(null);
 	const [loading, setLoading] = useState(true);
-	const [fetchSub] = useSubscriptionMutation();
+	const [fetchSub] = useUpdateNotificationMutation();
 
 	useEffect(() => {
 		setLoading(true);

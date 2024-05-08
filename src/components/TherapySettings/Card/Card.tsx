@@ -1,19 +1,36 @@
-import { FC, useEffect, useState } from 'react';
+import { ChangeEvent, FC, useEffect, useState } from 'react';
 
 import eveningIcon from '@/assets/images/icons/evening.svg';
 import morningIcon from '@/assets/images/icons/morning.svg';
-import { periods } from '@/constants/settings';
 
 import { Controls, Desc, Periods, Time, Title, Wrapper } from './Card.styled';
+
+interface IPeriods {
+	value: number;
+	text: string;
+}
 
 interface CardProps {
 	title: string;
 	subtitle: string;
 	activeSettings: boolean;
+	time: string | null | undefined;
+	days: number | undefined;
+	handleChangeTime: (e: ChangeEvent<HTMLInputElement>) => void;
+	handleChangeDays: (e: ChangeEvent<HTMLSelectElement>) => void;
+	periods: IPeriods[];
 }
 
-export const Card: FC<CardProps> = ({ subtitle, title, activeSettings }) => {
-	const [time, setTime] = useState('13:30');
+export const Card: FC<CardProps> = ({
+	subtitle,
+	title,
+	activeSettings,
+	time,
+	days,
+	handleChangeTime,
+	handleChangeDays,
+	periods,
+}) => {
 	const [isEvening, setIsEvening] = useState(false);
 
 	useEffect(() => {
@@ -30,19 +47,18 @@ export const Card: FC<CardProps> = ({ subtitle, title, activeSettings }) => {
 		}
 	}, [time]);
 
+	if (typeof time !== 'string') {
+		return <></>;
+	}
+
 	return (
 		<Wrapper>
 			<Title>{title}</Title>
 			<Desc>{subtitle}</Desc>
 			<Controls>
 				<img src={isEvening ? eveningIcon : morningIcon} alt="" />
-				<Time
-					type="time"
-					value={time}
-					onChange={(e) => setTime(e.target.value)}
-					disabled={!activeSettings}
-				/>
-				<Periods disabled={!activeSettings}>
+				<Time type="time" value={time} onChange={handleChangeTime} disabled={!activeSettings} />
+				<Periods disabled={!activeSettings} onChange={handleChangeDays} defaultValue={days}>
 					{periods.map(({ text, value }) => (
 						<option key={text} value={value}>
 							{text}

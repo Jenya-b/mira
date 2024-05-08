@@ -87,39 +87,6 @@ export const StyledSwitch = styledMUI((props: SwitchProps) => (
 	},
 }));
 
-export const Controls = styled.div`
-	margin-top: 1.22rem;
-	display: flex;
-	column-gap: 0.57rem;
-
-	button {
-		color: ${({ theme }) => theme.colors.textPrimary};
-		font-size: 1rem;
-		font-style: normal;
-		font-weight: 500;
-		line-height: 120%;
-		width: 12.07143rem;
-		height: 3.14rem;
-		border-radius: 0.85714rem;
-
-		&:nth-child(1) {
-			background: ${({ theme }) => theme.colors.buttonBgPrimary};
-		}
-		&:nth-child(2) {
-			border: 1px solid rgba(255, 255, 255, 0.26);
-			background: none;
-		}
-	}
-
-	@media (max-width: 480px) {
-		justify-content: space-between;
-
-		button {
-			width: 100%;
-		}
-	}
-`;
-
 export const CardsWrap = styled.div`
 	margin-top: 4.29rem;
 
@@ -132,4 +99,16 @@ export const CardsWrap = styled.div`
 		grid-template-columns: 1fr;
 		margin-top: 2.14rem;
 	}
+`;
+
+export const Reminder = styled.div`
+	margin-top: 1.71rem;
+	color: ${({ theme }) => theme.colors.textPrimary};
+	font-size: 1rem;
+	font-weight: 500;
+	line-height: 120%;
+	padding: 1.21rem 0;
+	text-align: center;
+	border-radius: 1rem;
+	border: 1px solid rgba(255, 174, 164, 0.47);
 `;

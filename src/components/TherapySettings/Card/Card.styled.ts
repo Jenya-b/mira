@@ -80,6 +80,8 @@ export const Periods = styled.select`
 	opacity: 0.8;
 	margin-left: auto;
 	text-align: center;
+	text-align-last: center;
+	text-align: -webkit-center;
 
 	option {
 		color: ${({ theme }) => theme.colors.textSecondary};

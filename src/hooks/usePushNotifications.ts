@@ -5,7 +5,6 @@ import {
 	createNotificationSubscription,
 	getUserSubscription,
 	isPushNotificationSupported,
-	registerServiceWorker,
 } from '@/utils/pushNotification';
 
 const pushNotificationSupported = isPushNotificationSupported();
@@ -27,17 +26,6 @@ export const usePushNotifications = (): {
 	const [error, setError] = useState<ErrorNotification | null>(null);
 	const [loading, setLoading] = useState(true);
 	const [fetchSub] = useSubscriptionMutation();
-
-	useEffect(() => {
-		if (pushNotificationSupported) {
-			setLoading(true);
-			setError(null);
-
-			registerServiceWorker().then(() => {
-				setLoading(false);
-			});
-		}
-	}, []);
 
 	useEffect(() => {
 		setLoading(true);

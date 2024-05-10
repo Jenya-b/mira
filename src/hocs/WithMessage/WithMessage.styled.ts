@@ -24,7 +24,7 @@ export const Logo = styled.div`
 	}
 `;
 
-export const Text = styled.p`
+export const Text = styled.div`
 	color: rgba(255, 255, 255, 0.9);
 	font-size: 1.14286rem;
 	font-style: normal;

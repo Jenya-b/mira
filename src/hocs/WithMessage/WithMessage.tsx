@@ -32,7 +32,11 @@ export const WithMessage: FC<WithMessageProps> = ({ logoParam, text, children })
 				alt="logo"
 			/>
 		</Logo>
-		<Text className={logoParam}>{text}</Text>
+		<Text className={logoParam}>
+			{text.split('\r\n').map((item, i) => (
+				<p key={i}>{item}</p>
+			))}
+		</Text>
 		{children}
 	</Wrapper>
 );

@@ -1,6 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom';
 
 import { Layout } from '@/components/Layout/Layout';
+import { ChatProvider } from '@/context/chat';
 import { RequireAuth } from '@/hocs/RequireAuth/RequireAuth';
 import {
 	AuthPage,
@@ -29,7 +30,11 @@ export const router = createBrowserRouter([
 		children: [
 			{
 				index: true,
-				element: <HomePage />,
+				element: (
+					<ChatProvider>
+						<HomePage />
+					</ChatProvider>
+				),
 			},
 			{
 				path: path.questions,

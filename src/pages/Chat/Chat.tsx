@@ -1,4 +1,4 @@
-import { FC, useEffect, useRef } from 'react';
+import { FC, useContext, useEffect } from 'react';
 
 import modalIcon from '@/assets/images/bulb.png';
 import { CardsBlock } from '@/components/Chat/CardsBlock/CardsBlock';
@@ -11,6 +11,7 @@ import { MessageBlock } from '@/components/Chat/MessagesBlock/MessagesBlock';
 import { Input } from '@/components/ChatElements/Input/Input';
 import { Loader } from '@/components/Loader/Loader';
 import { BaseModal } from '@/components/Modal/Modal';
+import { ChatContext } from '@/context/chat';
 import { useModal } from '@/hooks/useModal';
 import { usePushNotifications } from '@/hooks/usePushNotifications';
 import { useGetLastSessionQuery } from '@/services/api/session';
@@ -18,6 +19,7 @@ import { useAppDispatch, useAppSelector } from '@/store';
 import {
 	Author,
 	Message,
+	MessageType,
 	SessionBlocks,
 	StageEnum,
 	addMessage,
@@ -35,7 +37,7 @@ const ChatPage: FC = () => {
 	);
 	const { accessToken } = useAppSelector((state) => state.user);
 	const { isActivePWA } = useAppSelector((state) => state.general);
-	const ws = useRef<WebSocket | null>(null);
+	const { ws } = useContext(ChatContext);
 	const [isOpenModal, openModal, closeModal] = useModal();
 	const { onClickSusbribeToPushNotification, userSubscription } = usePushNotifications();
 
@@ -64,7 +66,7 @@ const ChatPage: FC = () => {
 	}, [userSubscription]);
 
 	useEffect(() => {
-		if (isSuccess && data !== undefined && Object.keys(data).length !== 0) {
+		if (isSuccess && data !== undefined && Object.keys(data).length !== 0 && data.active) {
 			if (data.messages.length) {
 				dispatch(setSessionBlock(SessionBlocks.CHAT));
 			} else {
@@ -74,6 +76,10 @@ const ChatPage: FC = () => {
 	}, [isSuccess]);
 
 	useEffect(() => {
+		if (ws === null) {
+			return;
+		}
+
 		ws.current = new WebSocket(
 			`${import.meta.env.VITE_API_WEB_SOCKET_URL}/chat/?token=${accessToken}`
 		);
@@ -98,6 +104,7 @@ const ChatPage: FC = () => {
 
 		const wsCurrent = ws.current;
 
+		// eslint-disable-next-line consistent-return
 		return () => {
 			wsCurrent.close();
 		};
@@ -147,6 +154,10 @@ const ChatPage: FC = () => {
 	};
 
 	const sendMessage = (): void => {
+		if (ws === null) {
+			return;
+		}
+
 		const wsCurrent = ws.current;
 
 		if (wsCurrent?.readyState === WebSocket.OPEN && inputValue) {
@@ -161,7 +172,7 @@ const ChatPage: FC = () => {
 					role: 'user',
 					stage: StageEnum.SITUATION,
 					status: 1,
-					type: 'msg',
+					type: MessageType.MSG,
 				};
 				dispatch(addMessage(message));
 			}

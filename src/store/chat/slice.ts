@@ -14,6 +14,14 @@ export enum SessionBlocks {
 export enum StageEnum {
 	SITUATION = 'SITUATION',
 	DISTORTIONS = 'DISTORTIONS',
+	QUESTIONNAIRE = 'QUESTIONNAIRE',
+}
+
+export enum MessageType {
+	MSG = 'msg',
+	KB_UPD = 'kb_upd',
+	UPD_MSG = 'upd_msg',
+	ERROR_MSG = 'error_msg',
 }
 
 export enum Author {
@@ -23,7 +31,7 @@ export enum Author {
 
 export interface ButtonsWS {
 	action: string;
-	action_param: number;
+	action_param?: number;
 	content: string;
 }
 
@@ -36,7 +44,7 @@ export interface Message {
 	role: null | string;
 	stage: StageEnum;
 	status: 1;
-	type: 'msg';
+	type: MessageType;
 }
 
 export interface Session {

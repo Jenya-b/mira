@@ -34,12 +34,13 @@ export const MessageBlock: FC = () => {
 	return (
 		<Wrapper>
 			<Container ref={contentRef}>
-				{currentSession?.messages.map(({ author, buttons, content }, i) => (
+				{currentSession?.messages.map(({ author, buttons, content, stage }, i) => (
 					<TextMessage
 						key={i}
 						logoParam={author ? PersonMessage.MIRA_MAIN : PersonMessage.USER}
 						text={content}
 						buttons={buttons}
+						stage={stage}
 					/>
 				))}
 				{isLoader && <LoaderMessage />}

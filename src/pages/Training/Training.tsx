@@ -15,6 +15,7 @@ import { PersonMessage } from '@/hocs/WithMessage/WithMessage';
 import { useModal } from '@/hooks/useModal';
 import { path } from '@/router/path';
 import { useAppSelector } from '@/store';
+import { StageEnum } from '@/store/chat';
 import { TrainingParam } from '@/store/training';
 
 import { Container, DisabledBg, FilterBg, MessageWrap, Wrapper } from './Training.styled';
@@ -63,6 +64,7 @@ const Training: FC = () => {
 							logoParam={logoParam as PersonMessage}
 							text={text}
 							buttons={searchBlock}
+							stage={StageEnum.QUESTIONNAIRE}
 						/>
 					))}
 				</MessageWrap>

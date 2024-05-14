@@ -1,7 +1,7 @@
 import { BaseQueryApi, createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 import { RootState } from '@/store';
-import { Session, addCurrentSession } from '@/store/chat';
+import { ButtonsWS, Session, addCurrentSession } from '@/store/chat';
 
 export const sessionApi = createApi({
 	reducerPath: 'sessionApi',
@@ -68,6 +68,16 @@ export const sessionApi = createApi({
 				},
 			}),
 		}),
+		postMessage: build.mutation<ButtonsWS, ButtonsWS>({
+			query: (body) => ({
+				method: 'POST',
+				url: '/sessions/message/',
+				body,
+				headers: {
+					accept: 'application/json',
+				},
+			}),
+		}),
 	}),
 });
 
@@ -77,4 +87,5 @@ export const {
 	useGetLastSessionQuery,
 	useCreateSessionMutation,
 	useLazyGetLastSessionQuery,
+	usePostMessageMutation,
 } = sessionApi;

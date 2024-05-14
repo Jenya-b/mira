@@ -14,7 +14,7 @@ import { BaseModal } from '@/components/Modal/Modal';
 import { ChatContext } from '@/context/chat';
 import { useModal } from '@/hooks/useModal';
 import { usePushNotifications } from '@/hooks/usePushNotifications';
-import { useGetLastSessionQuery } from '@/services/api/session';
+import { useGetLastSessionQuery, usePostMessageMutation } from '@/services/api/session';
 import { useAppDispatch, useAppSelector } from '@/store';
 import {
 	Author,
@@ -30,6 +30,13 @@ import {
 
 import { Wrapper } from './Chat.styled';
 
+interface WSMessage {
+	message: Message;
+	errors: [];
+	user_id: number;
+	is_all_users: boolean;
+}
+
 const ChatPage: FC = () => {
 	const dispatch = useAppDispatch();
 	const { hiddenInput, sessionBlock, currentStage, inputValue } = useAppSelector(
@@ -42,6 +49,7 @@ const ChatPage: FC = () => {
 	const { onClickSusbribeToPushNotification, userSubscription } = usePushNotifications();
 
 	const { isLoading, isSuccess, data } = useGetLastSessionQuery(null);
+	const [postMessage, { isSuccess: isSuccessPost }] = usePostMessageMutation();
 
 	useEffect(() => {
 		if (!isActivePWA || userSubscription !== null) {
@@ -76,6 +84,27 @@ const ChatPage: FC = () => {
 	}, [isSuccess]);
 
 	useEffect(() => {
+		if (!isSuccessPost) {
+			return;
+		}
+
+		const message: Message = {
+			author: Author.USER,
+			buttons: null,
+			content: inputValue,
+			created_at: '',
+			gpt: true,
+			role: 'user',
+			stage: StageEnum.SITUATION,
+			status: 1,
+			type: MessageType.MSG,
+		};
+		dispatch(addMessage(message));
+		dispatch(setSessionBlock(SessionBlocks.CHAT));
+		dispatch(setInputValue(''));
+	}, [isSuccessPost]);
+
+	useEffect(() => {
 		if (ws === null) {
 			return;
 		}
@@ -90,13 +119,13 @@ const ChatPage: FC = () => {
 
 		ws.current.onmessage = function (event) {
 			try {
-				const json = JSON.parse(event.data);
+				const json: WSMessage = JSON.parse(event.data);
 
-				if (json.errors) {
+				if (json.errors.length) {
 					return;
 				}
 
-				dispatch(addMessage(json as Message));
+				dispatch(addMessage(json.message as Message));
 			} catch {
 				throw new Error();
 			}
@@ -154,30 +183,8 @@ const ChatPage: FC = () => {
 	};
 
 	const sendMessage = (): void => {
-		if (ws === null) {
-			return;
-		}
-
-		const wsCurrent = ws.current;
-
-		if (wsCurrent?.readyState === WebSocket.OPEN && inputValue) {
-			if (currentStage === StageEnum.SITUATION) {
-				wsCurrent.send(JSON.stringify({ content: inputValue, action: 'MESSAGE' }));
-				const message: Message = {
-					author: Author.USER,
-					buttons: null,
-					content: inputValue,
-					created_at: '',
-					gpt: true,
-					role: 'user',
-					stage: StageEnum.SITUATION,
-					status: 1,
-					type: MessageType.MSG,
-				};
-				dispatch(addMessage(message));
-			}
-			dispatch(setSessionBlock(SessionBlocks.CHAT));
-			dispatch(setInputValue(''));
+		if (currentStage === StageEnum.SITUATION) {
+			postMessage({ action: 'MESSAGE', content: inputValue });
 		}
 	};
 

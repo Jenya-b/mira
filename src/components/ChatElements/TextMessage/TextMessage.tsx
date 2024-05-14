@@ -1,9 +1,9 @@
-import { FC, useContext } from 'react';
+import { FC } from 'react';
 
 import { Thoughts } from '../Thoughts/Thoughts';
 
-import { ChatContext } from '@/context/chat';
 import { PersonMessage, WithMessage } from '@/hocs/WithMessage/WithMessage';
+import { usePostMessageMutation } from '@/services/api/session';
 import { useAppSelector } from '@/store';
 import { ButtonsWS, StageEnum } from '@/store/chat';
 
@@ -17,20 +17,12 @@ interface TextMessageProps {
 }
 
 export const TextMessage: FC<TextMessageProps> = ({ logoParam, text, buttons, stage }) => {
-	const { ws } = useContext(ChatContext);
 	const { currentStage } = useAppSelector((state) => state.chat);
+	const [postMessage] = usePostMessageMutation();
 
 	const sendCheckUser = (content: string, action: string, action_param?: number): void => {
-		if (ws === null) {
-			return;
-		}
-
-		const wsCurrent = ws.current;
-
-		if (wsCurrent?.readyState === WebSocket.OPEN) {
-			if (currentStage === StageEnum.QUESTIONNAIRE) {
-				wsCurrent.send(JSON.stringify({ content, action, action_param }));
-			}
+		if (currentStage === StageEnum.QUESTIONNAIRE) {
+			postMessage({ content, action, action_param });
 		}
 	};
 

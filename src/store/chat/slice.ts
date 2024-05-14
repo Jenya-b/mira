@@ -22,6 +22,7 @@ export enum MessageType {
 	KB_UPD = 'kb_upd',
 	UPD_MSG = 'upd_msg',
 	ERROR_MSG = 'error_msg',
+	ORD_MSG = 'ord_msg',
 }
 
 export enum Author {

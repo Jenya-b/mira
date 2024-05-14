@@ -16,6 +16,7 @@ import { useAppSelector } from '@/store';
 import { DeviceTypeEnum } from '@/store/general';
 import { Subscription } from '@/store/user';
 import { ButtonPrimary } from '@/styles/components';
+import { getTimeUTC } from '@/utils/time';
 
 import {
 	CardsWrap,
@@ -120,11 +121,15 @@ const TherapySettings: FC = () => {
 	};
 
 	const handleSubmit = (): void => {
+		if (!(newNotificationData.new_through_time && newNotificationData.practice_time)) {
+			return;
+		}
+
 		updatePushData({
 			new_thoughts_days: newNotificationData.new_thoughts_days,
-			new_through_time: newNotificationData.new_through_time,
+			new_through_time: getTimeUTC(newNotificationData.new_through_time),
 			practice_days: newNotificationData.practice_days,
-			practice_time: newNotificationData.practice_time,
+			practice_time: getTimeUTC(newNotificationData.practice_time),
 		});
 	};
 

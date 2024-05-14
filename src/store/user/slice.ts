@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { defaultNotificationData } from '@/constants/pushNotification';
+import { getMyTime } from '@/utils/time';
 
 export interface User {
 	phone: number;
@@ -12,10 +13,10 @@ export interface User {
 export interface Subscription {
 	deactivate?: boolean;
 	new_thoughts_days?: number;
-	new_through_time?: string | null;
+	new_through_time?: string;
 	notify_email?: boolean;
 	practice_days?: number;
-	practice_time?: string | null;
+	practice_time?: string;
 	settings?: PushSubscription;
 }
 
@@ -44,9 +45,12 @@ export const userSlice = createSlice({
 		setNotificationData(state, action: PayloadAction<Subscription>): void {
 			state.notificationData = {
 				...action.payload,
-				practice_time: action.payload.practice_time ?? defaultNotificationData.practice_time,
-				new_through_time:
-					action.payload.new_through_time ?? defaultNotificationData.new_through_time,
+				practice_time: action.payload.practice_time
+					? getMyTime(action.payload.practice_time)
+					: defaultNotificationData.practice_time,
+				new_through_time: action.payload.new_through_time
+					? getMyTime(action.payload.new_through_time)
+					: defaultNotificationData.new_through_time,
 			};
 		},
 		resetState() {

@@ -1,24 +1,78 @@
-import { FC } from 'react';
+import { FC, useCallback } from 'react';
 
+import modalImg from '@/assets/images/phoneForModal.png';
 import { Accordion } from '@/components/Accordion/Accordion';
-import { accordionList } from '@/constants/accordion';
+import { BaseModal } from '@/components/Modal/Modal';
+import { ButtonType, accordionList } from '@/constants/accordion';
+import { useModal } from '@/hooks/useModal';
+import { useAppSelector } from '@/store';
+import { DeviceTypeEnum } from '@/store/general';
 
 import { AccordionWrap, Button, Container, Controls, Title, Wrapper } from './Questions.styled';
 
-const Questions: FC = () => (
-	<Wrapper>
-		<Container>
-			<Title>Вопросы и ответы</Title>
-			<AccordionWrap>
-				{accordionList.map(({ desc, title }, i) => (
-					<Accordion key={i} title={title} desc={desc} />
-				))}
-			</AccordionWrap>
-			<Controls>
-				<Button>Задать вопрос</Button>
-			</Controls>
-		</Container>
-	</Wrapper>
-);
+const Questions: FC = () => {
+	const [isOpenInstallModal, openInstallModal, closeInstallModal] = useModal();
+	const { prompt, isMobileDevice, deviceType } = useAppSelector((state) => state.general);
+
+	const handleClick = useCallback((type: ButtonType | undefined): void => {
+		switch (type) {
+			case ButtonType.INSTALL_PWA:
+				openInstallModal();
+				break;
+			default:
+				break;
+		}
+	}, []);
+
+	const handleClickModal = (): void => {
+		if (prompt) {
+			prompt.prompt();
+		} else if (deviceType !== DeviceTypeEnum.DESKTOP) {
+			closeInstallModal();
+		}
+	};
+
+	return (
+		<Wrapper>
+			{isMobileDevice ? (
+				<BaseModal
+					buttonText="Установить"
+					buttonTextSecond="Пропустить"
+					isOpen={isOpenInstallModal}
+					title="Для настройки терапии установите приложение"
+					imgSrc={modalImg}
+					handleClickModal={handleClickModal}
+					handleClickModalSecond={closeInstallModal}
+				/>
+			) : (
+				<BaseModal
+					buttonText="Закрыть"
+					isOpen={isOpenInstallModal}
+					title="Настройка терапии"
+					subtitle="Для настройки терапии перейдите в мобильное устройство и установите приложение."
+					imgSrc={modalImg}
+					handleClickModal={closeInstallModal}
+				/>
+			)}
+			<Container>
+				<Title>Вопросы и ответы</Title>
+				<AccordionWrap>
+					{accordionList.map(({ desc, title, button }, i) => (
+						<Accordion
+							key={i}
+							title={title}
+							desc={desc}
+							button={button}
+							handleClick={handleClick}
+						/>
+					))}
+				</AccordionWrap>
+				<Controls>
+					<Button>Задать вопрос</Button>
+				</Controls>
+			</Container>
+		</Wrapper>
+	);
+};
 
 export default Questions;

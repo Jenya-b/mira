@@ -26,20 +26,22 @@ export const Wrapper = styled.div`
 `;
 
 export const Title = styled.div`
-	display: flex;
-	align-items: center;
-	grid-column: 2/3;
+	display: grid;
+	grid-template-columns: 2.5rem 1fr;
+	column-gap: 1.93rem;
+	grid-column: 1/3;
 	grid-row: 1/2;
 	font-size: 1.71429rem;
 	font-weight: 500;
 
 	@media (max-width: 768px) {
+		column-gap: 1.07rem;
 		font-size: 1.28571rem;
 		line-height: 110%;
 	}
 `;
 
-export const Desc = styled.p`
+export const Desc = styled.div`
 	grid-column: 2/3;
 	grid-row: 2/3;
 	max-height: 0;
@@ -60,5 +62,16 @@ export const Desc = styled.p`
 		max-height: 500px;
 		opacity: 1;
 		transition: max-height 1s linear;
+	}
+
+	button {
+		margin-top: 1rem;
+		color: blue;
+		background: none;
+		font-size: 1.14286rem;
+
+		@media (max-width: 768px) {
+			font-size: 1rem;
+		}
 	}
 `;

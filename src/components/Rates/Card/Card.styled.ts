@@ -19,8 +19,9 @@ export const CardWrap = styled.div`
 `;
 
 export const Discount = styled.div`
+	padding-top: 0.25rem;
 	height: 2.214rem;
-	width: 7.714rem;
+	width: 9rem;
 	border-radius: 1.48593rem;
 	background: ${({ theme }) => theme.colors.bgTertiary};
 	display: flex;

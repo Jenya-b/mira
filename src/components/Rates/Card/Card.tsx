@@ -15,7 +15,7 @@ interface CardProps {
 
 export const Card: FC<CardProps> = ({ discount, price, services, title, handleSubmit }) => (
 	<CardWrap>
-		{discount ? <Discount>скидка {discount}%</Discount> : <span />}
+		{discount ? <Discount>экономия {discount}%</Discount> : <span />}
 		<CardTitle>{title}</CardTitle>
 		<Services>
 			{services.map(({ icon, text }) => (

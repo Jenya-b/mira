@@ -48,7 +48,7 @@ export const rateList = [
 			},
 		],
 		price: 1799,
-		discount: 40,
+		discount: 10,
 	},
 	{
 		title: '30 сессий',
@@ -71,6 +71,6 @@ export const rateList = [
 			},
 		],
 		price: 2999,
-		discount: 40,
+		discount: 30,
 	},
 ];

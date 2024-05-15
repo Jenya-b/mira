@@ -1,5 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom';
 
+import { ErrorBoundary } from '@/components/ErrorBoundary/ErrorBoundary';
 import { Layout } from '@/components/Layout/Layout';
 import { ChatProvider } from '@/context/chat';
 import { RequireAuth } from '@/hocs/RequireAuth/RequireAuth';
@@ -22,6 +23,7 @@ import { path } from './path';
 export const router = createBrowserRouter([
 	{
 		path: path.home,
+		errorElement: <ErrorBoundary />,
 		element: (
 			<RequireAuth>
 				<Layout />

@@ -1,7 +1,13 @@
 import { BaseQueryApi, createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 import { RootState } from '@/store';
-import { ButtonsWS, Session, addCurrentSession } from '@/store/chat';
+import {
+	ButtonsWS,
+	Session,
+	SessionBlocks,
+	addCurrentSession,
+	setSessionBlock,
+} from '@/store/chat';
 
 export const sessionApi = createApi({
 	reducerPath: 'sessionApi',
@@ -53,6 +59,12 @@ export const sessionApi = createApi({
 
 					if (Object.keys(data).length !== 0) {
 						dispatch(addCurrentSession(data));
+
+						if (data.active && data.messages.length) {
+							dispatch(setSessionBlock(SessionBlocks.CHAT));
+						} else {
+							dispatch(setSessionBlock(SessionBlocks.FIRST));
+						}
 					}
 				} catch {
 					throw new Error();

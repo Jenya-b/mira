@@ -5,6 +5,7 @@ import { BurgerMenu } from '../BurgerMenu/BurgerMenu';
 import { Sidebar } from '../Sidebar/Sidebar';
 
 import { useResize } from '@/hooks/useResize';
+import { useGetLastSessionQuery } from '@/services/api/session';
 import { useAppDispatch, useAppSelector } from '@/store';
 import { setOpenBurgerMenu } from '@/store/general';
 
@@ -14,6 +15,7 @@ export const Layout: FC = () => {
 	const [innerWidth, innerHeight] = useResize();
 	const dispatch = useAppDispatch();
 	const { isOpenBurgerMenu } = useAppSelector((state) => state.general);
+	useGetLastSessionQuery(null);
 
 	useEffect(() => {
 		const vh = window.innerHeight * 0.01;

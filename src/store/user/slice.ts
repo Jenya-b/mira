@@ -7,7 +7,7 @@ export interface User {
 	phone: number;
 	email: string;
 	first_name: string;
-	notify_email: boolean;
+	available_sessions: number;
 }
 
 export interface Subscription {

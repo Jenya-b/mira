@@ -106,6 +106,26 @@ export const ButtonPrimory = styled.button`
 
 	p {
 		padding-left: 1.04rem;
+
+		&.noactive {
+			display: flex;
+			flex-direction: column;
+			text-align: start;
+		}
+
+		span {
+			strong {
+				color: #ffa89d;
+			}
+
+			&:nth-child(2) {
+				opacity: 0.69;
+				font-size: 0.85714rem;
+				font-weight: 500;
+				letter-spacing: -0.01714rem;
+				text-decoration-line: underline;
+			}
+		}
 	}
 `;
 

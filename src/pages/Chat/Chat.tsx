@@ -9,12 +9,11 @@ import { FirstBlock } from '@/components/Chat/FirstBlock/FirstBlock';
 import { FurtherActionsBlock } from '@/components/Chat/FurtherActionsBlock/FurtherActionsBlock';
 import { MessageBlock } from '@/components/Chat/MessagesBlock/MessagesBlock';
 import { Input } from '@/components/ChatElements/Input/Input';
-import { Loader } from '@/components/Loader/Loader';
 import { BaseModal } from '@/components/Modal/Modal';
 import { ChatContext } from '@/context/chat';
 import { useModal } from '@/hooks/useModal';
 import { usePushNotifications } from '@/hooks/usePushNotifications';
-import { useGetLastSessionQuery, usePostMessageMutation } from '@/services/api/session';
+import { usePostMessageMutation } from '@/services/api/session';
 import { useAppDispatch, useAppSelector } from '@/store';
 import {
 	Author,
@@ -48,7 +47,6 @@ const ChatPage: FC = () => {
 	const [isOpenModal, openModal, closeModal] = useModal();
 	const { onClickSusbribeToPushNotification, userSubscription } = usePushNotifications();
 
-	const { isLoading, isSuccess, data } = useGetLastSessionQuery(null);
 	const [postMessage, { isSuccess: isSuccessPost }] = usePostMessageMutation();
 
 	useEffect(() => {
@@ -72,16 +70,6 @@ const ChatPage: FC = () => {
 			}
 		}
 	}, [userSubscription]);
-
-	useEffect(() => {
-		if (isSuccess && data !== undefined && Object.keys(data).length !== 0 && data.active) {
-			if (data.messages.length) {
-				dispatch(setSessionBlock(SessionBlocks.CHAT));
-			} else {
-				dispatch(setSessionBlock(SessionBlocks.FIRST));
-			}
-		}
-	}, [isSuccess]);
 
 	useEffect(() => {
 		if (!isSuccessPost) {
@@ -206,7 +194,6 @@ const ChatPage: FC = () => {
 
 	return (
 		<Wrapper className={!hiddenInput ? 'grid' : ''}>
-			{isLoading && <Loader />}
 			<button
 				onClick={handleClick}
 				style={{ background: 'none', position: 'absolute', top: '7rem', right: '2rem' }}

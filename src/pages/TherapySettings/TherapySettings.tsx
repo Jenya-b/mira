@@ -150,7 +150,7 @@ const TherapySettings: FC = () => {
 					buttonText="Перейти на главную"
 					isOpen={isOpenInstallModal}
 					title="Настройка терапии"
-					subtitle="Для настройки терапии перейдите в мобильное устройство и установите приложение."
+					subtitle="Для настройки терапии откройте сайт Миры на мобильном устройстве и следуйте инструкции по установке. Затем перейдите в раздел «Уведомления»."
 					imgSrc={modalImg}
 					handleClickModal={handleNavigate}
 				/>

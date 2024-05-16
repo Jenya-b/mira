@@ -11,7 +11,6 @@ import {
 	homeActions,
 } from '@/constants/chat';
 import { WithChat } from '@/hocs/WithChat/WithChat';
-import { useAppSnackbar } from '@/hooks/useAppSnackbar';
 import { useCreateSessionMutation, useLazyGetLastSessionQuery } from '@/services/api/session';
 import { useAppDispatch } from '@/store';
 import { SessionBlocks, setSessionBlock } from '@/store/chat';
@@ -30,7 +29,6 @@ export const FurtherActionsBlock: FC<FurtherActionsBlockProps> = ({ isHome = fal
 	const [animation, setAnimation] = useState(false);
 	const [fetchCreateSession, { isSuccess: isSuccessCreate }] = useCreateSessionMutation();
 	const [fetchGetLastSession, { isSuccess: isSuccessGet }] = useLazyGetLastSessionQuery();
-	const { openSnackbar } = useAppSnackbar();
 
 	const { x } = useSpring({
 		from: { x: 0 },
@@ -53,7 +51,7 @@ export const FurtherActionsBlock: FC<FurtherActionsBlockProps> = ({ isHome = fal
 			.unwrap()
 			.catch((error) => {
 				if (error.status === 422 && error.data.length) {
-					openSnackbar('error', error.data[0]);
+					dispatch(setSessionBlock(SessionBlocks.END_SESSION));
 				}
 			});
 	};

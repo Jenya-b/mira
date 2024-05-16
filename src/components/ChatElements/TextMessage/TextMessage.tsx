@@ -3,9 +3,9 @@ import { FC } from 'react';
 import { Thoughts } from '../Thoughts/Thoughts';
 
 import { PersonMessage, WithMessage } from '@/hocs/WithMessage/WithMessage';
-import { usePostMessageMutation } from '@/services/api/session';
+import { useCreateSessionMutation, usePostMessageMutation } from '@/services/api/session';
 import { useAppSelector } from '@/store';
-import { ButtonsWS, StageEnum } from '@/store/chat';
+import { ButtonsWS, MessageType, StageEnum } from '@/store/chat';
 
 import { CheckWithUserList, ThoughtsWrap } from './TextMessage.styled';
 
@@ -14,14 +14,18 @@ interface TextMessageProps {
 	text: string;
 	buttons: ButtonsWS[] | null;
 	stage: StageEnum;
+	type?: MessageType;
 }
 
-export const TextMessage: FC<TextMessageProps> = ({ logoParam, text, buttons, stage }) => {
+export const TextMessage: FC<TextMessageProps> = ({ logoParam, text, buttons, stage, type }) => {
 	const { currentStage } = useAppSelector((state) => state.chat);
 	const [postMessage] = usePostMessageMutation();
+	const [fetchCreateSession] = useCreateSessionMutation();
 
 	const sendCheckUser = (content: string, action: string, action_param?: number): void => {
-		if (currentStage === StageEnum.QUESTIONNAIRE) {
+		if (type === MessageType.ERROR_MSG && action === 'NEW_SESSION') {
+			fetchCreateSession(null);
+		} else if (currentStage === StageEnum.QUESTIONNAIRE) {
 			postMessage({ content, action, action_param });
 		}
 	};

@@ -79,6 +79,19 @@ export const sessionApi = createApi({
 					accept: 'application/json',
 				},
 			}),
+			onQueryStarted: async (_, { dispatch, queryFulfilled }) => {
+				try {
+					const { data } = await queryFulfilled;
+
+					if (data.active && data.messages.length) {
+						dispatch(setSessionBlock(SessionBlocks.CHAT));
+					} else {
+						dispatch(setSessionBlock(SessionBlocks.FIRST));
+					}
+				} catch {
+					throw new Error();
+				}
+			},
 		}),
 		postMessage: build.mutation<ButtonsWS, ButtonsWS>({
 			query: (body) => ({

@@ -1,5 +1,5 @@
 import { animated, useSpring } from '@react-spring/web';
-import { FC, useCallback, useEffect, useState } from 'react';
+import { FC, useCallback, useState } from 'react';
 
 import {
 	FurtherActionsEnum,
@@ -11,7 +11,7 @@ import {
 	homeActions,
 } from '@/constants/chat';
 import { WithChat } from '@/hocs/WithChat/WithChat';
-import { useCreateSessionMutation, useLazyGetLastSessionQuery } from '@/services/api/session';
+import { useCreateSessionMutation } from '@/services/api/session';
 import { useAppDispatch } from '@/store';
 import { SessionBlocks, setSessionBlock } from '@/store/chat';
 
@@ -27,8 +27,7 @@ export const FurtherActionsBlock: FC<FurtherActionsBlockProps> = ({ isHome = fal
 		isHome ? FurtherActionsEnum.HOME : FurtherActionsEnum.MAIN
 	);
 	const [animation, setAnimation] = useState(false);
-	const [fetchCreateSession, { isSuccess: isSuccessCreate }] = useCreateSessionMutation();
-	const [fetchGetLastSession, { isSuccess: isSuccessGet }] = useLazyGetLastSessionQuery();
+	const [fetchCreateSession] = useCreateSessionMutation();
 
 	const { x } = useSpring({
 		from: { x: 0 },
@@ -55,18 +54,6 @@ export const FurtherActionsBlock: FC<FurtherActionsBlockProps> = ({ isHome = fal
 				}
 			});
 	};
-
-	useEffect(() => {
-		if (isSuccessCreate) {
-			fetchGetLastSession(null);
-		}
-	}, [isSuccessCreate]);
-
-	useEffect(() => {
-		if (isSuccessGet) {
-			dispatch(setSessionBlock(SessionBlocks.FIRST));
-		}
-	}, [isSuccessGet]);
 
 	const renderElement = useCallback((): JSX.Element => {
 		switch (activeSlide) {

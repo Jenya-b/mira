@@ -138,7 +138,7 @@ export const ButtonSecondary = styled.button`
 	}
 `;
 
-export const ControlsInfo = styled.p`
+export const ControlsInfo = styled.div`
 	display: flex;
 	justify-content: center;
 	text-align: center;
@@ -146,16 +146,23 @@ export const ControlsInfo = styled.p`
 	font-size: 0.85rem;
 	font-style: normal;
 	font-weight: 500;
-	line-height: 0.875rem;
-	text-decoration-line: underline;
+	line-height: 1rem;
 
 	@media (max-width: 768px) {
 		color: rgba(255, 255, 255, 0.57);
 	}
 
-	span {
-		display: inline-block;
-		max-width: 22.3125rem;
+	p {
+		max-width: 26.5rem;
 		width: 100%;
+
+		@media (max-width: 768px) {
+			font-size: 0.71429rem;
+			max-width: 22.3125rem;
+		}
+	}
+
+	span {
+		text-decoration-line: underline;
 	}
 `;

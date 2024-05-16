@@ -87,6 +87,7 @@ export const DisabledBg = styled.div`
 
 export const FilterBg = styled.div`
 	background: rgba(0, 0, 0, 0.35);
+	-webkit-backdrop-filter: blur(5px);
 	backdrop-filter: blur(5px);
 	position: absolute;
 	width: 100%;

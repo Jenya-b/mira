@@ -1,3 +1,4 @@
+import { SnackbarProvider } from 'notistack';
 import { FC, Suspense, useEffect } from 'react';
 import { RouterProvider } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
@@ -32,12 +33,20 @@ const App: FC = () => {
 	}, [prompt]);
 
 	return (
-		<ThemeProvider theme={theme}>
-			<Suspense fallback={<Loader />}>
-				<RouterProvider router={router} />
-			</Suspense>
-			<GlobalStyles />
-		</ThemeProvider>
+		<SnackbarProvider
+			maxSnack={3}
+			anchorOrigin={{
+				horizontal: 'center',
+				vertical: 'top',
+			}}
+		>
+			<ThemeProvider theme={theme}>
+				<Suspense fallback={<Loader />}>
+					<RouterProvider router={router} />
+				</Suspense>
+				<GlobalStyles />
+			</ThemeProvider>
+		</SnackbarProvider>
 	);
 };
 

@@ -31,6 +31,9 @@ export const Text = styled.div`
 	font-weight: 500;
 	line-height: 130%;
 	padding-top: 0.3rem;
+	display: flex;
+	flex-direction: column;
+	row-gap: 0.7rem;
 
 	@media (max-width: 768px) {
 		padding: 1.08rem 1.3rem;

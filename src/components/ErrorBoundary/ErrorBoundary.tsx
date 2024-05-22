@@ -1,5 +1,5 @@
 import { FC, useEffect } from 'react';
-import { useRouteError, isRouteErrorResponse, useNavigate } from 'react-router-dom';
+import { useRouteError, isRouteErrorResponse, useNavigate, useLocation } from 'react-router-dom';
 
 import { useResize } from '@/hooks/useResize';
 import { path } from '@/router/path';
@@ -10,6 +10,7 @@ import { OtherError } from './OtherError';
 export const ErrorBoundary: FC = () => {
 	const error = useRouteError();
 	const navigate = useNavigate();
+	const location = useLocation();
 	const [innerHeight] = useResize();
 
 	useEffect(() => {
@@ -18,7 +19,11 @@ export const ErrorBoundary: FC = () => {
 	}, [innerHeight]);
 
 	const handleNavigate = (): void => {
-		navigate(path.home);
+		if (location.pathname === path.home) {
+			window.location.reload();
+		} else {
+			navigate(path.home);
+		}
 	};
 
 	if (isRouteErrorResponse(error)) {

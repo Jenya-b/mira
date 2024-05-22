@@ -62,8 +62,10 @@ export const sessionApi = createApi({
 
 						if (data.active && data.messages.length) {
 							dispatch(setSessionBlock(SessionBlocks.CHAT));
-						} else {
+						} else if (data.active && !data.messages.length) {
 							dispatch(setSessionBlock(SessionBlocks.FIRST));
+						} else {
+							dispatch(setSessionBlock(SessionBlocks.FUTURE_ACTIONS));
 						}
 					}
 				} catch {

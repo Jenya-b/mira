@@ -15,6 +15,9 @@ export enum StageEnum {
 	SITUATION = 'SITUATION',
 	DISTORTIONS = 'DISTORTIONS',
 	QUESTIONNAIRE = 'QUESTIONNAIRE',
+	THERAPY_STARTING_POINT = 'THERAPY_STARTING_POINT',
+	DOUBT_CREATION = 'DOUBT_CREATION',
+	NEW_THOUGHT_CREATION = 'NEW_THOUGHT_CREATION',
 }
 
 export enum MessageType {
@@ -23,6 +26,7 @@ export enum MessageType {
 	UPD_MSG = 'upd_msg',
 	ERROR_MSG = 'error_msg',
 	ORD_MSG = 'ord_msg',
+	CARD = 'card',
 }
 
 export enum Author {

@@ -171,7 +171,7 @@ const ChatPage: FC = () => {
 	};
 
 	const sendMessage = (): void => {
-		if (currentStage === StageEnum.SITUATION) {
+		if (currentStage === StageEnum.SITUATION || currentStage === StageEnum.DOUBT_CREATION) {
 			postMessage({ action: 'MESSAGE', content: inputValue });
 		}
 	};

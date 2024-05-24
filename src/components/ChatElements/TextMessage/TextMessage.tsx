@@ -25,7 +25,11 @@ export const TextMessage: FC<TextMessageProps> = ({ logoParam, text, buttons, st
 	const sendCheckUser = (content: string, action: string, action_param?: number): void => {
 		if (type === MessageType.ERROR_MSG && action === 'NEW_SESSION') {
 			fetchCreateSession(null);
-		} else if (currentStage === StageEnum.QUESTIONNAIRE) {
+		} else if (
+			currentStage === StageEnum.QUESTIONNAIRE ||
+			currentStage === StageEnum.THERAPY_STARTING_POINT ||
+			currentStage === StageEnum.DOUBT_CREATION
+		) {
 			postMessage({ content, action, action_param });
 		}
 	};
@@ -38,7 +42,10 @@ export const TextMessage: FC<TextMessageProps> = ({ logoParam, text, buttons, st
 						<Thoughts key={i} list={[]} title={content} />
 					))}
 				</ThoughtsWrap>
-			) : stage === StageEnum.QUESTIONNAIRE && buttons !== null ? (
+			) : (stage === StageEnum.QUESTIONNAIRE ||
+					stage === StageEnum.THERAPY_STARTING_POINT ||
+					stage === StageEnum.DOUBT_CREATION) &&
+			  buttons !== null ? (
 				<CheckWithUserList>
 					{buttons.map(({ content, action, action_param }, i) => (
 						<li key={i}>

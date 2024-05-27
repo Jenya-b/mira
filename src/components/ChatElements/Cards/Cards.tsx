@@ -1,24 +1,39 @@
 import { FC } from 'react';
 
 import { Slider } from '@/components/Slider/Slider';
-import { PersonMessage, WithMessage } from '@/hocs/WithMessage/WithMessage';
+import { useAppDispatch } from '@/store';
+import { setHideInput } from '@/store/chat';
 
 import { Wrapper } from './Cards.styled';
 import { Controls } from './Controls';
 
 interface CardsProps {
-	text: string;
+	data: string[];
 }
 
-export const Cards: FC<CardsProps> = ({ text }) => {
-	const renderSliderData = (): JSX.Element => <></>;
+export const Cards: FC<CardsProps> = ({ data }) => {
+	const dispatch = useAppDispatch();
+
+	const renderSliderData = (t: string): JSX.Element => {
+		const list = t.split('\n');
+
+		return (
+			<div style={{ display: 'flex', flexDirection: 'column', rowGap: '0.5rem' }}>
+				{list.map((item) => (
+					<p key={item}>{item}</p>
+				))}
+			</div>
+		);
+	};
+
+	const handleClickBtn1 = (): void => {
+		dispatch(setHideInput(false));
+	};
 
 	return (
-		<WithMessage logoParam={PersonMessage.MIRA_MAIN} text={text}>
-			<Wrapper>
-				<Slider data={[...Array(8)]} renderData={renderSliderData} />
-				<Controls />
-			</Wrapper>
-		</WithMessage>
+		<Wrapper>
+			<Slider data={data} renderData={renderSliderData} />
+			<Controls btnText1="Создать новую мысль" handleClickBtn1={handleClickBtn1} />
+		</Wrapper>
 	);
 };

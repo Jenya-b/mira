@@ -86,6 +86,7 @@ const ChatPage: FC = () => {
 			stage: StageEnum.SITUATION,
 			status: 1,
 			type: MessageType.MSG,
+			additional_data: null,
 		};
 		dispatch(addMessage(message));
 		dispatch(setSessionBlock(SessionBlocks.CHAT));
@@ -171,9 +172,7 @@ const ChatPage: FC = () => {
 	};
 
 	const sendMessage = (): void => {
-		if (currentStage === StageEnum.SITUATION || currentStage === StageEnum.DOUBT_CREATION) {
-			postMessage({ action: 'MESSAGE', content: inputValue });
-		}
+		postMessage({ action: 'MESSAGE', content: inputValue });
 	};
 
 	const handleClickModal = (): void => {

@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { Controls } from '@/components/ChatElements/Cards/Controls';
+// import { Controls } from '@/components/ChatElements/Cards/Controls';
 import { Slider } from '@/components/Slider/Slider';
 
 import { Container, Wrapper } from './CardsBlock.styled';
@@ -12,7 +12,7 @@ export const CardsBlock: FC = () => {
 		<Wrapper>
 			<Container>
 				<Slider data={[...Array(8)]} renderData={renderSliderData} visible />
-				<Controls isFullBtn={false} />
+				{/* <Controls isFullBtn={false} /> */}
 			</Container>
 		</Wrapper>
 	);

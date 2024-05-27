@@ -40,7 +40,12 @@ export interface ButtonsWS {
 	content: string;
 }
 
+export interface AdditionalData {
+	cards?: string[];
+}
+
 export interface Message {
+	additional_data: AdditionalData | null;
 	author: Author;
 	buttons: ButtonsWS[] | null;
 	content: string;

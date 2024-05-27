@@ -29,7 +29,8 @@ export const StyledSwiper = styled(Swiper)`
 `;
 
 export const StyledSwiperSlide = styled(SwiperSlide)`
-	text-align: center;
+	/* text-align: center; */
+	padding: 5.36rem 1.79rem 1rem 1.79rem;
 	font-size: 18px;
 	border-radius: 1.42857rem;
 	background: #488ce1;
@@ -40,7 +41,7 @@ export const StyledSwiperSlide = styled(SwiperSlide)`
 		width: 25.21429rem;
 		display: flex;
 		justify-content: center;
-		align-items: center;
+		/* align-items: center; */
 
 		@media (max-width: 480px) {
 			width: 100%;

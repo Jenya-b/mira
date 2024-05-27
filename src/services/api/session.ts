@@ -95,6 +95,16 @@ export const sessionApi = createApi({
 				}
 			},
 		}),
+		updateSession: build.mutation<Session, { id: number; result: number }>({
+			query: ({ id, result }) => ({
+				method: 'PATCH',
+				url: `/sessions/${id}/result`,
+				headers: {
+					accept: 'application/json',
+				},
+				body: { result },
+			}),
+		}),
 		postMessage: build.mutation<ButtonsWS, ButtonsWS>({
 			query: (body) => ({
 				method: 'POST',
@@ -115,4 +125,5 @@ export const {
 	useCreateSessionMutation,
 	useLazyGetLastSessionQuery,
 	usePostMessageMutation,
+	useUpdateSessionMutation,
 } = sessionApi;

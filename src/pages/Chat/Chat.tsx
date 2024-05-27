@@ -38,9 +38,7 @@ interface WSMessage {
 
 const ChatPage: FC = () => {
 	const dispatch = useAppDispatch();
-	const { hiddenInput, sessionBlock, currentStage, inputValue } = useAppSelector(
-		(state) => state.chat
-	);
+	const { hiddenInput, sessionBlock, inputValue } = useAppSelector((state) => state.chat);
 	const { accessToken } = useAppSelector((state) => state.user);
 	const { isActivePWA } = useAppSelector((state) => state.general);
 	const { ws } = useContext(ChatContext);

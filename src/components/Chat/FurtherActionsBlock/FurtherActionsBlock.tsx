@@ -23,9 +23,7 @@ interface FurtherActionsBlockProps {
 
 export const FurtherActionsBlock: FC<FurtherActionsBlockProps> = ({ isHome = false }) => {
 	const dispatch = useAppDispatch();
-	const [activeSlide, setActiveSlide] = useState<FurtherActionsEnum>(
-		isHome ? FurtherActionsEnum.HOME : FurtherActionsEnum.MAIN
-	);
+	const [activeSlide, setActiveSlide] = useState<FurtherActionsEnum>(FurtherActionsEnum.HOME);
 	const [animation, setAnimation] = useState(false);
 	const [fetchCreateSession] = useCreateSessionMutation();
 

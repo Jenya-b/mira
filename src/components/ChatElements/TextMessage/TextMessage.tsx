@@ -1,8 +1,10 @@
 import { FC } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { Thoughts } from '../Thoughts/Thoughts';
 
 import { PersonMessage, WithMessage } from '@/hocs/WithMessage/WithMessage';
+import { path } from '@/router/path';
 import { useCreateSessionMutation, usePostMessageMutation } from '@/services/api/session';
 import { useAppSelector } from '@/store';
 import { ButtonsWS, MessageType, StageEnum } from '@/store/chat';
@@ -18,6 +20,7 @@ interface TextMessageProps {
 }
 
 export const TextMessage: FC<TextMessageProps> = ({ logoParam, text, buttons, stage, type }) => {
+	const navigate = useNavigate();
 	const { currentStage } = useAppSelector((state) => state.chat);
 	const [postMessage] = usePostMessageMutation();
 	const [fetchCreateSession] = useCreateSessionMutation();
@@ -25,6 +28,8 @@ export const TextMessage: FC<TextMessageProps> = ({ logoParam, text, buttons, st
 	const sendCheckUser = (content: string, action: string, action_param?: number): void => {
 		if (type === MessageType.ERROR_MSG && action === 'NEW_SESSION') {
 			fetchCreateSession(null);
+		} else if (currentStage === StageEnum.QUESTIONNAIRE && action === 'SAVE_QUESTION') {
+			navigate(path.questions);
 		} else if (
 			currentStage === StageEnum.QUESTIONNAIRE ||
 			currentStage === StageEnum.THERAPY_STARTING_POINT ||

@@ -65,6 +65,7 @@ const Training: FC = () => {
 							text={text}
 							buttons={searchBlock}
 							stage={StageEnum.QUESTIONNAIRE}
+							additional_data={null}
 						/>
 					))}
 				</MessageWrap>

@@ -2,7 +2,7 @@ import { FC } from 'react';
 
 import { Slider } from '@/components/Slider/Slider';
 import { useAppDispatch } from '@/store';
-import { setHideInput } from '@/store/chat';
+import { setIsButtonsBlock } from '@/store/chat';
 
 import { Wrapper } from './Cards.styled';
 import { Controls } from './Controls';
@@ -27,7 +27,7 @@ export const Cards: FC<CardsProps> = ({ data }) => {
 	};
 
 	const handleClickBtn1 = (): void => {
-		dispatch(setHideInput(false));
+		dispatch(setIsButtonsBlock(false));
 	};
 
 	return (

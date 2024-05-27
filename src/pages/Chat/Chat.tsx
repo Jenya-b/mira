@@ -38,7 +38,9 @@ interface WSMessage {
 
 const ChatPage: FC = () => {
 	const dispatch = useAppDispatch();
-	const { hiddenInput, sessionBlock, inputValue } = useAppSelector((state) => state.chat);
+	const { hiddenInput, sessionBlock, inputValue, buttonsBlock } = useAppSelector(
+		(state) => state.chat
+	);
 	const { accessToken } = useAppSelector((state) => state.user);
 	const { isActivePWA } = useAppSelector((state) => state.general);
 	const { ws } = useContext(ChatContext);
@@ -137,14 +139,17 @@ const ChatPage: FC = () => {
 				break;
 
 			case SessionBlocks.FIRST:
-			case SessionBlocks.CHAT:
 				dispatch(setHideInput(false));
+				break;
+			case SessionBlocks.CHAT:
+				dispatch(setHideInput(buttonsBlock));
+
 				break;
 
 			default:
 				break;
 		}
-	}, [hiddenInput, sessionBlock]);
+	}, [hiddenInput, sessionBlock, buttonsBlock]);
 
 	const renderSessionBlock = (): JSX.Element => {
 		switch (sessionBlock) {
@@ -183,20 +188,10 @@ const ChatPage: FC = () => {
 		closeModal();
 	};
 
-	// TODO временно для перелистывания экранов
-	const handleClick = (): void => {
-		const newSession = sessionBlock === 7 ? 0 : sessionBlock + 1;
-		dispatch(setSessionBlock(newSession));
-	};
-
 	return (
-		<Wrapper className={!hiddenInput ? 'grid' : ''}>
-			<button
-				onClick={handleClick}
-				style={{ background: 'none', position: 'absolute', top: '7rem', right: '2rem' }}
-			>
-				CL
-			</button>
+		<Wrapper
+			className={!hiddenInput || (hiddenInput && sessionBlock === SessionBlocks.CHAT) ? 'grid' : ''}
+		>
 			{renderSessionBlock()}
 			<Input sendMessage={sendMessage} />
 			<BaseModal

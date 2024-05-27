@@ -30,9 +30,9 @@ export const Feedback: FC = () => {
 	return (
 		<WithChat title="Как вы себя чувствуете после сессии?">
 			<List>
-				{smiles.map(({ img, title }, index) => (
+				{smiles.map(({ img, title, result }) => (
 					<li key={title}>
-						<button onClick={() => updateResult(index)}>
+						<button onClick={() => updateResult(result)}>
 							<img src={img} alt="smile" />
 							<span>{title}</span>
 						</button>

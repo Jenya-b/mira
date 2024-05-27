@@ -6,13 +6,16 @@ export const smiles = [
 	{
 		img: smile1,
 		title: 'Хуже',
+		result: 2,
 	},
 	{
 		img: smile2,
 		title: 'Так же',
+		result: 1,
 	},
 	{
 		img: smile3,
 		title: 'Лучше',
+		result: 0,
 	},
 ];

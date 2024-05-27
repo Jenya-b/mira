@@ -70,6 +70,7 @@ export interface Session {
 interface InitialState {
 	inputValue: string;
 	hiddenInput: boolean;
+	buttonsBlock: boolean;
 	sessionBlock: SessionBlocks;
 	currentSession: Session | null;
 	currentStage: StageEnum;
@@ -78,6 +79,7 @@ interface InitialState {
 const initialState: InitialState = {
 	inputValue: '',
 	hiddenInput: false,
+	buttonsBlock: false,
 	sessionBlock: SessionBlocks.HOME,
 	currentSession: null,
 	currentStage: StageEnum.SITUATION,
@@ -96,8 +98,20 @@ export const chatSlice = createSlice({
 		setHideInput(state, action: PayloadAction<boolean>): void {
 			state.hiddenInput = action.payload;
 		},
+		setIsButtonsBlock(state, action: PayloadAction<boolean>): void {
+			state.buttonsBlock = action.payload;
+		},
 		addCurrentSession(state, action: PayloadAction<Session>) {
 			state.currentSession = action.payload;
+
+			const messages = action.payload.messages;
+
+			if (messages.length) {
+				const lastMessage = messages[messages.length - 1];
+				state.buttonsBlock =
+					(lastMessage.buttons !== null && lastMessage.buttons.length > 0) ||
+					!!lastMessage.additional_data?.cards;
+			}
 		},
 		addMessage(state, action: PayloadAction<Message>) {
 			if (state.currentSession === null) {
@@ -105,6 +119,9 @@ export const chatSlice = createSlice({
 			}
 
 			state.currentSession.messages.push(action.payload);
+			state.buttonsBlock =
+				(action.payload.buttons !== null && action.payload.buttons.length > 0) ||
+				!!action.payload.additional_data?.cards;
 		},
 		setCurrentStage(state, action: PayloadAction<StageEnum>) {
 			state.currentStage = action.payload;
@@ -123,6 +140,7 @@ export const {
 	addCurrentSession,
 	addMessage,
 	setCurrentStage,
+	setIsButtonsBlock,
 } = chatSlice.actions;
 
 export const chatReducer = chatSlice.reducer;

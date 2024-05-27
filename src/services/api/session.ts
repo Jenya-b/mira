@@ -84,12 +84,8 @@ export const sessionApi = createApi({
 			onQueryStarted: async (_, { dispatch, queryFulfilled }) => {
 				try {
 					const { data } = await queryFulfilled;
-
-					if (data.active && data.messages.length) {
-						dispatch(setSessionBlock(SessionBlocks.CHAT));
-					} else {
-						dispatch(setSessionBlock(SessionBlocks.FIRST));
-					}
+					dispatch(setSessionBlock(SessionBlocks.FIRST));
+					dispatch(addCurrentSession(data));
 				} catch {
 					throw new Error();
 				}

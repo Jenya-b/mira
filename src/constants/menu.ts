@@ -10,6 +10,10 @@ export const sidebarMenu = [
 		path: path.therapySettings,
 	},
 	{
+		title: 'Тарифы и оплата',
+		path: path.rates,
+	},
+	{
 		title: 'Служба поддержки',
 		path: path.request,
 	},

@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { Cards } from '../Cards/Cards';
@@ -14,8 +14,10 @@ import {
 	MessageType,
 	SessionBlocks,
 	StageEnum,
+	Statuses,
 	setSessionBlock,
 } from '@/store/chat';
+import { SelectChatBlockEnum, selectChatBlock } from '@/utils/selectChatBlock';
 
 import { CheckWithUserList, ThoughtsWrap } from './TextMessage.styled';
 
@@ -26,6 +28,7 @@ interface TextMessageProps {
 	stage: StageEnum;
 	type?: MessageType;
 	additional_data: AdditionalData | null;
+	status: Statuses;
 }
 
 export const TextMessage: FC<TextMessageProps> = ({
@@ -35,12 +38,19 @@ export const TextMessage: FC<TextMessageProps> = ({
 	stage,
 	type,
 	additional_data,
+	status,
 }) => {
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
+	const [selectedChatBlock, setSelectedChatBlock] = useState<SelectChatBlockEnum | null>(null);
 	const { currentStage } = useAppSelector((state) => state.chat);
 	const [postMessage] = usePostMessageMutation();
 	const [fetchCreateSession] = useCreateSessionMutation();
+
+	useEffect(() => {
+		const chatBlock = selectChatBlock({ additional_data, buttons, stage, status });
+		setSelectedChatBlock(chatBlock);
+	}, []);
 
 	const sendCheckUser = (content: string, action: string, action_param?: number): void => {
 		if (type === MessageType.ERROR_MSG && action === 'NEW_SESSION') {
@@ -61,23 +71,11 @@ export const TextMessage: FC<TextMessageProps> = ({
 
 	return (
 		<WithMessage logoParam={logoParam} text={text}>
-			{stage === StageEnum.DISTORTIONS && buttons !== null ? (
-				<ThoughtsWrap>
-					{buttons.map(({ content }, i) => (
-						<Thoughts key={i} list={[]} title={content} />
-					))}
-				</ThoughtsWrap>
-			) : stage === StageEnum.NEW_THOUGHT_CREATION &&
-			  additional_data !== null &&
-			  additional_data?.cards ? (
-				<Cards data={additional_data.cards} />
-			) : (stage === StageEnum.QUESTIONNAIRE ||
-					stage === StageEnum.THERAPY_STARTING_POINT ||
-					stage === StageEnum.NEW_THOUGHT_CREATION ||
-					stage === StageEnum.DOUBT_CREATION) &&
-			  buttons !== null ? (
+			{selectedChatBlock === SelectChatBlockEnum.CARDS ? (
+				<Cards data={additional_data!.cards as string[]} />
+			) : selectedChatBlock === SelectChatBlockEnum.CHECK_WITH_USER ? (
 				<CheckWithUserList>
-					{buttons.map(({ content, action, action_param }, i) => (
+					{buttons!.map(({ content, action, action_param }, i) => (
 						<li key={i}>
 							<button onClick={() => sendCheckUser(content, action, action_param)}>
 								{content}
@@ -85,6 +83,12 @@ export const TextMessage: FC<TextMessageProps> = ({
 						</li>
 					))}
 				</CheckWithUserList>
+			) : selectedChatBlock === SelectChatBlockEnum.THOUGHTS ? (
+				<ThoughtsWrap>
+					{buttons!.map(({ content }, i) => (
+						<Thoughts key={i} list={[]} title={content} />
+					))}
+				</ThoughtsWrap>
 			) : undefined}
 		</WithMessage>
 	);

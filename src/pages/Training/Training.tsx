@@ -15,7 +15,7 @@ import { PersonMessage } from '@/hocs/WithMessage/WithMessage';
 import { useModal } from '@/hooks/useModal';
 import { path } from '@/router/path';
 import { useAppSelector } from '@/store';
-import { StageEnum } from '@/store/chat';
+import { StageEnum, Statuses } from '@/store/chat';
 import { TrainingParam } from '@/store/training';
 
 import { Container, DisabledBg, FilterBg, MessageWrap, Wrapper } from './Training.styled';
@@ -66,6 +66,7 @@ const Training: FC = () => {
 							buttons={searchBlock}
 							stage={StageEnum.QUESTIONNAIRE}
 							additional_data={null}
+							status={Statuses.IN_PROCESS}
 						/>
 					))}
 				</MessageWrap>

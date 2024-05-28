@@ -11,6 +11,15 @@ export enum SessionBlocks {
 	END_SESSION,
 }
 
+export enum Statuses {
+	NO_START,
+	IN_PROCESS,
+	ONE_OPTION,
+	SEVERAL_OPTION,
+	END_SESSION,
+	WAS_ONE_OF_SEVERAL,
+}
+
 export enum StageEnum {
 	SITUATION = 'SITUATION',
 	DISTORTIONS = 'DISTORTIONS',
@@ -53,7 +62,7 @@ export interface Message {
 	gpt: boolean;
 	role: null | string;
 	stage: StageEnum;
-	status: 1;
+	status: Statuses;
 	type: MessageType;
 }
 
@@ -109,7 +118,9 @@ export const chatSlice = createSlice({
 			if (messages.length) {
 				const lastMessage = messages[messages.length - 1];
 				state.buttonsBlock =
-					(lastMessage.buttons !== null && lastMessage.buttons.length > 0) ||
+					(lastMessage.buttons !== null &&
+						lastMessage.buttons.length > 0 &&
+						lastMessage.stage !== StageEnum.NEW_THOUGHT_CREATION) ||
 					!!lastMessage.additional_data?.cards;
 			}
 		},
@@ -120,7 +131,9 @@ export const chatSlice = createSlice({
 
 			state.currentSession.messages.push(action.payload);
 			state.buttonsBlock =
-				(action.payload.buttons !== null && action.payload.buttons.length > 0) ||
+				(action.payload.buttons !== null &&
+					action.payload.buttons.length > 0 &&
+					action.payload.stage !== StageEnum.NEW_THOUGHT_CREATION) ||
 				!!action.payload.additional_data?.cards;
 		},
 		setCurrentStage(state, action: PayloadAction<StageEnum>) {

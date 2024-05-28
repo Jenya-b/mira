@@ -35,7 +35,7 @@ export const MessageBlock: FC = () => {
 		<Wrapper>
 			<Container ref={contentRef}>
 				{currentSession?.messages.map(
-					({ author, buttons, content, stage, type, additional_data }, i) => (
+					({ author, buttons, content, stage, type, additional_data, status }, i) => (
 						<TextMessage
 							key={i}
 							logoParam={
@@ -50,6 +50,7 @@ export const MessageBlock: FC = () => {
 							stage={stage}
 							type={type}
 							additional_data={additional_data}
+							status={status}
 						/>
 					)
 				)}

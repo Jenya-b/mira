@@ -50,7 +50,6 @@ export const ThoughtsCards: FC<CardsProps> = ({ data }) => {
 				) : (
 					list.map((item) => <p key={item}>{item}</p>)
 				)}
-				{}
 			</div>
 		);
 	};
@@ -62,7 +61,7 @@ export const ThoughtsCards: FC<CardsProps> = ({ data }) => {
 	return (
 		<Wrapper>
 			<Slider data={data} renderData={renderSliderData} />
-			<Controls btnText1="Создать новую мысль" handleClickBtn1={handleClickBtn1} />
+			<Controls isIcon btnText1="Создать новую мысль" handleClickBtn1={handleClickBtn1} />
 		</Wrapper>
 	);
 };

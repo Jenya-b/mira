@@ -100,6 +100,14 @@ export const sessionApi = createApi({
 				},
 				body: { result },
 			}),
+			onQueryStarted: (_, { dispatch }) => {
+				try {
+					dispatch(setSessionBlock(SessionBlocks.CARDS));
+				} catch {
+					dispatch(setSessionBlock(SessionBlocks.CARDS));
+					throw new Error();
+				}
+			},
 		}),
 		postMessage: build.mutation<ButtonsWS, ButtonsWS>({
 			query: (body) => ({

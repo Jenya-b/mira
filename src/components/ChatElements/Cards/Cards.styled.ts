@@ -48,6 +48,8 @@ export const ButtonSecondary = styled.button`
 export const Cover = styled.div`
 	background: url(${coverImg}) no-repeat;
 	border-radius: 1.42857rem;
+	width: 100%;
+	height: 100%;
 	padding: 0.64rem 0.79rem 6rem 0.79rem;
 	display: flex;
 	flex-direction: column;

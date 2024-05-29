@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { Cards } from '../Cards/Cards';
 import { Thoughts } from '../Thoughts/Thoughts';
 
+import { instructionsThoughtsList } from '@/constants/chat';
 import { PersonMessage, WithMessage } from '@/hocs/WithMessage/WithMessage';
 import { path } from '@/router/path';
 import { useCreateSessionMutation, usePostMessageMutation } from '@/services/api/session';
@@ -72,7 +73,13 @@ export const TextMessage: FC<TextMessageProps> = ({
 	return (
 		<WithMessage logoParam={logoParam} text={text}>
 			{selectedChatBlock === SelectChatBlockEnum.CARDS ? (
-				<Cards data={additional_data!.cards as string[]} />
+				<Cards
+					data={[
+						'Примеры новых мыслей',
+						...(additional_data!.cards as string[]),
+						...instructionsThoughtsList,
+					]}
+				/>
 			) : selectedChatBlock === SelectChatBlockEnum.CHECK_WITH_USER ? (
 				<CheckWithUserList>
 					{buttons!.map(({ content, action, action_param }, i) => (

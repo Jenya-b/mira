@@ -30,7 +30,7 @@ export const StyledSwiper = styled(Swiper)`
 
 export const StyledSwiperSlide = styled(SwiperSlide)`
 	/* text-align: center; */
-	padding: 5.36rem 1.79rem 1rem 1.79rem;
+	/* padding: 5.36rem 1.79rem 1rem 1.79rem; */
 	font-size: 18px;
 	border-radius: 1.42857rem;
 	background: #488ce1;
@@ -49,7 +49,7 @@ export const StyledSwiperSlide = styled(SwiperSlide)`
 
 		svg {
 			position: absolute;
-			bottom: 4.79rem;
+			bottom: 3.79rem;
 			left: 50%;
 			transform: translateX(-50%);
 		}

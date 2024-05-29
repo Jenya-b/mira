@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { Cards } from '../Cards/Cards';
+import { ThoughtsCards } from '../Cards/ThoughtsCards';
 import { Thoughts } from '../Thoughts/Thoughts';
 
 import { instructionsThoughtsList } from '@/constants/chat';
@@ -73,7 +73,7 @@ export const TextMessage: FC<TextMessageProps> = ({
 	return (
 		<WithMessage logoParam={logoParam} text={text}>
 			{selectedChatBlock === SelectChatBlockEnum.CARDS ? (
-				<Cards
+				<ThoughtsCards
 					data={[
 						'Примеры новых мыслей',
 						...(additional_data!.cards as string[]),

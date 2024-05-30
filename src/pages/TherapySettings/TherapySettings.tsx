@@ -12,7 +12,8 @@ import { usePushNotifications } from '@/hooks/usePushNotifications';
 import { useResize } from '@/hooks/useResize';
 import { path } from '@/router/path';
 import { useGetNotificationQuery, useUpdateNotificationMutation } from '@/services/api/user';
-import { useAppSelector } from '@/store';
+import { useAppDispatch, useAppSelector } from '@/store';
+import { SessionBlocks, setSessionBlock } from '@/store/chat';
 import { DeviceTypeEnum } from '@/store/general';
 import { Subscription } from '@/store/user';
 import { ButtonPrimary } from '@/styles/components';
@@ -29,6 +30,7 @@ import {
 
 const TherapySettings: FC = () => {
 	const navigate = useNavigate();
+	const dispatch = useAppDispatch();
 	const [activeSettings, setActiveSettings] = useState(false);
 	const [activeSubmitBtn, setActiveSubmitBtn] = useState(false);
 	const [newNotificationData, setNewNotificationData] = useState<Subscription>({});
@@ -38,6 +40,7 @@ const TherapySettings: FC = () => {
 		(state) => state.general
 	);
 	const { notificationData } = useAppSelector((state) => state.user);
+	const { sessionBlock } = useAppSelector((state) => state.chat);
 	const [innerWidth] = useResize();
 	const { onClickSusbribeToPushNotification, userSubscription } = usePushNotifications();
 	const [updatePushData] = useUpdateNotificationMutation();
@@ -101,6 +104,9 @@ const TherapySettings: FC = () => {
 	};
 
 	const handleNavigate = (): void => {
+		if (sessionBlock === SessionBlocks.CARDS) {
+			dispatch(setSessionBlock(SessionBlocks.HOME));
+		}
 		navigate(path.home);
 	};
 

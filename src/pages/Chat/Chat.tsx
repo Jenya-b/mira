@@ -45,12 +45,12 @@ const ChatPage: FC = () => {
 	const { isActivePWA } = useAppSelector((state) => state.general);
 	const { ws } = useContext(ChatContext);
 	const [isOpenModal, openModal, closeModal] = useModal();
-	const { onClickSusbribeToPushNotification, userSubscription } = usePushNotifications();
+	const { onClickSusbribeToPushNotification, userSubscription, loading } = usePushNotifications();
 
 	const [postMessage, { isSuccess: isSuccessPost }] = usePostMessageMutation();
 
 	useEffect(() => {
-		if (!isActivePWA || userSubscription !== null) {
+		if (loading || !isActivePWA || userSubscription !== null) {
 			closeModal();
 
 			return;

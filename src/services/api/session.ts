@@ -94,7 +94,7 @@ export const sessionApi = createApi({
 		updateSession: build.mutation<Session, { id: number; result: number }>({
 			query: ({ id, result }) => ({
 				method: 'PATCH',
-				url: `/sessions/${id}/result`,
+				url: `/sessions/${id}/result/`,
 				headers: {
 					accept: 'application/json',
 				},

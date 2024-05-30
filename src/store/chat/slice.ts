@@ -49,14 +49,23 @@ export interface ButtonsWS {
 	content: string;
 }
 
+export type StringObject = {
+	[key: string]: string;
+};
+
+export type StringObjectButtons = {
+	[key: string]: ButtonsWS[];
+};
+
 export interface AdditionalData {
 	cards?: string[];
+	descriptions?: StringObject[];
 }
 
 export interface Message {
 	additional_data: AdditionalData | null;
 	author: Author;
-	buttons: ButtonsWS[] | null;
+	buttons: ButtonsWS[] | StringObjectButtons[] | null;
 	content: string;
 	created_at: string;
 	gpt: boolean;

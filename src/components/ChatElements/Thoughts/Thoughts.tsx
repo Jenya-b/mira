@@ -3,21 +3,23 @@ import { FC } from 'react';
 import { DialogSlide } from '../Dialog/Dialog';
 
 import { useModal } from '@/hooks/useModal';
+import { StringObject, StringObjectButtons } from '@/store/chat';
 
 import { List, Title, Wrapper } from './Thoughts.styled';
 
 interface ThoughtsProps {
-	title: string;
-	list: string[];
+	list: StringObjectButtons;
+	descriptions: StringObject | undefined;
+	sendCheckUser: (content: string, action: string, action_param?: number) => void;
 }
 
-export const Thoughts: FC<ThoughtsProps> = ({ list, title }) => {
+export const Thoughts: FC<ThoughtsProps> = ({ list, descriptions, sendCheckUser }) => {
 	const [open, openModal, closeModal] = useModal();
 
 	return (
 		<Wrapper>
 			<Title>
-				<h3>{title}</h3>
+				<h3>{Object.keys(list)[0]}</h3>
 				<svg
 					width="26"
 					height="26"
@@ -34,13 +36,17 @@ export const Thoughts: FC<ThoughtsProps> = ({ list, title }) => {
 				</svg>
 			</Title>
 			<List>
-				{list.map((item) => (
-					<li key={item}>
-						<button>{item}</button>
+				{Object.values(list)[0].map(({ action, content, action_param }) => (
+					<li key={content}>
+						<button onClick={() => sendCheckUser(content, action, action_param)}>{content}</button>
 					</li>
 				))}
 			</List>
-			<DialogSlide handleClickClose={closeModal} open={open} />
+			<DialogSlide
+				handleClickClose={closeModal}
+				open={open}
+				content={descriptions !== undefined ? Object.entries(descriptions)[0] : []}
+			/>
 		</Wrapper>
 	);
 };

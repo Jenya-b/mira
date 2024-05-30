@@ -16,6 +16,8 @@ import {
 	SessionBlocks,
 	StageEnum,
 	Statuses,
+	StringObject,
+	StringObjectButtons,
 	setSessionBlock,
 } from '@/store/chat';
 import { SelectChatBlockEnum, selectChatBlock } from '@/utils/selectChatBlock';
@@ -25,7 +27,7 @@ import { CheckWithUserList, ThoughtsWrap } from './TextMessage.styled';
 interface TextMessageProps {
 	logoParam: PersonMessage;
 	text: string;
-	buttons: ButtonsWS[] | null;
+	buttons: ButtonsWS[] | StringObjectButtons[] | null;
 	stage: StageEnum;
 	type?: MessageType;
 	additional_data: AdditionalData | null;
@@ -44,17 +46,23 @@ export const TextMessage: FC<TextMessageProps> = ({
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
 	const [selectedChatBlock, setSelectedChatBlock] = useState<SelectChatBlockEnum | null>(null);
+	const [selectedButtons, setSelectedButtons] = useState<string>('');
 	const { currentStage } = useAppSelector((state) => state.chat);
 	const [postMessage] = usePostMessageMutation();
 	const [fetchCreateSession] = useCreateSessionMutation();
 
 	useEffect(() => {
-		const chatBlock = selectChatBlock({ additional_data, buttons, stage, status });
+		const chatBlock = selectChatBlock({
+			additional_data,
+			buttons: buttons as ButtonsWS[],
+			stage,
+			status,
+		});
 		setSelectedChatBlock(chatBlock);
 	}, []);
 
 	const sendCheckUser = (content: string, action: string, action_param?: number): void => {
-		if (type === MessageType.ERROR_MSG && action === 'NEW_SESSION') {
+		if ((type === MessageType.ERROR_MSG || type === MessageType.MSG) && action === 'NEW_SESSION') {
 			fetchCreateSession(null);
 		} else if (currentStage === StageEnum.QUESTIONNAIRE && action === 'SAVE_QUESTION') {
 			navigate(path.questions);
@@ -64,7 +72,8 @@ export const TextMessage: FC<TextMessageProps> = ({
 			currentStage === StageEnum.QUESTIONNAIRE ||
 			currentStage === StageEnum.THERAPY_STARTING_POINT ||
 			currentStage === StageEnum.NEW_THOUGHT_CREATION ||
-			currentStage === StageEnum.DOUBT_CREATION
+			currentStage === StageEnum.DOUBT_CREATION ||
+			currentStage === StageEnum.DISTORTIONS
 		) {
 			postMessage({ content, action, action_param });
 		}
@@ -82,9 +91,15 @@ export const TextMessage: FC<TextMessageProps> = ({
 				/>
 			) : selectedChatBlock === SelectChatBlockEnum.CHECK_WITH_USER ? (
 				<CheckWithUserList>
-					{buttons!.map(({ content, action, action_param }, i) => (
+					{(buttons as ButtonsWS[])!.map(({ content, action, action_param }, i) => (
 						<li key={i}>
-							<button onClick={() => sendCheckUser(content, action, action_param)}>
+							<button
+								className={content === selectedButtons ? 'active' : ''}
+								onClick={() => {
+									setSelectedButtons(content);
+									sendCheckUser(content, action, action_param);
+								}}
+							>
 								{content}
 							</button>
 						</li>
@@ -92,8 +107,13 @@ export const TextMessage: FC<TextMessageProps> = ({
 				</CheckWithUserList>
 			) : selectedChatBlock === SelectChatBlockEnum.THOUGHTS ? (
 				<ThoughtsWrap>
-					{buttons!.map(({ content }, i) => (
-						<Thoughts key={i} list={[]} title={content} />
+					{(buttons as StringObjectButtons[])!.map((item, i) => (
+						<Thoughts
+							key={i}
+							list={item}
+							descriptions={(additional_data?.descriptions as StringObject[])[i]}
+							sendCheckUser={sendCheckUser}
+						/>
 					))}
 				</ThoughtsWrap>
 			) : undefined}

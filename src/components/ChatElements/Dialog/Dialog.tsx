@@ -8,17 +8,14 @@ import { Button, Content, Title } from './Dialog.styled';
 interface DialogSlideProps {
 	open: boolean;
 	handleClickClose: () => void;
+	content: string[];
 }
 
-export const DialogSlide: FC<DialogSlideProps> = ({ handleClickClose, open }) => (
+export const DialogSlide: FC<DialogSlideProps> = ({ handleClickClose, open, content }) => (
 	<WithModal open={open} handleClickClose={handleClickClose}>
 		<>
-			<Title>Долженствование</Title>
-			<Content>
-				{' '}
-				Накладывание строгих, часто нереальных стандартов на себя или других, обычно с
-				использованием слов "должен" или "необходимо".
-			</Content>
+			<Title>{content[0] ?? ''}</Title>
+			<Content> {content[1] ?? ''}</Content>
 			<Button onClick={handleClickClose}>Понятно, назад</Button>
 		</>
 	</WithModal>

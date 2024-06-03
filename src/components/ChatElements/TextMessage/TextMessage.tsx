@@ -1,12 +1,12 @@
 import { FC, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-// import { DistortionCards } from '../Cards/DistortionCards';
+import { DistortionCards } from '../Cards/DistortionCards';
 import { ThoughtsCards } from '../Cards/ThoughtsCards';
 import { Thoughts } from '../Thoughts/Thoughts';
 
 import { instructionsThoughtsList } from '@/constants/chat';
-// import { distortionCards } from '@/constants/distortionCards';
+import { distortionCards } from '@/constants/distortionCards';
 import { PersonMessage, WithMessage } from '@/hocs/WithMessage/WithMessage';
 import { path } from '@/router/path';
 import { useCreateSessionMutation, usePostMessageMutation } from '@/services/api/session';
@@ -35,7 +35,7 @@ interface TextMessageProps {
 	type?: MessageType;
 	additional_data: AdditionalData | null;
 	status: Statuses;
-	id: number;
+	id: number | undefined;
 }
 
 export const TextMessage: FC<TextMessageProps> = ({
@@ -130,7 +130,6 @@ export const TextMessage: FC<TextMessageProps> = ({
 							</li>
 						))}
 					</CheckWithUserList>
-					{/* <DistortionCards data={distortionCards.ought} degree={0} type={0} /> */}
 				</>
 			) : selectedChatBlock === SelectChatBlockEnum.THOUGHTS ? (
 				<ThoughtsWrap>
@@ -143,6 +142,23 @@ export const TextMessage: FC<TextMessageProps> = ({
 						/>
 					))}
 				</ThoughtsWrap>
+			) : selectedChatBlock === SelectChatBlockEnum.DISTORTION_CARDS &&
+			  additional_data !== null &&
+			  additional_data.distortion_tag &&
+			  additional_data.severity &&
+			  buttons !== null ? (
+				<DistortionCards
+					data={distortionCards.ought}
+					degree={additional_data.severity}
+					type={additional_data.distortion_tag}
+					handleClickBtn1={() =>
+						sendCheckUser(
+							(buttons as ButtonsWS[])[0].content,
+							(buttons as ButtonsWS[])[0].action,
+							(buttons as ButtonsWS[])[0].action_param
+						)
+					}
+				/>
 			) : undefined}
 		</WithMessage>
 	);

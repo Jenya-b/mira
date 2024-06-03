@@ -1,31 +1,10 @@
-export enum DegreeOfExpression {
-	LOW,
-	AVERAGE,
-	HIGH,
-}
+import { DegreeOfExpression, DistortionCardsEnum } from '@/store/chat';
 
 export const DegreeOfExpressionNames = {
 	[DegreeOfExpression.LOW]: 'Низкая',
 	[DegreeOfExpression.AVERAGE]: 'Средняя',
 	[DegreeOfExpression.HIGH]: 'Высокая',
 };
-
-export enum DistortionCardsEnum {
-	CATASTROPHIZATION, // Катастрофизация
-	OUGHT, // Долженствование
-	HYPERGENERALIZATION, // Гиперобобщение
-	BLACK_AND_WHITE_THINKING, // Чёрно-белое мышление
-	FILTRATION, // Фильтрация
-	PERSONALIZATION, // Персонализация
-	EMOTIONAL_REASONING, // Эмоциональная аргументация
-	MAGNIFICATION_MINIMIZATION, // Магнификация/минимизация
-	NEGATIVE_FORECASTING, // Негативное прогнозирование
-	MIND_READING, // Чтение мыслей
-	UNFAIR_COMPARISON, // Несправедливое сравнение
-	PERFECTIONISM, // Перфекционизм
-	MAGICAL_THINKING, // Магическое мышление
-	LABELING, // Навешивание ярлыков
-}
 
 export const DistortionNames = {
 	[DistortionCardsEnum.CATASTROPHIZATION]: 'Катастрофизация',

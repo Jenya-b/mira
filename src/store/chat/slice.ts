@@ -43,6 +43,29 @@ export enum Author {
 	PSYCHOLOGIST,
 }
 
+export enum DegreeOfExpression {
+	LOW,
+	AVERAGE,
+	HIGH,
+}
+
+export enum DistortionCardsEnum {
+	CATASTROPHIZATION = 'CTPH', // Катастрофизация
+	OUGHT = 'OGTM', // Долженствование
+	HYPERGENERALIZATION = 'OVGN', // Гиперобобщение
+	BLACK_AND_WHITE_THINKING = 'BWTK', // Чёрно-белое мышление
+	FILTRATION = 'FLTG', // Фильтрация
+	PERSONALIZATION = 'PRSZ', // Персонализация
+	EMOTIONAL_REASONING = 'EMRS', // Эмоциональная аргументация
+	MAGNIFICATION_MINIMIZATION = 'MGMM', // Магнификация/минимизация
+	NEGATIVE_FORECASTING = 'NGFC', // Негативное прогнозирование
+	MIND_READING = 'MDRD', // Чтение мыслей
+	UNFAIR_COMPARISON = 'UFCO', // Несправедливое сравнение
+	PERFECTIONISM = 'PRFM', // Перфекционизм
+	MAGICAL_THINKING = 'MGTK', // Магическое мышление
+	LABELING = 'LBLG', // Навешивание ярлыков
+}
+
 export interface ButtonsWS {
 	action: string;
 	action_param?: number;
@@ -60,10 +83,12 @@ export type StringObjectButtons = {
 export interface AdditionalData {
 	cards?: string[];
 	descriptions?: StringObject[];
+	severity?: DegreeOfExpression;
+	distortion_tag?: DistortionCardsEnum;
 }
 
 export interface Message {
-	id: number;
+	id?: number;
 	additional_data: AdditionalData | null;
 	author: Author;
 	buttons: ButtonsWS[] | StringObjectButtons[] | null;

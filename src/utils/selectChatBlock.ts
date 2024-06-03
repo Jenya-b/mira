@@ -12,6 +12,7 @@ export enum SelectChatBlockEnum {
 	CHECK_WITH_USER,
 	THOUGHTS,
 	UNDEFINED,
+	DISTORTION_CARDS,
 }
 
 export const selectChatBlock = ({
@@ -20,6 +21,10 @@ export const selectChatBlock = ({
 	additional_data,
 	status,
 }: SelectChatBlockType): SelectChatBlockEnum => {
+	if (additional_data !== null && additional_data?.distortion_tag) {
+		return SelectChatBlockEnum.DISTORTION_CARDS;
+	}
+
 	if (
 		stage === StageEnum.NEW_THOUGHT_CREATION &&
 		additional_data !== null &&

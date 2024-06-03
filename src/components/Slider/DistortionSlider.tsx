@@ -3,12 +3,11 @@ import { FC, useEffect, useState } from 'react';
 import { Cover, InstructionCover } from '../ChatElements/Cards/Cards.styled';
 
 import {
-	DegreeOfExpression,
 	DegreeOfExpressionNames,
 	DistortionCardType,
-	DistortionCardsEnum,
 	DistortionNames,
 } from '@/constants/distortionCards';
+import { DegreeOfExpression, DistortionCardsEnum } from '@/store/chat';
 import { arrayConversion } from '@/utils/arrayConversion';
 
 import { Order, StyledSwiper, StyledSwiperSlide } from './Slider.styled';

@@ -63,6 +63,7 @@ export interface AdditionalData {
 }
 
 export interface Message {
+	id: number;
 	additional_data: AdditionalData | null;
 	author: Author;
 	buttons: ButtonsWS[] | StringObjectButtons[] | null;

@@ -173,16 +173,19 @@ export const messagesList = [
 
 export const messagesListTraining = [
 	{
+		id: 1,
 		logoParam: 'user',
 		text: 'Подскажи конкретные шаги, как я себе могу чем-то помочь',
 		searchBlock: [],
 	},
 	{
+		id: 2,
 		logoParam: 'mira',
 		text: 'Конечно, я готов помочь. Пожалуйста, расскажи мне, в чем именно твоя проблема или что тебя беспокоит, и мы вместе попытаемся найти решение.',
 		searchBlock: [],
 	},
 	{
+		id: 3,
 		logoParam: 'user',
 		text: 'Спасибо, а еще?',
 		searchBlock: [],

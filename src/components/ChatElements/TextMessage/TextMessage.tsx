@@ -35,6 +35,7 @@ interface TextMessageProps {
 	type?: MessageType;
 	additional_data: AdditionalData | null;
 	status: Statuses;
+	id: number;
 }
 
 export const TextMessage: FC<TextMessageProps> = ({
@@ -45,12 +46,13 @@ export const TextMessage: FC<TextMessageProps> = ({
 	type,
 	additional_data,
 	status,
+	id,
 }) => {
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
 	const [selectedChatBlock, setSelectedChatBlock] = useState<SelectChatBlockEnum | null>(null);
 	const [selectedButtons, setSelectedButtons] = useState<string>('');
-	const { currentStage } = useAppSelector((state) => state.chat);
+	const { currentStage, currentSession } = useAppSelector((state) => state.chat);
 	const [postMessage] = usePostMessageMutation();
 	const [fetchCreateSession] = useCreateSessionMutation();
 
@@ -65,6 +67,12 @@ export const TextMessage: FC<TextMessageProps> = ({
 	}, []);
 
 	const sendCheckUser = (content: string, action: string, action_param?: number): void => {
+		const lastId = currentSession!.messages[currentSession!.messages.length - 1]?.id;
+
+		if (lastId !== id) {
+			return;
+		}
+
 		if ((type === MessageType.ERROR_MSG || type === MessageType.MSG) && action === 'NEW_SESSION') {
 			fetchCreateSession(null);
 		} else if (currentStage === StageEnum.QUESTIONNAIRE && action === 'SAVE_QUESTION') {
@@ -81,6 +89,21 @@ export const TextMessage: FC<TextMessageProps> = ({
 		) {
 			postMessage({ content, action, action_param });
 		}
+	};
+
+	const handleSelectButtons = (
+		content: string,
+		action: string,
+		action_param: number | undefined
+	): void => {
+		const lastId = currentSession!.messages[currentSession!.messages.length - 1]?.id;
+
+		if (lastId !== id) {
+			return;
+		}
+
+		setSelectedButtons(content);
+		sendCheckUser(content, action, action_param);
 	};
 
 	return (
@@ -100,10 +123,7 @@ export const TextMessage: FC<TextMessageProps> = ({
 							<li key={i}>
 								<button
 									className={content === selectedButtons ? 'active' : ''}
-									onClick={() => {
-										setSelectedButtons(content);
-										sendCheckUser(content, action, action_param);
-									}}
+									onClick={() => handleSelectButtons(content, action, action_param)}
 								>
 									{content}
 								</button>

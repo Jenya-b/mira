@@ -58,15 +58,16 @@ const Training: FC = () => {
 		<Wrapper>
 			<Container>
 				<MessageWrap>
-					{messagesListTraining.map(({ text, searchBlock, logoParam }, i) => (
+					{messagesListTraining.map(({ text, searchBlock, logoParam, id }) => (
 						<TextMessage
-							key={i}
+							key={id}
 							logoParam={logoParam as PersonMessage}
 							text={text}
 							buttons={searchBlock}
 							stage={StageEnum.QUESTIONNAIRE}
 							additional_data={null}
 							status={Statuses.IN_PROCESS}
+							id={id}
 						/>
 					))}
 				</MessageWrap>

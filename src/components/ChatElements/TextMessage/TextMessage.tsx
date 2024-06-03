@@ -20,6 +20,7 @@ import {
 	Statuses,
 	StringObject,
 	StringObjectButtons,
+	disconnectCurrentSession,
 	setSessionBlock,
 } from '@/store/chat';
 import { SelectChatBlockEnum, selectChatBlock } from '@/utils/selectChatBlock';
@@ -70,6 +71,7 @@ export const TextMessage: FC<TextMessageProps> = ({
 			navigate(path.questions);
 		} else if (currentStage === StageEnum.NEW_THOUGHT_CREATION && action === 'FINISH_SESSION') {
 			dispatch(setSessionBlock(SessionBlocks.FEEDBACK));
+			dispatch(disconnectCurrentSession());
 		} else if (
 			currentStage === StageEnum.QUESTIONNAIRE ||
 			currentStage === StageEnum.THERAPY_STARTING_POINT ||

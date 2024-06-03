@@ -133,6 +133,13 @@ export const chatSlice = createSlice({
 					!!lastMessage.additional_data?.cards;
 			}
 		},
+		disconnectCurrentSession(state) {
+			if (state.currentSession === null) {
+				return;
+			}
+
+			state.currentSession = { ...state.currentSession, active: false };
+		},
 		addMessage(state, action: PayloadAction<Message>) {
 			if (state.currentSession === null) {
 				return;
@@ -163,6 +170,7 @@ export const {
 	addMessage,
 	setCurrentStage,
 	setIsButtonsBlock,
+	disconnectCurrentSession,
 } = chatSlice.actions;
 
 export const chatReducer = chatSlice.reducer;

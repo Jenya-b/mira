@@ -1,10 +1,12 @@
 import { FC, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+// import { DistortionCards } from '../Cards/DistortionCards';
 import { ThoughtsCards } from '../Cards/ThoughtsCards';
 import { Thoughts } from '../Thoughts/Thoughts';
 
 import { instructionsThoughtsList } from '@/constants/chat';
+// import { distortionCards } from '@/constants/distortionCards';
 import { PersonMessage, WithMessage } from '@/hocs/WithMessage/WithMessage';
 import { path } from '@/router/path';
 import { useCreateSessionMutation, usePostMessageMutation } from '@/services/api/session';
@@ -90,21 +92,24 @@ export const TextMessage: FC<TextMessageProps> = ({
 					]}
 				/>
 			) : selectedChatBlock === SelectChatBlockEnum.CHECK_WITH_USER ? (
-				<CheckWithUserList>
-					{(buttons as ButtonsWS[])!.map(({ content, action, action_param }, i) => (
-						<li key={i}>
-							<button
-								className={content === selectedButtons ? 'active' : ''}
-								onClick={() => {
-									setSelectedButtons(content);
-									sendCheckUser(content, action, action_param);
-								}}
-							>
-								{content}
-							</button>
-						</li>
-					))}
-				</CheckWithUserList>
+				<>
+					<CheckWithUserList>
+						{(buttons as ButtonsWS[])!.map(({ content, action, action_param }, i) => (
+							<li key={i}>
+								<button
+									className={content === selectedButtons ? 'active' : ''}
+									onClick={() => {
+										setSelectedButtons(content);
+										sendCheckUser(content, action, action_param);
+									}}
+								>
+									{content}
+								</button>
+							</li>
+						))}
+					</CheckWithUserList>
+					{/* <DistortionCards data={distortionCards.ought} degree={0} type={0} /> */}
+				</>
 			) : selectedChatBlock === SelectChatBlockEnum.THOUGHTS ? (
 				<ThoughtsWrap>
 					{(buttons as StringObjectButtons[])!.map((item, i) => (

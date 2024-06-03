@@ -79,6 +79,24 @@ export const Cover = styled.div`
 			line-height: 120%;
 		}
 
+		&__degree {
+			border-radius: 0.80614rem;
+			font-size: 1rem;
+			font-weight: 500;
+			line-height: 120%;
+			padding: 0.8rem 1.48rem;
+
+			&.low {
+				background: #dda538;
+			}
+			&.average {
+				background: #dd7338;
+			}
+			&.high {
+				background: #dd3838;
+			}
+		}
+
 		&__text {
 			font-size: 1rem;
 			font-weight: 500;
@@ -99,6 +117,7 @@ export const Cover = styled.div`
 
 export const InstructionCover = styled.div`
 	display: flex;
+	width: 100%;
 	justify-content: center;
 	align-items: center;
 	font-size: 2.14286rem;

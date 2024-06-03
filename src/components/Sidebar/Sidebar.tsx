@@ -79,7 +79,7 @@ export const Sidebar: FC<SidebarProps> = ({ closeMenu }) => {
 				{currentSession && currentSession.active ? (
 					<ButtonPrimory onClick={handleOpenActiveSession}>
 						<img src={arrowRight} alt="" />
-						<p>Продолжить активную сессию</p>
+						<p>Продолжить сессию</p>
 					</ButtonPrimory>
 				) : user && user.available_sessions ? (
 					<ButtonPrimory>

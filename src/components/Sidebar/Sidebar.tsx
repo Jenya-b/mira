@@ -91,7 +91,7 @@ export const Sidebar: FC<SidebarProps> = ({ closeMenu }) => {
 						<img src={noOkIcon} alt="" />
 						<p className="noactive">
 							<span>
-								<strong>0</strong> доступных сессий
+								<strong>{user?.available_sessions ?? ''}</strong> доступных сессий
 							</span>
 							<span>Приобрести сессии</span>
 						</p>

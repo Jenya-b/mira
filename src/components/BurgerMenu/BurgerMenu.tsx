@@ -28,6 +28,7 @@ export const BurgerMenu: FC = () => {
 	const location = useLocation();
 	const dispatch = useAppDispatch();
 	const { isOpenBurgerMenu } = useAppSelector((state) => state.general);
+	const { user } = useAppSelector((state) => state.user);
 	const { activeFilter } = useAppSelector((state) => state.practice);
 	const [innerWidth] = useResize();
 
@@ -84,7 +85,7 @@ export const BurgerMenu: FC = () => {
 									fillOpacity="0.5"
 								/>
 							</svg>
-							<p>22</p>
+							<p>{user?.available_sessions ?? 0}</p>
 						</CountSession>
 					</>
 				)}

@@ -1,6 +1,7 @@
+import { animated } from '@react-spring/web';
 import styled from 'styled-components';
 
-export const Wrapper = styled.div`
+export const Wrapper = styled(animated.div)`
 	display: grid;
 	grid-template-columns: 2.6rem 1fr;
 	column-gap: 2rem;

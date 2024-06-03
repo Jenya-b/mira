@@ -1,3 +1,4 @@
+import { useSpring } from '@react-spring/web';
 import { FC } from 'react';
 
 import miraIcon from '@/assets/images/icons/logo-chat.svg';
@@ -18,25 +19,32 @@ interface WithMessageProps {
 	children?: JSX.Element;
 }
 
-export const WithMessage: FC<WithMessageProps> = ({ logoParam, text, children }) => (
-	<Wrapper>
-		<Logo className={logoParam}>
-			<img
-				src={
-					logoParam === PersonMessage.MIRA_MAIN
-						? miraIcon
-						: logoParam === PersonMessage.MIRA_CHECK
-							? miraCheckIcon
-							: userIcon
-				}
-				alt="logo"
-			/>
-		</Logo>
-		<Text className={logoParam}>
-			{text.split('\r\n').map((item, i) => (
-				<p key={i}>{item}</p>
-			))}
-		</Text>
-		{children}
-	</Wrapper>
-);
+export const WithMessage: FC<WithMessageProps> = ({ logoParam, text, children }) => {
+	const props = useSpring({
+		from: { opacity: 0 },
+		to: { opacity: 1 },
+	});
+
+	return (
+		<Wrapper style={props}>
+			<Logo className={logoParam}>
+				<img
+					src={
+						logoParam === PersonMessage.MIRA_MAIN
+							? miraIcon
+							: logoParam === PersonMessage.MIRA_CHECK
+								? miraCheckIcon
+								: userIcon
+					}
+					alt="logo"
+				/>
+			</Logo>
+			<Text className={logoParam}>
+				{text.split('\r\n').map((item, i) => (
+					<p key={i}>{item}</p>
+				))}
+			</Text>
+			{children}
+		</Wrapper>
+	);
+};

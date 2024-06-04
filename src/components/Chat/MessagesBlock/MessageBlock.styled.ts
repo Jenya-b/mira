@@ -12,7 +12,7 @@ export const Wrapper = styled.div`
 `;
 
 export const Container = styled.div`
-	padding: 3rem 0 1.5rem 0;
+	padding: 5rem 0 1.5rem 0;
 	grid-column: 2/3;
 	display: flex;
 	flex-direction: column;

@@ -40,7 +40,7 @@ export const WithMessage: FC<WithMessageProps> = ({ logoParam, text, children })
 				/>
 			</Logo>
 			<Text className={logoParam}>
-				{text.split('\r\n').map((item, i) => (
+				{text.split('\n').map((item, i) => (
 					<p key={i}>{item}</p>
 				))}
 			</Text>

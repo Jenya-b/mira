@@ -99,7 +99,7 @@ export const furtherActionsPractice: FurtherActions[] = [
 	{
 		img: arrowIcon,
 		title: 'Вернуться назад',
-		redirection: FurtherActionsEnum.MAIN,
+		redirection: FurtherActionsEnum.HOME,
 	},
 ];
 
@@ -126,7 +126,7 @@ export const furtherActionsHelp: FurtherActions[] = [
 	{
 		img: arrowIcon,
 		title: 'Вернуться назад',
-		redirection: FurtherActionsEnum.MAIN,
+		redirection: FurtherActionsEnum.HOME,
 	},
 ];
 

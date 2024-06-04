@@ -28,7 +28,7 @@ export const MessageBlock: FC = () => {
 			return;
 		}
 
-		setTimeout(() => el.scrollIntoView({ block: 'center', behavior: 'smooth' }));
+		setTimeout(() => el.scrollIntoView({ block: 'end', inline: 'nearest' }));
 	}, [currentSession, isLoader]);
 
 	return (

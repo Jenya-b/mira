@@ -5,6 +5,7 @@ import icon4 from '@/assets/images/icons/rates/icon4.svg';
 
 export const rateList = [
 	{
+		id: 1,
 		title: '7 сессий',
 		services: [
 			{
@@ -28,6 +29,7 @@ export const rateList = [
 		discount: 0,
 	},
 	{
+		id: 2,
 		title: '14 сессий',
 		services: [
 			{
@@ -51,6 +53,7 @@ export const rateList = [
 		discount: 10,
 	},
 	{
+		id: 3,
 		title: '30 сессий',
 		services: [
 			{

@@ -8,6 +8,7 @@ import { BaseModal } from '@/components/Modal/Modal';
 import { rateList } from '@/constants/rates';
 import { useModal } from '@/hooks/useModal';
 import { useResize } from '@/hooks/useResize';
+import { useLazyGetPaymentLinkQuery } from '@/services/api/rate';
 
 import { Container, RatesWrap, Title, Wrapper } from './Rates.styled';
 
@@ -15,8 +16,14 @@ const Rates: FC = () => {
 	const [width, height] = useResize();
 	const [party, setParty] = useState(false);
 	const [isOpen, openModal, closeModal] = useModal();
+	const [fetchPaymentLink] = useLazyGetPaymentLinkQuery();
 
 	const handleSubmit = (): void => {
+		fetchPaymentLink(1)
+			.unwrap()
+			.then((url) => {
+				window.open(url, '_blank', 'noopener,noreferrer');
+			});
 		openModal();
 		setParty(true);
 	};

@@ -2,6 +2,7 @@ import { FC, useEffect, useState } from 'react';
 
 import { Cover, InstructionCover } from '../ChatElements/Cards/Cards.styled';
 
+import { cardsImg } from '@/constants/cardsImg';
 import {
 	DegreeOfExpressionNames,
 	DistortionCardType,
@@ -23,6 +24,13 @@ export const DistortionSlider: FC<SliderProps> = ({ data, degree, type }) => {
 		instruction: 0,
 		all: 0,
 	});
+	const [imgCover, setImgCover] = useState<string>(cardsImg[0]);
+
+	useEffect(() => {
+		const length = cardsImg.length;
+		const random = Math.floor(Math.random() * length);
+		setImgCover(cardsImg[random]);
+	}, []);
 
 	useEffect(() => {
 		const privateManifestationsLength = arrayConversion(data.privateManifestations, 3).length;
@@ -57,7 +65,7 @@ export const DistortionSlider: FC<SliderProps> = ({ data, degree, type }) => {
 			grabCursor
 		>
 			<StyledSwiperSlide>
-				<Cover>
+				<Cover style={{ background: `url(${imgCover}) no-repeat` }}>
 					<div className="warning">
 						<div
 							className={`warning__degree ${degree === DegreeOfExpression.LOW ? 'low' : degree === DegreeOfExpression.AVERAGE ? 'average' : 'high'}`}

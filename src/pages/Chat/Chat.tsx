@@ -43,7 +43,7 @@ const ChatPage: FC = () => {
 	);
 	const { accessToken } = useAppSelector((state) => state.user);
 	const { isActivePWA } = useAppSelector((state) => state.general);
-	const { ws } = useContext(ChatContext);
+	const { ws, reconnectInterval } = useContext(ChatContext);
 	const [isOpenModal, openModal, closeModal] = useModal();
 	const { onClickSusbribeToPushNotification, userSubscription, loading } = usePushNotifications();
 
@@ -93,8 +93,8 @@ const ChatPage: FC = () => {
 		dispatch(setInputValue(''));
 	}, [isSuccessPost]);
 
-	useEffect(() => {
-		if (ws === null) {
+	const connectWebSocket = (): void => {
+		if (ws === null || reconnectInterval === null) {
 			return;
 		}
 
@@ -102,11 +102,27 @@ const ChatPage: FC = () => {
 			`${import.meta.env.VITE_API_WEB_SOCKET_URL}/chat/?token=${accessToken}`
 		);
 
-		ws.current.onopen = () => console.log('ws opened');
+		ws.current.onopen = () => {
+			console.log('ws opened');
 
-		ws.current.onclose = () => console.log('ws closed');
+			if (reconnectInterval.current) {
+				clearInterval(reconnectInterval.current);
+				reconnectInterval.current = null;
+			}
+		};
 
-		ws.current.onmessage = function (event) {
+		ws.current.onclose = () => {
+			console.log('ws closed');
+
+			if (reconnectInterval.current === null) {
+				reconnectInterval.current = setInterval(() => {
+					console.log('Attempting to reconnect...');
+					connectWebSocket();
+				}, 2000); // Период попыток переподключения в миллисекундах
+			}
+		};
+
+		ws.current.onmessage = (event) => {
 			try {
 				const json: WSMessage = JSON.parse(event.data);
 
@@ -119,12 +135,24 @@ const ChatPage: FC = () => {
 				throw new Error();
 			}
 		};
+	};
 
-		const wsCurrent = ws.current;
+	useEffect(() => {
+		if (ws === null || reconnectInterval === null) {
+			return;
+		}
+
+		connectWebSocket();
 
 		// eslint-disable-next-line consistent-return
 		return () => {
-			wsCurrent.close();
+			if (ws.current) {
+				ws.current.close();
+			}
+
+			if (reconnectInterval.current !== null) {
+				clearInterval(reconnectInterval.current);
+			}
 		};
 	}, []);
 

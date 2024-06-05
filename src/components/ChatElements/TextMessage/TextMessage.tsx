@@ -150,7 +150,7 @@ export const TextMessage: FC<TextMessageProps> = ({
 			  additional_data.severity &&
 			  buttons !== null ? (
 				<DistortionCards
-					data={distortionCards.ought}
+					data={distortionCards[additional_data.distortion_tag]}
 					degree={additional_data.severity}
 					type={additional_data.distortion_tag}
 					handleClickBtn1={() =>

@@ -116,11 +116,11 @@ const ChatPage: FC = () => {
 
 		ws.current.onclose = () => {
 			console.log('ws closed');
-			dispatch(setReconnectWS(true));
 
 			if (reconnectInterval.current === null) {
 				reconnectInterval.current = setInterval(() => {
 					console.log('Attempting to reconnect...');
+					dispatch(setReconnectWS(true));
 					connectWebSocket();
 				}, 2000); // Период попыток переподключения в миллисекундах
 			}

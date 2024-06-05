@@ -130,7 +130,7 @@ const ChatPage: FC = () => {
 					return;
 				}
 
-				dispatch(addMessage(json.message as Message));
+				dispatch(addMessage({ ...json.message, newMessage: true } as Message));
 			} catch {
 				throw new Error();
 			}

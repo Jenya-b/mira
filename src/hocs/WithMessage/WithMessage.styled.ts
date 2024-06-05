@@ -10,6 +10,11 @@ export const Wrapper = styled(animated.div)`
 		align-self: flex-end;
 		column-gap: 0.79rem;
 		grid-template-columns: 2.14286rem 1fr;
+
+		&.mira,
+		&.mira-check {
+			align-self: flex-start;
+		}
 	}
 `;
 

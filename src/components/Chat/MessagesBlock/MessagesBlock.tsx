@@ -11,7 +11,7 @@ import { Container, Wrapper } from './MessageBlock.styled';
 
 export const MessageBlock: FC = () => {
 	const dispatch = useAppDispatch();
-	const { currentSession } = useAppSelector((state) => state.chat);
+	const { currentSession, typingComplete } = useAppSelector((state) => state.chat);
 	const [isLoader, setIsLoader] = useState(false);
 	const contentRef = useRef<HTMLDivElement>(null);
 
@@ -28,14 +28,17 @@ export const MessageBlock: FC = () => {
 			return;
 		}
 
-		setTimeout(() => el.scrollIntoView({ block: 'end', inline: 'nearest' }));
-	}, [currentSession, isLoader]);
+		setTimeout(() => el.scrollIntoView({ block: 'start', inline: 'nearest' }));
+	}, [currentSession, isLoader, typingComplete]);
 
 	return (
 		<Wrapper>
 			<Container ref={contentRef}>
 				{currentSession?.messages.map(
-					({ author, buttons, content, stage, type, additional_data, status, id }, i) => (
+					(
+						{ author, buttons, content, stage, type, additional_data, status, id, newMessage },
+						i
+					) => (
 						<TextMessage
 							key={i}
 							logoParam={
@@ -52,6 +55,7 @@ export const MessageBlock: FC = () => {
 							additional_data={additional_data}
 							status={status}
 							id={id}
+							newMessage={newMessage}
 						/>
 					)
 				)}

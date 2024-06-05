@@ -36,6 +36,7 @@ interface TextMessageProps {
 	additional_data: AdditionalData | null;
 	status: Statuses;
 	id: number | undefined;
+	newMessage?: boolean;
 }
 
 export const TextMessage: FC<TextMessageProps> = ({
@@ -47,6 +48,7 @@ export const TextMessage: FC<TextMessageProps> = ({
 	additional_data,
 	status,
 	id,
+	newMessage = false,
 }) => {
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
@@ -107,7 +109,7 @@ export const TextMessage: FC<TextMessageProps> = ({
 	};
 
 	return (
-		<WithMessage logoParam={logoParam} text={text}>
+		<WithMessage logoParam={logoParam} text={text} newMessage={newMessage}>
 			{selectedChatBlock === SelectChatBlockEnum.CARDS ? (
 				<ThoughtsCards
 					data={[

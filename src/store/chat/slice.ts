@@ -99,6 +99,7 @@ export interface Message {
 	stage: StageEnum;
 	status: Statuses;
 	type: MessageType;
+	newMessage?: boolean;
 }
 
 export interface Session {
@@ -118,6 +119,7 @@ interface InitialState {
 	sessionBlock: SessionBlocks;
 	currentSession: Session | null;
 	currentStage: StageEnum;
+	typingComplete: boolean;
 }
 
 const initialState: InitialState = {
@@ -127,6 +129,7 @@ const initialState: InitialState = {
 	sessionBlock: SessionBlocks.HOME,
 	currentSession: null,
 	currentStage: StageEnum.SITUATION,
+	typingComplete: false,
 };
 
 export const chatSlice = createSlice({
@@ -181,6 +184,9 @@ export const chatSlice = createSlice({
 		setCurrentStage(state, action: PayloadAction<StageEnum>) {
 			state.currentStage = action.payload;
 		},
+		setTypingComplete(state, action: PayloadAction<boolean>) {
+			state.typingComplete = action.payload;
+		},
 		resetState() {
 			return initialState;
 		},
@@ -197,6 +203,7 @@ export const {
 	setCurrentStage,
 	setIsButtonsBlock,
 	disconnectCurrentSession,
+	setTypingComplete,
 } = chatSlice.actions;
 
 export const chatReducer = chatSlice.reducer;

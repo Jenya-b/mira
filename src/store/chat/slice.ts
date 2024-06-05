@@ -120,6 +120,7 @@ interface InitialState {
 	currentSession: Session | null;
 	currentStage: StageEnum;
 	typingComplete: boolean;
+	reconnectWS: boolean;
 }
 
 const initialState: InitialState = {
@@ -130,6 +131,7 @@ const initialState: InitialState = {
 	currentSession: null,
 	currentStage: StageEnum.SITUATION,
 	typingComplete: false,
+	reconnectWS: false,
 };
 
 export const chatSlice = createSlice({
@@ -187,6 +189,9 @@ export const chatSlice = createSlice({
 		setTypingComplete(state, action: PayloadAction<boolean>) {
 			state.typingComplete = action.payload;
 		},
+		setReconnectWS(state, action: PayloadAction<boolean>) {
+			state.reconnectWS = action.payload;
+		},
 		resetState() {
 			return initialState;
 		},
@@ -204,6 +209,7 @@ export const {
 	setIsButtonsBlock,
 	disconnectCurrentSession,
 	setTypingComplete,
+	setReconnectWS,
 } = chatSlice.actions;
 
 export const chatReducer = chatSlice.reducer;

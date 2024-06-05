@@ -9,6 +9,7 @@ import { FirstBlock } from '@/components/Chat/FirstBlock/FirstBlock';
 import { FurtherActionsBlock } from '@/components/Chat/FurtherActionsBlock/FurtherActionsBlock';
 import { MessageBlock } from '@/components/Chat/MessagesBlock/MessagesBlock';
 import { Input } from '@/components/ChatElements/Input/Input';
+import { Loader } from '@/components/Loader/Loader';
 import { BaseModal } from '@/components/Modal/Modal';
 import { ChatContext } from '@/context/chat';
 import { useModal } from '@/hooks/useModal';
@@ -24,6 +25,7 @@ import {
 	addMessage,
 	setHideInput,
 	setInputValue,
+	setReconnectWS,
 	setSessionBlock,
 } from '@/store/chat';
 
@@ -38,7 +40,7 @@ interface WSMessage {
 
 const ChatPage: FC = () => {
 	const dispatch = useAppDispatch();
-	const { hiddenInput, sessionBlock, inputValue, buttonsBlock } = useAppSelector(
+	const { hiddenInput, sessionBlock, inputValue, buttonsBlock, reconnectWS } = useAppSelector(
 		(state) => state.chat
 	);
 	const { accessToken } = useAppSelector((state) => state.user);
@@ -104,6 +106,7 @@ const ChatPage: FC = () => {
 
 		ws.current.onopen = () => {
 			console.log('ws opened');
+			dispatch(setReconnectWS(false));
 
 			if (reconnectInterval.current) {
 				clearInterval(reconnectInterval.current);
@@ -113,6 +116,7 @@ const ChatPage: FC = () => {
 
 		ws.current.onclose = () => {
 			console.log('ws closed');
+			dispatch(setReconnectWS(true));
 
 			if (reconnectInterval.current === null) {
 				reconnectInterval.current = setInterval(() => {
@@ -233,6 +237,7 @@ const ChatPage: FC = () => {
 				closeModal={handleCloseModal}
 				handleClickModalSecond={handleCloseModal}
 			/>
+			{reconnectWS && <Loader />}
 		</Wrapper>
 	);
 };

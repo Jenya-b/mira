@@ -61,6 +61,10 @@ export const WithMessage: FC<WithMessageProps> = ({
 			...options,
 			onBegin() {
 				dispatch(setTypingComplete(false));
+
+				if (logoParam !== PersonMessage.MIRA_CHECK) {
+					setTimeout(() => dispatch(setTypingComplete(true)), 2000);
+				}
 				setIsTyping(false);
 			},
 			onComplete() {

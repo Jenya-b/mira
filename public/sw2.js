@@ -1,7 +1,7 @@
 function receivePushNotification(event) {
 	const message = JSON.parse(event.data.text());
 
-	const url = 'https://scintillating-empanada-mira.netlify.app/';
+	const url = 'https://mirahelps.online/';
 
 	const notificationPromise = self.registration.showNotification(message.title, {
 		body: message.body,

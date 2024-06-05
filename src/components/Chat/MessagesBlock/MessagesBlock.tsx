@@ -29,7 +29,7 @@ export const MessageBlock: FC = () => {
 		}
 
 		setTimeout(() => el.scrollIntoView({ block: 'start', inline: 'nearest' }));
-	}, [currentSession, isLoader, typingComplete]);
+	}, [typingComplete, currentSession?.messages.length]);
 
 	return (
 		<Wrapper>

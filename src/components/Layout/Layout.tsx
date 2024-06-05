@@ -1,5 +1,5 @@
 import { MouseEvent, FC, useEffect } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 
 import { BurgerMenu } from '../BurgerMenu/BurgerMenu';
 import { Sidebar } from '../Sidebar/Sidebar';
@@ -7,15 +7,21 @@ import { Sidebar } from '../Sidebar/Sidebar';
 import { useResize } from '@/hooks/useResize';
 import { useGetLastSessionQuery } from '@/services/api/session';
 import { useAppDispatch, useAppSelector } from '@/store';
+import { flagMessages } from '@/store/chat';
 import { setOpenBurgerMenu } from '@/store/general';
 
 import { Wrapper } from './Layout.styled';
 
 export const Layout: FC = () => {
+	const location = useLocation();
 	const [innerWidth, innerHeight] = useResize();
 	const dispatch = useAppDispatch();
 	const { isOpenBurgerMenu } = useAppSelector((state) => state.general);
 	useGetLastSessionQuery(null);
+
+	useEffect(() => {
+		dispatch(flagMessages());
+	}, [location.pathname]);
 
 	useEffect(() => {
 		const vh = window.innerHeight * 0.01;

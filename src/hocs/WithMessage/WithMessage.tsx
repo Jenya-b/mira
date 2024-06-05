@@ -67,7 +67,6 @@ export const WithMessage: FC<WithMessageProps> = ({
 				if (logoParam === PersonMessage.MIRA_CHECK) {
 					dispatch(setTypingComplete(true));
 				}
-
 				setIsTyping(true);
 			},
 		});

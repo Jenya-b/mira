@@ -164,6 +164,17 @@ export const chatSlice = createSlice({
 					!!lastMessage.additional_data?.cards;
 			}
 		},
+		flagMessages(state) {
+			if (state.currentSession === null) {
+				return;
+			}
+
+			const messages = state.currentSession.messages.map((item) => ({
+				...item,
+				newMessage: false,
+			}));
+			state.currentSession.messages = messages;
+		},
 		disconnectCurrentSession(state) {
 			if (state.currentSession === null) {
 				return;
@@ -210,6 +221,7 @@ export const {
 	disconnectCurrentSession,
 	setTypingComplete,
 	setReconnectWS,
+	flagMessages,
 } = chatSlice.actions;
 
 export const chatReducer = chatSlice.reducer;

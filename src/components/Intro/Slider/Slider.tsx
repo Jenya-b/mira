@@ -12,6 +12,7 @@ import { Slide6 } from '../Slides/Slide6/Slide6';
 import { Slide7 } from '../Slides/Slide7/Slide7';
 
 import { path } from '@/router/path';
+import { useUpdateUserMutation } from '@/services/api/user';
 
 import { StyledSwiper, StyledSwiperSlide } from './Slider.styled';
 
@@ -24,6 +25,7 @@ export const Slider: FC = () => {
 	const sliderRef = useRef<SwiperRef>(null);
 	const sliderRef2 = useRef<SwiperRef>(null);
 	const [isNextSlider, setNextSlider] = useState(false);
+	const [fetchUpdateUser] = useUpdateUserMutation();
 
 	const handleNext = (): void => {
 		if (!isNextSlider && sliderRef.current) {
@@ -38,7 +40,9 @@ export const Slider: FC = () => {
 	};
 
 	const handleNavigate = (): void => {
-		navigate(path.training);
+		fetchUpdateUser({ intro_passed: true })
+			.unwrap()
+			.then(() => navigate(path.training));
 	};
 
 	const slides = [

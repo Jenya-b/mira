@@ -3,6 +3,7 @@ import { FC } from 'react';
 import listIcon from '@/assets/images/icons/list.svg';
 import settingsIcon from '@/assets/images/icons/settings.svg';
 import { useResize } from '@/hooks/useResize';
+import { useUpdateUserMutation } from '@/services/api/user';
 import { useAppDispatch } from '@/store';
 import { TrainingParam, setTrainingBlock } from '@/store/training';
 
@@ -11,6 +12,13 @@ import { ButtonGroup, ButtonSecondary, Content, TextBlock, Wrapper } from './Car
 export const CardBlock: FC = () => {
 	const dispatch = useAppDispatch();
 	const [innerWidth] = useResize();
+	const [fetchUpdateUser] = useUpdateUserMutation();
+
+	const handleNavigate = (): void => {
+		fetchUpdateUser({ training_after_intro_passed: true })
+			.unwrap()
+			.then(() => dispatch(setTrainingBlock(TrainingParam.MODAL)));
+	};
 
 	return (
 		<Wrapper>
@@ -47,7 +55,7 @@ export const CardBlock: FC = () => {
 						<li>Виртуальный тренажер</li>
 					</ul>
 				</TextBlock>
-				<button onClick={() => dispatch(setTrainingBlock(TrainingParam.MODAL))}>Ок, дальше</button>
+				<button onClick={handleNavigate}>Ок, дальше</button>
 			</Content>
 		</Wrapper>
 	);

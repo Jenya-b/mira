@@ -4,6 +4,7 @@ import { ErrorBoundary } from '@/components/ErrorBoundary/ErrorBoundary';
 import { Layout } from '@/components/Layout/Layout';
 import { ChatProvider } from '@/context/chat';
 import { RequireAuth } from '@/hocs/RequireAuth/RequireAuth';
+import { RequireIntro } from '@/hocs/RequireIntro/RequireIntro';
 import {
 	AuthPage,
 	HomePage,
@@ -26,7 +27,10 @@ export const router = createBrowserRouter([
 		errorElement: <ErrorBoundary />,
 		element: (
 			<RequireAuth>
-				<Layout />
+				<RequireIntro>
+					<Layout />
+				</RequireIntro>
+				{/* <Layout /> */}
 			</RequireAuth>
 		),
 		children: [

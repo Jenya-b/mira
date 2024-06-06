@@ -7,6 +7,10 @@ interface UpdateUserRequest {
 	email?: string;
 	first_name?: string;
 	notify_email?: boolean;
+	intro_passed?: boolean;
+	training_after_intro_passed?: boolean;
+	training_coping_carts_passed?: boolean;
+	training_after_session_passed?: boolean;
 }
 
 interface SubscriptionRequest {

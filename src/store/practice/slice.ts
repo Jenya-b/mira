@@ -7,14 +7,12 @@ export enum TrainingBlock {
 
 interface InitialState {
 	activeFilter: boolean;
-	isTraining: boolean;
 	trainingBlock: TrainingBlock;
 	cardTrainingBlock: number;
 }
 
 const initialState: InitialState = {
 	activeFilter: false,
-	isTraining: true,
 	trainingBlock: TrainingBlock.COPING_CARD,
 	cardTrainingBlock: 0,
 };
@@ -25,9 +23,6 @@ export const practiceSlice = createSlice({
 	reducers: {
 		setActiveFilter(state, action: PayloadAction<boolean>): void {
 			state.activeFilter = action.payload;
-		},
-		setIsTraining(state, action: PayloadAction<boolean>): void {
-			state.isTraining = action.payload;
 		},
 		setTrainingBlock(state, action: PayloadAction<TrainingBlock>): void {
 			state.trainingBlock = action.payload;
@@ -41,12 +36,7 @@ export const practiceSlice = createSlice({
 	},
 });
 
-export const {
-	setActiveFilter,
-	setIsTraining,
-	setTrainingBlock,
-	setCardTrainingBlock,
-	resetState,
-} = practiceSlice.actions;
+export const { setActiveFilter, setTrainingBlock, setCardTrainingBlock, resetState } =
+	practiceSlice.actions;
 
 export const practiceReducer = practiceSlice.reducer;

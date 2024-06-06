@@ -1,12 +1,11 @@
 import { FC } from 'react';
 
-import { useAppDispatch } from '@/store';
-import { setIsTraining } from '@/store/practice';
+import { useUpdateUserMutation } from '@/services/api/user';
 
 import { Content, StyledFilter, TextBlock, Wrapper } from './FilterBlock.styled';
 
 export const FilterBlock: FC = () => {
-	const dispatch = useAppDispatch();
+	const [fetchUpdateUser] = useUpdateUserMutation();
 
 	return (
 		<Wrapper>
@@ -34,7 +33,9 @@ export const FilterBlock: FC = () => {
 						</svg>
 					</StyledFilter>
 				</TextBlock>
-				<button onClick={() => dispatch(setIsTraining(false))}>Ок, спасибо</button>
+				<button onClick={() => fetchUpdateUser({ training_coping_carts_passed: true })}>
+					Ок, спасибо
+				</button>
 			</Content>
 		</Wrapper>
 	);

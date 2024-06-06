@@ -22,7 +22,8 @@ import {
 const Practice: FC = () => {
 	const { state } = useLocation();
 	const dispatch = useAppDispatch();
-	const { activeFilter, isTraining, trainingBlock } = useAppSelector(({ practice }) => practice);
+	const { activeFilter, trainingBlock } = useAppSelector(({ practice }) => practice);
+	const { user } = useAppSelector((state) => state.user);
 
 	const renderTrainingBlock = (): JSX.Element => {
 		switch (trainingBlock) {
@@ -45,7 +46,7 @@ const Practice: FC = () => {
 					<Filter
 						onClick={() => dispatch(setActiveFilter(!activeFilter))}
 						className={
-							isTraining && trainingBlock === TrainingBlock.FILTER
+							user && !user.training_coping_carts_passed && trainingBlock === TrainingBlock.FILTER
 								? 'training'
 								: activeFilter
 									? 'active'
@@ -89,7 +90,7 @@ const Practice: FC = () => {
 					/>
 				</Content>
 			</Container>
-			{isTraining && (
+			{user && !user.training_coping_carts_passed && (
 				<>
 					<DisabledBg>
 						<FilterBg />

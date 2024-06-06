@@ -1,5 +1,8 @@
 import { DegreeOfExpression, DistortionCardsEnum } from '@/store/chat';
 
+export const COUNT_BY_KEYWORDS_SLIDE = 5;
+export const COUNT_BY_PM_SLIDE = 3;
+
 export const DegreeOfExpressionNames = {
 	[DegreeOfExpression.LOW]: 'Низкая',
 	[DegreeOfExpression.AVERAGE]: 'Средняя',

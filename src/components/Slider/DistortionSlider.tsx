@@ -4,6 +4,8 @@ import { Cover, InstructionCover } from '../ChatElements/Cards/Cards.styled';
 
 import { cardsImg } from '@/constants/cardsImg';
 import {
+	COUNT_BY_KEYWORDS_SLIDE,
+	COUNT_BY_PM_SLIDE,
 	DegreeOfExpressionNames,
 	DistortionCardType,
 	DistortionNames,
@@ -92,7 +94,7 @@ export const DistortionSlider: FC<SliderProps> = ({ data, degree, type }) => {
 				<InstructionCover>Частые проявления</InstructionCover>
 				{renderNumericalInfo(3, startingIndex.all)}
 			</StyledSwiperSlide>
-			{arrayConversion(data.privateManifestations, 3).map((list, index) => (
+			{arrayConversion(data.privateManifestations, COUNT_BY_PM_SLIDE).map((list, index) => (
 				<StyledSwiperSlide key={index}>
 					<div
 						style={{
@@ -105,7 +107,7 @@ export const DistortionSlider: FC<SliderProps> = ({ data, degree, type }) => {
 					>
 						{list.map((item, i) => (
 							<div key={i} style={{ display: 'flex', columnGap: '0.5rem' }}>
-								<p>{i + 1}.</p>
+								<p>{i + 1 + index * COUNT_BY_PM_SLIDE}.</p>
 								<p>{item}</p>
 							</div>
 						))}
@@ -117,7 +119,7 @@ export const DistortionSlider: FC<SliderProps> = ({ data, degree, type }) => {
 				<InstructionCover>Ключевые слова</InstructionCover>
 				{renderNumericalInfo(startingIndex.instruction, startingIndex.all)}
 			</StyledSwiperSlide>
-			{arrayConversion(data.keywords, 5).map((list, index) => (
+			{arrayConversion(data.keywords, COUNT_BY_KEYWORDS_SLIDE).map((list, index) => (
 				<StyledSwiperSlide key={index}>
 					<div
 						style={{
@@ -130,7 +132,7 @@ export const DistortionSlider: FC<SliderProps> = ({ data, degree, type }) => {
 					>
 						{list.map((item, i) => (
 							<div key={i} style={{ display: 'flex', columnGap: '0.5rem' }}>
-								<p style={{ width: '2rem' }}>{i + 1}.</p>
+								<p style={{ width: '2rem' }}>{i + 1 + index * COUNT_BY_KEYWORDS_SLIDE}.</p>
 								<p>{item}</p>
 							</div>
 						))}

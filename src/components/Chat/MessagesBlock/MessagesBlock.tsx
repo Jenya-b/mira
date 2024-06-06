@@ -1,24 +1,23 @@
-import { FC, useEffect, useRef, useState } from 'react';
+import { FC, useEffect, useRef } from 'react';
 
 import { LoaderMessage } from '../../ChatElements/LoaderMessage/LoaderMessage';
 
 import { TextMessage } from '@/components/ChatElements/TextMessage/TextMessage';
 import { PersonMessage } from '@/hocs/WithMessage/WithMessage';
 import { useAppDispatch, useAppSelector } from '@/store';
-import { MessageType, setCurrentStage } from '@/store/chat';
+import { MessageType, setCurrentStage, setInputBlock } from '@/store/chat';
 
 import { Container, Wrapper } from './MessageBlock.styled';
 
 export const MessageBlock: FC = () => {
 	const dispatch = useAppDispatch();
-	const { currentSession, typingComplete } = useAppSelector((state) => state.chat);
-	const [isLoader, setIsLoader] = useState(false);
+	const { currentSession, typingComplete, inputBlock } = useAppSelector((state) => state.chat);
 	const contentRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
 		if (currentSession && currentSession.messages.length) {
 			const lastMessage = currentSession.messages[currentSession.messages.length - 1];
-			setIsLoader(!lastMessage.author);
+			dispatch(setInputBlock(!lastMessage.author));
 			dispatch(setCurrentStage(lastMessage.stage));
 		}
 
@@ -59,7 +58,7 @@ export const MessageBlock: FC = () => {
 						/>
 					)
 				)}
-				{isLoader && <LoaderMessage />}
+				{inputBlock && <LoaderMessage />}
 				<div id="bottom-scroll" />
 			</Container>
 		</Wrapper>

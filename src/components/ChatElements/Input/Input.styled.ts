@@ -65,6 +65,10 @@ export const StyledInput = styled.textarea`
 		color: rgba(255, 255, 255, 0.7);
 	}
 
+	&:disabled {
+		opacity: 0.5;
+	}
+
 	@media (max-width: 1000px) {
 		background: #3a4497;
 		padding: 0.6rem 0.8rem 0 1.43rem;

@@ -18,7 +18,7 @@ export const Input: FC<InputProps> = ({ sendMessage }) => {
 	const dispatch = useAppDispatch();
 	const { pathname } = useLocation();
 	const { trainingBlock } = useAppSelector((state) => state.training);
-	const { hiddenInput, inputValue } = useAppSelector((state) => state.chat);
+	const { hiddenInput, inputValue, inputBlock } = useAppSelector((state) => state.chat);
 	const [trClassName, setTrClassName] = useState('');
 	const [innerWidth] = useResize();
 
@@ -47,6 +47,7 @@ export const Input: FC<InputProps> = ({ sendMessage }) => {
 				onChange={(e) => dispatch(setInputValue(e.target.value))}
 				onKeyPress={handleKeyPress}
 				placeholder="Сообщение..."
+				disabled={inputBlock}
 			/>
 			<Controls className={trClassName}>
 				{innerWidth > 1000 ? (

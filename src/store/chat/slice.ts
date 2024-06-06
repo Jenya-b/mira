@@ -115,6 +115,7 @@ export interface Session {
 interface InitialState {
 	inputValue: string;
 	hiddenInput: boolean;
+	inputBlock: boolean;
 	buttonsBlock: boolean;
 	sessionBlock: SessionBlocks;
 	currentSession: Session | null;
@@ -126,6 +127,7 @@ interface InitialState {
 const initialState: InitialState = {
 	inputValue: '',
 	hiddenInput: false,
+	inputBlock: false,
 	buttonsBlock: false,
 	sessionBlock: SessionBlocks.HOME,
 	currentSession: null,
@@ -143,6 +145,9 @@ export const chatSlice = createSlice({
 		},
 		setSessionBlock(state, action: PayloadAction<SessionBlocks>): void {
 			state.sessionBlock = action.payload;
+		},
+		setInputBlock(state, action: PayloadAction<boolean>): void {
+			state.inputBlock = action.payload;
 		},
 		setHideInput(state, action: PayloadAction<boolean>): void {
 			state.hiddenInput = action.payload;
@@ -218,6 +223,7 @@ export const {
 	setTypingComplete,
 	setReconnectWS,
 	flagMessages,
+	setInputBlock,
 } = chatSlice.actions;
 
 export const chatReducer = chatSlice.reducer;

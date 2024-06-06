@@ -5,7 +5,7 @@ import Typed from 'typed.js';
 import miraIcon from '@/assets/images/icons/logo-chat.svg';
 import miraCheckIcon from '@/assets/images/icons/logo-chat2.svg';
 import userIcon from '@/assets/images/icons/logo-chat3.svg';
-import { useAppDispatch } from '@/store';
+import { useAppDispatch, useAppSelector } from '@/store';
 import { setTypingComplete } from '@/store/chat';
 
 import { Logo, Text, Wrapper } from './WithMessage.styled';
@@ -30,6 +30,7 @@ export const WithMessage: FC<WithMessageProps> = ({
 	newMessage = false,
 }) => {
 	const dispatch = useAppDispatch();
+	const { typingComplete } = useAppSelector((state) => state.chat);
 	const el = useRef(null);
 	const typed = useRef<Typed | null>(null);
 	const [isTyping, setIsTyping] = useState(false);
@@ -63,7 +64,14 @@ export const WithMessage: FC<WithMessageProps> = ({
 				dispatch(setTypingComplete(false));
 
 				if (logoParam !== PersonMessage.MIRA_CHECK) {
-					setTimeout(() => dispatch(setTypingComplete(true)), 2000);
+					new Promise((resolve) => {
+						setTimeout(() => {
+							dispatch(setTypingComplete(!typingComplete));
+							resolve(!typingComplete);
+						}, 1500);
+					}).then((typing) => {
+						setTimeout(() => dispatch(setTypingComplete(!typing)), 1500);
+					});
 				}
 				setIsTyping(false);
 			},

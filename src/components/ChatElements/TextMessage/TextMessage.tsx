@@ -143,7 +143,6 @@ export const TextMessage: FC<TextMessageProps> = ({
 							list={item}
 							descriptions={(additional_data?.descriptions as StringObject[])[i]}
 							sendCheckUser={sendCheckUser}
-							isButton={buttons !== null && buttons.length === 1}
 						/>
 					))}
 				</ThoughtsWrap>

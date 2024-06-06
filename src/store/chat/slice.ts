@@ -158,11 +158,19 @@ export const chatSlice = createSlice({
 			if (messages.length) {
 				const lastMessage = messages[messages.length - 1];
 				state.buttonsBlock =
-					(lastMessage.buttons !== null &&
-						lastMessage.buttons.length > 0 &&
-						lastMessage.stage !== StageEnum.NEW_THOUGHT_CREATION) ||
+					(lastMessage.buttons !== null && lastMessage.buttons.length > 0) ||
 					!!lastMessage.additional_data?.cards;
 			}
+		},
+		addMessage(state, action: PayloadAction<Message>) {
+			if (state.currentSession === null) {
+				return;
+			}
+
+			state.currentSession.messages.push(action.payload);
+			state.buttonsBlock =
+				(action.payload.buttons !== null && action.payload.buttons.length > 0) ||
+				!!action.payload.additional_data?.cards;
 		},
 		flagMessages(state) {
 			if (state.currentSession === null) {
@@ -181,18 +189,6 @@ export const chatSlice = createSlice({
 			}
 
 			state.currentSession = { ...state.currentSession, active: false };
-		},
-		addMessage(state, action: PayloadAction<Message>) {
-			if (state.currentSession === null) {
-				return;
-			}
-
-			state.currentSession.messages.push(action.payload);
-			state.buttonsBlock =
-				(action.payload.buttons !== null &&
-					action.payload.buttons.length > 0 &&
-					action.payload.stage !== StageEnum.NEW_THOUGHT_CREATION) ||
-				!!action.payload.additional_data?.cards;
 		},
 		setCurrentStage(state, action: PayloadAction<StageEnum>) {
 			state.currentStage = action.payload;

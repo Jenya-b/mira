@@ -1,8 +1,8 @@
-import { AdditionalData, ButtonsWS, StageEnum, Statuses } from '@/store/chat';
+import { AdditionalData, ButtonsWS, StageEnum, Statuses, StringObjectButtons } from '@/store/chat';
 
 interface SelectChatBlockType {
 	stage: StageEnum;
-	buttons: ButtonsWS[] | null;
+	buttons: ButtonsWS[] | StringObjectButtons[] | null;
 	additional_data: AdditionalData | null;
 	status: Statuses;
 }
@@ -31,6 +31,15 @@ export const selectChatBlock = ({
 		additional_data?.cards
 	) {
 		return SelectChatBlockEnum.CARDS;
+	}
+
+	if (
+		stage === StageEnum.QUESTIONNAIRE &&
+		additional_data !== null &&
+		additional_data.descriptions &&
+		buttons !== null
+	) {
+		return SelectChatBlockEnum.THOUGHTS;
 	}
 
 	if (

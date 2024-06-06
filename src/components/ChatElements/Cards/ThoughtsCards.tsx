@@ -1,19 +1,18 @@
 import { FC } from 'react';
 
 import { Slider } from '@/components/Slider/Slider';
-import { useAppDispatch } from '@/store';
-import { setIsButtonsBlock } from '@/store/chat';
+import { ButtonsWS } from '@/store/chat';
 
 import { Cover, InstructionCover, Wrapper } from './Cards.styled';
 import { Controls } from './Controls';
 
 interface CardsProps {
 	data: string[];
+	buttonParam: ButtonsWS;
+	sendCheckUser: (content: string, action: string, action_param?: number) => void;
 }
 
-export const ThoughtsCards: FC<CardsProps> = ({ data }) => {
-	const dispatch = useAppDispatch();
-
+export const ThoughtsCards: FC<CardsProps> = ({ data, buttonParam, sendCheckUser }) => {
 	const renderSliderData = (t: string, index: number): JSX.Element => {
 		if (index === 0) {
 			return (
@@ -54,14 +53,16 @@ export const ThoughtsCards: FC<CardsProps> = ({ data }) => {
 		);
 	};
 
-	const handleClickBtn1 = (): void => {
-		dispatch(setIsButtonsBlock(false));
-	};
-
 	return (
 		<Wrapper>
 			<Slider data={data} renderData={renderSliderData} />
-			<Controls isIcon btnText1="Создать новую мысль" handleClickBtn1={handleClickBtn1} />
+			<Controls
+				isIcon
+				btnText1="Создать новую мысль"
+				handleClickBtn1={() =>
+					sendCheckUser(buttonParam.content, buttonParam.action, buttonParam.action_param)
+				}
+			/>
 		</Wrapper>
 	);
 };

@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 export const Wrapper = styled.div`
 	padding-bottom: 1.71rem;
-	border-bottom: 1px solid rgba(255, 255, 255, 0.18);
 `;
 
 export const Title = styled.div`

@@ -4,6 +4,7 @@ import { DialogSlide } from '../Dialog/Dialog';
 
 import { useModal } from '@/hooks/useModal';
 import { StringObject, StringObjectButtons } from '@/store/chat';
+import { ButtonPrimary } from '@/styles/components';
 
 import { List, Title, Wrapper } from './Thoughts.styled';
 
@@ -11,13 +12,19 @@ interface ThoughtsProps {
 	list: StringObjectButtons;
 	descriptions: StringObject | undefined;
 	sendCheckUser: (content: string, action: string, action_param?: number) => void;
+	isButton?: boolean;
 }
 
-export const Thoughts: FC<ThoughtsProps> = ({ list, descriptions, sendCheckUser }) => {
+export const Thoughts: FC<ThoughtsProps> = ({
+	list,
+	descriptions,
+	sendCheckUser,
+	isButton = false,
+}) => {
 	const [open, openModal, closeModal] = useModal();
 
 	return (
-		<Wrapper>
+		<Wrapper style={{ borderBottom: !isButton ? '1px solid rgba(255, 255, 255, 0.18)' : '' }}>
 			<Title>
 				<h3>{Object.keys(list)[0]}</h3>
 				<svg
@@ -42,6 +49,18 @@ export const Thoughts: FC<ThoughtsProps> = ({ list, descriptions, sendCheckUser 
 					</li>
 				))}
 			</List>
+			{isButton && (
+				<ButtonPrimary
+					style={{ marginTop: '4rem' }}
+					onClick={() => {
+						const params = Object.values(list)[0][0];
+						sendCheckUser(params.content, params.action, params.action_param);
+					}}
+				>
+					Готов(а)
+				</ButtonPrimary>
+			)}
+
 			<DialogSlide
 				handleClickClose={closeModal}
 				open={open}

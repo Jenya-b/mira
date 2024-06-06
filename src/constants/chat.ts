@@ -68,10 +68,11 @@ export interface FurtherActions {
 }
 
 export const homeActions: FurtherActions[] = [
-	{
-		img: bookIcon,
-		title: 'Мысли прошлой сессии',
-	},
+	// TODO Временно скрыты, пока не реализован функционал
+	// {
+	// 	img: bookIcon,
+	// 	title: 'Мысли прошлой сессии',
+	// },
 	{
 		img: messageIcon,
 		title: 'Начать новую сессию',

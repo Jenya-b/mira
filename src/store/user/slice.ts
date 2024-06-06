@@ -4,10 +4,16 @@ import { defaultNotificationData } from '@/constants/pushNotification';
 import { getMyTime } from '@/utils/time';
 
 export interface User {
+	id: number;
 	phone: number;
 	email: string;
 	first_name: string;
 	available_sessions: number;
+	intro_passed: boolean;
+	training_after_intro_passed: boolean;
+	training_coping_carts_passed: boolean;
+	training_after_session_passed: boolean;
+	count_sessions: number;
 }
 
 export interface Subscription {

@@ -54,6 +54,7 @@ export const TextMessage: FC<TextMessageProps> = ({
 	const navigate = useNavigate();
 	const [selectedChatBlock, setSelectedChatBlock] = useState<SelectChatBlockEnum | null>(null);
 	const [selectedButtons, setSelectedButtons] = useState<string>('');
+	const [isClick, setIsClick] = useState(false);
 	const { currentStage, currentSession } = useAppSelector((state) => state.chat);
 	const [postMessage] = usePostMessageMutation();
 	const [fetchCreateSession] = useCreateSessionMutation();
@@ -71,9 +72,11 @@ export const TextMessage: FC<TextMessageProps> = ({
 	const sendCheckUser = (content: string, action: string, action_param?: number): void => {
 		const lastId = currentSession!.messages[currentSession!.messages.length - 1]?.id;
 
-		if (lastId !== id) {
+		if (lastId !== id || isClick) {
 			return;
 		}
+
+		setIsClick(true);
 
 		if ((type === MessageType.ERROR_MSG || type === MessageType.MSG) && action === 'NEW_SESSION') {
 			fetchCreateSession(null);
@@ -100,10 +103,11 @@ export const TextMessage: FC<TextMessageProps> = ({
 	): void => {
 		const lastId = currentSession!.messages[currentSession!.messages.length - 1]?.id;
 
-		if (lastId !== id) {
+		if (lastId !== id || isClick) {
 			return;
 		}
 
+		setIsClick(true);
 		setSelectedButtons(content);
 		sendCheckUser(content, action, action_param);
 	};

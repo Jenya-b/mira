@@ -1,4 +1,4 @@
-import { FC, KeyboardEvent, useEffect, useState } from 'react';
+import { FC, KeyboardEvent, useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import arrow from '@/assets/images/icons/arrow-top.svg';
@@ -21,6 +21,7 @@ export const Input: FC<InputProps> = ({ sendMessage }) => {
 	const { hiddenInput, inputValue, inputBlock } = useAppSelector((state) => state.chat);
 	const [trClassName, setTrClassName] = useState('');
 	const [innerWidth] = useResize();
+	const inputRef = useRef<HTMLTextAreaElement | null>(null);
 
 	useEffect(() => {
 		if (pathname.match('training')?.length) {
@@ -34,6 +35,12 @@ export const Input: FC<InputProps> = ({ sendMessage }) => {
 		}
 	}, [trainingBlock, pathname]);
 
+	useEffect(() => {
+		if (innerWidth > 1000 && !hiddenInput) {
+			inputRef.current?.focus();
+		}
+	}, [inputBlock, hiddenInput]);
+
 	const handleKeyPress = (event: KeyboardEvent): void => {
 		if (event.key === 'Enter') {
 			sendMessage();
@@ -43,6 +50,7 @@ export const Input: FC<InputProps> = ({ sendMessage }) => {
 	return (
 		<Label className={trClassName || (hiddenInput ? 'hidden' : '')}>
 			<StyledInput
+				ref={inputRef}
 				value={inputValue}
 				onChange={(e) => dispatch(setInputValue(e.target.value))}
 				onKeyPress={handleKeyPress}

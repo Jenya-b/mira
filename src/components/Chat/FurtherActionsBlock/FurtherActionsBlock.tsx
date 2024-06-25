@@ -12,6 +12,7 @@ import {
 } from '@/constants/chat';
 import { WithChat } from '@/hocs/WithChat/WithChat';
 import { useCreateSessionMutation } from '@/services/api/session';
+import { useLazyGetUserQuery } from '@/services/api/user';
 import { useAppDispatch } from '@/store';
 import { SessionBlocks, setSessionBlock } from '@/store/chat';
 
@@ -26,6 +27,7 @@ export const FurtherActionsBlock: FC<FurtherActionsBlockProps> = ({ isHome = fal
 	const [activeSlide, setActiveSlide] = useState<FurtherActionsEnum>(FurtherActionsEnum.HOME);
 	const [animation, setAnimation] = useState(false);
 	const [fetchCreateSession] = useCreateSessionMutation();
+	const [fetchGetUser] = useLazyGetUserQuery();
 
 	const { x } = useSpring({
 		from: { x: 0 },
@@ -46,6 +48,7 @@ export const FurtherActionsBlock: FC<FurtherActionsBlockProps> = ({ isHome = fal
 	const createSession = (): void => {
 		fetchCreateSession(null)
 			.unwrap()
+			.then(() => fetchGetUser(null))
 			.catch((error) => {
 				if (error.status === 422 && error.data.length) {
 					dispatch(setSessionBlock(SessionBlocks.END_SESSION));

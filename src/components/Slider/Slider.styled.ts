@@ -23,14 +23,12 @@ export const StyledSwiper = styled(Swiper)`
 
 			animation: go-left-right 0.5s alternate;
 			animation-delay: 1s;
-			animation-iteration-count: 2;
+			animation-iteration-count: 4;
 		}
 	}
 `;
 
 export const StyledSwiperSlide = styled(SwiperSlide)`
-	/* text-align: center; */
-	/* padding: 5.36rem 1.79rem 1rem 1.79rem; */
 	font-size: 18px;
 	border-radius: 1.42857rem;
 	background: #488ce1;
@@ -41,7 +39,6 @@ export const StyledSwiperSlide = styled(SwiperSlide)`
 		width: 25.21429rem;
 		display: flex;
 		justify-content: center;
-		/* align-items: center; */
 
 		@media (max-width: 480px) {
 			width: 100%;

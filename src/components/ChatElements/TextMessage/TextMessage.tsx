@@ -21,6 +21,7 @@ import {
 	StringObject,
 	StringObjectButtons,
 	disconnectCurrentSession,
+	setInputBlock,
 	setSessionBlock,
 } from '@/store/chat';
 import { SelectChatBlockEnum, selectChatBlock } from '@/utils/selectChatBlock';
@@ -77,6 +78,7 @@ export const TextMessage: FC<TextMessageProps> = ({
 		}
 
 		setIsClick(true);
+		dispatch(setInputBlock(true));
 
 		if ((type === MessageType.ERROR_MSG || type === MessageType.MSG) && action === 'NEW_SESSION') {
 			fetchCreateSession(null);

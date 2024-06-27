@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Wrapper = styled.div`
 	position: absolute;
-	bottom: -60rem;
+	bottom: -52rem;
 	left: 50%;
 	transform: translateX(-50%);
 	width: 78.85714rem;
@@ -20,13 +20,13 @@ export const Wrapper = styled.div`
 	@media (max-width: 768px) {
 		width: 60.57143rem;
 		height: 60.57143rem;
-		bottom: -42rem;
+		bottom: -35rem;
 	}
 
 	@media (max-width: 480px) {
 		width: 32.57143rem;
 		height: 32.57143rem;
-		bottom: -13rem;
+		bottom: -8rem;
 	}
 `;
 

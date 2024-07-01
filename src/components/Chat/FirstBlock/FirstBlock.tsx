@@ -32,14 +32,14 @@ export const FirstBlock: FC = () => {
 					))}
 					<li>
 						<button onClick={openModal}>
-							<span>Любая ситуация из вашей жизни</span>
+							<span>У меня другая ситуация</span>
 						</button>
 					</li>
 				</List>
 				<BaseModal
 					buttonText="Продолжить"
 					title="Любая ситуация из вашей жизни"
-					subtitle="Опишите своими словами, что вас беспокоит, в поле для сообщений. Вместе мы найдем путь к решению."
+					subtitle="Опишите своими словами, что вас беспокоит, в поле для сообщений."
 					imgSrc={messageIcon}
 					handleClickModal={closeModal}
 					isOpen={isOpen}

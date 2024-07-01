@@ -86,7 +86,7 @@ export const homeActions: FurtherActions[] = [
 	},
 	{
 		img: chatIcon,
-		title: 'Нужна помощь',
+		title: 'Есть вопрос',
 		redirection: FurtherActionsEnum.HELP,
 	},
 ];
@@ -107,7 +107,7 @@ export const furtherActionsMain: FurtherActions[] = [
 	},
 	{
 		img: chatIcon,
-		title: 'Нужна помощь',
+		title: 'Есть вопрос',
 		redirection: FurtherActionsEnum.HELP,
 	},
 ];

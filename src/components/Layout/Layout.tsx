@@ -5,7 +5,6 @@ import { BurgerMenu } from '../BurgerMenu/BurgerMenu';
 import { Sidebar } from '../Sidebar/Sidebar';
 
 import { useResize } from '@/hooks/useResize';
-// import { path } from '@/router/path';
 import { useGetLastSessionQuery } from '@/services/api/session';
 import { useAppDispatch, useAppSelector } from '@/store';
 import { flagMessages } from '@/store/chat';
@@ -18,7 +17,7 @@ export const Layout: FC = () => {
 	const [innerWidth, innerHeight] = useResize();
 	const dispatch = useAppDispatch();
 	const { isOpenBurgerMenu } = useAppSelector((state) => state.general);
-	// const { user } = useAppSelector((state) => state.user);
+
 	useGetLastSessionQuery(null);
 
 	useEffect(() => {
@@ -37,14 +36,6 @@ export const Layout: FC = () => {
 			dispatch(setOpenBurgerMenu(false));
 		}
 	};
-
-	// if (user !== null && !user.intro_passed) {
-	// 	return <Navigate to={path.intro} />;
-	// }
-
-	// if (user !== null && !user.training_after_intro_passed) {
-	// 	return <Navigate to={path.training} />;
-	// }
 
 	return (
 		<Wrapper onClick={handleClick}>

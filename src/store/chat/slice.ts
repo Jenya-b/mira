@@ -112,6 +112,12 @@ export interface Session {
 	messages: Message[];
 }
 
+export interface LastThoughts {
+	session: number;
+	thought: string;
+	new_thought: string;
+}
+
 interface InitialState {
 	inputValue: string;
 	hiddenInput: boolean;
@@ -122,6 +128,7 @@ interface InitialState {
 	currentStage: StageEnum;
 	typingComplete: boolean;
 	reconnectWS: boolean;
+	lastThoughts: LastThoughts[];
 }
 
 const initialState: InitialState = {
@@ -134,6 +141,7 @@ const initialState: InitialState = {
 	currentStage: StageEnum.SITUATION,
 	typingComplete: false,
 	reconnectWS: false,
+	lastThoughts: [],
 };
 
 export const chatSlice = createSlice({
@@ -204,6 +212,9 @@ export const chatSlice = createSlice({
 		setReconnectWS(state, action: PayloadAction<boolean>) {
 			state.reconnectWS = action.payload;
 		},
+		setLastThoughts(state, action: PayloadAction<LastThoughts[]>) {
+			state.lastThoughts = action.payload;
+		},
 		resetState() {
 			return initialState;
 		},
@@ -224,6 +235,7 @@ export const {
 	setReconnectWS,
 	flagMessages,
 	setInputBlock,
+	setLastThoughts,
 } = chatSlice.actions;
 
 export const chatReducer = chatSlice.reducer;

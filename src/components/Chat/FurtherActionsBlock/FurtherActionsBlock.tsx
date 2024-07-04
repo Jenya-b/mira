@@ -1,5 +1,5 @@
 import { animated, useSpring } from '@react-spring/web';
-import { FC, useCallback, useState } from 'react';
+import { FC, useCallback, useEffect, useState } from 'react';
 
 import {
 	FurtherActionsEnum,
@@ -11,9 +11,9 @@ import {
 	homeActions,
 } from '@/constants/chat';
 import { WithChat } from '@/hocs/WithChat/WithChat';
-import { useCreateSessionMutation } from '@/services/api/session';
+import { useCreateSessionMutation, useLazyGetLastThoughtsQuery } from '@/services/api/session';
 import { useLazyGetUserQuery } from '@/services/api/user';
-import { useAppDispatch } from '@/store';
+import { useAppDispatch, useAppSelector } from '@/store';
 import { SessionBlocks, setSessionBlock } from '@/store/chat';
 
 import { Slide } from './Slide';
@@ -26,14 +26,22 @@ export const FurtherActionsBlock: FC<FurtherActionsBlockProps> = ({ isHome = fal
 	const dispatch = useAppDispatch();
 	const [activeSlide, setActiveSlide] = useState<FurtherActionsEnum>(FurtherActionsEnum.HOME);
 	const [animation, setAnimation] = useState(false);
+	const { lastThoughts } = useAppSelector((state) => state.chat);
 	const [fetchCreateSession] = useCreateSessionMutation();
 	const [fetchGetUser] = useLazyGetUserQuery();
+	const [fetchGetLastThoughts] = useLazyGetLastThoughtsQuery();
 
 	const { x } = useSpring({
 		from: { x: 0 },
 		x: animation ? 1 : 0,
 		config: { duration: 200 },
 	});
+
+	useEffect(() => {
+		if (isHome) {
+			fetchGetLastThoughts(null);
+		}
+	}, [isHome]);
 
 	const handleChangeSlide = useCallback((item: FurtherActionsEnum): (() => void) => {
 		setAnimation(true);
@@ -61,7 +69,7 @@ export const FurtherActionsBlock: FC<FurtherActionsBlockProps> = ({ isHome = fal
 			case FurtherActionsEnum.HOME:
 				return (
 					<Slide
-						list={homeActions}
+						list={lastThoughts.length ? homeActions : homeActions.slice(1)}
 						handleChangeSlide={handleChangeSlide}
 						createSession={createSession}
 					/>

@@ -3,9 +3,11 @@ import { BaseQueryApi, createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/
 import { RootState } from '@/store';
 import {
 	ButtonsWS,
+	LastThoughts,
 	Session,
 	SessionBlocks,
 	addCurrentSession,
+	setLastThoughts,
 	setSessionBlock,
 } from '@/store/chat';
 
@@ -119,6 +121,22 @@ export const sessionApi = createApi({
 				},
 			}),
 		}),
+		getLastThoughts: build.query<LastThoughts[], null>({
+			query: () => ({
+				url: '/sessions/last_thoughts/',
+				headers: {
+					accept: 'application/json',
+				},
+			}),
+			onQueryStarted: async (_, { dispatch, queryFulfilled }) => {
+				try {
+					const { data } = await queryFulfilled;
+					dispatch(setLastThoughts(data));
+				} catch {
+					throw new Error();
+				}
+			},
+		}),
 	}),
 });
 
@@ -130,4 +148,6 @@ export const {
 	useLazyGetLastSessionQuery,
 	usePostMessageMutation,
 	useUpdateSessionMutation,
+	useLazyGetLastThoughtsQuery,
+	useGetLastThoughtsQuery,
 } = sessionApi;

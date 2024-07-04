@@ -40,6 +40,8 @@ export const InstructionModal: FC<ModalProps> = ({ isOpen, data, closeModal }) =
 
 		if (newIndex <= data.length - 1) {
 			setActiveIndex(newIndex);
+		} else if (closeModal !== undefined) {
+			closeModal();
 		} else {
 			navigate(path.home);
 		}

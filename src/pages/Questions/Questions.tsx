@@ -3,7 +3,9 @@ import { FC, useCallback } from 'react';
 import modalImg from '@/assets/images/phoneForModal.png';
 import { Accordion } from '@/components/Accordion/Accordion';
 import { BaseModal } from '@/components/Modal/Modal';
+import { InstructionModal } from '@/components/TherapySettings/InstructionModal/InstructionModal';
 import { ButtonType, accordionList } from '@/constants/accordion';
+import { dataAndroid, dataIos } from '@/constants/installPWA';
 import { useModal } from '@/hooks/useModal';
 import { useAppSelector } from '@/store';
 import { DeviceTypeEnum } from '@/store/general';
@@ -12,6 +14,7 @@ import { AccordionWrap, Button, Container, Controls, Title, Wrapper } from './Qu
 
 const Questions: FC = () => {
 	const [isOpenInstallModal, openInstallModal, closeInstallModal] = useModal();
+	const [isOpenInstructionModal, openInstructionModal, closeInstructionModal] = useModal();
 	const { prompt, isMobileDevice, deviceType } = useAppSelector((state) => state.general);
 
 	const handleClick = useCallback((type: ButtonType | undefined): void => {
@@ -29,21 +32,29 @@ const Questions: FC = () => {
 			prompt.prompt();
 		} else if (deviceType !== DeviceTypeEnum.DESKTOP) {
 			closeInstallModal();
+			openInstructionModal();
 		}
 	};
 
 	return (
 		<Wrapper>
 			{isMobileDevice ? (
-				<BaseModal
-					buttonText="Установить"
-					buttonTextSecond="Пропустить"
-					isOpen={isOpenInstallModal}
-					title="Для настройки терапии установите приложение"
-					imgSrc={modalImg}
-					handleClickModal={handleClickModal}
-					handleClickModalSecond={closeInstallModal}
-				/>
+				<>
+					<BaseModal
+						buttonText="Установить"
+						buttonTextSecond="Пропустить"
+						isOpen={isOpenInstallModal}
+						title="Для настройки терапии установите приложение"
+						imgSrc={modalImg}
+						handleClickModal={handleClickModal}
+						handleClickModalSecond={closeInstallModal}
+					/>
+					<InstructionModal
+						isOpen={isOpenInstructionModal}
+						data={deviceType === DeviceTypeEnum.IOS ? dataIos : dataAndroid}
+						closeModal={closeInstructionModal}
+					/>
+				</>
 			) : (
 				<BaseModal
 					buttonText="Закрыть"

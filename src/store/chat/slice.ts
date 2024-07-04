@@ -222,9 +222,11 @@ export const chatSlice = createSlice({
 	},
 });
 
+export const setSessionBlock = chatSlice.actions.setSessionBlock;
+
 export const {
 	setInputValue,
-	setSessionBlock,
+	// setSessionBlock,
 	resetState,
 	setHideInput,
 	addCurrentSession,

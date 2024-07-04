@@ -54,7 +54,12 @@ export const Sidebar: FC<SidebarProps> = ({ closeMenu }) => {
 			closeMenu();
 		}
 
-		dispatch(setSessionBlock(SessionBlocks.HOME));
+		if (user?.available_sessions === 0) {
+			dispatch(setSessionBlock(SessionBlocks.END_SESSION));
+		} else {
+			dispatch(setSessionBlock(SessionBlocks.HOME));
+		}
+
 		setTimeout(() => navigate(href));
 	};
 

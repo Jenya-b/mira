@@ -55,9 +55,10 @@ export const sessionApi = createApi({
 					accept: 'application/json',
 				},
 			}),
-			onQueryStarted: async (_, { dispatch, queryFulfilled }) => {
+			onQueryStarted: async (_, { dispatch, queryFulfilled, getState }) => {
 				try {
 					const { data } = await queryFulfilled;
+					const user = (getState() as RootState).user.user;
 
 					if (Object.keys(data).length !== 0) {
 						dispatch(addCurrentSession(data));
@@ -66,6 +67,8 @@ export const sessionApi = createApi({
 							dispatch(setSessionBlock(SessionBlocks.CHAT));
 						} else if (data.active && !data.messages.length) {
 							dispatch(setSessionBlock(SessionBlocks.FIRST));
+						} else if (user?.available_sessions === 0) {
+							dispatch(setSessionBlock(SessionBlocks.END_SESSION));
 						} else {
 							dispatch(setSessionBlock(SessionBlocks.FUTURE_ACTIONS));
 						}

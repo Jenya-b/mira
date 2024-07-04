@@ -20,9 +20,7 @@ import { useAppDispatch, useAppSelector } from '@/store';
 import {
 	Author,
 	Message,
-	MessageType,
 	SessionBlocks,
-	StageEnum,
 	addMessage,
 	setHideInput,
 	setInputValue,
@@ -52,7 +50,7 @@ const ChatPage: FC = () => {
 	const numberConnectRef = useRef(0);
 	const [isConnectError, setIsConnectError] = useState(false);
 	const { openSnackbar } = useAppSnackbar();
-	const [postMessage, { isSuccess: isSuccessPost }] = usePostMessageMutation();
+	const [postMessage] = usePostMessageMutation();
 
 	useEffect(() => {
 		if (isConnectError) {
@@ -83,28 +81,6 @@ const ChatPage: FC = () => {
 			}
 		}
 	}, [userSubscription]);
-
-	useEffect(() => {
-		if (!isSuccessPost) {
-			return;
-		}
-
-		const message: Message = {
-			author: Author.USER,
-			buttons: null,
-			content: inputValue,
-			created_at: '',
-			gpt: true,
-			role: 'user',
-			stage: StageEnum.SITUATION,
-			status: 1,
-			type: MessageType.MSG,
-			additional_data: null,
-		};
-		dispatch(addMessage(message));
-		dispatch(setSessionBlock(SessionBlocks.CHAT));
-		dispatch(setInputValue(''));
-	}, [isSuccessPost]);
 
 	const connectWebSocket = (): void => {
 		if (ws === null || reconnectInterval === null) {
@@ -152,7 +128,12 @@ const ChatPage: FC = () => {
 					return;
 				}
 
-				dispatch(addMessage({ ...json.message, newMessage: true } as Message));
+				dispatch(
+					addMessage({
+						...json.message,
+						newMessage: !(json.message.author === Author.USER),
+					} as Message)
+				);
 			} catch {
 				throw new Error();
 			}
@@ -225,7 +206,12 @@ const ChatPage: FC = () => {
 	};
 
 	const sendMessage = (): void => {
-		postMessage({ action: 'MESSAGE', content: inputValue });
+		postMessage({ action: 'MESSAGE', content: inputValue })
+			.unwrap()
+			.then(() => {
+				dispatch(setSessionBlock(SessionBlocks.CHAT));
+				dispatch(setInputValue(''));
+			});
 	};
 
 	const handleClickModal = (): void => {

@@ -5,7 +5,7 @@ import { LoaderMessage } from '../../ChatElements/LoaderMessage/LoaderMessage';
 import { TextMessage } from '@/components/ChatElements/TextMessage/TextMessage';
 import { PersonMessage } from '@/hocs/WithMessage/WithMessage';
 import { useAppDispatch, useAppSelector } from '@/store';
-import { MessageType, setCurrentStage, setInputBlock } from '@/store/chat';
+import { Author, MessageType, setCurrentStage, setInputBlock } from '@/store/chat';
 
 import { Container, Wrapper } from './MessageBlock.styled';
 
@@ -41,9 +41,11 @@ export const MessageBlock: FC = () => {
 						<TextMessage
 							key={i}
 							logoParam={
-								author && type === MessageType.UPD_MSG && buttons !== null
+								(author === Author.PSYCHOLOGIST || author === Author.SERVER) &&
+								type === MessageType.UPD_MSG &&
+								buttons !== null
 									? PersonMessage.MIRA_CHECK
-									: author
+									: author === Author.PSYCHOLOGIST || author === Author.SERVER
 										? PersonMessage.MIRA_MAIN
 										: PersonMessage.USER
 							}

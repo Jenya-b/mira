@@ -39,8 +39,9 @@ export enum MessageType {
 }
 
 export enum Author {
-	USER,
-	PSYCHOLOGIST,
+	USER = 1,
+	PSYCHOLOGIST = 4,
+	SERVER = 5,
 }
 
 export enum DegreeOfExpression {

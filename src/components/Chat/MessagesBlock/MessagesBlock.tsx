@@ -35,7 +35,18 @@ export const MessageBlock: FC = () => {
 			<Container ref={contentRef}>
 				{currentSession?.messages.map(
 					(
-						{ author, buttons, content, stage, type, additional_data, status, id, newMessage },
+						{
+							author,
+							buttons,
+							content,
+							stage,
+							type,
+							additional_data,
+							status,
+							id,
+							newMessage,
+							activeBtn,
+						},
 						i
 					) => (
 						<TextMessage
@@ -57,6 +68,7 @@ export const MessageBlock: FC = () => {
 							status={status}
 							id={id}
 							newMessage={newMessage}
+							activeBtn={activeBtn}
 						/>
 					)
 				)}

@@ -38,6 +38,7 @@ interface TextMessageProps {
 	status: Statuses;
 	id: number | undefined;
 	newMessage?: boolean;
+	activeBtn?: string;
 }
 
 export const TextMessage: FC<TextMessageProps> = ({
@@ -50,6 +51,7 @@ export const TextMessage: FC<TextMessageProps> = ({
 	status,
 	id,
 	newMessage = false,
+	activeBtn,
 }) => {
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
@@ -70,7 +72,12 @@ export const TextMessage: FC<TextMessageProps> = ({
 		setSelectedChatBlock(chatBlock);
 	}, []);
 
-	const sendCheckUser = (content: string, action: string, action_param?: number): void => {
+	const sendCheckUser = (
+		content: string,
+		action: string,
+		action_param?: number,
+		parent?: number
+	): void => {
 		const lastId = currentSession!.messages[currentSession!.messages.length - 1]?.id;
 
 		if (lastId !== id || isClick) {
@@ -84,6 +91,8 @@ export const TextMessage: FC<TextMessageProps> = ({
 			fetchCreateSession(null);
 		} else if (currentStage === StageEnum.QUESTIONNAIRE && action === 'SAVE_QUESTION') {
 			navigate(path.questions);
+		} else if (action === 'TRY_ONE_MORE_TIME_NEW_THOUGHT_CREATION') {
+			dispatch(setInputBlock(true));
 		} else if (currentStage === StageEnum.NEW_THOUGHT_CREATION && action === 'FINISH_SESSION') {
 			dispatch(setSessionBlock(SessionBlocks.FEEDBACK));
 			dispatch(disconnectCurrentSession());
@@ -94,14 +103,15 @@ export const TextMessage: FC<TextMessageProps> = ({
 			currentStage === StageEnum.DOUBT_CREATION ||
 			currentStage === StageEnum.DISTORTIONS
 		) {
-			postMessage({ content, action, action_param });
+			postMessage({ content, action, action_param, parent });
 		}
 	};
 
 	const handleSelectButtons = (
 		content: string,
 		action: string,
-		action_param: number | undefined
+		action_param: number | undefined,
+		parent: number | undefined
 	): void => {
 		const lastId = currentSession!.messages[currentSession!.messages.length - 1]?.id;
 
@@ -111,7 +121,7 @@ export const TextMessage: FC<TextMessageProps> = ({
 
 		setIsClick(true);
 		setSelectedButtons(content);
-		sendCheckUser(content, action, action_param);
+		sendCheckUser(content, action, action_param, parent);
 	};
 
 	return (
@@ -125,6 +135,7 @@ export const TextMessage: FC<TextMessageProps> = ({
 					]}
 					buttonParam={(buttons as ButtonsWS[])![0]}
 					sendCheckUser={sendCheckUser}
+					parent={id}
 				/>
 			) : selectedChatBlock === SelectChatBlockEnum.CHECK_WITH_USER ? (
 				<>
@@ -132,8 +143,8 @@ export const TextMessage: FC<TextMessageProps> = ({
 						{(buttons as ButtonsWS[])!.map(({ content, action, action_param }, i) => (
 							<li key={i}>
 								<button
-									className={content === selectedButtons ? 'active' : ''}
-									onClick={() => handleSelectButtons(content, action, action_param)}
+									className={content === selectedButtons || content === activeBtn ? 'active' : ''}
+									onClick={() => handleSelectButtons(content, action, action_param, id)}
 								>
 									{content}
 								</button>
@@ -149,6 +160,7 @@ export const TextMessage: FC<TextMessageProps> = ({
 							list={item}
 							descriptions={(additional_data?.descriptions as StringObject[])[i]}
 							sendCheckUser={sendCheckUser}
+							parent={id}
 						/>
 					))}
 				</ThoughtsWrap>
@@ -165,7 +177,8 @@ export const TextMessage: FC<TextMessageProps> = ({
 						sendCheckUser(
 							(buttons as ButtonsWS[])[0].content,
 							(buttons as ButtonsWS[])[0].action,
-							(buttons as ButtonsWS[])[0].action_param
+							(buttons as ButtonsWS[])[0].action_param,
+							id
 						)
 					}
 				/>

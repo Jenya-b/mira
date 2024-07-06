@@ -10,10 +10,11 @@ import { List, Title, Wrapper } from './Thoughts.styled';
 interface ThoughtsProps {
 	list: StringObjectButtons;
 	descriptions: StringObject | undefined;
-	sendCheckUser: (content: string, action: string, action_param?: number) => void;
+	sendCheckUser: (content: string, action: string, action_param?: number, parent?: number) => void;
+	parent?: number;
 }
 
-export const Thoughts: FC<ThoughtsProps> = ({ list, descriptions, sendCheckUser }) => {
+export const Thoughts: FC<ThoughtsProps> = ({ list, descriptions, sendCheckUser, parent }) => {
 	const [open, openModal, closeModal] = useModal();
 
 	return (
@@ -38,7 +39,9 @@ export const Thoughts: FC<ThoughtsProps> = ({ list, descriptions, sendCheckUser 
 			<List>
 				{Object.values(list)[0].map(({ action, content, action_param }) => (
 					<li key={content}>
-						<button onClick={() => sendCheckUser(content, action, action_param)}>{content}</button>
+						<button onClick={() => sendCheckUser(content, action, action_param, parent)}>
+							{content}
+						</button>
 					</li>
 				))}
 			</List>

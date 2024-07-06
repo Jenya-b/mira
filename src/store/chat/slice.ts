@@ -69,8 +69,8 @@ export enum DistortionCardsEnum {
 
 export interface ButtonsWS {
 	action: string;
-	action_param?: number;
 	content: string;
+	action_param?: number;
 }
 
 export type StringObject = {
@@ -100,7 +100,9 @@ export interface Message {
 	stage: StageEnum;
 	status: Statuses;
 	type: MessageType;
+	parent: number | null;
 	newMessage?: boolean;
+	activeBtn?: string;
 }
 
 export interface Session {
@@ -165,9 +167,26 @@ export const chatSlice = createSlice({
 			state.buttonsBlock = action.payload;
 		},
 		addCurrentSession(state, action: PayloadAction<Session>) {
-			state.currentSession = action.payload;
+			const parentMessages = action.payload.messages.filter((item) => item.parent !== null);
 
-			const messages = action.payload.messages;
+			const currentSession = {
+				...action.payload,
+				messages: action.payload.messages
+					.filter((item) => item.parent === null)
+					.map((item) => {
+						const mess = parentMessages.find((i) => i.parent === item.id);
+
+						if (mess) {
+							return { ...item, activeBtn: mess.content };
+						}
+
+						return item;
+					}),
+			};
+
+			state.currentSession = currentSession;
+
+			const messages = currentSession.messages;
 
 			if (messages.length) {
 				const lastMessage = messages[messages.length - 1];

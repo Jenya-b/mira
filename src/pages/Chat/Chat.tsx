@@ -86,7 +86,7 @@ const ChatPage: FC = () => {
 			try {
 				const json: WSMessage = JSON.parse(event.data);
 
-				if (json.errors.length) {
+				if (json.errors.length || json.message.parent !== null) {
 					return;
 				}
 

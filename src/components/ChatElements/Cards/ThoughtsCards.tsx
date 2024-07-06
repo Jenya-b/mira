@@ -9,10 +9,11 @@ import { Controls } from './Controls';
 interface CardsProps {
 	data: string[];
 	buttonParam: ButtonsWS;
-	sendCheckUser: (content: string, action: string, action_param?: number) => void;
+	sendCheckUser: (content: string, action: string, action_param?: number, parent?: number) => void;
+	parent: number | undefined;
 }
 
-export const ThoughtsCards: FC<CardsProps> = ({ data, buttonParam, sendCheckUser }) => {
+export const ThoughtsCards: FC<CardsProps> = ({ data, buttonParam, sendCheckUser, parent }) => {
 	const renderSliderData = (t: string, index: number): JSX.Element => {
 		if (index === 0) {
 			return (
@@ -60,7 +61,7 @@ export const ThoughtsCards: FC<CardsProps> = ({ data, buttonParam, sendCheckUser
 				isIcon
 				btnText1="Создать новую мысль"
 				handleClickBtn1={() =>
-					sendCheckUser(buttonParam.content, buttonParam.action, buttonParam.action_param)
+					sendCheckUser(buttonParam.content, buttonParam.action, buttonParam.action_param, parent)
 				}
 			/>
 		</Wrapper>

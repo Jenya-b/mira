@@ -114,7 +114,10 @@ export const sessionApi = createApi({
 				}
 			},
 		}),
-		postMessage: build.mutation<ButtonsWS, ButtonsWS>({
+		postMessage: build.mutation<
+			ButtonsWS,
+			{ action: string; content: string; action_param?: number; parent?: number }
+		>({
 			query: (body) => ({
 				method: 'POST',
 				url: '/sessions/message/',

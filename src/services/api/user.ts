@@ -1,7 +1,6 @@
 import { BaseQueryApi, createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 import { RootState } from '@/store';
-import { SessionBlocks, setSessionBlock } from '@/store/chat';
 import { Subscription, User, resetState, setNotificationData, setUser } from '@/store/user';
 
 interface UpdateUserRequest {
@@ -55,10 +54,6 @@ export const userApi = createApi({
 				try {
 					const { data } = await queryFulfilled;
 					dispatch(setUser(data));
-
-					if (!data.count_sessions) {
-						dispatch(setSessionBlock(SessionBlocks.END_SESSION));
-					}
 				} catch {
 					localStorage.removeItem('accessToken');
 					dispatch(resetState());

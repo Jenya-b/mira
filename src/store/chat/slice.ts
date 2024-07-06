@@ -210,9 +210,6 @@ export const chatSlice = createSlice({
 		setTypingComplete(state, action: PayloadAction<boolean>) {
 			state.typingComplete = action.payload;
 		},
-		setReconnectWS(state, action: PayloadAction<boolean>) {
-			state.reconnectWS = action.payload;
-		},
 		setLastThoughts(state, action: PayloadAction<LastThoughts[]>) {
 			state.lastThoughts = action.payload;
 		},
@@ -222,11 +219,9 @@ export const chatSlice = createSlice({
 	},
 });
 
-export const setSessionBlock = chatSlice.actions.setSessionBlock;
-
 export const {
 	setInputValue,
-	// setSessionBlock,
+	setSessionBlock,
 	resetState,
 	setHideInput,
 	addCurrentSession,
@@ -235,7 +230,6 @@ export const {
 	setIsButtonsBlock,
 	disconnectCurrentSession,
 	setTypingComplete,
-	setReconnectWS,
 	flagMessages,
 	setInputBlock,
 	setLastThoughts,

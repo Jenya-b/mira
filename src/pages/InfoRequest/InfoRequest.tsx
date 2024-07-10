@@ -4,6 +4,7 @@ import messageImg from '@/assets/images/message.png';
 import { BaseModal } from '@/components/Modal/Modal';
 import { WithProfile } from '@/hocs/WithProfile/WithProfile';
 import { useModal } from '@/hooks/useModal';
+import { usePostMessageMutation } from '@/services/api/support';
 import { useAppSelector } from '@/store';
 import {
 	ButtonPrimary,
@@ -22,8 +23,10 @@ const InfoRequest: FC = () => {
 	const [name, setName] = useState('');
 	const [email, setEmail] = useState('');
 	const [text, setText] = useState('');
-	const [select, setSelect] = useState('');
+	const [select, setSelect] = useState('TECHNICAL');
 	const [open, openModal, closeModal] = useModal();
+
+	const [fetchPostMessage] = usePostMessageMutation();
 
 	useEffect(() => {
 		if (user === null) {
@@ -37,7 +40,7 @@ const InfoRequest: FC = () => {
 	const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
 		e.preventDefault();
 
-		openModal();
+		fetchPostMessage({ content: text, type: select }).unwrap().then(openModal);
 	};
 
 	const handleClickModal = (): void => {
@@ -54,7 +57,7 @@ const InfoRequest: FC = () => {
 					<LabelSelect>
 						<span>Тема</span>
 						<SelectPrimary value={select} onChange={(e) => setSelect(e.target.value)}>
-							<option value="problem">Техническая проблема</option>
+							<option value="TECHNICAL">Техническая проблема</option>
 							<option value="err">Ошибка</option>
 						</SelectPrimary>
 						<svg width="11" height="6" viewBox="0 0 11 6" fill="none">

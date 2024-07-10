@@ -6,6 +6,7 @@ import { authApi } from '@/services/api/auth';
 import { copingCartsApi } from '@/services/api/copingCarts';
 import { rateApi } from '@/services/api/rate';
 import { sessionApi } from '@/services/api/session';
+import { supportApi } from '@/services/api/support';
 import { userApi } from '@/services/api/user';
 
 import { authReducer } from './auth';
@@ -32,6 +33,7 @@ export const store = configureStore({
 		[sessionApi.reducerPath]: sessionApi.reducer,
 		[rateApi.reducerPath]: rateApi.reducer,
 		[copingCartsApi.reducerPath]: copingCartsApi.reducer,
+		[supportApi.reducerPath]: supportApi.reducer,
 	},
 
 	middleware: (getDefaultMiddleware) =>
@@ -40,7 +42,8 @@ export const store = configureStore({
 			userApi.middleware,
 			sessionApi.middleware,
 			rateApi.middleware,
-			copingCartsApi.middleware
+			copingCartsApi.middleware,
+			supportApi.middleware
 		),
 });
 

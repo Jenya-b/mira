@@ -19,3 +19,12 @@ export const getMyTime = (time: string): string => {
 
 	return `${hours < 10 ? `0${hours}` : hours}:${minutes < 10 ? `0${minutes}` : minutes}:00`;
 };
+
+export const getMyDate = (time: string): string => {
+	const date = new Date(Date.parse(time));
+	const day = date.getDate();
+	const month = date.getMonth() + 1;
+	const year = date.getFullYear();
+
+	return `${day < 10 ? `0${day}` : day}.${month < 10 ? `0${month}` : month}.${year}`;
+};

@@ -3,12 +3,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import type { TypedUseSelectorHook } from 'react-redux';
 
 import { authApi } from '@/services/api/auth';
+import { copingCartsApi } from '@/services/api/copingCarts';
 import { rateApi } from '@/services/api/rate';
 import { sessionApi } from '@/services/api/session';
 import { userApi } from '@/services/api/user';
 
 import { authReducer } from './auth';
 import { chatReducer } from './chat';
+import { copingCartsReducer } from './copingCart';
 import { generalReducer } from './general';
 import { notificationReducer } from './notification';
 import { practiceReducer } from './practice';
@@ -24,10 +26,12 @@ export const store = configureStore({
 		general: generalReducer,
 		practice: practiceReducer,
 		notification: notificationReducer,
+		copingCarts: copingCartsReducer,
 		[authApi.reducerPath]: authApi.reducer,
 		[userApi.reducerPath]: userApi.reducer,
 		[sessionApi.reducerPath]: sessionApi.reducer,
 		[rateApi.reducerPath]: rateApi.reducer,
+		[copingCartsApi.reducerPath]: copingCartsApi.reducer,
 	},
 
 	middleware: (getDefaultMiddleware) =>
@@ -35,7 +39,8 @@ export const store = configureStore({
 			authApi.middleware,
 			userApi.middleware,
 			sessionApi.middleware,
-			rateApi.middleware
+			rateApi.middleware,
+			copingCartsApi.middleware
 		),
 });
 

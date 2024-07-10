@@ -6,8 +6,11 @@ import { Card } from '@/components/Practice/Card/Card';
 import { CopingCardBlock } from '@/components/Training/CopingCard/CopingCard';
 import { FilterBlock } from '@/components/Training/FilterBlock/FilterBlock';
 import { path } from '@/router/path';
+import { useGetCopingCartsQuery, useUpdateFavoriteCartMutation } from '@/services/api/copingCarts';
 import { useAppDispatch, useAppSelector } from '@/store';
+import { updateFavoriteCart } from '@/store/copingCart';
 import { TrainingBlock, setActiveFilter } from '@/store/practice';
+import { getMyDate } from '@/utils/time';
 
 import {
 	Container,
@@ -20,10 +23,15 @@ import {
 } from './Practice.styled';
 
 const Practice: FC = () => {
-	const { state } = useLocation();
+	const { state: stateLocation } = useLocation();
 	const dispatch = useAppDispatch();
 	const { activeFilter, trainingBlock } = useAppSelector(({ practice }) => practice);
 	const { user } = useAppSelector((state) => state.user);
+	const { copingCarts } = useAppSelector((state) => state.copingCarts);
+
+	useGetCopingCartsQuery({});
+
+	const [fetchUpdateFavorite] = useUpdateFavoriteCartMutation();
 
 	const renderTrainingBlock = (): JSX.Element => {
 		switch (trainingBlock) {
@@ -42,7 +50,10 @@ const Practice: FC = () => {
 		<Wrapper>
 			<Container>
 				<Controls>
-					<BackLink path={state ? state.backPath : path.home} textLink="Вернуться назад" />
+					<BackLink
+						path={stateLocation ? stateLocation.backPath : path.home}
+						textLink="Вернуться назад"
+					/>
 					<Filter
 						onClick={() => dispatch(setActiveFilter(!activeFilter))}
 						className={
@@ -72,22 +83,21 @@ const Practice: FC = () => {
 					</Filter>
 				</Controls>
 				<Content>
-					<Card
-						date="02.02.2024"
-						favorites
-						btnText1="Хочу реализовать потенциал"
-						btnText2="Должен много зарабатывать"
-						btnText3="Никто не покупает мой продукт"
-						btnText4="Новая мысль плохо работает"
-					/>
-					<Card
-						date="02.02.2024"
-						favorites={false}
-						btnText1="Хочу реализовать потенциал"
-						btnText2="Должен много зарабатывать"
-						btnText3="Никто не покупает мой продукт, несмотря на то, что я потратил много сил на свой бизнес и формирование продукта"
-						btnText4="Новая мысль плохо работает"
-					/>
+					{copingCarts.map(({ created_at, id, is_favorite, new_thought, situation, thought }) => (
+						<Card
+							key={id}
+							date={getMyDate(created_at)}
+							favorites={is_favorite}
+							btnText1={new_thought}
+							btnText2={thought}
+							btnText3={situation}
+							btnText4="Новая мысль плохо работает"
+							handleClickFavorite={() => {
+								dispatch(updateFavoriteCart({ id, isFavorite: !is_favorite }));
+								fetchUpdateFavorite({ id, is_favorite: !is_favorite });
+							}}
+						/>
+					))}
 				</Content>
 			</Container>
 			{user && !user.training_coping_carts_passed && (

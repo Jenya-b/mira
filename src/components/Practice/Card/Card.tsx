@@ -23,6 +23,7 @@ interface CardProps {
 	date: string;
 	favorites: boolean;
 	isTraining?: boolean;
+	handleClickFavorite: () => void;
 }
 
 export const Card: FC<CardProps> = ({
@@ -33,6 +34,7 @@ export const Card: FC<CardProps> = ({
 	date,
 	favorites,
 	isTraining = false,
+	handleClickFavorite,
 }) => {
 	const btnRef = useRef<HTMLButtonElement>(null);
 	const [activeText, setActiveText] = useState(false);
@@ -59,7 +61,7 @@ export const Card: FC<CardProps> = ({
 		<Wrapper>
 			<Info>
 				<Date>{date}</Date>
-				<Favorites className={favorites ? 'favorites' : ''}>
+				<Favorites onClick={handleClickFavorite} className={favorites ? 'favorites' : ''}>
 					<svg width="16" height="16" viewBox="0 0 16 16" fill="none">
 						<g clipPath="url(#clip0_1534_5634)">
 							<path

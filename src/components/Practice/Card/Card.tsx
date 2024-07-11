@@ -23,7 +23,7 @@ interface CardProps {
 	date: string;
 	favorites: boolean;
 	isTraining?: boolean;
-	handleClickFavorite: () => void;
+	handleClickFavorite?: () => void;
 }
 
 export const Card: FC<CardProps> = ({

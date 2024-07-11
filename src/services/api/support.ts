@@ -2,7 +2,23 @@ import { BaseQueryApi, createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/
 
 import { RootState } from '@/store';
 
-export const supportType = [[]];
+export enum SupportEnum {
+	TECHNICAL = 'TECHNICAL',
+	USAGE_SERVICE = 'USAGE_SERVICE',
+	COMPENSATION_SESSION = 'COMPENSATION_SESSION',
+	GENERAL_QUESTION = 'GENERAL_QUESTION',
+	COOPERATION = 'COOPERATION',
+	OTHER = 'OTHER',
+}
+
+export const supportType = {
+	[SupportEnum.TECHNICAL]: 'Техническая проблема',
+	[SupportEnum.USAGE_SERVICE]: 'Вопросы по использованию сервиса',
+	[SupportEnum.COMPENSATION_SESSION]: 'Компенсация за сессию',
+	[SupportEnum.GENERAL_QUESTION]: 'Общие вопросы',
+	[SupportEnum.COOPERATION]: 'Сотрудничество',
+	[SupportEnum.OTHER]: 'Другое',
+};
 
 export const supportApi = createApi({
 	reducerPath: 'supportApi',
@@ -24,7 +40,7 @@ export const supportApi = createApi({
 		},
 	}),
 	endpoints: (build) => ({
-		postMessage: build.mutation<null, { content: string; type: string }>({
+		postMessage: build.mutation<null, { content: string; type: SupportEnum }>({
 			query: (body) => ({
 				url: '/support-messages/',
 				method: 'POST',

@@ -4,7 +4,7 @@ import messageImg from '@/assets/images/message.png';
 import { BaseModal } from '@/components/Modal/Modal';
 import { WithProfile } from '@/hocs/WithProfile/WithProfile';
 import { useModal } from '@/hooks/useModal';
-import { usePostMessageMutation } from '@/services/api/support';
+import { SupportEnum, supportType, usePostMessageMutation } from '@/services/api/support';
 import { useAppSelector } from '@/store';
 import {
 	ButtonPrimary,
@@ -23,7 +23,7 @@ const InfoRequest: FC = () => {
 	const [name, setName] = useState('');
 	const [email, setEmail] = useState('');
 	const [text, setText] = useState('');
-	const [select, setSelect] = useState('TECHNICAL');
+	const [select, setSelect] = useState<SupportEnum>(SupportEnum.TECHNICAL);
 	const [open, openModal, closeModal] = useModal();
 
 	const [fetchPostMessage] = usePostMessageMutation();
@@ -40,7 +40,10 @@ const InfoRequest: FC = () => {
 	const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
 		e.preventDefault();
 
-		fetchPostMessage({ content: text, type: select }).unwrap().then(openModal);
+		fetchPostMessage({ content: text, type: select })
+			.unwrap()
+			.then(openModal)
+			.then(() => setText(''));
 	};
 
 	const handleClickModal = (): void => {
@@ -56,9 +59,15 @@ const InfoRequest: FC = () => {
 				<Form onSubmit={handleSubmit}>
 					<LabelSelect>
 						<span>Тема</span>
-						<SelectPrimary value={select} onChange={(e) => setSelect(e.target.value)}>
-							<option value="TECHNICAL">Техническая проблема</option>
-							<option value="err">Ошибка</option>
+						<SelectPrimary
+							value={select}
+							onChange={(e) => setSelect(e.target.value as SupportEnum)}
+						>
+							{Object.entries(supportType).map(([value, desc]) => (
+								<option key={value} value={value}>
+									{desc}
+								</option>
+							))}
 						</SelectPrimary>
 						<svg width="11" height="6" viewBox="0 0 11 6" fill="none">
 							<path
@@ -69,7 +78,7 @@ const InfoRequest: FC = () => {
 					</LabelSelect>
 					<LabelPrimary>
 						<span>Электронная почта</span>
-						<InputPrimary value={email} onChange={(e) => setEmail(e.target.value)} />
+						<InputPrimary value={email} onChange={(e) => setEmail(e.target.value)} disabled />
 					</LabelPrimary>
 					<LabelSecondary>
 						<span>Обращение</span>

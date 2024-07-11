@@ -37,7 +37,7 @@ export const CardsBlock: FC = () => {
 				<Cover style={{ background: `url(${coverImg})` }}>
 					<div className="warning">
 						<div className="warning__icon">!</div>
-						<p className="warning__text">Важно знать для лучшего результата </p>
+						<p className="warning__text">Что делать после сессии?</p>
 					</div>
 					<p className="title">{t}</p>
 				</Cover>

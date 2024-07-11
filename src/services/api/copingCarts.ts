@@ -43,11 +43,19 @@ export const copingCartsApi = createApi({
 				}
 			},
 		}),
-		updateFavoriteCart: build.mutation<null, { id: number; is_favorite: boolean }>({
-			query: (params) => ({
-				url: `/coping-carts/${params.id}/favorite/`,
+		addFavoriteCart: build.mutation<null, { id: number }>({
+			query: ({ id }) => ({
+				url: `/coping-carts/${id}/favorite/`,
 				method: 'POST',
-				params: { is_favorite: params.is_favorite },
+				headers: {
+					accept: 'application/json',
+				},
+			}),
+		}),
+		deleteFavoriteCart: build.mutation<null, { id: number }>({
+			query: ({ id }) => ({
+				url: `/coping-carts/${id}/favorite/`,
+				method: 'DELETE',
 				headers: {
 					accept: 'application/json',
 				},
@@ -56,4 +64,5 @@ export const copingCartsApi = createApi({
 	}),
 });
 
-export const { useGetCopingCartsQuery, useUpdateFavoriteCartMutation } = copingCartsApi;
+export const { useGetCopingCartsQuery, useAddFavoriteCartMutation, useDeleteFavoriteCartMutation } =
+	copingCartsApi;

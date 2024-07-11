@@ -6,7 +6,11 @@ import { Card } from '@/components/Practice/Card/Card';
 import { CopingCardBlock } from '@/components/Training/CopingCard/CopingCard';
 import { FilterBlock } from '@/components/Training/FilterBlock/FilterBlock';
 import { path } from '@/router/path';
-import { useGetCopingCartsQuery, useUpdateFavoriteCartMutation } from '@/services/api/copingCarts';
+import {
+	useAddFavoriteCartMutation,
+	useDeleteFavoriteCartMutation,
+	useGetCopingCartsQuery,
+} from '@/services/api/copingCarts';
 import { useAppDispatch, useAppSelector } from '@/store';
 import { updateFavoriteCart } from '@/store/copingCart';
 import { TrainingBlock, setActiveFilter } from '@/store/practice';
@@ -31,7 +35,8 @@ const Practice: FC = () => {
 
 	useGetCopingCartsQuery({});
 
-	const [fetchUpdateFavorite] = useUpdateFavoriteCartMutation();
+	const [fetchAddFavorite] = useAddFavoriteCartMutation();
+	const [fetchDeleteFavorite] = useDeleteFavoriteCartMutation();
 
 	const renderTrainingBlock = (): JSX.Element => {
 		switch (trainingBlock) {
@@ -43,6 +48,18 @@ const Practice: FC = () => {
 
 			default:
 				return <></>;
+		}
+	};
+
+	const handleUpdateFavorite = (id: number, isFavorite: boolean): void => {
+		if (isFavorite) {
+			fetchAddFavorite({ id })
+				.unwrap()
+				.then(() => dispatch(updateFavoriteCart({ id, isFavorite })));
+		} else {
+			fetchDeleteFavorite({ id })
+				.unwrap()
+				.then(() => dispatch(updateFavoriteCart({ id, isFavorite })));
 		}
 	};
 
@@ -92,10 +109,7 @@ const Practice: FC = () => {
 							btnText2={thought}
 							btnText3={situation}
 							btnText4="Новая мысль плохо работает"
-							handleClickFavorite={() => {
-								dispatch(updateFavoriteCart({ id, isFavorite: !is_favorite }));
-								fetchUpdateFavorite({ id, is_favorite: !is_favorite });
-							}}
+							handleClickFavorite={() => handleUpdateFavorite(id, !is_favorite)}
 						/>
 					))}
 				</Content>

@@ -59,6 +59,11 @@ export const Services = styled.ul`
 		span {
 			opacity: 0.8;
 		}
+
+		img {
+			width: 1rem;
+			height: 1rem;
+		}
 	}
 `;
 

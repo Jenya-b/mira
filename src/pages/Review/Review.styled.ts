@@ -121,19 +121,9 @@ export const ParamsWrap = styled.div`
 	display: flex;
 	flex-direction: column;
 	row-gap: 4rem;
+	overflow: auto;
 
-	&.exception {
-		position: relative;
-
-		&::before {
-			content: '';
-			position: absolute;
-			left: 0;
-			top: 50%;
-			transform: translateY(-50%);
-			width: 100%;
-			height: 0.07143rem;
-			background: rgba(255, 255, 255, 0.18);
-		}
+	@media (max-width: 768px) {
+		overflow: visible;
 	}
 `;

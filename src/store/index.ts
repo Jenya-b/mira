@@ -4,6 +4,7 @@ import type { TypedUseSelectorHook } from 'react-redux';
 
 import { authApi } from '@/services/api/auth';
 import { copingCartsApi } from '@/services/api/copingCarts';
+import { notificationApi } from '@/services/api/notification';
 import { rateApi } from '@/services/api/rate';
 import { sessionApi } from '@/services/api/session';
 import { supportApi } from '@/services/api/support';
@@ -34,6 +35,7 @@ export const store = configureStore({
 		[rateApi.reducerPath]: rateApi.reducer,
 		[copingCartsApi.reducerPath]: copingCartsApi.reducer,
 		[supportApi.reducerPath]: supportApi.reducer,
+		[notificationApi.reducerPath]: notificationApi.reducer,
 	},
 
 	middleware: (getDefaultMiddleware) =>
@@ -43,7 +45,8 @@ export const store = configureStore({
 			sessionApi.middleware,
 			rateApi.middleware,
 			copingCartsApi.middleware,
-			supportApi.middleware
+			supportApi.middleware,
+			notificationApi.middleware
 		),
 });
 

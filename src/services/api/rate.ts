@@ -2,11 +2,17 @@ import { BaseQueryApi, createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/
 
 import { RootState } from '@/store';
 
-interface Rate {
+export interface Rate {
 	id: number;
 	count_session: number;
 	short_description: string;
 	price: number;
+	descriptions: [
+		{
+			icon: string;
+			text: string;
+		},
+	];
 }
 
 export const rateApi = createApi({

@@ -4,11 +4,11 @@ import Confetti from 'react-confetti';
 import { Card } from '../../components/Rates/Card/Card';
 
 import smile from '@/assets/images/smile-confetti.png';
+import { Loader } from '@/components/Loader/Loader';
 import { BaseModal } from '@/components/Modal/Modal';
-import { rateList } from '@/constants/rates';
 import { useModal } from '@/hooks/useModal';
 import { useResize } from '@/hooks/useResize';
-import { useLazyGetPaymentLinkQuery } from '@/services/api/rate';
+import { useGetRatesQuery, useLazyGetPaymentLinkQuery } from '@/services/api/rate';
 
 import { Container, RatesWrap, Title, Wrapper } from './Rates.styled';
 
@@ -17,6 +17,8 @@ const Rates: FC = () => {
 	const [party, setParty] = useState(false);
 	const [isOpen, openModal, closeModal] = useModal();
 	const [fetchPaymentLink] = useLazyGetPaymentLinkQuery();
+
+	const { data, isLoading } = useGetRatesQuery(null);
 
 	const handleSubmit = (): void => {
 		fetchPaymentLink(1)
@@ -34,6 +36,7 @@ const Rates: FC = () => {
 
 	return (
 		<Wrapper>
+			{isLoading && <Loader />}
 			<BaseModal
 				buttonText="Отлично!"
 				title="Вы успешно приобрели пакет из 7 сессий!"
@@ -57,9 +60,8 @@ const Rates: FC = () => {
 			<Container>
 				<Title>Тарифы и оплата</Title>
 				<RatesWrap>
-					{rateList.map((item) => (
-						<Card key={item.title} {...item} handleSubmit={handleSubmit} />
-					))}
+					{data !== undefined &&
+						data.map((item) => <Card key={item.id} {...item} handleSubmit={handleSubmit} />)}
 				</RatesWrap>
 			</Container>
 		</Wrapper>

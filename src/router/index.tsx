@@ -3,6 +3,7 @@ import { createBrowserRouter } from 'react-router-dom';
 import { ErrorBoundary } from '@/components/ErrorBoundary/ErrorBoundary';
 import { Layout } from '@/components/Layout/Layout';
 import { ChatProvider } from '@/context/chat';
+import { NotificationProvider } from '@/context/notification';
 import { RequireAuth } from '@/hocs/RequireAuth/RequireAuth';
 import { RequireIntro } from '@/hocs/RequireIntro/RequireIntro';
 import {
@@ -28,9 +29,10 @@ export const router = createBrowserRouter([
 		element: (
 			<RequireAuth>
 				<RequireIntro>
-					<Layout />
+					<NotificationProvider>
+						<Layout />
+					</NotificationProvider>
 				</RequireIntro>
-				{/* <Layout /> */}
 			</RequireAuth>
 		),
 		children: [

@@ -37,6 +37,22 @@ export const Subtitle = styled.h3`
 	}
 `;
 
+export const Desc = styled.h3`
+	margin-top: 1.5rem;
+	font-size: 1.42857rem;
+	font-weight: 400;
+	line-height: 120%;
+	color: ${({ theme }) => theme.colors.textPrimary};
+	text-align: center;
+
+	@media (max-width: 768px) {
+		font-size: 1.14286rem;
+		font-weight: 400;
+		line-height: 1.42857rem;
+		letter-spacing: -0.02286rem;
+	}
+`;
+
 export const Button = styled(ButtonPrimary)`
 	margin-top: 2.5rem;
 `;

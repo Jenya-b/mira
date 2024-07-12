@@ -2,7 +2,7 @@ import { FC } from 'react';
 
 import { WithModal } from '@/hocs/WithModal/WithModal';
 
-import { Button, ButtonSecond, ImageWrap, Subtitle, Title } from './Modal.styled';
+import { Button, ButtonSecond, Desc, ImageWrap, Subtitle, Title } from './Modal.styled';
 
 interface ModalProps {
 	isOpen: boolean;
@@ -14,6 +14,7 @@ interface ModalProps {
 	imgSrc: string;
 	buttonText: string;
 	buttonTextSecond?: string;
+	desc?: string;
 }
 
 export const BaseModal: FC<ModalProps> = ({
@@ -26,6 +27,7 @@ export const BaseModal: FC<ModalProps> = ({
 	imgSrc,
 	subtitle,
 	title,
+	desc,
 }) => (
 	<WithModal handleClickClose={closeModal} open={isOpen}>
 		<>
@@ -34,6 +36,7 @@ export const BaseModal: FC<ModalProps> = ({
 			</ImageWrap>
 			<Title>{title}</Title>
 			{!!subtitle && <Subtitle>{subtitle}</Subtitle>}
+			{!!desc && <Desc>{desc}</Desc>}
 			<Button onClick={handleClickModal}>{buttonText}</Button>
 			{!!buttonTextSecond && (
 				<ButtonSecond onClick={handleClickModalSecond}>{buttonTextSecond}</ButtonSecond>

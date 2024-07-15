@@ -17,7 +17,7 @@ export const MessageBlock: FC = () => {
 	useEffect(() => {
 		if (currentSession && currentSession.messages.length) {
 			const lastMessage = currentSession.messages[currentSession.messages.length - 1];
-			dispatch(setInputBlock(!lastMessage.author));
+			dispatch(setInputBlock(lastMessage.author === Author.USER));
 			dispatch(setCurrentStage(lastMessage.stage));
 		}
 

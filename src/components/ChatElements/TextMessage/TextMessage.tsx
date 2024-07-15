@@ -21,7 +21,9 @@ import {
 	StringObject,
 	StringObjectButtons,
 	disconnectCurrentSession,
+	setHideInput,
 	setInputBlock,
+	setIsButtonsBlock,
 	setSessionBlock,
 } from '@/store/chat';
 import { SelectChatBlockEnum, selectChatBlock } from '@/utils/selectChatBlock';
@@ -91,8 +93,6 @@ export const TextMessage: FC<TextMessageProps> = ({
 			fetchCreateSession(null);
 		} else if (currentStage === StageEnum.QUESTIONNAIRE && action === 'SAVE_QUESTION') {
 			navigate(path.questions);
-		} else if (action === 'TRY_ONE_MORE_TIME_NEW_THOUGHT_CREATION') {
-			dispatch(setInputBlock(true));
 		} else if (currentStage === StageEnum.NEW_THOUGHT_CREATION && action === 'FINISH_SESSION') {
 			dispatch(setSessionBlock(SessionBlocks.FEEDBACK));
 			dispatch(disconnectCurrentSession());
@@ -119,9 +119,14 @@ export const TextMessage: FC<TextMessageProps> = ({
 			return;
 		}
 
-		setIsClick(true);
-		setSelectedButtons(content);
-		sendCheckUser(content, action, action_param, parent);
+		if (action === 'TRY_ONE_MORE_TIME_NEW_THOUGHT_CREATION') {
+			dispatch(setHideInput(false));
+			dispatch(setIsButtonsBlock(false));
+		} else {
+			setIsClick(true);
+			setSelectedButtons(content);
+			sendCheckUser(content, action, action_param, parent);
+		}
 	};
 
 	return (

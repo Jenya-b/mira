@@ -3,6 +3,7 @@ import { createBrowserRouter } from 'react-router-dom';
 import { ErrorBoundary } from '@/components/ErrorBoundary/ErrorBoundary';
 import { Layout } from '@/components/Layout/Layout';
 import { ChatProvider } from '@/context/chat';
+import { ExerciserProvider } from '@/context/exerciser';
 import { NotificationProvider } from '@/context/notification';
 import { RequireAuth } from '@/hocs/RequireAuth/RequireAuth';
 import { RequireIntro } from '@/hocs/RequireIntro/RequireIntro';
@@ -18,6 +19,7 @@ import {
 	UserDataPage,
 	ReviewPage,
 	PracticePage,
+	ExerciserSessionPage,
 } from '@/pages';
 
 import { path } from './path';
@@ -75,6 +77,14 @@ export const router = createBrowserRouter([
 			{
 				path: path.practice,
 				element: <PracticePage />,
+			},
+			{
+				path: path.exerciserSession,
+				element: (
+					<ExerciserProvider>
+						<ExerciserSessionPage />
+					</ExerciserProvider>
+				),
 			},
 		],
 	},

@@ -4,6 +4,7 @@ import type { TypedUseSelectorHook } from 'react-redux';
 
 import { authApi } from '@/services/api/auth';
 import { copingCartsApi } from '@/services/api/copingCarts';
+import { exerciserSessionApi } from '@/services/api/exerciserSessions';
 import { notificationApi } from '@/services/api/notification';
 import { rateApi } from '@/services/api/rate';
 import { sessionApi } from '@/services/api/session';
@@ -13,6 +14,7 @@ import { userApi } from '@/services/api/user';
 import { authReducer } from './auth';
 import { chatReducer } from './chat';
 import { copingCartsReducer } from './copingCart';
+import { exerciserSessionReducer } from './exerciserSession';
 import { generalReducer } from './general';
 import { notificationReducer } from './notification';
 import { practiceReducer } from './practice';
@@ -29,6 +31,7 @@ export const store = configureStore({
 		practice: practiceReducer,
 		notification: notificationReducer,
 		copingCarts: copingCartsReducer,
+		exerciserSession: exerciserSessionReducer,
 		[authApi.reducerPath]: authApi.reducer,
 		[userApi.reducerPath]: userApi.reducer,
 		[sessionApi.reducerPath]: sessionApi.reducer,
@@ -36,6 +39,7 @@ export const store = configureStore({
 		[copingCartsApi.reducerPath]: copingCartsApi.reducer,
 		[supportApi.reducerPath]: supportApi.reducer,
 		[notificationApi.reducerPath]: notificationApi.reducer,
+		[exerciserSessionApi.reducerPath]: exerciserSessionApi.reducer,
 	},
 
 	middleware: (getDefaultMiddleware) =>
@@ -46,7 +50,8 @@ export const store = configureStore({
 			rateApi.middleware,
 			copingCartsApi.middleware,
 			supportApi.middleware,
-			notificationApi.middleware
+			notificationApi.middleware,
+			exerciserSessionApi.middleware
 		),
 });
 

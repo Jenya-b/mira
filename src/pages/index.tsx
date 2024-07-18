@@ -11,3 +11,4 @@ export const IntroPage = lazy(() => import('./Intro/Intro'));
 export const TrainingPage = lazy(() => import('./Training/Training'));
 export const ReviewPage = lazy(() => import('./Review/Review'));
 export const PracticePage = lazy(() => import('./Practice/Practice'));
+export const ExerciserSessionPage = lazy(() => import('./ExerciserSession/ExerciserSession'));

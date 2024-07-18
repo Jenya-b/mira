@@ -10,4 +10,5 @@ export const path = {
 	training: '/training',
 	review: '/review',
 	practice: '/practice',
+	exerciserSession: '/exerciser-session',
 };

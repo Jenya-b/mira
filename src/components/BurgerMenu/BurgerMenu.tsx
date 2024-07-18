@@ -72,7 +72,7 @@ export const BurgerMenu: FC = () => {
 								<img src={listIcon} alt="list" />
 								<p>Карточки</p>
 							</ButtonSecondary>
-							<ButtonSecondary to="#">
+							<ButtonSecondary to={path.exerciserSession}>
 								<img src={settingsIcon} alt="setting" />
 								<p>Тренажер</p>
 							</ButtonSecondary>

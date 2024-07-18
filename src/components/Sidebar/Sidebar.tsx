@@ -112,7 +112,7 @@ export const Sidebar: FC<SidebarProps> = ({ closeMenu }) => {
 					<img src={listIcon} alt="list" />
 					<p>Карточки</p>
 				</ButtonSecondary>
-				<ButtonSecondary to="#">
+				<ButtonSecondary to={path.exerciserSession}>
 					<img src={settingsIcon} alt="setting" />
 					<p>Тренажер</p>
 				</ButtonSecondary>

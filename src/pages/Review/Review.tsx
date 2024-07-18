@@ -73,14 +73,10 @@ const Review: FC = () => {
 									))}
 								</ParamsWrap>
 							</Card>
-							{/* TODO В API НЕТ ЭТИХ ДАННЫХ 11.07.2024 */}
-							{/* <Card className="exception">
+							<Card className="exception">
 								<Title>Выявленные триггерные ситуации:</Title>
 								<ParamsWrap>
-									<ParamsBlock
-										exception
-										list={['Я должен много зарабатывать', 'Все должны меня уважать']}
-									/>
+									<ParamsBlock exception list={['...', '....']} />
 								</ParamsWrap>
 							</Card>
 							<Card>
@@ -91,7 +87,7 @@ const Review: FC = () => {
 									испытывать гораздо меньше негативных эмоций и при этом не чувствовать
 									незащищенным.
 								</Subtitle>
-							</Card> */}
+							</Card>
 						</>
 					)}
 				</Content>

@@ -1,7 +1,8 @@
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import { BackLink } from '@/components/BackLink/BackLink';
+import { Loader } from '@/components/Loader/Loader';
 import { Card } from '@/components/Practice/Card/Card';
 import { CopingCardBlock } from '@/components/Training/CopingCard/CopingCard';
 import { FilterBlock } from '@/components/Training/FilterBlock/FilterBlock';
@@ -12,7 +13,7 @@ import {
 	useGetCopingCartsQuery,
 } from '@/services/api/copingCarts';
 import { useAppDispatch, useAppSelector } from '@/store';
-import { updateFavoriteCart } from '@/store/copingCart';
+import { CopingCarts, updateFavoriteCart } from '@/store/copingCart';
 import { TrainingBlock, setActiveFilter } from '@/store/practice';
 import { getMyDate } from '@/utils/time';
 
@@ -32,11 +33,22 @@ const Practice: FC = () => {
 	const { activeFilter, trainingBlock } = useAppSelector(({ practice }) => practice);
 	const { user } = useAppSelector((state) => state.user);
 	const { copingCarts } = useAppSelector((state) => state.copingCarts);
+	const [sortingCopingCarts, setSortingCopingCarts] = useState<CopingCarts[]>([]);
 
-	useGetCopingCartsQuery({});
+	const { isLoading } = useGetCopingCartsQuery({});
 
 	const [fetchAddFavorite] = useAddFavoriteCartMutation();
 	const [fetchDeleteFavorite] = useDeleteFavoriteCartMutation();
+
+	useEffect(() => {
+		if (!copingCarts.length) {
+			return;
+		}
+
+		const newCopingCarts = copingCarts.slice();
+		newCopingCarts.sort((a, b) => Number(b.is_favorite) - Number(a.is_favorite));
+		setSortingCopingCarts(newCopingCarts);
+	}, [copingCarts, activeFilter]);
 
 	const renderTrainingBlock = (): JSX.Element => {
 		switch (trainingBlock) {
@@ -65,6 +77,7 @@ const Practice: FC = () => {
 
 	return (
 		<Wrapper>
+			{isLoading && <Loader />}
 			<Container>
 				<Controls>
 					<BackLink
@@ -100,18 +113,20 @@ const Practice: FC = () => {
 					</Filter>
 				</Controls>
 				<Content>
-					{copingCarts.map(({ created_at, id, is_favorite, new_thought, situation, thought }) => (
-						<Card
-							key={id}
-							date={getMyDate(created_at)}
-							favorites={is_favorite}
-							btnText1={new_thought}
-							btnText2={thought}
-							btnText3={situation}
-							btnText4="Новая мысль плохо работает"
-							handleClickFavorite={() => handleUpdateFavorite(id, !is_favorite)}
-						/>
-					))}
+					{(activeFilter ? sortingCopingCarts : copingCarts).map(
+						({ created_at, id, is_favorite, new_thought, situation, thought }) => (
+							<Card
+								key={id}
+								date={getMyDate(created_at)}
+								favorites={is_favorite}
+								btnText1={new_thought}
+								btnText2={thought}
+								btnText3={situation}
+								btnText4="Новая мысль плохо работает"
+								handleClickFavorite={() => handleUpdateFavorite(id, !is_favorite)}
+							/>
+						)
+					)}
 				</Content>
 			</Container>
 			{user && !user.training_coping_carts_passed && (

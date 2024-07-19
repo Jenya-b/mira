@@ -25,6 +25,7 @@ import {
 	setInputBlock,
 	setIsButtonsBlock,
 	setSessionBlock,
+	setTypingComplete,
 } from '@/store/chat';
 import { SelectChatBlockEnum, selectChatBlock } from '@/utils/selectChatBlock';
 
@@ -60,7 +61,7 @@ export const TextMessage: FC<TextMessageProps> = ({
 	const [selectedChatBlock, setSelectedChatBlock] = useState<SelectChatBlockEnum | null>(null);
 	const [selectedButtons, setSelectedButtons] = useState<string>('');
 	const [isClick, setIsClick] = useState(false);
-	const { currentStage, currentSession } = useAppSelector((state) => state.chat);
+	const { currentStage, currentSession, typingComplete } = useAppSelector((state) => state.chat);
 	const [postMessage] = usePostMessageMutation();
 	const [fetchCreateSession] = useCreateSessionMutation();
 
@@ -129,8 +130,18 @@ export const TextMessage: FC<TextMessageProps> = ({
 		}
 	};
 
+	const handleTypingComplete = (isTyping: boolean): void => {
+		dispatch(setTypingComplete(isTyping));
+	};
+
 	return (
-		<WithMessage logoParam={logoParam} text={text} newMessage={newMessage}>
+		<WithMessage
+			logoParam={logoParam}
+			text={text}
+			newMessage={newMessage}
+			typingComplete={typingComplete}
+			handleTypingComplete={handleTypingComplete}
+		>
 			{selectedChatBlock === SelectChatBlockEnum.CARDS ? (
 				<ThoughtsCards
 					data={[

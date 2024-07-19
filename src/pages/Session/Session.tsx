@@ -1,4 +1,4 @@
-import { FC, useContext, useEffect } from 'react';
+import { ChangeEvent, FC, useContext, useEffect } from 'react';
 
 import modalIcon from '@/assets/images/bulb.png';
 import { Input } from '@/components/ChatElements/Input/Input';
@@ -37,9 +37,8 @@ interface WSMessage {
 
 const SessionPage: FC = () => {
 	const dispatch = useAppDispatch();
-	const { hiddenInput, sessionBlock, inputValue, buttonsBlock, reconnectWS } = useAppSelector(
-		(state) => state.chat
-	);
+	const { hiddenInput, inputBlock, sessionBlock, inputValue, buttonsBlock, reconnectWS } =
+		useAppSelector((state) => state.chat);
 	const { accessToken } = useAppSelector((state) => state.user);
 	const { isActivePWA } = useAppSelector((state) => state.general);
 	const { ws } = useContext(ChatContext);
@@ -182,12 +181,22 @@ const SessionPage: FC = () => {
 		closeModal();
 	};
 
+	const handleInputValue = (e: ChangeEvent<HTMLTextAreaElement>): void => {
+		dispatch(setInputValue(e.target.value));
+	};
+
 	return (
 		<Wrapper
 			className={!hiddenInput || (hiddenInput && sessionBlock === SessionBlocks.CHAT) ? 'grid' : ''}
 		>
 			{renderSessionBlock()}
-			<Input sendMessage={sendMessage} />
+			<Input
+				sendMessage={sendMessage}
+				hiddenInput={hiddenInput}
+				inputBlock={inputBlock}
+				inputValue={inputValue}
+				handleInputValue={handleInputValue}
+			/>
 			<BaseModal
 				buttonText="Включить"
 				buttonTextSecond="Пропустить"

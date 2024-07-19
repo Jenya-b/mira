@@ -71,7 +71,13 @@ const Training: FC = () => {
 						/>
 					))}
 				</MessageWrap>
-				<Input sendMessage={() => {}} />
+				<Input
+					sendMessage={() => {}}
+					hiddenInput={false}
+					inputBlock={false}
+					inputValue=""
+					handleInputValue={() => {}}
+				/>
 			</Container>
 			<DisabledBg className={trainingBlock}>
 				<FilterBg className={trainingBlock} />

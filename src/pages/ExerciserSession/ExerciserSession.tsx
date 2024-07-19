@@ -1,20 +1,57 @@
-import { FC, useContext, useEffect } from 'react';
+import { ChangeEvent, FC, useContext, useEffect } from 'react';
 
 import { Input } from '@/components/ChatElements/Input/Input';
+import { CardsBlock } from '@/components/ExerciserSession/CardsBlock/CardsBlock';
+import { MessageBlock } from '@/components/ExerciserSession/MessagesBlock/MessagesBlock';
 import { ExerciserContext } from '@/context/exerciser';
-import { useAppSelector } from '@/store';
-import { SessionBlocks } from '@/store/exerciserSession';
+import { useCreateSessionMutation, usePostMessageMutation } from '@/services/api/exerciserSessions';
+import { useAppDispatch, useAppSelector } from '@/store';
+import {
+	addMessage,
+	Author,
+	Message,
+	SessionBlocks,
+	setHideInput,
+	setInputValue,
+} from '@/store/exerciserSession';
 
 import { Wrapper } from './ExerciserSession.styled';
 
 const ExerciserSession: FC = () => {
-	const { hiddenInput, sessionBlock } = useAppSelector((state) => state.exerciserSession);
+	const dispatch = useAppDispatch();
+	const { hiddenInput, sessionBlock, inputValue, inputBlock, currentSession, isGetSessionData } =
+		useAppSelector((state) => state.exerciserSession);
 	const { accessToken } = useAppSelector((state) => state.user);
 	const { ws } = useContext(ExerciserContext);
+	const [fetchCreateSession] = useCreateSessionMutation();
+	const [postMessage] = usePostMessageMutation();
 
-	const renderSessionBlock = (): JSX.Element => <></>;
+	useEffect(() => {
+		if (isGetSessionData && (currentSession === null || !currentSession.active)) {
+			fetchCreateSession(null);
+		}
+	}, [isGetSessionData]);
 
-	const sendMessage = (): void => {};
+	const renderSessionBlock = (): JSX.Element => {
+		switch (sessionBlock) {
+			case SessionBlocks.CARDS:
+				dispatch(setHideInput(true));
+
+				return <CardsBlock />;
+
+			case SessionBlocks.CHAT:
+				return <MessageBlock />;
+
+			default:
+				return <></>;
+		}
+	};
+
+	const sendMessage = (): void => {
+		postMessage({ action: 'MESSAGE', content: inputValue })
+			.unwrap()
+			.then(() => dispatch(setInputValue('')));
+	};
 
 	const connectWebSocket = (): void => {
 		if (ws === null) {
@@ -32,7 +69,17 @@ const ExerciserSession: FC = () => {
 		ws.current.onmessage = (event) => {
 			try {
 				const json = JSON.parse(event.data);
-				console.log(json);
+
+				if (json.errors.length) {
+					return;
+				}
+
+				dispatch(
+					addMessage({
+						...json.message,
+						newMessage: !(json.message.author === Author.USER),
+					} as Message)
+				);
 			} catch {
 				throw new Error();
 			}
@@ -54,12 +101,22 @@ const ExerciserSession: FC = () => {
 		};
 	}, []);
 
+	const handleInputValue = (e: ChangeEvent<HTMLTextAreaElement>): void => {
+		dispatch(setInputValue(e.target.value));
+	};
+
 	return (
 		<Wrapper
 			className={!hiddenInput || (hiddenInput && sessionBlock === SessionBlocks.CHAT) ? 'grid' : ''}
 		>
 			{renderSessionBlock()}
-			<Input sendMessage={sendMessage} />
+			<Input
+				sendMessage={sendMessage}
+				hiddenInput={hiddenInput}
+				inputBlock={inputBlock}
+				inputValue={inputValue}
+				handleInputValue={handleInputValue}
+			/>
 		</Wrapper>
 	);
 };

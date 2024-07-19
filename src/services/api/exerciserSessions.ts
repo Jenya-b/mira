@@ -1,16 +1,13 @@
 import { BaseQueryApi, createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 import { RootState } from '@/store';
-
-export interface Session {
-	id: number;
-	active: boolean;
-	script: number;
-	input_attempts: number;
-	created_at: string;
-	last_stage: string;
-	messages: string;
-}
+import {
+	addCurrentSession,
+	Session,
+	SessionBlocks,
+	setIsGetSessionData,
+	setSessionBlock,
+} from '@/store/exerciserSession';
 
 export const exerciserSessionApi = createApi({
 	reducerPath: 'exerciserSessionApi',
@@ -39,6 +36,25 @@ export const exerciserSessionApi = createApi({
 					accept: 'application/json',
 				},
 			}),
+			onQueryStarted: async (_, { dispatch, queryFulfilled }) => {
+				try {
+					const { data } = await queryFulfilled;
+
+					if (Object.keys(data).length !== 0) {
+						dispatch(addCurrentSession(data));
+
+						if (data.active && data.messages.length) {
+							dispatch(setSessionBlock(SessionBlocks.CHAT));
+						}
+					} else {
+						dispatch(setSessionBlock(SessionBlocks.CARDS));
+					}
+
+					dispatch(setIsGetSessionData(true));
+				} catch {
+					throw new Error();
+				}
+			},
 		}),
 		createSession: build.mutation<Session, null>({
 			query: () => ({
@@ -48,6 +64,18 @@ export const exerciserSessionApi = createApi({
 					accept: 'application/json',
 				},
 			}),
+			onQueryStarted: async (_, { dispatch, queryFulfilled }) => {
+				try {
+					const { data } = await queryFulfilled;
+
+					if (Object.keys(data).length !== 0) {
+						dispatch(addCurrentSession(data));
+						dispatch(setSessionBlock(SessionBlocks.CARDS));
+					}
+				} catch {
+					throw new Error();
+				}
+			},
 		}),
 		postMessage: build.mutation<
 			null,
@@ -55,7 +83,7 @@ export const exerciserSessionApi = createApi({
 		>({
 			query: (body) => ({
 				method: 'POST',
-				url: '/sessions/message/',
+				url: '/exerciser-sessions/message/',
 				body,
 				headers: {
 					accept: 'application/json',

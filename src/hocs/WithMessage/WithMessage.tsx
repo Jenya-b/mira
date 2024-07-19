@@ -5,8 +5,8 @@ import Typed from 'typed.js';
 import miraIcon from '@/assets/images/icons/logo-chat.svg';
 import miraCheckIcon from '@/assets/images/icons/logo-chat2.svg';
 import userIcon from '@/assets/images/icons/logo-chat3.svg';
-import { useAppDispatch, useAppSelector } from '@/store';
-import { setTypingComplete } from '@/store/chat';
+// import { useAppDispatch, useAppSelector } from '@/store';
+// import { setTypingComplete } from '@/store/chat';
 
 import { Logo, Text, Wrapper } from './WithMessage.styled';
 
@@ -19,6 +19,8 @@ export enum PersonMessage {
 interface WithMessageProps {
 	logoParam: PersonMessage;
 	text: string;
+	typingComplete: boolean;
+	handleTypingComplete: (isTyping: boolean) => void;
 	children?: JSX.Element;
 	newMessage?: boolean;
 }
@@ -27,10 +29,12 @@ export const WithMessage: FC<WithMessageProps> = ({
 	logoParam,
 	text,
 	children,
+	typingComplete,
+	handleTypingComplete,
 	newMessage = false,
 }) => {
-	const dispatch = useAppDispatch();
-	const { typingComplete } = useAppSelector((state) => state.chat);
+	// const dispatch = useAppDispatch();
+	// const { typingComplete } = useAppSelector((state) => state.chat);
 	const el = useRef(null);
 	const typed = useRef<Typed | null>(null);
 	const [isTyping, setIsTyping] = useState(false);
@@ -61,23 +65,23 @@ export const WithMessage: FC<WithMessageProps> = ({
 		typed.current = new Typed(el.current, {
 			...options,
 			onBegin() {
-				dispatch(setTypingComplete(false));
+				handleTypingComplete(false);
 
 				if (logoParam !== PersonMessage.MIRA_CHECK) {
 					new Promise((resolve) => {
 						setTimeout(() => {
-							dispatch(setTypingComplete(!typingComplete));
+							handleTypingComplete(!typingComplete);
 							resolve(!typingComplete);
 						}, 1500);
 					}).then((typing) => {
-						setTimeout(() => dispatch(setTypingComplete(!typing)), 1500);
+						setTimeout(() => handleTypingComplete(!typing), 1500);
 					});
 				}
 				setIsTyping(false);
 			},
 			onComplete() {
 				if (logoParam === PersonMessage.MIRA_CHECK) {
-					dispatch(setTypingComplete(true));
+					handleTypingComplete(true);
 				}
 				setIsTyping(true);
 			},
